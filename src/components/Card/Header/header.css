@@ -1,0 +1,39 @@
+.headerRoot {
+  width: 90%;
+  height: 10px;
+  background-image: url('/src/assets/images/paperTexture.jpg');
+  background-size: 500%;
+  border-top-left-radius: 25px 80px;
+  border-top-right-radius: 25px 80px;
+  border-bottom-left-radius: 25px 80px;
+  border-bottom-right-radius: 25px 80px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 5px;
+  border: 3px solid var(--background-inner-color); 
+}
+
+.headerRoot::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--background-color, rgba(255, 255, 255, 0.5)); /* Fallback to white with 50% opacity */
+  border-top-left-radius: 17px 80px;
+  border-top-right-radius: 17px 80px;
+  border-bottom-left-radius: 17px 80px;
+  border-bottom-right-radius: 17px 80px;
+  z-index: 1;
+}
+
+.headerRoot p {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 2; 
+  color: #000; 
+}
