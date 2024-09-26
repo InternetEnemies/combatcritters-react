@@ -5,9 +5,9 @@ interface Props {
 }
 
 const abilityMap: { [key: number]: string } = {
-  1: "/assets/images/ability0.svg", 
-  2: "/assets/images/ability1.svg", 
-  3: "/assets/images/ability2.svg", 
+  0: "/assets/images/ability0.svg", 
+  1: "/assets/images/ability1.svg", 
+  2: "/assets/images/ability2.svg", 
 };
 
 const Abilities: React.FC<Props> = ({ abilities }) => {
