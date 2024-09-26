@@ -1,0 +1,16 @@
+.abilitiesRoot {
+  width: 75%;
+  height: 8%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; 
+  margin-top: 5px;
+  gap: 10px; 
+  position: relative; 
+  top: -2px;
+}
+
+.abilityImage {
+  width: 15px;
+}
+  
