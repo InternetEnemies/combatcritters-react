@@ -16,6 +16,10 @@
   gap: 9px;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .footerRoot.common {
   background-color: var(--background-inner-color-common);
 }
