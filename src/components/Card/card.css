@@ -1,4 +1,5 @@
 .cardRoot {
+    position: relative;
     display: flex;  
     flex-direction: column;          
     justify-content: center;    
@@ -6,55 +7,59 @@
     width: 204px;
     height: 300px;
 
+    --border-color: rgb(49, 49, 49);
 
-    --background-inner-color: #00b7ff;
-    /* background: 
-      url("/src/assets/images/crackedPattern.svg") no-repeat center, 
-      linear-gradient(0deg, hsla(134, 95%, 14%, 1) 0%, hsla(105, 77%, 59%, 1) 100%); 
+    --background-inner-color-common: #ababab;
+    --background-inner-color-uncommon: #67c76a;
+    --background-inner-color-rare: #00b7ff;
+    --background-inner-color-epic: #cc85cc;
+    --background-inner-color-legendary: #beab58;
 
-    
-    background-position: center, center top; */
-    /* background: hsla(0, 0%, 0%, 1); */
-
-    /* background: hsla(134, 95%, 14%, 1);
-
-    background: linear-gradient(0deg, hsla(134, 95%, 14%, 1) 0%, hsla(105, 77%, 59%, 1) 100%);
-    
-    background: -moz-linear-gradient(90deg, hsla(134, 95%, 14%, 1) 0%, hsla(105, 77%, 59%, 1) 100%);
-    
-    background: -webkit-linear-gradient(90, hsla(134, 95%, 14%, 1) 0%, hsla(105, 77%, 59%, 1) 100%);
-     */
-    /* filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#024712", endColorstr="#70E748", GradientType=1 );
-
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000000", endColorstr="#000000", GradientType=1 ); */
-    /* background-size: 12%;
-    background-image: url('/src/assets/images/rareTexture.svg'); */
-    /* background-color: rgb(255, 0, 0); */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     margin: 10px;
     border: 3px solid #000000;
-
-    /* background-image: url("/src/assets/images/crackedPattern.svg"); */
-    /* background-size: 70%; */
-
   }
 
+  .footerInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;  
+    align-items: center;     
+    gap: 20px;             
+  }
+
+.cardRoot.common {
+  background: 
+    url("/src/assets/images/crackedPattern.svg") no-repeat center, 
+    linear-gradient(0deg, rgb(47, 47, 47) 0%, rgb(149, 149, 149) 100%); 
+  background-position: center, center top;
+}
 .cardRoot.uncommon {
   background: 
     url("/src/assets/images/crackedPattern.svg") no-repeat center, 
-    linear-gradient(0deg, hsla(134, 95%, 14%, 1) 0%, hsla(105, 77%, 59%, 1) 100%); 
-
-  
+    linear-gradient(0deg, rgb(1, 51, 13) 0%, rgb(98, 203, 63) 100%); 
   background-position: center, center top;
 }
-
 .cardRoot.rare {
   background: 
     url("/src/assets/images/crackedPattern.svg") no-repeat center, 
     linear-gradient(0deg, rgb(0, 36, 121) 0%, rgb(75, 129, 255) 100%); 
-  }
+}
+.cardRoot.epic {
+  background: 
+    url("/src/assets/images/crackedPattern.svg") no-repeat center, 
+    linear-gradient(0deg, rgb(96, 0, 66) 0%, rgb(250, 60, 180) 100%); 
+  background-position: center, center top;
+}
+.cardRoot.legendary {
+  background: 
+    url("/src/assets/images/crackedPattern.svg") no-repeat center, 
+    linear-gradient(0deg, rgb(64, 57, 2) 0%, rgb(252, 219, 0) 100%); 
+  background-position: center, center top;
+}
   
 .cardInner {
   display: flex;
@@ -62,12 +67,22 @@
   width: 92%;
   height: 75%;
   align-items: center;  
-  /* align-items: center; */
-  /* align-self: center; */
 }
 
+.cardInner.common {
+  background-color: var(--background-inner-color-common);
+}
+.cardInner.uncommon {
+  background-color: var(--background-inner-color-uncommon);
+}
 .cardInner.rare {
-  background-color: var(--background-inner-color);
+  background-color: var(--background-inner-color-rare);
+}
+.cardInner.epic {
+  background-color: var(--background-inner-color-epic);
+}
+.cardInner.legendary {
+  background-color: var(--background-inner-color-legendary);
 }
 
 .cardRoot:hover {
