@@ -17,6 +17,7 @@ const Abilities: React.FC<Props> = ({ abilities }) => {
         const src = abilityMap[ability]; 
         return (
           <img
+            alt="Ability"
             key={index} 
             src={src}
             className="abilityImage"
