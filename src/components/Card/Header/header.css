@@ -13,13 +13,6 @@
   padding: 2.5%;
 }
 
-@font-face {
-  font-family: 'mtgBold';
-  src: url('/src/assets/fonts/mtgBold.ttf') format('truetype'); 
-  font-weight:bold;  
-  font-style: normal;   
-}
-
 .cardName {
   font-size: 7cqw;
   font-family: 'mtgBold', sans-serif; 

@@ -1,3 +1,17 @@
+@font-face {
+  font-family: 'mtgBold';
+  src: url('/src/assets/fonts/mtgBold.ttf') format('truetype'); 
+  font-weight:bold;  
+  font-style: normal;   
+}
+
+@font-face {
+  font-family: 'robotoRegular';
+  src: url('/src/assets/fonts/Roboto-Regular.ttf') format('truetype'); 
+  font-weight:bold;  
+  font-style: normal;   
+} 
+
 .cardRoot {
   container-type: inline-size;
   position: relative;
