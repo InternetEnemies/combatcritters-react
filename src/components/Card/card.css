@@ -46,34 +46,41 @@
   gap: 20px;             
 }
 
+.cardRoot.common,
+.cardRoot.rare,
+.cardRoot.uncommon,
+.cardRoot.epic,
+.cardRoot.legendary {
+  --common-gradient: linear-gradient(0deg, rgb(47, 47, 47) 0%, rgb(149, 149, 149) 100%); 
+  --uncommon-gradient: linear-gradient(0deg, rgb(1, 51, 13) 0%, rgb(98, 203, 63) 100%); 
+  --rare-gradient: linear-gradient(0deg, rgb(0, 36, 121) 0%, rgb(75, 129, 255) 100%);
+  --epic-gradient: linear-gradient(0deg, rgb(96, 0, 66) 0%, rgb(250, 60, 180) 100%); 
+  --legendary-gradient: linear-gradient(0deg, rgb(64, 57, 2) 0%, rgb(252, 219, 0) 100%); 
+  background-position: center, center top;
+  background:
+    url("/src/assets/images/crackedPattern.svg") no-repeat center;
+}
+
+
 .cardRoot.common {
   background: 
-    url("/src/assets/images/crackedPattern.svg") no-repeat center, 
-    linear-gradient(0deg, rgb(47, 47, 47) 0%, rgb(149, 149, 149) 100%); 
-  background-position: center, center top;
+    var(--common-gradient);
 }
 .cardRoot.uncommon {
   background: 
-    url("/src/assets/images/crackedPattern.svg") no-repeat center, 
-    linear-gradient(0deg, rgb(1, 51, 13) 0%, rgb(98, 203, 63) 100%); 
-  background-position: center, center top;
+    var(--uncommon-gradient);
 }
 .cardRoot.rare {
   background: 
-    url("/src/assets/images/crackedPattern.svg") no-repeat center, 
-    linear-gradient(0deg, rgb(0, 36, 121) 0%, rgb(75, 129, 255) 100%); 
+    var(--rare-gradient)
 }
 .cardRoot.epic {
   background: 
-    url("/src/assets/images/crackedPattern.svg") no-repeat center, 
-    linear-gradient(0deg, rgb(96, 0, 66) 0%, rgb(250, 60, 180) 100%); 
-  background-position: center, center top;
+    var(--epic-gradient)
 }
 .cardRoot.legendary {
   background: 
-    url("/src/assets/images/crackedPattern.svg") no-repeat center, 
-    linear-gradient(0deg, rgb(64, 57, 2) 0%, rgb(252, 219, 0) 100%); 
-  background-position: center, center top;
+    var(--legendary-gradient);
 }
   
 .cardInner {
