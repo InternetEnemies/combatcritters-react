@@ -1,0 +1,11 @@
+.typeImage {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  bottom: 8px;   
+  left: 12px; 
+  border-radius: 150px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
