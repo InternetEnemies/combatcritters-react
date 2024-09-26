@@ -2,20 +2,13 @@ import './header.css'
 
 interface Props {
     name: string;
-    playCost: number;
-    backgroundColor: string;
-    borderColor: string;
+    rarity: string;
   }
   
-  const Header: React.FC<Props> = ({ name, playCost, backgroundColor, borderColor }) => {
+  const Header: React.FC<Props> = ({ name, rarity }) => {
     return (
-        <div className="headerRoot" 
-        style={{
-          '--background-color': (backgroundColor+'55'),
-          '--border-color': borderColor 
-        } as React.CSSProperties}>
-
-          <span>Hello world</span>
+        <div className={`headerRoot ${rarity}`} >
+          <span className="cardName">{name}</span>
         </div>
       );
     };
