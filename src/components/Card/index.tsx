@@ -1,8 +1,10 @@
 import Header from './Header'
 import CardImage from './CardImage'
 import HpDmgFooter from './HpDmgFooter'
-import AbilitiesAndType from './AbilitiesAndType'
+import AbilitiesAndType from './Abilities'
 import Description from './Description'
+import PlayCost from './PlayCost'
+import Type from './Type'
 import './card.css'
 
 interface CardProps {
@@ -15,20 +17,21 @@ interface CardProps {
     description: string;
     hp: number;
     damage: number;
-    innerColor: string
   }
   
-  const Card: React.FC<CardProps> = ({ rarity, name, playCost, imagePath, abilities, type, description, hp, damage, innerColor }) => {
+  const Card: React.FC<CardProps> = ({ rarity, name, playCost, imagePath, abilities, type, description, hp, damage }) => {
     return (
       <div className={`cardRoot ${rarity}`}>
 
-        <Header name={name} playCost={playCost} backgroundColor={"#007700"} borderColor={innerColor}/>
+        <Header name={name} rarity={rarity}/>
         <div className={`cardInner ${rarity}`}>
           <CardImage imagePath={imagePath}/>
-          <AbilitiesAndType abilities={abilities} type={type}/>
+          <AbilitiesAndType abilities={abilities}/>
           <Description description={description}/>
         </div>
-        <HpDmgFooter hp={hp} damage={damage} backgroundColor={innerColor}/>
+        <HpDmgFooter hp={hp} damage={damage} rarity={rarity}/>
+        <PlayCost playCost={playCost}/>
+        <Type type={type}/>
       </div>
     );
   };
