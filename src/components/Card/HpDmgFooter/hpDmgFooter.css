@@ -1,16 +1,52 @@
+@font-face {
+  font-family: 'robotoRegular';
+  src: url('/src/assets/fonts/Roboto-Regular.ttf') format('truetype'); 
+  font-weight:bold;  
+  font-style: normal;   
+}
+
 .footerRoot {
   width: 120px; 
   height: 35px;
-  /* padding: 10px; */
-  /* background-color: #888888;  */
+  background-color: var(--background-inner-color-rare);
   display: flex;
-  justify-content: space-between;
-  /* align-items: center; */
-  
+  justify-content: center;
+  align-items: center;
   clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+  gap: 9px;
 }
-/* 
-.health, .damage {
-  color: white;
-  font-size: 16px;
-} */
+
+.footerRoot.common {
+  background-color: var(--background-inner-color-common);
+}
+.footerRoot.uncommon {
+  background-color: var(--background-inner-color-uncommon);
+}
+.footerRoot.rare {
+  background-color: var(--background-inner-color-rare);
+}
+.footerRoot.epic {
+  background-color: var(--background-inner-color-epic);
+}
+.footerRoot.legendary {
+  background-color: var(--background-inner-color-legendary);
+}
+
+.hp, .damage {
+  display: flex;
+  justify-content: center; 
+  align-items: center;    
+  width: auto;  
+  font-size: 15px;  
+  font-family: 'robotoRegular', sans-serif; 
+}
+
+.hpImage {
+  width: 16px;
+}
+
+.swordImage {
+  width: 12px;  
+}
+
+
