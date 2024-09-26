@@ -1,0 +1,59 @@
+.footerRoot {
+  width: 59%; 
+  height: 11.8%;
+  background-color: var(--background-inner-color-rare);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.footerRoot.common {
+  background-color: var(--background-inner-color-common);
+}
+.footerRoot.uncommon {
+  background-color: var(--background-inner-color-uncommon);
+}
+.footerRoot.rare {
+  background-color: var(--background-inner-color-rare);
+}
+.footerRoot.epic {
+  background-color: var(--background-inner-color-epic);
+}
+.footerRoot.legendary {
+  background-color: var(--background-inner-color-legendary);
+}
+
+.hp, .damage {
+  display: flex;
+  justify-content: center; 
+  align-items: center;    
+  width: auto; 
+  font-size: 8cqw; 
+  font-family: 'robotoRegular', sans-serif; 
+  gap: 0%;
+}
+
+.damage {
+  margin-right: 16%;
+}
+
+.hp {
+  margin-left: 19%;
+}
+
+.hpImage {
+  width: 40%; 
+  height: auto;
+}
+
+.swordImage {
+  width: 28%;
+  height: auto;
+}
+
+

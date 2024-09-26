@@ -1,0 +1,20 @@
+.playCostRoot {
+  position: absolute;
+  width: 13%;
+  aspect-ratio: 1/1;
+  height: auto;
+  bottom: 2.6%;  
+  right: 6%;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  border: 1px solid rgb(206, 4, 4);
+  font-size: 8cqw;
+}
+
+.playCost {
+    align-items: center;
+    font-family: 'robotoRegular';
+}

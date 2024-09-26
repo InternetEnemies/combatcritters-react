@@ -1,0 +1,6 @@
+.cardImage {
+    width: 75%;
+    height:auto;
+    justify-content: center;
+    border: 1.4cqw solid var(--border-color);
+}

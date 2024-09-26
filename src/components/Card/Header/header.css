@@ -1,0 +1,36 @@
+.headerRoot {
+  width: 90%;
+  height: 3.4%;
+  background-color: var(--border-color);
+  border-top-left-radius: 3% 27.2%;
+  border-top-right-radius: 3% 27.2%;
+  border-bottom-left-radius: 3% 27.2%;
+  border-bottom-right-radius: 3% 27.2%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 2.5%;
+}
+
+.cardName {
+  font-size: 7cqw;
+  font-family: 'mtgBold', sans-serif; 
+  color: white; 
+}
+
+.headerRoot.common {
+  border: solid 2px var(--background-inner-color-common);
+}
+.headerRoot.uncommon {
+  border: solid 2px var(--background-inner-color-uncommon);
+}
+.headerRoot.rare {
+  border: solid 2px var(--background-inner-color-rare);
+}
+.headerRoot.epic {
+  border: solid 2px var(--background-inner-color-epic);
+}
+.headerRoot.legendary {
+  border: solid 2px var(--background-inner-color-legendary);
+}

@@ -1,0 +1,113 @@
+@font-face {
+  font-family: 'mtgBold';
+  src: url('/src/assets/fonts/mtgBold.ttf') format('truetype'); 
+  font-weight:bold;  
+  font-style: normal;   
+}
+
+@font-face {
+  font-family: 'robotoRegular';
+  src: url('/src/assets/fonts/Roboto-Regular.ttf') format('truetype'); 
+  font-weight:bold;  
+  font-style: normal;   
+} 
+
+.cardRoot {
+  container-type: inline-size;
+  position: relative;
+  display: flex;  
+  flex-direction: column;          
+  justify-content: center;    
+  align-items: center;         
+  width: 204px;
+  height: 300px;
+
+  --border-color: rgb(49, 49, 49);
+
+  --background-inner-color-common: #ababab;
+  --background-inner-color-uncommon: #67c76a;
+  --background-inner-color-rare: #00b7ff;
+  --background-inner-color-epic: #cc85cc;
+  --background-inner-color-legendary: #beab58;
+
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin: 10px;
+  border: 3px solid #000000;
+  }
+
+.footerInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;  
+  align-items: center;     
+  gap: 20px;             
+}
+
+.cardRoot.common,
+.cardRoot.rare,
+.cardRoot.uncommon,
+.cardRoot.epic,
+.cardRoot.legendary {
+  --common-gradient: linear-gradient(0deg, rgb(47, 47, 47) 0%, rgb(149, 149, 149) 100%); 
+  --uncommon-gradient: linear-gradient(0deg, rgb(1, 51, 13) 0%, rgb(98, 203, 63) 100%); 
+  --rare-gradient: linear-gradient(0deg, rgb(0, 36, 121) 0%, rgb(75, 129, 255) 100%);
+  --epic-gradient: linear-gradient(0deg, rgb(96, 0, 66) 0%, rgb(250, 60, 180) 100%); 
+  --legendary-gradient: linear-gradient(0deg, rgb(64, 57, 2) 0%, rgb(252, 219, 0) 100%); 
+  background-position: center, center top;
+  background:
+    url("/src/assets/images/crackedPattern.svg") no-repeat center;
+}
+
+
+.cardRoot.common {
+  background: 
+    var(--common-gradient);
+}
+.cardRoot.uncommon {
+  background: 
+    var(--uncommon-gradient);
+}
+.cardRoot.rare {
+  background: 
+    var(--rare-gradient)
+}
+.cardRoot.epic {
+  background: 
+    var(--epic-gradient)
+}
+.cardRoot.legendary {
+  background: 
+    var(--legendary-gradient);
+}
+  
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  width: 92%;
+  height: 75%;
+  align-items: center;  
+}
+
+.cardInner.common {
+  background-color: var(--background-inner-color-common);
+}
+.cardInner.uncommon {
+  background-color: var(--background-inner-color-uncommon);
+}
+.cardInner.rare {
+  background-color: var(--background-inner-color-rare);
+}
+.cardInner.epic {
+  background-color: var(--background-inner-color-epic);
+}
+.cardInner.legendary {
+  background-color: var(--background-inner-color-legendary);
+}
+
+.cardRoot:hover {
+  transform: scale(1.1);
+}
+  
