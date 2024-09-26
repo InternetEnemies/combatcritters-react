@@ -1,36 +1,36 @@
 .cardRoot {
-    container-type: inline-size;
-    position: relative;
-    display: flex;  
-    flex-direction: column;          
-    justify-content: center;    
-    align-items: center;         
-    width: 204px;
-    height: 300px;
+  container-type: inline-size;
+  position: relative;
+  display: flex;  
+  flex-direction: column;          
+  justify-content: center;    
+  align-items: center;         
+  width: 204px;
+  height: 300px;
 
-    --border-color: rgb(49, 49, 49);
+  --border-color: rgb(49, 49, 49);
 
-    --background-inner-color-common: #ababab;
-    --background-inner-color-uncommon: #67c76a;
-    --background-inner-color-rare: #00b7ff;
-    --background-inner-color-epic: #cc85cc;
-    --background-inner-color-legendary: #beab58;
+  --background-inner-color-common: #ababab;
+  --background-inner-color-uncommon: #67c76a;
+  --background-inner-color-rare: #00b7ff;
+  --background-inner-color-epic: #cc85cc;
+  --background-inner-color-legendary: #beab58;
 
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    margin: 10px;
-    border: 3px solid #000000;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin: 10px;
+  border: 3px solid #000000;
   }
 
-  .footerInfo {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;  
-    align-items: center;     
-    gap: 20px;             
-  }
+.footerInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;  
+  align-items: center;     
+  gap: 20px;             
+}
 
 .cardRoot.common {
   background: 
