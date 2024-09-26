@@ -7,7 +7,7 @@ interface Props {
 const Description: React.FC<Props> = ({ description }) => {
   return (
     <div className="descriptionRoot">
-        <span>Hello world again</span>
+        <span>{description}</span>
     </div>
   );
 };
