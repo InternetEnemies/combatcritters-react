@@ -7,17 +7,18 @@
 
 .playCostRoot {
   position: absolute;
-  width: 25px;
-  height: 25px;
-  bottom: 8px;   
-  right: 12px; 
+  width: 13%;
+  aspect-ratio: 1/1;
+  height: auto;
+  bottom: 2.6%;  
+  right: 6%;
   background-color: #f0f0f0;
-  border-radius: 150px;
+  border-radius: 50%;
   display: flex;
   justify-content: center; 
   align-items: center;
   border: 1px solid rgb(206, 4, 4);
-  font-size:15px;
+  font-size: 8cqw;
 }
 
 .playCost {

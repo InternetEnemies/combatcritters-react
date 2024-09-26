@@ -6,19 +6,19 @@
 } 
 
 .descriptionRoot {
-  border: 1px solid var(--border-color);
   display: flex;   
   width: 93%;
+  border: .5cqw solid var(--border-color);
   justify-content: center;   
   align-items: center;   
   text-align: center;      
   position: relative;
-  font-size: 10px;
+  font-size: 4.2cqw;
   background-color: rgb(235, 229, 222);
   font-family: 'robotoRegular'; 
 }
 
-.description.critter {
+.descriptionRoot.critter {
   height: 23%;
 }
 

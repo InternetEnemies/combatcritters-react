@@ -1,16 +1,16 @@
 .headerRoot {
   width: 90%;
-  height: 10px;
+  height: 3.4%;
   background-color: var(--border-color);
-  border-top-left-radius: 25px 80px;
-  border-top-right-radius: 25px 80px;
-  border-bottom-left-radius: 25px 80px;
-  border-bottom-right-radius: 25px 80px;
+  border-top-left-radius: 3% 27.2%;
+  border-top-right-radius: 3% 27.2%;
+  border-bottom-left-radius: 3% 27.2%;
+  border-bottom-right-radius: 3% 27.2%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 5px;
+  padding: 2.5%;
 }
 
 @font-face {
@@ -21,7 +21,7 @@
 }
 
 .cardName {
-  font-size: 14px;
+  font-size: 7cqw;
   font-family: 'mtgBold', sans-serif; 
   color: white; 
 }

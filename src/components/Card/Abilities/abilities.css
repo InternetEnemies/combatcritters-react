@@ -4,13 +4,14 @@
   display: flex;
   justify-content: flex-start;
   align-items: center; 
-  margin-top: 5px;
-  gap: 10px; 
+  margin-top: 2.7%;
+  gap: 7%;
   position: relative; 
-  top: -2px;
+  top: -.85%;
 }
 
 .abilityImage {
-  width: 15px;
+  width: 10.7%;
+  flex-shrink: 1;
 }
   
