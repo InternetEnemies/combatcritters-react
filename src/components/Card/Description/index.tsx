@@ -2,11 +2,12 @@ import "./description.css"
 
 interface Props {
   description: string;
+  type: string;
 }
   
-const Description: React.FC<Props> = ({ description }) => {
+const Description: React.FC<Props> = ({ description, type }) => {
   return (
-    <div className="descriptionRoot">
+    <div className={`descriptionRoot ${type}`}>
         <span>{description}</span>
     </div>
   );
