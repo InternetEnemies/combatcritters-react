@@ -8,6 +8,7 @@ import Type from './Type'
 import './card.css'
 
 interface CardProps {
+    id: number;
     rarity: string;
     name: string;
     playCost: number;
@@ -36,5 +37,4 @@ interface CardProps {
   };
   
   
-  export default Card;
-  
+  export default Card;  
