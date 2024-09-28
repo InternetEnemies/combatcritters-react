@@ -35,6 +35,8 @@
   transition: transform 0.3s ease;
   margin: 10px;
   border: 3px solid #000000;
+  cursor: pointer;
+  user-select: none;
   }
 
 .footerInfo {
@@ -57,29 +59,32 @@
   --epic-gradient: linear-gradient(0deg, rgb(96, 0, 66) 0%, rgb(250, 60, 180) 100%); 
   --legendary-gradient: linear-gradient(0deg, rgb(64, 57, 2) 0%, rgb(252, 219, 0) 100%); 
   background-position: center, center top;
-  background:
-    url("/src/assets/images/crackedPattern.svg") no-repeat center;
 }
 
 
 .cardRoot.common {
   background: 
+    url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--common-gradient);
 }
 .cardRoot.uncommon {
   background: 
+    url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--uncommon-gradient);
 }
 .cardRoot.rare {
   background: 
-    var(--rare-gradient)
+    url("/src/assets/images/crackedPattern.svg") no-repeat center,
+    var(--rare-gradient);
 }
 .cardRoot.epic {
   background: 
-    var(--epic-gradient)
+    url("/src/assets/images/crackedPattern.svg") no-repeat center,
+    var(--epic-gradient);
 }
 .cardRoot.legendary {
   background: 
+    url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--legendary-gradient);
 }
   
