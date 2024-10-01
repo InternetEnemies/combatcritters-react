@@ -18,6 +18,7 @@ interface Props {
       <img
         className="typeImage"
         src={getImagePath(type)}
+        alt="Critter or box"
       />
     );
   };
