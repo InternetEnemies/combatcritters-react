@@ -1,4 +1,4 @@
-export interface Card {
+export interface ICard {
   id: number;
   rarity: string;
   name: string;
@@ -9,4 +9,5 @@ export interface Card {
   description: string;
   hp: number;
   damage: number;
+  cardCount?: number;
 }
