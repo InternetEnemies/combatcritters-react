@@ -1,0 +1,23 @@
+.switchRoot {
+  display: flex;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 120px;
+  justify-content: space-between;
+}
+
+.option {
+  padding: 10px;
+  flex: 1;
+  text-align: center;
+}
+
+.leftOption {
+  border-right: 1px solid #ccc;
+}
+
+.active {
+  background-color: #4CAF50; 
+  color: white;
+}

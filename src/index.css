@@ -1,5 +1,6 @@
 :root {
     --primary-background-color: #0d1929;
+    box-sizing:border-box;
 }
 
 html, body {

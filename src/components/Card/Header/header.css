@@ -9,7 +9,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  /* position: relative; */
   padding: 2.5%;
 }
 

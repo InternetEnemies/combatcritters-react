@@ -1,5 +1,5 @@
 
-export interface DeckDetails {
+export interface IDeckDetails {
   id: number;
   name: string;
 }

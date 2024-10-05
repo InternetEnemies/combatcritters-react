@@ -1,0 +1,24 @@
+.deleteComponent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.deleteImage {
+  width: 24px; 
+  height: 24px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.8;
+}
+
+.deleteImage:hover {
+  transform: scale(1.1); 
+  opacity: 1;  
+}
+
+.deleteImage:active {
+  transform: scale(1.05);
+  opacity: 0.9;
+}

@@ -1,40 +1,69 @@
-import { getCards } from "testingCode";
-import React, { useEffect } from "react";
-import { DndContext } from "@dnd-kit/core";
-import DraggableCard from "components/DraggableCard";
+import React, { useEffect, useState } from "react";
 import "./inventory.css";
-import {Card} from "card"
+import { ISortableCard } from "interfaces/ISortableCard";
+import SortableCard from "components/SortableCard";
+import { getItemCards, getCritterCards } from "testingCode";
+import { convertToSortable } from "utils/cardUtils";
+import SortDropdown from "components/Dropdown";
+import Filter from "components/Filter";
+import { CardRarity } from "api/cardRarity";
+import { IFilterOption } from "interfaces/IFilterOption";
+import { ISortOption } from "interfaces/ISortOption";
+import { CardOrder } from "api/cardOrder";
+import Switch from "components/Switch";
+import { useCardSort } from "hooks/useCardSort";
+import { useCardFilter } from "hooks/useCardFilter";
 
 interface InventoryProps {
-  selectedCards: Card[];
-  setSelectedCards: (cards: Card[]) => void;
+  selectedCards: ISortableCard[];
+  setSelectedCards: (cards: ISortableCard[]) => void;
 }
 
 const Inventory: React.FC<InventoryProps> = ({
   selectedCards,
   setSelectedCards,
 }) => {
+  const { sortOptions, selectedSortOption, setSelectedSortOption } =
+    useCardSort();
+
+  const {
+    rarityFilterOptions,
+    setRarityFilterOptions,
+    ownedFilter,
+    setOwnedFilter,
+  } = useCardFilter();
+
   useEffect(() => {
-    const cards = getCards(); 
-    setSelectedCards(cards);
+    setSelectedCards(convertToSortable(getCritterCards())); 
   }, [setSelectedCards]);
 
   return (
     <div className="inventoryRoot">
+      <div className="filterSortContainer">
+        <SortDropdown
+          dropdownOptions={sortOptions}
+          selectedDropdownOption={selectedSortOption}
+          setSelectedDropdownOption={setSelectedSortOption}
+          className="inventorySort"
+          labelPrefix="Sort by Card "
+        />
+        <Filter
+          filterOptions={rarityFilterOptions}
+          setFilterOptions={setRarityFilterOptions}
+        />
+        <Switch
+          isLeftToggled={ownedFilter}
+          setIsLeftToggled={setOwnedFilter}
+          leftOption={"Owned"}
+          rightOption={"All"}
+        />
+      </div>
       <div className="cardGrid">
-        {selectedCards.map((card) => (
-          <DraggableCard
-            key={card.id}
-            id={card.id}
-            rarity={card.rarity}
-            name={card.name}
-            playCost={card.playCost}
-            imagePath={card.imagePath}
-            abilities={card.abilities}
-            type={card.type}
-            description={card.description}
-            hp={card.hp}
-            damage={card.damage}
+        {selectedCards.map((sortableCard) => (
+          <SortableCard
+            key={sortableCard.instanceId}
+            sortableCard={sortableCard}
+            translucent={true} 
           />
         ))}
       </div>
@@ -43,5 +72,3 @@ const Inventory: React.FC<InventoryProps> = ({
 };
 
 export default Inventory;
-
-
