@@ -11,7 +11,7 @@ interface CreateDeckProps {
 const CreateDeck: React.FC<CreateDeckProps> = ({ onCreateDeck }) => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
   const [deckName, setDeckName] = useState("");
-  const { showToast, message, triggerToast, setShowToast } = useToast(); 
+  const { showToast, toastMessage, triggerToast, setShowToast } = useToast(); 
   const popoverRef = useRef<HTMLDivElement>(null);
 
   const handleTogglePopover = () => {
@@ -75,7 +75,7 @@ const CreateDeck: React.FC<CreateDeckProps> = ({ onCreateDeck }) => {
         </div>
       )}
 
-      <Toast show={showToast} setShow={setShowToast} message={message} />
+      <Toast show={showToast} setShow={setShowToast} message={toastMessage} />
     </div>
   );
 };
