@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const useToast = () => {
   const [showToast, setShowToast] = useState(false);
-  const [message, setMessage] = useState("");
+  const [toastMessage, setMessage] = useState("");
 
   const triggerToast = (msg: string) => {
     setMessage(msg);
@@ -15,7 +15,7 @@ export const useToast = () => {
 
   return {
     showToast,
-    message,
+    toastMessage,
     triggerToast, 
     setShowToast,
   };
