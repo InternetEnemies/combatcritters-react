@@ -7,8 +7,7 @@ class DeckManager implements IDeckManager {
   private static instance: DeckManager;
   private decks: IDeck[] = [];
 
-  private constructor() {
-  }
+  private constructor() {}
 
   public static getInstance(): DeckManager {
     if (!DeckManager.instance) {
@@ -17,19 +16,21 @@ class DeckManager implements IDeckManager {
     return DeckManager.instance;
   }
 
-  
   async getDecks(): Promise<IDeck[]> {
     return this.decks;
   }
 
   async createDeck(deckName: string): Promise<IDeck> {
-    const newDeck = new Deck(this.decks.length + 1, deckName); 
+    const newDeck = new Deck(this.decks.length + 1, deckName);
     this.decks.push(newDeck);
     return newDeck;
   }
 
   async deleteDeck(deck: IDeck): Promise<void> {
-    return;
+    let index = this.decks.indexOf(deck);
+    if (index !== -1) {
+      this.decks.splice(index, 1); 
+    }
   }
 
   async getDeckRules(): Promise<DeckRules | null> {
