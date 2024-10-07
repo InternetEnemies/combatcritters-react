@@ -9,16 +9,17 @@ import { ClientSingleton } from "./ClientSingleton";
 import Collection from "pages/Collection";
 
 function App() {
-  const [isInitialized, setIsInitialized] = useState<boolean>(false); // Track initialization
+  const [isInitialized, setIsInitialized] = useState<boolean>(false); 
   const client = ClientSingleton.getInstance();
 
   useEffect(() => {
     const initializeClient = async () => {
       try {
         await client.login("kevin", "1234");
+        console.log("Logged in.");
       } catch (error) {
       } finally {
-        setIsInitialized(true); 
+        setIsInitialized(true);
       }
     };
 
@@ -26,7 +27,7 @@ function App() {
   }, [client]);
 
   if (!isInitialized) {
-    return null; 
+    return null;
   }
 
   return (

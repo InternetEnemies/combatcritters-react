@@ -13,9 +13,11 @@
   width: 100%;
   height: 100px;
   background-color: rgb(2, 21, 74);
+  align-items: center;
+  justify-content: space-between;
 }
 
-.cardGrid {
+.inventoryRoot .cardGrid {
   padding:1cqw;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
@@ -31,4 +33,70 @@
 }
 
 
+.filterContainer {
+  margin-left: 30px;
+  display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+}
 
+.inventoryRoot .cardSortDropdownRoot {
+  margin-right: 30px;
+}
+
+
+.inventoryRoot .switchRoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 160px; /* Adjust as needed */
+  height: 40px; /* Adjust as needed */
+  border-radius: 2px;
+  background-color: #ddd; /* Background of the switch */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+  overflow: hidden; /* Ensure child elements don't overflow the border radius */
+}
+
+.inventoryRoot .option {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  z-index: 2; /* Keep text above the sliding background */
+}
+
+.inventoryRoot .active {
+  color: white;
+}
+
+.inventoryRoot .notActive {
+  background-color: white;
+  color: #ad1e1e;
+}
+
+.inventoryRoot .switchSlider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%; 
+  height: 100%;
+  border-radius: 25px;
+  background-color: rgb(3, 35, 122); 
+  transition: left 0.3s ease;
+  z-index: 1;
+}
+
+.inventoryRoot .switchSlider.toggled {
+  left: 50%; 
+}
+
+.inventoryRoot .switchRoot:hover .switchSlider {
+  background-color: rgb(101, 115, 156); 
+}

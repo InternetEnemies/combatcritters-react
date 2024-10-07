@@ -13,12 +13,12 @@ const CardSortDropdown: React.FC<CardSortDropdownProps> = ({
   setSelectedDropdownOption,
 }) => {
   return (
-    <div className="">
+    <div className="cardSortDropdownRoot">
       <select
         value={selectedDropdownOption.id}
         onChange={(e) => {
           const selectedOption = dropdownOptions.find(
-            (option) => Number(option.id) == Number(e.target.value)
+            (option) => option.id == e.target.value
           );
           if (selectedOption) {
             setSelectedDropdownOption(selectedOption);

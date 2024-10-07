@@ -9,6 +9,7 @@ import Switch from "components/Switch";
 import { useCardSort } from "hooks/useCardSort";
 import { useCardFilter } from "hooks/useCardFilter";
 import {
+  CardOrder,
   ICardQueryBuilder,
   IUserCardsManager,
   UserCardsManager,
@@ -26,7 +27,6 @@ const Inventory: React.FC<InventoryProps> = ({
   selectedCards,
   setSelectedCards,
 }) => {
-  // Memoize userCardsManager to ensure it's stable across renders
   const [userCardsManager] = useState<IUserCardsManager>(
     new UserCardsManager(
       ClientSingleton.getInstance(),
@@ -37,7 +37,6 @@ const Inventory: React.FC<InventoryProps> = ({
     userCardsManager.getBuilder()
   );
 
-  // Sorting and filtering hooks
   const { sortOptions, selectedSortOption, setSelectedSortOption } =
     useCardSort();
 
@@ -48,13 +47,14 @@ const Inventory: React.FC<InventoryProps> = ({
     setOwnedFilter,
   } = useCardFilter();
 
-  // Memoize the rarityFilterOptions to prevent unnecessary re-renders
   const memoizedRarityFilterOptions = useMemo(
-    () => rarityFilterOptions.map((option) => option.id),
+    () =>
+      rarityFilterOptions
+        .filter((option) => option.toggled === true)
+        .map((option) => option.id),
     [rarityFilterOptions]
   );
 
-  // Memoize cardQuery, so it only changes when its inputs (sortOption, rarityFilterOptions, ownedFilter) change
   const cardQuery = useCardQueryBuilder(
     cardQueryBuilder,
     selectedSortOption.id,
@@ -62,8 +62,9 @@ const Inventory: React.FC<InventoryProps> = ({
     ownedFilter
   );
 
-  // useEffect that will trigger on mount and when cardQuery changes
   useEffect(() => {
+    console.log(CardOrder);
+    console.log(cardQueryBuilder);
     const fetchAndSetCards = async () => {
       try {
         const cards = await userCardsManager.getCards(cardQuery);
@@ -73,27 +74,28 @@ const Inventory: React.FC<InventoryProps> = ({
       }
     };
 
-    // Trigger fetch on mount and whenever cardQuery changes
     fetchAndSetCards();
   }, [userCardsManager, cardQuery, setSelectedCards]);
 
   return (
     <div className="inventoryRoot">
       <div className="filterSortContainer">
+        <div className="filterContainer">
+          <Switch
+            isLeftToggled={ownedFilter}
+            setIsLeftToggled={setOwnedFilter}
+            leftOption={"Owned"}
+            rightOption={"All"}
+          />
+          <Filter
+            filterOptions={rarityFilterOptions}
+            setFilterOptions={setRarityFilterOptions}
+          />
+        </div>
         <SortDropdown
           dropdownOptions={sortOptions}
           selectedDropdownOption={selectedSortOption}
           setSelectedDropdownOption={setSelectedSortOption}
-        />
-        <Filter
-          filterOptions={rarityFilterOptions}
-          setFilterOptions={setRarityFilterOptions}
-        />
-        <Switch
-          isLeftToggled={ownedFilter}
-          setIsLeftToggled={setOwnedFilter}
-          leftOption={"Owned"}
-          rightOption={"All"}
         />
       </div>
       <div className="cardGrid">
