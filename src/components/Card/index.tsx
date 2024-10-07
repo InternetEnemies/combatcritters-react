@@ -8,7 +8,7 @@ import Type from "./Type";
 import "./card.css";
 import CardCount from "./CardCount";
 import { ICard } from "combatcritters-ts/src/objects";
-import { Rarity } from "api/Rarity";
+import { CardRarity } from "combatcritters-ts/src/objects";
 
 interface CardProps {
   card: ICard;
@@ -17,9 +17,9 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ card, cardCount }) => {
   return (
-    <div className={`cardRoot ${Rarity[card.rarity]}`}>
+    <div className={`cardRoot ${CardRarity[card.rarity]}`}>
       <Header name={card.name} rarity={card.rarity} />
-      <div className={`cardInner ${Rarity[card.rarity]}`}>
+      <div className={`cardInner ${CardRarity[card.rarity]}`}>
         <CardImage imagePath={"/assets/images/cardImage.jpeg"} />
         <Abilities card={card} />
         <Description card={card} />

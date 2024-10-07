@@ -31,10 +31,9 @@ import {
   ICardCritter,
   ICardItem,
 } from "combatcritters-ts/src/objects";
-import { ICardVisitor } from "combatcritters-ts/src/ICardVisitor";
+import { ICardVisitor } from "combatcritters-ts";
 import "./hpDmgFooter.css"
-import { Rarity } from "api/Rarity";
-
+import { CardRarity } from "combatcritters-ts/src/objects";
 
 const HpDmgFooter: React.FC<{ card: ICard }> = ({ card }) => {
   let content: React.ReactNode = null;
@@ -43,7 +42,7 @@ const HpDmgFooter: React.FC<{ card: ICard }> = ({ card }) => {
   const visitor: ICardVisitor = {
     visitCritter: (critter: ICardCritter): void => {
       content = (
-        <div className={`footerRoot ${Rarity[card.rarity]}`}>
+        <div className={`footerRoot ${CardRarity[card.rarity]}`}>
           <div className="hp">
             <img
               className="hpImage"

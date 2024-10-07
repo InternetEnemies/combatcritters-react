@@ -31,8 +31,7 @@
 
 import "./abilities.css";
 import { ICard, ICardCritter, ICardItem } from "combatcritters-ts/src/objects";
-import { ICardVisitor } from "combatcritters-ts/src/ICardVisitor";
-
+import { ICardVisitor } from "combatcritters-ts";
 const abilityMap: { [key: number]: string } = {
   0: "/assets/images/ability0.svg",
   1: "/assets/images/ability1.svg",

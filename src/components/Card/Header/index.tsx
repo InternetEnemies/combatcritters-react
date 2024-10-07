@@ -1,5 +1,5 @@
 import './header.css'
-import { Rarity } from 'api/Rarity';
+import { CardRarity } from 'combatcritters-ts';
 
 interface Props {
     name: string;
@@ -8,7 +8,7 @@ interface Props {
   
   const Header: React.FC<Props> = ({ name, rarity }) => {
     return (
-        <div className={`headerRoot ${Rarity[rarity]}`} >
+        <div className={`headerRoot ${CardRarity[rarity]}`} >
           <span className="cardName">{name}</span>
         </div>
       );
