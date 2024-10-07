@@ -1,26 +1,28 @@
 @font-face {
-  font-family: 'mtgBold';
-  src: url('/src/assets/fonts/mtgBold.ttf') format('truetype'); 
-  font-weight:bold;  
-  font-style: normal;   
+  font-family: "mtgBold";
+  src: url("/src/assets/fonts/mtgBold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: 'robotoRegular';
-  src: url('/src/assets/fonts/Roboto-Regular.ttf') format('truetype'); 
-  font-weight:bold;  
-  font-style: normal;   
-} 
+  font-family: "robotoRegular";
+  src: url("/src/assets/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
 
 .cardRoot {
   container-type: inline-size;
-  position: relative;
-  display: flex;  
-  flex-direction: column;          
-  justify-content: center;    
-  align-items: center;         
-  width: 204px;
-  height: 300px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  justify-content: flex-start;
+  align-items: center;
+  /* width: 204px;
+  height: 300px; */
+    width: 132.6px;
+  height: 195px;
 
   --border-color: rgb(49, 49, 49);
 
@@ -32,18 +34,21 @@
 
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  margin: 10px;
+  /* transition: transform 0.3s ease; */
+  padding-top:3%;
+  /* margin: 10px; */
   border: 3px solid #000000;
-  }
+  cursor: pointer;
+  user-select: none;
+}
 
 .footerInfo {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: center;  
-  align-items: center;     
-  gap: 20px;             
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .cardRoot.common,
@@ -51,44 +56,61 @@
 .cardRoot.uncommon,
 .cardRoot.epic,
 .cardRoot.legendary {
-  --common-gradient: linear-gradient(0deg, rgb(47, 47, 47) 0%, rgb(149, 149, 149) 100%); 
-  --uncommon-gradient: linear-gradient(0deg, rgb(1, 51, 13) 0%, rgb(98, 203, 63) 100%); 
-  --rare-gradient: linear-gradient(0deg, rgb(0, 36, 121) 0%, rgb(75, 129, 255) 100%);
-  --epic-gradient: linear-gradient(0deg, rgb(96, 0, 66) 0%, rgb(250, 60, 180) 100%); 
-  --legendary-gradient: linear-gradient(0deg, rgb(64, 57, 2) 0%, rgb(252, 219, 0) 100%); 
+  --common-gradient: linear-gradient(
+    0deg,
+    rgb(47, 47, 47) 0%,
+    rgb(149, 149, 149) 100%
+  );
+  --uncommon-gradient: linear-gradient(
+    0deg,
+    rgb(1, 51, 13) 0%,
+    rgb(98, 203, 63) 100%
+  );
+  --rare-gradient: linear-gradient(
+    0deg,
+    rgb(0, 36, 121) 0%,
+    rgb(75, 129, 255) 100%
+  );
+  --epic-gradient: linear-gradient(
+    0deg,
+    rgb(96, 0, 66) 0%,
+    rgb(250, 60, 180) 100%
+  );
+  --legendary-gradient: linear-gradient(
+    0deg,
+    rgb(64, 57, 2) 0%,
+    rgb(252, 219, 0) 100%
+  );
   background-position: center, center top;
-  background:
-    url("/src/assets/images/crackedPattern.svg") no-repeat center;
 }
 
-
 .cardRoot.common {
-  background: 
+  background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--common-gradient);
 }
 .cardRoot.uncommon {
-  background: 
+  background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--uncommon-gradient);
 }
 .cardRoot.rare {
-  background: 
-    var(--rare-gradient)
+  background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
+    var(--rare-gradient);
 }
 .cardRoot.epic {
-  background: 
-    var(--epic-gradient)
+  background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
+    var(--epic-gradient);
 }
 .cardRoot.legendary {
-  background: 
+  background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--legendary-gradient);
 }
-  
+
 .cardInner {
   display: flex;
   flex-direction: column;
   width: 92%;
-  height: 75%;
-  align-items: center;  
+  height: 76.8%;
+  align-items: center;
 }
 
 .cardInner.common {
@@ -107,7 +129,6 @@
   background-color: var(--background-inner-color-legendary);
 }
 
-.cardRoot:hover {
+/* .cardRoot:hover {
   transform: scale(1.1);
-}
-  
+} */
