@@ -1,5 +1,13 @@
+@font-face {
+  font-family: "pressStart";
+  src: url("/src/assets/fonts/Bangers-Regular.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
 :root {
-    --primary-background-color: #0d1929;
+    --primary-background-color: #182f4c;
+    --login-font: "pressStart";
     box-sizing:border-box;
 }
 
