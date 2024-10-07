@@ -1,6 +1,5 @@
 import { ICard, ICardCritter, ICardItem } from "combatcritters-ts/src/objects";
-import { ICardVisitor } from "combatcritters-ts/src/ICardVisitor";
-import { IDeckDetails } from "deckDetails";
+import { ICardVisitor } from "combatcritters-ts";
 import { ISortableDeck } from "interfaces/ISortableDeck";
 
 
@@ -48,15 +47,15 @@ export function getItemCards(): ICardItem[] {
   return cards;
 }
 
-export function getDeckDetailsList(): IDeckDetails[] {
-  const deckDetailsList: IDeckDetails[] = []
-  for (let i = 0; i < 10; i++) {
-      deckDetailsList.push({id: i, name: `deck${i + 1}`})
-  }
-  return deckDetailsList
-}
+// export function getDeckDetailsList(): IDeckDetails[] {
+//   const deckDetailsList: IDeckDetails[] = []
+//   for (let i = 0; i < 10; i++) {
+//       deckDetailsList.push({id: i, name: `deck${i + 1}`})
+//   }
+//   return deckDetailsList
+// }
 
-// export function getDeck(): IDeck {
+// // export function getDeck(): IDeck {
 //   const cards: ICard[] = getCards(); // Fetch cards as ICard[]
 
 //   // Convert ICard[] to IDraggableCard[] by adding an instanceId
@@ -71,11 +70,3 @@ export function getDeckDetailsList(): IDeckDetails[] {
 //     cards: draggableCards, // Pass the transformed draggable cards
 //   };
 // }
-
-export function getEmptyDeck(): ISortableDeck {
-  return {
-    id: getDeckDetailsList()[0].id,
-    name: getDeckDetailsList()[0].name,
-    cards: [],
-  };
-}
