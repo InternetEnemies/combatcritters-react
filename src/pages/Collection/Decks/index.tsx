@@ -9,13 +9,14 @@ import { ISortableDeck } from "interfaces/ISortableDeck";
 import DeckManager from "api/DeckManager";
 import Button from "components/Button";
 import { useDeckSave } from "hooks/useDeckSave";
-import { convertToSortableDeck } from "utils/deckUtils";
+import { convertToSortableDeck } from "utils/collectionUtils";
 import { useDeckCreateDelete } from "hooks/useDeckCreateDelete";
 import Dropdown from "components/Dropdown";
 import { useDeckSelect } from "hooks/useDeckSelect"; // Import your hook
 import ConfirmationButton from "components/ConfirmationButton";
 import Toast from "components/Toast";
 import { useToast } from "hooks/useToast";
+import { useMonitorDeckChanges } from "hooks/useMonitorDeckChanges";
 
 interface DeckProps {
   localDeck: ISortableDeck | null;
@@ -29,17 +30,38 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
   const [decks, setDecks] = useState<IDeck[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<IDeck | null>(null);
 
-  const { saveDeck, cancelChanges, changesMade } = useDeckSave(
-    localDeck,
-    setLocalDeck,
-    selectedDeck,
-    triggerToast
-  );
+  const changesMade = useMonitorDeckChanges(localDeck, selectedDeck);
 
-  // Use the useDeckSelect hook
+
+  const saveDeck = async () => {
+    if (selectedDeck && localDeck) {
+      // Clear the selectedDeck's cards
+      selectedDeck.cards = []; // Directly modify cards array
+
+      // Add all cards from localDeck to selectedDeck
+      localDeck.cards.forEach((card, index) => {
+        selectedDeck.cards.push({ ...card.card }); // Push directly into the array
+      });
+
+      triggerToast("Deck Saved!");
+
+      setLocalDeck(convertToSortableDeck(selectedDeck)); // Update the localDeck state
+      setSelectedDeck({ ...selectedDeck }); // This forces React to recognize the update
+      // setChangesMade(false);
+    } else {
+      console.error("No deck selected or local deck is not set.");
+    }
+  };
+
+  const cancelChanges = () => {
+    if (selectedDeck && changesMade) {
+      setLocalDeck(convertToSortableDeck(selectedDeck));
+    }
+  };
   const { deckDropdownOptions } = useDeckSelect(
     selectedDeck,
     setSelectedDeck,
+    setLocalDeck,
     decks,
     changesMade,
     saveDeck
@@ -55,14 +77,14 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
 
   const createDeck = async (deckName: string) => {
     try {
-      const createdDeck = await deckManager.createDeck(deckName); 
-      const updatedDecks = await deckManager.getDecks(); 
-      setDecks(updatedDecks); 
+      const createdDeck = await deckManager.createDeck(deckName);
+      const updatedDecks = await deckManager.getDecks();
+      setDecks(updatedDecks);
       setSelectedDeck(createdDeck);
-      setLocalDeck(convertToSortableDeck(createdDeck)); 
+      setLocalDeck(convertToSortableDeck(createdDeck));
       triggerToast("Deck Created!");
     } catch (error) {
-      console.error("Error creating the deck:", error); 
+      console.error("Error creating the deck:", error);
     }
   };
 
@@ -82,15 +104,6 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
       }
     }
   };
-
-  useEffect(() => {
-    if (selectedDeck) {
-      const sortableDeck = convertToSortableDeck(selectedDeck);
-      setLocalDeck(sortableDeck);
-    } else {
-      setLocalDeck(null);
-    }
-  }, [selectedDeck, setLocalDeck]);
 
   return (
     <div className="decksRoot" style={style}>

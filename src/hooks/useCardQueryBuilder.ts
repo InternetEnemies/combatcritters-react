@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react";
-import { ICardQuery } from "api/cardQuery";
-import { ICardQueryBuilder } from "api/ICardQueryBuilder";
-import { ISortOption } from "interfaces/ISortOption";
-import CardQueryBuilder from "api/CardQueryBuilder";
-export const useCardQueryBuilder = (
-  sortOption: number | null, 
-  rarityFilterOptions: number[] | null,
-  owned: boolean,
-) => {
-  const[cardQueryBuilder] = useState<ICardQueryBuilder>(new CardQueryBuilder())
-  const [query, setQuery] = useState<ICardQuery>(); 
+import { useMemo } from "react";
+import { CardQueryBuilder } from "combatcritters-ts";
+import { CardOrder } from "combatcritters-ts";
+import { ICardQueryBuilder } from "combatcritters-ts";
 
-  useEffect(() => {
-    if(sortOption){
+export const useCardQueryBuilder = (
+  cardQueryBuilder: ICardQueryBuilder,
+  sortOption: CardOrder | null,
+  rarityFilterOptions: number[] | null,
+  owned: boolean
+) => {
+
+  return useMemo(() => {
+    if (sortOption) {
       cardQueryBuilder.setOrder(sortOption);
     }
-    cardQueryBuilder.setOwned(owned);
-    
-      setQuery(cardQueryBuilder.build());
-  }, [sortOption, rarityFilterOptions, owned]); 
-
-  return {
-    query,
-  };
+    if(owned) {
+      cardQueryBuilder.setOwned();
+    }
+    if (rarityFilterOptions) {
+      cardQueryBuilder.setRarities(rarityFilterOptions);
+    }
+    // Rebuild only when dependencies change
+    return cardQueryBuilder.build();
+  }, [sortOption, rarityFilterOptions, owned, cardQueryBuilder]);
 };

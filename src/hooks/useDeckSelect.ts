@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { IDeck } from "combatcritters-ts/src/objects";
 import { IDropdownOption } from "interfaces/IDropdownOption";
+import { ISortableDeck } from "interfaces/ISortableDeck";
+import { convertToSortableDeck } from "utils/collectionUtils";
 
 export const useDeckSelect = (
   selectedDeck: IDeck | null, // The currently selected deck
   setSelectedDeck: (deck: IDeck) => void, // Function to update the selected deck
+  setLocalDeck: (deck: ISortableDeck | null) => void,
   decks: IDeck[],
   changesMade: boolean,
   saveDeck: () => void // The list of all decks
@@ -33,12 +36,11 @@ export const useDeckSelect = (
 
   // Update the selected deck when a new option is selected
   useEffect(() => {
-    if(changesMade) {
-      console.log("Changes on the prev deck");
-    } else {
-      console.log("No changes on the prev deck.");
-    }
+   
     if (selectedDropdownOption) {
+      if(changesMade) {
+        saveDeck();
+      }
       const newSelectedDeck = decks.find(
         (deck) => deck.deckid === selectedDropdownOption.id
       );
@@ -47,6 +49,15 @@ export const useDeckSelect = (
       }
     }
   }, [selectedDropdownOption, decks, setSelectedDeck]);
+
+  useEffect(() => {
+    if (selectedDeck) {
+      const sortableDeck = convertToSortableDeck(selectedDeck);
+      setLocalDeck(sortableDeck);
+    } else {
+      setLocalDeck(null);
+    }
+  }, [selectedDeck, setLocalDeck]);
 
   return {
     deckDropdownOptions, // Options for the dropdown

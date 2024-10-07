@@ -1,36 +1,29 @@
 import { useState } from "react";
-import { useEffect } from "react";
-import { ISortOption } from "interfaces/ISortOption";
-import { CardOrder } from "api/cardOrder";
 import { IDeck } from "combatcritters-ts/src/objects";
 import { ISortableDeck } from "interfaces/ISortableDeck";
-import DeckManager from "api/DeckManager";
-import { convertToSortableDeck } from "utils/deckUtils";
-import { useToast } from "./useToast";
+import { convertToSortableDeck } from "utils/collectionUtils";
 
 export const useDeckSave = (
   localDeck: ISortableDeck | null,
   setLocalDeck: (deck: ISortableDeck) => void,
   selectedDeck: IDeck | null,
-  triggerToast: (msg: string) => void,
+  setSelectedDeck: (deck: IDeck) => void,
+  triggerToast: (msg: string) => void
 ) => {
   const [changesMade, setChangesMade] = useState(false);
 
   const saveDeck = async () => {
-    console.log(selectedDeck);
-    console.log(localDeck);
     if (selectedDeck && localDeck) {
-      // Clear the selectedDeck's cards
-      selectedDeck.cards = []; // Directly modify cards array
-      // Add all cards from localDeck to selectedDeck
-      localDeck.cards.forEach((card, index) => {
-        selectedDeck.addCard(card.card, index);
-      });
+      // Clear the selectedDeck's cards and add all cards from localDeck
+      selectedDeck.cards = localDeck.cards.map((card) => ({ ...card.card })); // Synchronize decks
 
       triggerToast("Deck Saved!");
 
-      // Ensure React updates the selectedDeck reference
-      setLocalDeck(convertToSortableDeck(selectedDeck)); // Force state update
+      // Ensure React updates both localDeck and selectedDeck references
+      setLocalDeck(convertToSortableDeck(selectedDeck)); // Update the localDeck state
+      setSelectedDeck({ ...selectedDeck }); // Update selectedDeck
+
+      // Set changesMade to false because decks are now in sync
       setChangesMade(false);
     } else {
       console.error("No deck selected or local deck is not set.");
@@ -40,35 +33,31 @@ export const useDeckSave = (
   const cancelChanges = () => {
     if (selectedDeck && changesMade) {
       setLocalDeck(convertToSortableDeck(selectedDeck));
-      
     }
   };
 
+  // useEffect(() => {
+  //   if (localDeck && selectedDeck) {
+  //     // Compare length first
+  //     if (localDeck.cards.length !== selectedDeck.cards.length) {
+  //       setChangesMade(true);
+  //       return;
+  //     }
 
+  //     // Compare each card deeply
+  //     const areDecksEqual = localDeck.cards.every((localCard, index) => {
+  //       const selectedCard = selectedDeck.cards[index];
+  //       return (
+  //         localCard.card.cardid === selectedCard.cardid &&
+  //         localCard.card.name === selectedCard.name // Example of a deeper comparison
+  //       );
+  //     });
 
-  useEffect(() => {
-    if (localDeck && selectedDeck) {
-      // Compare length first
-      if (localDeck.cards.length !== selectedDeck.cards.length) {
-        setChangesMade(true);
-        return;
-      }
-
-      // Compare each card deeply (checking properties other than just cardid if necessary)
-      const areDecksEqual = localDeck.cards.every((localCard, index) => {
-        const selectedCard = selectedDeck.cards[index];
-        return (
-          localCard.card.cardid === selectedCard.cardid &&
-          // Add more comparisons if other card properties are relevant
-          localCard.card.name === selectedCard.name // Example of a deeper comparison
-        );
-      });
-
-      setChangesMade(!areDecksEqual);
-    } else {
-      setChangesMade(false);
-    }
-  }, [localDeck, selectedDeck]);
+  //     setChangesMade(!areDecksEqual);
+  //   } else {
+  //     setChangesMade(false);
+  //   }
+  // }, [localDeck, selectedDeck]);
 
   // useEffect(() => {
   //   if (localDeck && selectedDeck) {
@@ -85,10 +74,9 @@ export const useDeckSave = (
   //   }
   // }, [localDeck, selectedDeck]);
 
-
   return {
     saveDeck,
     cancelChanges,
-    changesMade
+    changesMade,
   };
 };

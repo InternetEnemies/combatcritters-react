@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { ISortOption } from "interfaces/ISortOption";
-import { CardOrder } from "api/cardOrder";
 import { IDeck } from "combatcritters-ts/src/objects";
 import { ISortableDeck } from "interfaces/ISortableDeck";
 import DeckManager from "api/DeckManager";
 import { useEffect } from "react";
-import { convertToSortableDeck } from "utils/deckUtils";
+import { convertToSortableDeck } from "utils/collectionUtils";
 
 export const useDeckManage = () => {
   const [selectedDeck, setSelectedDeck] = useState<IDeck | null>(null);
