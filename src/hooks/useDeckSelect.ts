@@ -5,12 +5,12 @@ import { ISortableDeck } from "interfaces/ISortableDeck";
 import { convertToSortableDeck } from "utils/collectionUtils";
 
 export const useDeckSelect = (
-  selectedDeck: IDeck | null, // The currently selected deck
-  setSelectedDeck: (deck: IDeck) => void, // Function to update the selected deck
+  selectedDeck: IDeck | null, 
+  setSelectedDeck: (deck: IDeck) => void,
   setLocalDeck: (deck: ISortableDeck | null) => void,
   decks: IDeck[],
   changesMade: boolean,
-  saveDeck: () => void // The list of all decks
+  saveDeck: () => void 
 ) => {
   const [deckDropdownOptions, setDeckDropdownOptions] = useState<
     IDropdownOption[]
@@ -18,7 +18,6 @@ export const useDeckSelect = (
   const [selectedDropdownOption, setSelectedDropdownOption] =
     useState<IDropdownOption | null>(null);
 
-  // Convert decks into dropdown options and set the selected dropdown option
   useEffect(() => {
     const options = decks.map((deck) => ({
       id: deck.deckid,
@@ -34,7 +33,6 @@ export const useDeckSelect = (
     }
   }, [decks, selectedDeck]);
 
-  // Update the selected deck when a new option is selected
   useEffect(() => {
    
     if (selectedDropdownOption) {
@@ -45,7 +43,7 @@ export const useDeckSelect = (
         (deck) => deck.deckid === selectedDropdownOption.id
       );
       if (newSelectedDeck) {
-        setSelectedDeck(newSelectedDeck); // Update the selected deck in the parent
+        setSelectedDeck(newSelectedDeck); 
       }
     }
   }, [selectedDropdownOption, decks, setSelectedDeck]);
@@ -60,8 +58,8 @@ export const useDeckSelect = (
   }, [selectedDeck, setLocalDeck]);
 
   return {
-    deckDropdownOptions, // Options for the dropdown
-    selectedDropdownOption, // The selected dropdown option
-    setSelectedDropdownOption, // Function to update the dropdown selection
+    deckDropdownOptions, 
+    selectedDropdownOption, 
+    setSelectedDropdownOption, 
   };
 };

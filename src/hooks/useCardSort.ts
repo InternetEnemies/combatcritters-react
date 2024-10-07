@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ICardSortOption } from "interfaces/ICardSortOption";
 import { CardOrder } from "combatcritters-ts";
 
-
 export const useCardSort = () => {
   const [sortOptions] = useState<ICardSortOption[]>([
     { name: "Rarity", id: CardOrder.RARITY },
@@ -13,7 +12,6 @@ export const useCardSort = () => {
   const [selectedSortOption, setSelectedSortOption] = useState<ICardSortOption>(
     sortOptions[0]
   );
-
   
   return {
     sortOptions,

@@ -16,7 +16,6 @@ import {
 } from "combatcritters-ts";
 import { useCardQueryBuilder } from "hooks/useCardQueryBuilder";
 import { ClientSingleton } from "ClientSingleton";
-import { useInventoryUpdate } from "hooks/useInventoryUpdate";
 
 interface InventoryProps {
   selectedCards: ISortableCard[];
@@ -65,6 +64,7 @@ const Inventory: React.FC<InventoryProps> = ({
   useEffect(() => {
     console.log(CardOrder);
     console.log(cardQueryBuilder);
+    console.log("The card query: " + cardQuery.getQueryString());
     const fetchAndSetCards = async () => {
       try {
         const cards = await userCardsManager.getCards(cardQuery);

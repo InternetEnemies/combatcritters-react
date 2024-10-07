@@ -14,16 +14,13 @@ export const useDeckSave = (
 
   const saveDeck = async () => {
     if (selectedDeck && localDeck) {
-      // Clear the selectedDeck's cards and add all cards from localDeck
-      selectedDeck.cards = localDeck.cards.map((card) => ({ ...card.card })); // Synchronize decks
+      selectedDeck.cards = localDeck.cards.map((card) => ({ ...card.card })); 
 
       triggerToast("Deck Saved!");
 
-      // Ensure React updates both localDeck and selectedDeck references
-      setLocalDeck(convertToSortableDeck(selectedDeck)); // Update the localDeck state
-      setSelectedDeck({ ...selectedDeck }); // Update selectedDeck
+      setLocalDeck(convertToSortableDeck(selectedDeck)); 
+      setSelectedDeck({ ...selectedDeck });
 
-      // Set changesMade to false because decks are now in sync
       setChangesMade(false);
     } else {
       console.error("No deck selected or local deck is not set.");
@@ -35,44 +32,6 @@ export const useDeckSave = (
       setLocalDeck(convertToSortableDeck(selectedDeck));
     }
   };
-
-  // useEffect(() => {
-  //   if (localDeck && selectedDeck) {
-  //     // Compare length first
-  //     if (localDeck.cards.length !== selectedDeck.cards.length) {
-  //       setChangesMade(true);
-  //       return;
-  //     }
-
-  //     // Compare each card deeply
-  //     const areDecksEqual = localDeck.cards.every((localCard, index) => {
-  //       const selectedCard = selectedDeck.cards[index];
-  //       return (
-  //         localCard.card.cardid === selectedCard.cardid &&
-  //         localCard.card.name === selectedCard.name // Example of a deeper comparison
-  //       );
-  //     });
-
-  //     setChangesMade(!areDecksEqual);
-  //   } else {
-  //     setChangesMade(false);
-  //   }
-  // }, [localDeck, selectedDeck]);
-
-  // useEffect(() => {
-  //   if (localDeck && selectedDeck) {
-  //     const areDecksEqual =
-  //       localDeck.cards.length === selectedDeck.cards.length &&
-  //       localDeck.cards.every((localCard, index) => {
-  //         const selectedCard = selectedDeck.cards[index];
-  //         return localCard.card.cardid === selectedCard.cardid;
-  //       });
-
-  //     setChangesMade(!areDecksEqual);
-  //   } else {
-  //     setChangesMade(false);
-  //   }
-  // }, [localDeck, selectedDeck]);
 
   return {
     saveDeck,

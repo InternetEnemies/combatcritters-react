@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { ISortableCard } from "interfaces/ISortableCard";
 import { useCardQueryBuilder } from "./useCardQueryBuilder";
-import { ISortOption } from "interfaces/ISortOption";
 import { IFilterOption } from "interfaces/IFilterOption";
 import { ICardSortOption } from "interfaces/ICardSortOption";
 import { ICardQueryBuilder } from "combatcritters-ts";

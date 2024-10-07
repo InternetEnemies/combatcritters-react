@@ -1,11 +1,16 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Confirmation dialog popup. 
+ */
+
 import React, { useEffect, useRef } from "react";
 import "./confirmationDialog.css";
 
 interface ConfirmationDialogProps {
   show: boolean;
-  message: string; 
-  onConfirm: () => void; 
-  setShowDialog: (show: boolean) => void; 
+  message: string;
+  onConfirm: () => void;  //Execute this callback when the user clicks confirm.
+  setShowDialog: (show: boolean) => void;
 }
 
 const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
@@ -14,7 +19,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   onConfirm,
   setShowDialog,
 }) => {
-  const dialogRef = useRef<HTMLDivElement>(null); 
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -36,7 +41,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   }, [show, setShowDialog]);
 
   if (!show) {
-    return null; 
+    return null;
   }
 
   return (

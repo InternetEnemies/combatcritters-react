@@ -89,9 +89,8 @@ export const useDragAndDrop = (
     setLocalDeck: (deck: ISortableDeck) => void,
     setHighlightDeck: (highlight: boolean) => void
   ) => {
-    // Allow inventory card dragging even when localDeck is null
     const draggedCard = findDraggedCard(selectedCards, activeId);
-    if (!draggedCard || !localDeck) return; // Do nothing if localDeck is null
+    if (!draggedCard || !localDeck) return; 
 
     const newDraggableCard = createNewDraggableCard(draggedCard);
     const isDirectDrop = over?.id === localDeck.id.toString();

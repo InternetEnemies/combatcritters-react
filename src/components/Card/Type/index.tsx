@@ -1,9 +1,6 @@
 import './type.css'
 import { ICard, ICardCritter, ICardItem } from 'combatcritters-ts/src/objects';
 import { ICardVisitor } from 'combatcritters-ts';
-interface Props {
-    type: string;
-  }
   
   const Type: React.FC<{ card: ICard }> = ({ card }) => {
     let imagePath;
@@ -18,8 +15,6 @@ interface Props {
     };
 
     card.accept(visitor);
-
-
 
     return <img className="typeImage" src={imagePath} />;
   };

@@ -1,6 +1,11 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Delete Deck button used in the deck builder.
+ */
+
 import React, { useState } from "react";
 import ConfirmationDialog from "components/ConfirmationDialog";
-import deleteIcon from "assets/icons/delete.svg"; 
+import deleteIcon from "assets/icons/delete.svg";
 import "./deleteButton.css";
 
 interface DeleteButtonProps {
@@ -11,12 +16,12 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ onDelete }) => {
   const [showDialog, setShowDialog] = useState(false);
 
   const handleDeleteClick = () => {
-    setShowDialog(true); 
+    setShowDialog(true);
   };
 
   const handleConfirmDelete = () => {
     onDelete();
-    setShowDialog(false); 
+    setShowDialog(false);
   };
 
   return (
@@ -25,14 +30,14 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ onDelete }) => {
         src={deleteIcon}
         alt="Delete"
         className="deleteImage"
-        onClick={handleDeleteClick} 
+        onClick={handleDeleteClick}
       />
 
       <ConfirmationDialog
         show={showDialog}
-        setShowDialog={setShowDialog} 
+        setShowDialog={setShowDialog}
         message="Are you sure you want to delete this deck?"
-        onConfirm={handleConfirmDelete} 
+        onConfirm={handleConfirmDelete}
       />
     </div>
   );

@@ -1,11 +1,16 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Dropdown of decks used in the deck builder.
+ */
+
 import React, { useEffect, useState } from "react";
 import { IDeck } from "combatcritters-ts/src/objects";
 import { IDropdownOption } from "interfaces/IDropdownOption";
 
 interface DeckDropdownProps {
-  decks: IDeck[]; // Array of available decks
-  selectedDeck: IDeck | null; // Currently selected deck
-  setSelectedDeck: (deck: IDeck) => void; // Callback to update the selected deck
+  decks: IDeck[];
+  selectedDeck: IDeck | null;
+  setSelectedDeck: (deck: IDeck) => void;
 }
 
 const DecksDropdown: React.FC<DeckDropdownProps> = ({
@@ -17,8 +22,8 @@ const DecksDropdown: React.FC<DeckDropdownProps> = ({
     IDropdownOption[]
   >([]);
 
+  //Convert decks[] into IDropdownOption[]
   useEffect(() => {
-    // Convert decks array to dropdown options
     const options = decks.map((deck) => ({
       id: deck.deckid,
       name: deck.name,
@@ -30,7 +35,7 @@ const DecksDropdown: React.FC<DeckDropdownProps> = ({
     const selectedDeckId = Number(e.target.value);
     const selectedDeck = decks.find((deck) => deck.deckid === selectedDeckId);
     if (selectedDeck) {
-      setSelectedDeck(selectedDeck); // Notify the parent of the selected deck
+      setSelectedDeck(selectedDeck);
     }
   };
 

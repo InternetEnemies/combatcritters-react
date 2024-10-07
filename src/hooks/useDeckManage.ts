@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ISortOption } from "interfaces/ISortOption";
 import { IDeck } from "combatcritters-ts/src/objects";
 import { ISortableDeck } from "interfaces/ISortableDeck";
 import DeckManager from "api/DeckManager";
@@ -35,10 +34,10 @@ export const useDeckManage = () => {
 
   useEffect(() => {
     const initializeDecks = async () => {
-      const d = await DeckManager.getInstance().getDecks(); // Await the promise here
+      const d = await DeckManager.getInstance().getDecks(); 
       setDecks(d);
       if (d.length > 0) {
-        setSelectedDeck(d[0]); // Optionally set the first deck as selected
+        setSelectedDeck(d[0]); 
       }
     };
 

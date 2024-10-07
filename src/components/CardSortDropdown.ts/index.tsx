@@ -1,6 +1,12 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Dropdown of card sort options used in the inventory.
+ */
+
 import React from "react";
 import "./cardSortDropdown.css";
 import { ICardSortOption } from "interfaces/ICardSortOption";
+
 interface CardSortDropdownProps {
   dropdownOptions: ICardSortOption[];
   selectedDropdownOption: ICardSortOption;
