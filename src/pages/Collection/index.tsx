@@ -10,27 +10,12 @@ import { ISortableCard } from "interfaces/ISortableCard";
 import SortableCard from "components/SortableCard";
 import { useDragAndDrop } from "hooks/useDragAndDrop";
 import DeckManager from "api/DeckManager";
-import { convertToSortableDeck } from "utils/deckUtils";
-
+import { convertToSortableDeck } from "utils/collectionUtils";
+import { IDeck } from "combatcritters-ts/src/objects";
+import { useDeckManage } from "hooks/useDeckManage";
 const Collection: React.FC = () => {
-  
   const [selectedCards, setSelectedCards] = useState<ISortableCard[]>([]);
-  const [localDeck, setLocalDeck] = useState<ISortableDeck>({
-    id: 0,
-    name: "No Deck Selected",
-    cards: [],
-  });
-
-  useEffect(() => {
-    const initializeDeck = async () => {
-      const decks = await DeckManager.getInstance().getDecks();
-      if(decks.length > 0) {
-        setLocalDeck(convertToSortableDeck(decks[0])); 
-    }
-      
-    };
-    initializeDeck();
-  }, []); 
+  const [localDeck, setLocalDeck] = useState<ISortableDeck | null>(null);
 
   const {
     activeCard,
@@ -49,17 +34,18 @@ const Collection: React.FC = () => {
       <div className="collectionRoot">
         <NavBar />
         <div className="invDecksContainer">
-          {localDeck && (
-            <SortableContext
-              items={localDeck.cards.map((card) => card.instanceId)}
-            >
-              <Decks
-                localDeck={localDeck}
-                setLocalDeck={setLocalDeck}
-                highlight={highlightDeck}
-              />
-            </SortableContext>
-          )}
+          <SortableContext
+            items={
+              localDeck ? localDeck.cards.map((card) => card.instanceId) : []
+            }
+          >
+            <Decks
+              localDeck={localDeck}
+              setLocalDeck={setLocalDeck}
+              highlight={highlightDeck}
+            />
+          </SortableContext>
+
           <Inventory
             selectedCards={selectedCards}
             setSelectedCards={setSelectedCards}
