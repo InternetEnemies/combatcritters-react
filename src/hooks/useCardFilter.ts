@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { ISortOption } from "interfaces/ISortOption";
-import { CardOrder } from "api/cardOrder";
 import { IFilterOption } from "interfaces/IFilterOption";
-import { CardRarity } from "api/cardRarity";
+import { CardRarity } from "combatcritters-ts";
 
 export const useCardFilter = () => {
   const [rarityFilterOptions, setRarityFilterOptions] = useState<
