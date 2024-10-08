@@ -5,7 +5,6 @@
 
 import React, { useState } from "react";
 import ConfirmationDialog from "components/ConfirmationDialog";
-import "./confirmationButton.css";
 
 interface ConfirmationButtonProps {
   onClick: () => void; //Callback to execute when the user confirms.
