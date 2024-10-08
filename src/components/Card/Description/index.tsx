@@ -7,10 +7,10 @@ const Description: React.FC<{ card: ICard }> = ({ card }) => {
 
   const visitor: ICardVisitor = {
     visitCritter: (critter: ICardCritter): void => {
-      className = "descriptionRoot critter";
+      className = "critter";
     },
     visitItem: (item: ICardItem): void => {
-      className = "descriptionRoot item";
+      className = "item";
     },
   };
 
