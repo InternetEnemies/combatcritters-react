@@ -14,8 +14,11 @@ import "./collection.css";
 import { ISortableCard } from "interfaces/ISortableCard";
 import SortableCard from "components/SortableCard";
 import { useDragAndDrop } from "hooks/useDragAndDrop";
+import useAuthRedirect from "hooks/useAuthCheck";
 
 const Collection: React.FC = () => {
+  useAuthRedirect();
+
   const [selectedCards, setSelectedCards] = useState<ISortableCard[]>([]);
   const [localDeck, setLocalDeck] = useState<ISortableDeck | null>(null);
 
