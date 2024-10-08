@@ -46,11 +46,11 @@
   gap: 20px;
 }
 
-.cardRoot.common,
-.cardRoot.rare,
-.cardRoot.uncommon,
-.cardRoot.epic,
-.cardRoot.legendary {
+.cardRoot.COMMON,
+.cardRoot.RARE,
+.cardRoot.UNCOMMON,
+.cardRoot.EPIC,
+.cardRoot.LEGENDARY {
   --common-gradient: linear-gradient(
     0deg,
     rgb(47, 47, 47) 0%,
@@ -79,23 +79,23 @@
   background-position: center, center top;
 }
 
-.cardRoot.common {
+.cardRoot.COMMON {
   background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--common-gradient);
 }
-.cardRoot.uncommon {
+.cardRoot.UNCOMMON {
   background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--uncommon-gradient);
 }
-.cardRoot.rare {
+.cardRoot.RARE {
   background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--rare-gradient);
 }
-.cardRoot.epic {
+.cardRoot.EPIC {
   background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--epic-gradient);
 }
-.cardRoot.legendary {
+.cardRoot.LEGENDARY {
   background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--legendary-gradient);
 }
@@ -108,18 +108,18 @@
   align-items: center;
 }
 
-.cardInner.common {
+.cardInner.COMMON {
   background-color: var(--background-inner-color-common);
 }
-.cardInner.uncommon {
+.cardInner.UNCOMMON {
   background-color: var(--background-inner-color-uncommon);
 }
-.cardInner.rare {
+.cardInner.RARE {
   background-color: var(--background-inner-color-rare);
 }
-.cardInner.epic {
+.cardInner.EPIC {
   background-color: var(--background-inner-color-epic);
 }
-.cardInner.legendary {
+.cardInner.LEGENDARY {
   background-color: var(--background-inner-color-legendary);
 }

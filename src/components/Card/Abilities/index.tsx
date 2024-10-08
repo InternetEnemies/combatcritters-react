@@ -14,10 +14,11 @@ const Abilities: React.FC<{ card: ICard }> = ({ card }) => {
     visitCritter: (critter: ICardCritter): void => {
       content = (
         <div className="abilitiesRoot">
-          {critter.abilities.map((ability, index) => {
-            const src = abilityMap[ability];
-            return <img key={index} src={src} className="abilityImage" />;
-          })}
+          {critter.abilities &&
+            critter.abilities.map((ability, index) => {
+              const src = abilityMap[ability];
+              return <img key={index} src={src} className="abilityImage" />;
+            })}
         </div>
       );
     },

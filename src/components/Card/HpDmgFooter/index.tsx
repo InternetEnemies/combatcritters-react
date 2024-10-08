@@ -6,7 +6,7 @@ import {
 } from "combatcritters-ts/src/objects";
 import { ICardVisitor } from "combatcritters-ts";
 import "./hpDmgFooter.css"
-import { CardRarity } from "combatcritters-ts/src/objects";
+import { CardRarity } from "combatcritters-ts";
 
 const HpDmgFooter: React.FC<{ card: ICard }> = ({ card }) => {
   let content: React.ReactNode = null;

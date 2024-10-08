@@ -8,19 +8,19 @@
   clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
 }
 
-.footerRoot.common {
+.footerRoot.COMMON {
   background-color: var(--background-inner-color-common);
 }
-.footerRoot.uncommon {
+.footerRoot.UNCOMMON {
   background-color: var(--background-inner-color-uncommon);
 }
-.footerRoot.rare {
+.footerRoot.RARE {
   background-color: var(--background-inner-color-rare);
 }
-.footerRoot.epic {
+.footerRoot.EPIC {
   background-color: var(--background-inner-color-epic);
 }
-.footerRoot.legendary {
+.footerRoot.LEGENDARY {
   background-color: var(--background-inner-color-legendary);
 }
 
