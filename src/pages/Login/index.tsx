@@ -33,6 +33,7 @@ const Login: React.FC = () => {
     }
     try {
       await ClientSingleton.getInstance().register(username, password);
+      await ClientSingleton.getInstance().login(username, password);
       navigate("/collection");
     } catch (e) {
       setError("Failed to register.");
