@@ -62,15 +62,15 @@ const Inventory: React.FC<InventoryProps> = ({
   );
 
   useEffect(() => {
-    console.log(CardOrder);
-    console.log(cardQueryBuilder);
-    console.log("The card query: " + cardQuery.getQueryString());
     const fetchAndSetCards = async () => {
-      try {
-        const cards = await userCardsManager.getCards(cardQuery);
-        setSelectedCards(convertCardStackToSortable(cards));
-      } catch (error) {
-        console.error("Error fetching cards:", error);
+      if (cardQuery) {
+        // Check if cardQuery is defined before making the request
+        try {
+          const cards = await userCardsManager.getCards(cardQuery);
+          setSelectedCards(convertCardStackToSortable(cards));
+        } catch (error) {
+          console.error("Error fetching cards:", error);
+        }
       }
     };
 

@@ -11,10 +11,11 @@ export const useCardQueryBuilder = (
   owned: boolean
 ) => {
 
-  const [cardQuery, setCardQuery] = useState<ICardQuery> (cardQueryBuilder.build());
+  const [cardQuery, setCardQuery] = useState<ICardQuery> ();
 
   useEffect(()=> {
     cardQueryBuilder.reset();
+    cardQueryBuilder.setRaritiesInclude(true);
     cardQueryBuilder.setOrder(sortOption);
     cardQueryBuilder.setOwned(owned);
     cardQueryBuilder.setRarities(rarityFilterOptions);
