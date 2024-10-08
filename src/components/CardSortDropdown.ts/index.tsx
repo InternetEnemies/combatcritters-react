@@ -24,7 +24,7 @@ const CardSortDropdown: React.FC<CardSortDropdownProps> = ({
         value={selectedDropdownOption.id}
         onChange={(e) => {
           const selectedOption = dropdownOptions.find(
-            (option) => option.id == e.target.value
+            (option) => option.id === e.target.value
           );
           if (selectedOption) {
             setSelectedDropdownOption(selectedOption);

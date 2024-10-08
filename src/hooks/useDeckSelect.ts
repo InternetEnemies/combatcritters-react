@@ -49,7 +49,7 @@ export const useDeckSelect = (
         setSelectedDeck(newSelectedDeck);
       }
     }
-  }, [selectedDropdownOption, setSelectedDeck]);
+  }, [selectedDropdownOption, setSelectedDeck, decks]);
 
   //Updates localdeck to match the newly selectedDeck
   useEffect(() => {

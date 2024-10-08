@@ -17,7 +17,7 @@ const Abilities: React.FC<{ card: ICard }> = ({ card }) => {
           {critter.abilities &&
             critter.abilities.map((ability, index) => {
               const src = abilityMap[ability];
-              return <img key={index} src={src} className="abilityImage" />;
+              return <img key={index} src={src} className="abilityImage" alt="Abilitiy image"/>;
             })}
         </div>
       );

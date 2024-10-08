@@ -9,7 +9,6 @@ import Switch from "components/Switch";
 import { useCardSort } from "hooks/useCardSort";
 import { useCardFilter } from "hooks/useCardFilter";
 import {
-  CardOrder,
   ICardQueryBuilder,
   IUserCardsManager,
   UserCardsManager,

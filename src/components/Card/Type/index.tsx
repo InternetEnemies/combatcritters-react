@@ -16,7 +16,7 @@ import { ICardVisitor } from 'combatcritters-ts';
 
     card.accept(visitor);
 
-    return <img className="typeImage" src={imagePath} />;
+    return <img className="typeImage" src={imagePath} alt="Card"/>;
   };
   
   export default Type;

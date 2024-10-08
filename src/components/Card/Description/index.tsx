@@ -1,10 +1,6 @@
 import "./description.css"
 import { ICard, ICardCritter, ICardItem } from "combatcritters-ts/src/objects";
 import { ICardVisitor } from "combatcritters-ts";
-interface Props {
-  description: string;
-  type: string;
-}
   
 const Description: React.FC<{ card: ICard }> = ({ card }) => {
   let className = "critter"; //Default to critter

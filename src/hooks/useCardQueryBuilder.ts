@@ -24,7 +24,7 @@ export const useCardQueryBuilder = (
     cardQueryBuilder.setOwned(owned);
     cardQueryBuilder.setRarities(rarityFilterOptions);
     setCardQuery(cardQueryBuilder.build());
-  }, [sortOption, owned, rarityFilterOptions]);
+  }, [sortOption, owned, rarityFilterOptions, cardQueryBuilder]);
 
   return cardQuery;
 };
