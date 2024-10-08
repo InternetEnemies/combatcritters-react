@@ -30,14 +30,14 @@ const Switch: React.FC<SwitchProps> = ({
   return (
     <div className="switchRoot">
       <span
-        className={`option leftOption ${isLeftToggled ? "active" : ""}`}
+        className={`option leftOption ${isLeftToggled ? "active" : "notActive"}`}
         onClick={handleLeftClick}
       >
         {leftOption}
       </span>
 
       <span
-        className={`option rightOption ${!isLeftToggled ? "active" : ""}`}
+        className={`option rightOption ${!isLeftToggled ? "active" : "notActive"}`}
         onClick={handleRightClick}
       >
         {rightOption}
