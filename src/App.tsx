@@ -1,6 +1,6 @@
 /**
  * @Created 2024-10-07
- * @Brief Main application component. Initializes the client.
+ * @Brief Main application component. 
  */
 
 import React, { useEffect, useState } from "react";
