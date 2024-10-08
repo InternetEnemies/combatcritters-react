@@ -23,19 +23,25 @@ export const convertCardStackToSortable = (
   }));
 };
 
+export async function convertToSortableDeck(
+  deck: IDeck
+): Promise<ISortableDeck> {
+  try {
+    const deckCards = await deck.getCards(); 
+    console.log("here in convert");
+    const sortableCards: ISortableCard[] = deckCards.map((card) => ({
+      instanceId: uuidv4(),
+      card: card,
+    }));
 
+    const sortableDeck: ISortableDeck = {
+      id: deck.deckid,
+      name: deck.name,
+      cards: sortableCards,
+    };
 
-export function convertToSortableDeck(deck: IDeck): ISortableDeck {
-  const sortableCards: ISortableCard[] = deck.cards.map((card) => ({
-    instanceId: uuidv4(),
-    card: card,
-  }));
-
-  const sortableDeck: ISortableDeck = {
-    id: deck.deckid,
-    name: deck.name,
-    cards: sortableCards,
-  };
-
-  return sortableDeck;
+    return sortableDeck;
+  } catch (e) {
+    throw e; 
+  }
 }
