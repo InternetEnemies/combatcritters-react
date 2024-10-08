@@ -24,6 +24,7 @@ export const useDeckSelect = (
     useState<IDropdownOption | null>(null);
 
   //Updates the list of decks in the dropdown whenever decks changes (i.e. a deck is created or deleted).
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const options = decks.map((deck) => ({
       id: deck.deckid,
