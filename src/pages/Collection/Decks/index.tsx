@@ -28,18 +28,45 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
   const { showToast, setShowToast, triggerToast, toastMessage } = useToast();
   const [decks, setDecks] = useState<IDeck[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<IDeck | null>(null);
+  // const [selectedDeck, setSelectedDeck] = useState<IDeck>();
+
+  useEffect(() => {
+    const fetchDecks = async () => {
+      try {
+        const fetchedDecks = await deckManager.getDecks(); 
+        setDecks(fetchedDecks); 
+      } catch (error) {
+        console.error("Error fetching decks:", error); 
+      }
+    };
+
+    fetchDecks(); 
+  }, [deckManager]);
+
+  useEffect(() => {
+    if (decks.length > 0) {
+      setSelectedDeck(decks[0]);
+    }
+  }, [decks]);
 
   const changesMade = useMonitorDeckChanges(localDeck, selectedDeck);
+
+  const { setNodeRef } = useDroppable({
+    id: localDeck ? localDeck.id.toString() : "default-droppable",
+  });
 
   const saveDeck = async () => {
     try {
       if (selectedDeck && localDeck) {
-        await selectedDeck.setCards(localDeck.cards.map((card) => card.card));
-
+        // await selectedDeck.setCards(localDeck.cards.map((card) => card.card));
+        await selectedDeck.setCards(
+          localDeck.cards.map((sortableCard) => sortableCard.card)
+        );
+        await selectedDeck.commit();
         triggerToast("Deck Saved!");
 
         setLocalDeck(await convertToSortableDeck(selectedDeck));
-        setSelectedDeck({ ...selectedDeck });
+        setSelectedDeck(selectedDeck);
       } else {
         console.error("No deck selected or local deck is not set.");
       }
@@ -63,17 +90,8 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
     saveDeck
   );
 
-  const { setNodeRef } = useDroppable({
-    id: localDeck ? localDeck.id.toString() : "default-droppable",
-  });
-
-  const style = {
-    filter: highlight ? "brightness(1.2)" : "none",
-  };
-
   const createDeck = async (deckName: string) => {
     try {
-
       const createdDeck = await deckManager.createDeck(deckName);
       const updatedDecks = await deckManager.getDecks();
       setDecks(updatedDecks);
@@ -100,6 +118,10 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
         console.error("Error deleting the deck:", error);
       }
     }
+  };
+
+  const style = {
+    filter: highlight ? "brightness(1.2)" : "none",
   };
 
   return (
