@@ -3,14 +3,12 @@ import "./navBar.css";
 import ProfileButton from "components/ProfileButton"; 
 
 const NavBar: React.FC = () => {
-  const [hasNotifications] = useState(true); 
-  const notificationCount = 3; 
 
   return (
     <div className="navBarRoot">
       <ProfileButton
-        hasNotifications={hasNotifications}
-        notificationCount={notificationCount}
+        hasNotifications={true}
+        notificationCount={1}
       />
     </div>
   );

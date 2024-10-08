@@ -1,6 +1,5 @@
 import React from "react";
 import "./profilePopdown.css";
-import { useNavigate } from "react-router-dom";
 
 interface PopdownProps {
   isVisible: boolean;
