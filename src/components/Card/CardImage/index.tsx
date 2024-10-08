@@ -6,7 +6,7 @@ interface Props {
   
 const CardImage: React.FC<Props> = ({ imagePath }) => {
   return (
-    <img className="cardImage" src={imagePath}/>
+    <img alt="Card" className="cardImage" src={imagePath}/>
   );
 };
 
