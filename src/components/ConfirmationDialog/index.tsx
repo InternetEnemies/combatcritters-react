@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useRef } from "react";
-import "./confirmationDialog.css";
+// import "./confirmationDialog.css";
 
 interface ConfirmationDialogProps {
   show: boolean;
