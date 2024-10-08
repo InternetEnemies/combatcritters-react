@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./navBar.css";
 import ProfileButton from "components/ProfileButton"; 
 
