@@ -17,7 +17,7 @@ function App() {
       try {
         // await client.register("kevin", "1234");
         await client.login("kevin", "1234");
-        console.log("Logged in.");
+        console.log(client.user.username+" is logged in.");
       } catch (error) {
       } finally {
         setIsInitialized(true);
