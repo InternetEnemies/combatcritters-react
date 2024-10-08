@@ -35,7 +35,8 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
       selectedDeck.cards = []; 
 
       localDeck.cards.forEach((card, index) => {
-        selectedDeck.cards.push({ ...card.card }); 
+        // selectedDeck.cards.push({ ...card.card }); 
+        selectedDeck.cards.push(card.card); 
       });
 
       triggerToast("Deck Saved!");
