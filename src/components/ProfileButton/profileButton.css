@@ -1,0 +1,38 @@
+.profileButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.profileIconContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.svgIcon {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%; 
+  border: 3px solid black;
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  min-width: 10px; 
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
