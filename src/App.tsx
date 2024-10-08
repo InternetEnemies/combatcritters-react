@@ -9,12 +9,13 @@ import { ClientSingleton } from "./ClientSingleton";
 import Collection from "pages/Collection";
 
 function App() {
-  const [isInitialized, setIsInitialized] = useState<boolean>(false); 
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const client = ClientSingleton.getInstance();
 
   useEffect(() => {
     const initializeClient = async () => {
       try {
+        // await client.register("kevin", "1234");
         await client.login("kevin", "1234");
         console.log("Logged in.");
       } catch (error) {
