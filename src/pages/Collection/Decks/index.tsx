@@ -14,6 +14,7 @@ import ConfirmationButton from "components/ConfirmationButton";
 import Toast from "components/Toast";
 import { useToast } from "hooks/useToast";
 import { useMonitorDeckChanges } from "hooks/useMonitorDeckChanges";
+import deleteIcon from "assets/icons/delete.svg";
 
 interface DeckProps {
   localDeck: ISortableDeck | null;
@@ -35,7 +36,6 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
       selectedDeck.cards = []; 
 
       localDeck.cards.forEach((card, index) => {
-        // selectedDeck.cards.push({ ...card.card }); 
         selectedDeck.cards.push(card.card); 
       });
 
@@ -103,12 +103,6 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
   return (
     <div className="decksRoot" style={style}>
       <div className="deckChooserContainer">
-        <ConfirmationButton
-          onClick={deleteDeck}
-          confirmationMessage="Are you sure you want to delete this deck?"
-          child={<Button onClick={() => {}} text="Delete Deck" />}
-        />
-        <CreateDeck onCreateDeck={createDeck} />
         <Dropdown
           dropdownOptions={deckDropdownOptions}
           selectedDropdownOption={{
@@ -120,6 +114,14 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
             setSelectedDeck(selected || null);
           }}
         />
+        <div className="createDeleteContainer">
+          <ConfirmationButton
+            onClick={deleteDeck}
+            confirmationMessage="Are you sure you want to delete this deck?"
+            child={<img className="trashIcon" src={deleteIcon} />}
+          />
+          <CreateDeck onCreateDeck={createDeck} />
+        </div>
       </div>
       <div
         className="deckCardsGrid"
@@ -142,16 +144,19 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
           <p>No deck selected.</p>
         )}
       </div>
-      {changesMade ? (
-        <ConfirmationButton
-          onClick={cancelChanges}
-          confirmationMessage="Are you sure you want to cancel changes?"
-          child={<Button onClick={() => {}} text="Cancel" />}
-        />
-      ) : (
-        <Button text="Cancel" onClick={() => {}} />
-      )}
-      <Button text={"Save"} onClick={saveDeck} />
+      <div className="cancelDeleteContainer">
+        {changesMade ? (
+          <ConfirmationButton
+            onClick={cancelChanges}
+            confirmationMessage="Are you sure you want to cancel changes?"
+            child={<Button onClick={() => {}} text="Cancel" />}
+          />
+        ) : (
+          <Button text="Cancel" onClick={() => {}} />
+        )}
+        <Button text={"Save"} onClick={saveDeck} />
+      </div>
+
       <Toast show={showToast} setShow={setShowToast} message={toastMessage} />
     </div>
   );
