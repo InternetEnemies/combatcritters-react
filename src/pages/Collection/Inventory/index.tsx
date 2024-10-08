@@ -64,7 +64,6 @@ const Inventory: React.FC<InventoryProps> = ({
   useEffect(() => {
     const fetchAndSetCards = async () => {
       if (cardQuery) {
-        // Check if cardQuery is defined before making the request
         try {
           const cards = await userCardsManager.getCards(cardQuery);
           setSelectedCards(convertCardStackToSortable(cards));
