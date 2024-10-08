@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Login component.
+ */
+
 import { ClientSingleton } from "ClientSingleton";
 import React, { useEffect, useState } from "react";
 import "./login.css";
@@ -10,7 +15,7 @@ const Login: React.FC = () => {
   const [loginSelected, setLoginSelected] = useState(true);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>(""); 
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async () => {
