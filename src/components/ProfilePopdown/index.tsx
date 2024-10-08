@@ -27,10 +27,6 @@ const ProfilePopdown: React.FC<PopdownProps> = ({ isVisible }) => {
       <button className="popdownButton" onClick={handleProfileClick}>
         Your Profile
       </button>
-      <button className="popdownButton" onClick={handleLogoutClick}>
-        <img src={logoutIcon} alt="Logout Icon" className="logoutIcon" />{" "}
-        Logout
-      </button>
     </div>
   );
 };
