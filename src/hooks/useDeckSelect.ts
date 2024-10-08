@@ -33,33 +33,37 @@ export const useDeckSelect = (
     }
   }, [decks, selectedDeck]);
 
+  //Updates the selected deck when the dropdown selection changes.
   useEffect(() => {
-   
     if (selectedDropdownOption) {
-      if(changesMade) {
-        saveDeck();
-      }
+      // if (changesMade) {
+      //   saveDeck();
+      // }
       const newSelectedDeck = decks.find(
         (deck) => deck.deckid === selectedDropdownOption.id
       );
       if (newSelectedDeck) {
-        setSelectedDeck(newSelectedDeck); 
+        setSelectedDeck(newSelectedDeck);
       }
     }
   }, [selectedDropdownOption, decks, setSelectedDeck]);
 
   useEffect(() => {
-    if (selectedDeck) {
-      const sortableDeck = convertToSortableDeck(selectedDeck);
-      setLocalDeck(sortableDeck);
-    } else {
-      setLocalDeck(null);
-    }
+    const fetchAndSetDeck = async () => {
+      if (selectedDeck) {
+        const sortableDeck = await convertToSortableDeck(selectedDeck);
+        setLocalDeck(sortableDeck);
+      } else {
+        setLocalDeck(null);
+      }
+    };
+
+    fetchAndSetDeck();
   }, [selectedDeck, setLocalDeck]);
 
   return {
-    deckDropdownOptions, 
-    selectedDropdownOption, 
-    setSelectedDropdownOption, 
+    deckDropdownOptions,
+    selectedDropdownOption,
+    setSelectedDropdownOption,
   };
 };
