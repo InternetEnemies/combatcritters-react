@@ -10,32 +10,32 @@ export const useDeckSave = (
   setSelectedDeck: (deck: IDeck) => void,
   triggerToast: (msg: string) => void
 ) => {
-  const [changesMade, setChangesMade] = useState(false);
+  // const [changesMade, setChangesMade] = useState(false);
 
-  const saveDeck = async () => {
-    if (selectedDeck && localDeck) {
-      selectedDeck.cards = localDeck.cards.map((card) => ({ ...card.card })); 
+  // const saveDeck = async () => {
+  //   if (selectedDeck && localDeck) {
+  //     selectedDeck.cards = localDeck.cards.map((card) => ({ ...card.card })); 
 
-      triggerToast("Deck Saved!");
+  //     triggerToast("Deck Saved!");
 
-      setLocalDeck(convertToSortableDeck(selectedDeck)); 
-      setSelectedDeck({ ...selectedDeck });
+  //     setLocalDeck(convertToSortableDeck(selectedDeck)); 
+  //     setSelectedDeck({ ...selectedDeck });
 
-      setChangesMade(false);
-    } else {
-      console.error("No deck selected or local deck is not set.");
-    }
-  };
+  //     setChangesMade(false);
+  //   } else {
+  //     console.error("No deck selected or local deck is not set.");
+  //   }
+  // };
 
-  const cancelChanges = () => {
-    if (selectedDeck && changesMade) {
-      setLocalDeck(convertToSortableDeck(selectedDeck));
-    }
-  };
+  // const cancelChanges = () => {
+  //   if (selectedDeck && changesMade) {
+  //     setLocalDeck(convertToSortableDeck(selectedDeck));
+  //   }
+  // };
 
   return {
-    saveDeck,
-    cancelChanges,
-    changesMade,
+    // saveDeck,
+    // cancelChanges,
+    // changesMade,
   };
 };
