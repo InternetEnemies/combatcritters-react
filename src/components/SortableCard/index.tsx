@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Sortable card for use in drag and drop.
+ */
+
 import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -31,7 +36,7 @@ const SortableCard: React.FC<SortableCardProps> = ({
     transition,
     zIndex: isDragging ? 1000 : "auto",
     opacity: isDragging ? (translucent ? 0.5 : 0) : 1,
-    pointerEvents: isDragging ? "none" : "auto", 
+    pointerEvents: isDragging ? "none" : "auto",
   };
 
   return (

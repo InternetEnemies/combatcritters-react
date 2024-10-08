@@ -1,12 +1,17 @@
+/**
+ * @Created 2024-10-07
+ * @Brief General Button component.
+ */
+
 import React from "react";
-import "./button.css"; 
+import "./button.css";
 
 interface ButtonProps {
   text: string;
   onClick: () => void;
-  className?: string; 
-  disabled?: boolean; 
-  style?: React.CSSProperties; 
+  className?: string;
+  disabled?: boolean;
+  style?: React.CSSProperties;
 }
 
 const Button: React.FC<ButtonProps> = ({

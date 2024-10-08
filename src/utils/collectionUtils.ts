@@ -1,17 +1,14 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Utilities used in the collection page.
+ */
+
 import { v4 as uuidv4 } from "uuid";
 import { ICard } from "combatcritters-ts/src/objects";
 import { ISortableCard } from "interfaces/ISortableCard";
 import { ISortableDeck } from "interfaces/ISortableDeck";
 import { IDeck } from "combatcritters-ts/src/objects";
 import { IItemStack } from "combatcritters-ts/src/objects";
-
-export const convertToSortable = (cards: ICard[]): ISortableCard[] => {
-  return cards.map((card) => ({
-    instanceId: uuidv4(),
-    card,
-    cardCount: 2,
-  }));
-};
 
 export const convertCardStackToSortable = (
   cardStacks: IItemStack<ICard>[]
@@ -23,19 +20,24 @@ export const convertCardStackToSortable = (
   }));
 };
 
+export async function convertToSortableDeck(
+  deck: IDeck
+): Promise<ISortableDeck> {
+  try {
+    const deckCards = await deck.getCards();
+    const sortableCards: ISortableCard[] = deckCards.map((card) => ({
+      instanceId: uuidv4(),
+      card: card,
+    }));
 
+    const sortableDeck: ISortableDeck = {
+      id: deck.deckid,
+      name: deck.name,
+      cards: sortableCards,
+    };
 
-export function convertToSortableDeck(deck: IDeck): ISortableDeck {
-  const sortableCards: ISortableCard[] = deck.cards.map((card) => ({
-    instanceId: uuidv4(),
-    card: card,
-  }));
-
-  const sortableDeck: ISortableDeck = {
-    id: deck.deckid,
-    name: deck.name,
-    cards: sortableCards,
-  };
-
-  return sortableDeck;
+    return sortableDeck;
+  } catch (e) {
+    throw e;
+  }
 }

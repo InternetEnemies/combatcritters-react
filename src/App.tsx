@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Main application component. Initializes the client.
+ */
+
 import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,

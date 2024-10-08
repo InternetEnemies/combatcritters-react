@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief The Card view that is used throughout the application.
+ */
+
 import Header from "./Header";
 import CardImage from "./CardImage";
 import HpDmgFooter from "./HpDmgFooter";
@@ -18,7 +23,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ card, cardCount }) => {
   return (
     <div className={`cardRoot ${CardRarity[card.rarity]}`}>
-      <Header name={card.name} rarity={card.rarity} />
+      <Header card={card} />
       <div className={`cardInner ${CardRarity[card.rarity]}`}>
         <CardImage imagePath={"/assets/images/cardImage.jpeg"} />
         <Abilities card={card} />

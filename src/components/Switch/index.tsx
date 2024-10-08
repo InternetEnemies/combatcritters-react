@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief General switch/toggle component.
+ */
+
 import React from "react";
 import "./switch.css";
 

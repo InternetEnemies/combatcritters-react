@@ -1,6 +1,12 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Dropdown of card sort options used in the inventory.
+ */
+
 import React from "react";
 import "./cardSortDropdown.css";
 import { ICardSortOption } from "interfaces/ICardSortOption";
+
 interface CardSortDropdownProps {
   dropdownOptions: ICardSortOption[];
   selectedDropdownOption: ICardSortOption;
@@ -13,12 +19,12 @@ const CardSortDropdown: React.FC<CardSortDropdownProps> = ({
   setSelectedDropdownOption,
 }) => {
   return (
-    <div className="">
+    <div className="cardSortDropdownRoot">
       <select
         value={selectedDropdownOption.id}
         onChange={(e) => {
           const selectedOption = dropdownOptions.find(
-            (option) => Number(option.id) == Number(e.target.value)
+            (option) => option.id === e.target.value
           );
           if (selectedOption) {
             setSelectedDropdownOption(selectedOption);

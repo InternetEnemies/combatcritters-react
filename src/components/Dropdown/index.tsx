@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief General dropdown component.
+ */
+
 import React from "react";
 import "./dropdown.css";
 import { IDropdownOption } from "interfaces/IDropdownOption";
@@ -7,7 +12,7 @@ interface DropdownProps {
   selectedDropdownOption: IDropdownOption;
   setSelectedDropdownOption: (option: IDropdownOption) => void;
   className?: string;
-  labelPrefix?: string;
+  labelPrefix?: string; //Optional prefix to add before each of the dropdown options.
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -15,7 +20,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   selectedDropdownOption,
   setSelectedDropdownOption,
   className,
-  labelPrefix,
+  labelPrefix, 
 }) => {
   return (
     <div className={`dropdown ${className}`}>
@@ -26,7 +31,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             (option) => option.id === Number(e.target.value)
           );
           if (selectedOption) {
-            setSelectedDropdownOption(selectedOption); 
+            setSelectedDropdownOption(selectedOption);
           }
         }}
         className="select"
@@ -42,50 +47,3 @@ const Dropdown: React.FC<DropdownProps> = ({
 };
 
 export default Dropdown;
-
-// import React from "react";
-// import "./dropdown.css"; // Generic CSS file, can add styles for the base dropdown
-
-// interface DropdownProps<T> {
-//   options: T[];
-//   selectedOption: T;
-//   setSelectedOption: (option: T) => void;
-//   getOptionLabel: (option: T) => string;
-//   getOptionValue: (option: T) => string | number;
-//   className?: string; // Allows different styles to be applied
-//   style?: React.CSSProperties; // Allows inline styles for more specific styling
-// }
-
-// const Dropdown = <T extends unknown>({
-//   options,
-//   selectedOption,
-//   setSelectedOption,
-//   getOptionLabel,
-//   getOptionValue,
-//   className = "",
-//   style = {},
-// }: DropdownProps<T>) => {
-//   return (
-//     <div className={`dropdown ${className}`} style={style}>
-//       <select
-//         value={getOptionValue(selectedOption)}
-//         onChange={(e) => {
-//           const selectedValue = e.target.value;
-//           const option = options.find(
-//             (opt) => String(getOptionValue(opt)) === selectedValue
-//           );
-//           if (option) setSelectedOption(option);
-//         }}
-//         className="dropdownSelect" // You can apply generic select styles here
-//       >
-//         {options.map((option) => (
-//           <option key={getOptionValue(option)} value={getOptionValue(option)}>
-//             {getOptionLabel(option)}
-//           </option>
-//         ))}
-//       </select>
-//     </div>
-//   );
-// };
-
-// export default Dropdown;

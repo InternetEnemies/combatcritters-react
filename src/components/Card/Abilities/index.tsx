@@ -1,34 +1,3 @@
-// import "./abilities.css";
-
-// interface Props {
-//   abilities: number[];
-// }
-
-// const abilityMap: { [key: number]: string } = {
-//   0: "/assets/images/ability0.svg",
-//   1: "/assets/images/ability1.svg",
-//   2: "/assets/images/ability2.svg",
-// };
-
-// const Abilities: React.FC<Props> = ({ abilities }) => {
-//   return (
-//     <div className="abilitiesRoot">
-//       {abilities.map((ability, index) => {
-//         const src = abilityMap[ability];
-//         return (
-//           <img
-//             key={index}
-//             src={src}
-//             className="abilityImage"
-//           />
-//         );
-//       })}
-//     </div>
-//   );
-// };
-
-// export default Abilities;
-
 import "./abilities.css";
 import { ICard, ICardCritter, ICardItem } from "combatcritters-ts/src/objects";
 import { ICardVisitor } from "combatcritters-ts";
@@ -45,10 +14,11 @@ const Abilities: React.FC<{ card: ICard }> = ({ card }) => {
     visitCritter: (critter: ICardCritter): void => {
       content = (
         <div className="abilitiesRoot">
-          {critter.abilities.map((ability, index) => {
-            const src = abilityMap[ability];
-            return <img key={index} src={src} className="abilityImage" />;
-          })}
+          {critter.abilities &&
+            critter.abilities.map((ability, index) => {
+              const src = abilityMap[ability];
+              return <img key={index} src={src} className="abilityImage" alt="Abilitiy"/>;
+            })}
         </div>
       );
     },

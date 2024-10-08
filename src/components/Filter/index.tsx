@@ -1,16 +1,21 @@
+/**
+ * @Created 2024-10-07
+ * @Brief General filter dropdown.
+ */
+
 import React, { useState, useRef, useEffect } from "react";
-import "./filter.css"; 
+import "./filter.css";
 import filterIcon from "assets/icons/filter.svg";
 import { IFilterOption } from "interfaces/IFilterOption";
 
 interface FilterProps {
-  filterOptions: IFilterOption[]; 
+  filterOptions: IFilterOption[];
   setFilterOptions: (options: IFilterOption[]) => void;
 }
 
 const Filter: React.FC<FilterProps> = ({ filterOptions, setFilterOptions }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null); 
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -34,11 +39,9 @@ const Filter: React.FC<FilterProps> = ({ filterOptions, setFilterOptions }) => {
 
   const toggleFilter = (filterId: number) => {
     const updatedOptions = filterOptions.map((filter) =>
-      filter.id === filterId
-        ? { ...filter, toggled: !filter.toggled } 
-        : filter
+      filter.id === filterId ? { ...filter, toggled: !filter.toggled } : filter
     );
-    setFilterOptions(updatedOptions); 
+    setFilterOptions(updatedOptions);
   };
 
   return (
@@ -55,7 +58,7 @@ const Filter: React.FC<FilterProps> = ({ filterOptions, setFilterOptions }) => {
             <label key={filter.id} className="filterOption">
               <input
                 type="checkbox"
-                checked={filter.toggled} 
+                checked={filter.toggled}
                 onChange={() => toggleFilter(filter.id)}
               />
               {filter.name}

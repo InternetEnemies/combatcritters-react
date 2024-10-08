@@ -16,12 +16,9 @@
   container-type: inline-size;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   justify-content: flex-start;
   align-items: center;
-  /* width: 204px;
-  height: 300px; */
-    width: 132.6px;
+  width: 132.6px;
   height: 195px;
 
   --border-color: rgb(49, 49, 49);
@@ -34,9 +31,7 @@
 
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* transition: transform 0.3s ease; */
-  padding-top:3%;
-  /* margin: 10px; */
+  padding-top: 3%;
   border: 3px solid #000000;
   cursor: pointer;
   user-select: none;
@@ -51,11 +46,11 @@
   gap: 20px;
 }
 
-.cardRoot.common,
-.cardRoot.rare,
-.cardRoot.uncommon,
-.cardRoot.epic,
-.cardRoot.legendary {
+.cardRoot.COMMON,
+.cardRoot.RARE,
+.cardRoot.UNCOMMON,
+.cardRoot.EPIC,
+.cardRoot.LEGENDARY {
   --common-gradient: linear-gradient(
     0deg,
     rgb(47, 47, 47) 0%,
@@ -84,23 +79,23 @@
   background-position: center, center top;
 }
 
-.cardRoot.common {
+.cardRoot.COMMON {
   background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--common-gradient);
 }
-.cardRoot.uncommon {
+.cardRoot.UNCOMMON {
   background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--uncommon-gradient);
 }
-.cardRoot.rare {
+.cardRoot.RARE {
   background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--rare-gradient);
 }
-.cardRoot.epic {
+.cardRoot.EPIC {
   background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--epic-gradient);
 }
-.cardRoot.legendary {
+.cardRoot.LEGENDARY {
   background: url("/src/assets/images/crackedPattern.svg") no-repeat center,
     var(--legendary-gradient);
 }
@@ -113,22 +108,18 @@
   align-items: center;
 }
 
-.cardInner.common {
+.cardInner.COMMON {
   background-color: var(--background-inner-color-common);
 }
-.cardInner.uncommon {
+.cardInner.UNCOMMON {
   background-color: var(--background-inner-color-uncommon);
 }
-.cardInner.rare {
+.cardInner.RARE {
   background-color: var(--background-inner-color-rare);
 }
-.cardInner.epic {
+.cardInner.EPIC {
   background-color: var(--background-inner-color-epic);
 }
-.cardInner.legendary {
+.cardInner.LEGENDARY {
   background-color: var(--background-inner-color-legendary);
 }
-
-/* .cardRoot:hover {
-  transform: scale(1.1);
-} */

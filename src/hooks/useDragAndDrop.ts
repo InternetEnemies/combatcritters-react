@@ -1,3 +1,10 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Hook for the drag and drop logic in the Collection page.
+ * 
+ * This class scares me...
+ */
+
 import { useState } from "react";
 import { DragEndEvent, DragOverEvent, DragStartEvent } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
@@ -8,14 +15,24 @@ import { UniqueIdentifier } from "@dnd-kit/core";
 import { Over } from "@dnd-kit/core";
 
 export const useDragAndDrop = (
+/*
+*   Note: handleDragStart(), handleDragEnd(), and handleDragOver are the main functions. Everything else
+*         is a helper function for them.
+*/
+
+
   selectedCards: ISortableCard[],
-  localDeck: ISortableDeck | null, 
+  localDeck: ISortableDeck | null,
   setLocalDeck: (deck: ISortableDeck) => void
 ) => {
-  const [isFromInventory, setIsFromInventory] = useState<boolean>(false);
-  const [activeCard, setActiveCard] = useState<ISortableCard | null>(null);
+  const [isFromInventory, setIsFromInventory] = useState<boolean>(false); //If the card being dragged is from the inventory.
+  const [activeCard, setActiveCard] = useState<ISortableCard | null>(null); //SortableCard being dragged.
   const [highlightDeck, setHighlightDeck] = useState<boolean>(false);
 
+  /**
+   * Handles when a drag starts. Determines if the dragged card is from inventory
+   * or already in the deck and sets the active card.
+   */
   const handleDragStart = (event: DragStartEvent) => {
     let draggedCard = selectedCards.find(
       (card) => card.instanceId === event.active.id
@@ -40,14 +57,16 @@ export const useDragAndDrop = (
     const { over, active } = event;
     setActiveCard(null);
 
-    if (!localDeck) return;
+    if (!localDeck) return; //No deck selected.
 
     const activeIndex = findActiveCardIndex(localDeck, active.id);
 
     if (activeIndex !== -1) {
-      processDeckCardDrop(activeIndex, over, localDeck, setLocalDeck);
+      //Dragged card is from the deck.
+      handleDeckCardDrop(activeIndex, over, localDeck, setLocalDeck);
     } else {
-      processInventoryCardDrop(
+      //Dragged card is from the inventory.
+      handleInventoryCardDrop(
         active.id,
         over,
         selectedCards,
@@ -58,13 +77,43 @@ export const useDragAndDrop = (
     }
   };
 
+  /**
+   * Highlight the deck when the card is dragged over it.
+   */
+  const handleDragOver = (event: DragOverEvent) => {
+    const { over } = event;
+
+    if (!localDeck) {
+      setHighlightDeck(false);
+      return;
+    }
+
+    if (isFromInventory && over) {
+      const isOverDeckCard = localDeck.cards.some(
+        (card) => card.instanceId === over.id
+      );
+
+      if (over.id === localDeck.id.toString() || isOverDeckCard) {
+        setHighlightDeck(true);
+      } else {
+        setHighlightDeck(false);
+      }
+    } else {
+      setHighlightDeck(false);
+    }
+  };
+
+  // Finds the index of the active card in the deck.
   const findActiveCardIndex = (
     deck: ISortableDeck,
     activeId: UniqueIdentifier
   ): number =>
     deck.cards.findIndex((card) => card.instanceId === String(activeId));
 
-  const processDeckCardDrop = (
+  /**
+   * Handles the logic for adding and removing cards from deck.
+   */
+  const handleDeckCardDrop = (
     activeIndex: number,
     over: Over | null,
     localDeck: ISortableDeck,
@@ -81,7 +130,10 @@ export const useDragAndDrop = (
     }
   };
 
-  const processInventoryCardDrop = (
+  /**
+   * Handles the logic for dropping a card from inventory into the deck.
+   */
+  const handleInventoryCardDrop = (
     activeId: UniqueIdentifier,
     over: Over | null,
     selectedCards: ISortableCard[],
@@ -89,9 +141,8 @@ export const useDragAndDrop = (
     setLocalDeck: (deck: ISortableDeck) => void,
     setHighlightDeck: (highlight: boolean) => void
   ) => {
-    // Allow inventory card dragging even when localDeck is null
     const draggedCard = findDraggedCard(selectedCards, activeId);
-    if (!draggedCard || !localDeck) return; // Do nothing if localDeck is null
+    if (!draggedCard || !localDeck) return;
 
     const newDraggableCard = createNewDraggableCard(draggedCard);
     const isDirectDrop = over?.id === localDeck.id.toString();
@@ -114,6 +165,9 @@ export const useDragAndDrop = (
     }
   };
 
+  /**
+   * Checks if the card was dropped outside the deck.
+   */
   const isDroppedOutsideDeck = (
     over: Over | null,
     deck: ISortableDeck
@@ -134,12 +188,21 @@ export const useDragAndDrop = (
     setLocalDeck(updatedDeck);
   };
 
+  /**
+   * Finds the index of the card that the dragged card is hovering over.
+   */
   const findOverCardIndex = (over: Over | null, deck: ISortableDeck): number =>
     deck.cards.findIndex((card) => card.instanceId === String(over?.id));
 
+  /**
+   * Checks if the card can be moved within the deck (not the same index).
+   */
   const isValidCardMove = (activeIndex: number, overIndex: number): boolean =>
     overIndex !== -1 && activeIndex !== overIndex;
 
+  /**
+   * Moves the card to a new position within the deck.
+   */
   const moveCardWithinDeck = (
     activeIndex: number,
     overIndex: number,
@@ -153,6 +216,9 @@ export const useDragAndDrop = (
     setLocalDeck(updatedDeck);
   };
 
+  /**
+   * Finds the card being dragged from the inventory.
+   */
   const findDraggedCard = (
     selectedCards: ISortableCard[],
     activeId: UniqueIdentifier
@@ -183,6 +249,9 @@ export const useDragAndDrop = (
     setHighlightDeck(false);
   };
 
+  /**
+   * Adds the card at a specific index in the deck.
+   */
   const addCardAtIndex = (
     newDraggableCard: ISortableCard,
     over: Over | null,
@@ -200,29 +269,6 @@ export const useDragAndDrop = (
         cards: updatedCards,
       };
       setLocalDeck(updatedDeck);
-      setHighlightDeck(false);
-    }
-  };
-
-  const handleDragOver = (event: DragOverEvent) => {
-    const { over } = event;
-
-    if (!localDeck) {
-      setHighlightDeck(false); 
-      return;
-    }
-
-    if (isFromInventory && over) {
-      const isOverDeckCard = localDeck.cards.some(
-        (card) => card.instanceId === over.id
-      );
-
-      if (over.id === localDeck.id.toString() || isOverDeckCard) {
-        setHighlightDeck(true);
-      } else {
-        setHighlightDeck(false);
-      }
-    } else {
       setHighlightDeck(false);
     }
   };

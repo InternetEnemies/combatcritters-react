@@ -1,18 +1,14 @@
 import './header.css'
 import { CardRarity } from 'combatcritters-ts';
-
-interface Props {
-    name: string;
-    rarity: number;
-  }
+import { ICard } from 'combatcritters-ts';
   
-  const Header: React.FC<Props> = ({ name, rarity }) => {
+  const Header: React.FC<{ card: ICard }> = ({ card }) => {
     return (
-        <div className={`headerRoot ${CardRarity[rarity]}`} >
-          <span className="cardName">{name}</span>
-        </div>
-      );
-    };
+      <div className={`headerRoot ${CardRarity[card.rarity]}`}>
+        <span className="cardName">{card.name}</span>
+      </div>
+    );
+  };
   
   export default Header;
   

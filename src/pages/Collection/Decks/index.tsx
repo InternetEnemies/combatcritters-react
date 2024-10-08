@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief The deck component in the Collection page.
+ */
+
 import React, { useState, useEffect } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import "./decks.css";
@@ -5,15 +10,16 @@ import SortableCard from "components/SortableCard";
 import CreateDeck from "components/CreateDeck";
 import { IDeck } from "combatcritters-ts/src/objects";
 import { ISortableDeck } from "interfaces/ISortableDeck";
-import DeckManager from "api/DeckManager";
 import Button from "components/Button";
 import { convertToSortableDeck } from "utils/collectionUtils";
 import Dropdown from "components/Dropdown";
-import { useDeckSelect } from "hooks/useDeckSelect"; // Import your hook
+import { useDeckSelect } from "hooks/useDeckSelect";
 import ConfirmationButton from "components/ConfirmationButton";
 import Toast from "components/Toast";
 import { useToast } from "hooks/useToast";
 import { useMonitorDeckChanges } from "hooks/useMonitorDeckChanges";
+import deleteIcon from "assets/icons/delete.svg";
+import { ClientSingleton } from "ClientSingleton";
 
 interface DeckProps {
   localDeck: ISortableDeck | null;
@@ -22,39 +28,61 @@ interface DeckProps {
 }
 
 const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
-  const [deckManager] = useState(DeckManager.getInstance());
+  const [deckManager] = useState(ClientSingleton.getInstance().user.decks);
   const { showToast, setShowToast, triggerToast, toastMessage } = useToast();
   const [decks, setDecks] = useState<IDeck[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<IDeck | null>(null);
 
+  useEffect(() => {
+    const fetchDecks = async () => {
+      try {
+        const fetchedDecks = await deckManager.getDecks();
+        setDecks(fetchedDecks);
+      } catch (error) {
+        console.error("Error fetching decks:", error);
+      }
+    };
+
+    fetchDecks();
+  }, [deckManager]);
+
+  useEffect(() => {
+    if (decks.length > 0) {
+      setSelectedDeck(decks[0]);
+    }
+  }, [decks]);
+
   const changesMade = useMonitorDeckChanges(localDeck, selectedDeck);
 
+  const { setNodeRef } = useDroppable({
+    id: localDeck ? localDeck.id.toString() : "default-droppable",
+  });
 
   const saveDeck = async () => {
-    if (selectedDeck && localDeck) {
-      // Clear the selectedDeck's cards
-      selectedDeck.cards = []; // Directly modify cards array
+    try {
+      if (selectedDeck && localDeck) {
+        await selectedDeck.setCards(
+          localDeck.cards.map((sortableCard) => sortableCard.card)
+        );
+        await selectedDeck.commit();
+        triggerToast("Deck Saved!");
 
-      // Add all cards from localDeck to selectedDeck
-      localDeck.cards.forEach((card, index) => {
-        selectedDeck.cards.push({ ...card.card }); // Push directly into the array
-      });
-
-      triggerToast("Deck Saved!");
-
-      setLocalDeck(convertToSortableDeck(selectedDeck)); // Update the localDeck state
-      setSelectedDeck({ ...selectedDeck }); // This forces React to recognize the update
-      // setChangesMade(false);
-    } else {
-      console.error("No deck selected or local deck is not set.");
+        setLocalDeck(await convertToSortableDeck(selectedDeck));
+        setSelectedDeck(selectedDeck);
+      } else {
+        console.error("No deck selected or local deck is not set.");
+      }
+    } catch (error) {
+      console.error("Error saving the deck:", error);
     }
   };
 
-  const cancelChanges = () => {
+  const cancelChanges = async () => {
     if (selectedDeck && changesMade) {
-      setLocalDeck(convertToSortableDeck(selectedDeck));
+      setLocalDeck(await convertToSortableDeck(selectedDeck));
     }
   };
+
   const { deckDropdownOptions } = useDeckSelect(
     selectedDeck,
     setSelectedDeck,
@@ -64,21 +92,13 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
     saveDeck
   );
 
-  const { setNodeRef } = useDroppable({
-    id: localDeck ? localDeck.id.toString() : "default-droppable",
-  });
-
-  const style = {
-    filter: highlight ? "brightness(1.2)" : "none",
-  };
-
   const createDeck = async (deckName: string) => {
     try {
       const createdDeck = await deckManager.createDeck(deckName);
       const updatedDecks = await deckManager.getDecks();
       setDecks(updatedDecks);
       setSelectedDeck(createdDeck);
-      setLocalDeck(convertToSortableDeck(createdDeck));
+      setLocalDeck(await convertToSortableDeck(createdDeck));
       triggerToast("Deck Created!");
     } catch (error) {
       console.error("Error creating the deck:", error);
@@ -102,19 +122,17 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
     }
   };
 
+  const style = {
+    filter: highlight ? "brightness(1.2)" : "none",
+  };
+
   return (
     <div className="decksRoot" style={style}>
       <div className="deckChooserContainer">
-        <ConfirmationButton
-          onClick={deleteDeck}
-          confirmationMessage="Are you sure you want to delete this deck?"
-          child={<Button onClick={() => {}} text="Delete Deck" />}
-        />
-        <CreateDeck onCreateDeck={createDeck} />
         <Dropdown
           dropdownOptions={deckDropdownOptions}
           selectedDropdownOption={{
-            id: selectedDeck?.deckid ?? 0,
+            id: selectedDeck?.deckid ?? 0, 
             name: selectedDeck?.name ?? "Select Deck",
           }}
           setSelectedDropdownOption={(option) => {
@@ -122,6 +140,16 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
             setSelectedDeck(selected || null);
           }}
         />
+        <div className="createDeleteContainer">
+          <ConfirmationButton
+            onClick={deleteDeck}
+            confirmationMessage="Are you sure you want to delete this deck?"
+            child={
+              <img className="trashIcon" src={deleteIcon} alt="Delete Deck" />
+            }
+          />
+          <CreateDeck onCreateDeck={createDeck} />
+        </div>
       </div>
       <div
         className="deckCardsGrid"
@@ -144,156 +172,22 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
           <p>No deck selected.</p>
         )}
       </div>
-      {changesMade ? (
-        <ConfirmationButton
-          onClick={cancelChanges}
-          confirmationMessage="Are you sure you want to cancel changes?"
-          child={<Button onClick={() => {}} text="Cancel" />}
-        />
-      ) : (
-        <Button text="Cancel" onClick={() => {}} />
-      )}
-      <Button text={"Save"} onClick={saveDeck} />
+      <div className="cancelDeleteContainer">
+        {changesMade ? (
+          <ConfirmationButton
+            onClick={cancelChanges}
+            confirmationMessage="Are you sure you want to cancel changes?"
+            child={<Button onClick={() => {}} text="Cancel" />}
+          />
+        ) : (
+          <Button text="Cancel" onClick={() => {}} />
+        )}
+        <Button text={"Save"} onClick={saveDeck} />
+      </div>
+
       <Toast show={showToast} setShow={setShowToast} message={toastMessage} />
     </div>
   );
 };
 
 export default Decks;
-
-// import React, { useState, useEffect } from "react";
-// import { useDroppable } from "@dnd-kit/core";
-// import "./decks.css";
-// import SortableCard from "components/SortableCard";
-// import { ISortableCard } from "interfaces/ISortableCard";
-// import CreateDeck from "components/CreateDeck";
-// import DeleteButton from "components/DeleteButton";
-// import { IDeck } from "combatcritters-ts/src/objects";
-// import { ISortableDeck } from "interfaces/ISortableDeck";
-// import DeckManager from "api/DeckManager";
-// import Dropdown from "components/Dropdown";
-
-// interface DeckProps {
-//   localDeck: ISortableDeck | null;
-//   setLocalDeck: (deck: ISortableDeck) => void;
-//   selectedDeck: IDeck | null;
-//   setSelectedDeck: (deck: IDeck) => void;
-//   highlight: boolean;
-// }
-
-// const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
-//   const [deckManager] = useState(DeckManager.getInstance());
-//   const [decks, setDecks] = useState<IDeck[]>([]);
-
-//   useEffect(() => {
-//     const fetchDecks = async () => {
-//       const fetchedDecks = await deckManager.getDecks();
-//       setDecks(fetchedDecks);
-//     };
-//     fetchDecks();
-//   }, [deckManager]);
-
-//   const { setNodeRef } = useDroppable({
-//     id: localDeck.id.toString(),
-//   });
-
-//   const style = {
-//     filter: highlight ? "brightness(1.2)" : "none",
-//   };
-
-//   const handleCreateDeck = (newDeckName: string) => {
-//     console.log(`Deck "${newDeckName}" has been created.`);
-//   };
-
-//   const handleDeleteDeck = () => {
-//     console.log(`Deck "${localDeck.name}" has been deleted.`);
-//   };
-
-//   return (
-//     <div className="decksRoot" style={style}>
-//       <div className="deckChooserContainer">
-//         <DeleteButton onDelete={handleDeleteDeck} />
-//         <CreateDeck onCreateDeck={handleCreateDeck} />
-//       </div>
-//       <div className="deckCardsGrid" ref={setNodeRef}>
-//         {localDeck.cards.map((card) => (
-//           <SortableCard
-//             key={card.instanceId}
-//             sortableCard={card}
-//             translucent={false}
-//           />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Decks;
-
-// import React, { useState, useEffect } from "react";
-// import { useDroppable } from "@dnd-kit/core";
-// import "./decks.css";
-// import SortableCard from "components/SortableCard";
-// import { ISortableCard } from "interfaces/ISortableCard";
-// import CreateDeck from "components/CreateDeck";
-// import DeleteButton from "components/DeleteButton";
-// import { IDeck } from "combatcritters-ts/src/objects";
-// import { ISortableDeck } from "interfaces/ISortableDeck";
-// import DeckManager from "api/DeckManager";
-// import Dropdown from "components/Dropdown";
-
-// interface DeckProps {
-//   localDeck: IDeck;
-//   setLocalDeck: (deck: IDeck) => void;
-//   highlight: boolean;
-// }
-
-// const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
-//   const [deckManager] = useState(DeckManager.getInstance()); // Extract the instance directly
-//   const [decks, setDecks] = useState<IDeck[]>([]); // Manage the decks state
-
-//   useEffect(() => {
-//     const fetchDecks = async () => {
-//       const fetchedDecks = await deckManager.getDecks(); // Fetch the decks
-//       setDecks(fetchedDecks); // Set the decks in state
-//     };
-//     fetchDecks();
-//   }, [deckManager]);
-
-//   const { setNodeRef } = useDroppable({
-//     id: localDeck.deckid.toString(),
-//   });
-
-//   const style = {
-//     filter: highlight ? "brightness(1.2)" : "none",
-//   };
-
-//   const handleCreateDeck = (newDeckName: string) => {
-//     console.log(`Deck "${newDeckName}" has been created.`);
-//   };
-
-//   const handleDeleteDeck = () => {
-//     console.log(`Deck "${localDeck.name}" has been deleted.`);
-//   };
-
-//   return (
-//     <div className="decksRoot" style={style}>
-//       <div className="deckChooserContainer">
-//         <DeleteButton onDelete={handleDeleteDeck} />
-//         <CreateDeck onCreateDeck={handleCreateDeck} />
-
-//       </div>
-//       <div className="deckCardsGrid" ref={setNodeRef}>
-//         {localDeck.cards.map((card) => (
-//           <SortableCard
-//             key={card.instanceId}
-//             sortableCard={card}
-//             translucent={false}
-//           />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Decks;

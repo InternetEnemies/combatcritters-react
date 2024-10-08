@@ -1,5 +1,10 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Toast popup component.
+ */
+
 import React from "react";
-import "./toast.css"; 
+import "./toast.css";
 
 interface ToastProps {
   show: boolean;
@@ -9,11 +14,11 @@ interface ToastProps {
 
 const Toast: React.FC<ToastProps> = ({ show, setShow, message }) => {
   if (!show) {
-    return null; 
+    return null;
   }
 
   const handleClose = () => {
-    setShow(false); 
+    setShow(false);
   };
 
   return (
