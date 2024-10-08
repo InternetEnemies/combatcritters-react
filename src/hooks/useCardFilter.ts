@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Hook to keep track of card filtering.
+ */
+
 import { useState } from "react";
 import { IFilterOption } from "interfaces/IFilterOption";
 import { CardRarity } from "combatcritters-ts";

@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief The inventory component used in the Collection page.
+ */
+
 import React, { useState } from "react";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";

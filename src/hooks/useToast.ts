@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Hook used to display toast messages.
+ */
+
 import { useState } from "react";
 
 export const useToast = () => {
@@ -16,7 +21,7 @@ export const useToast = () => {
   return {
     showToast,
     toastMessage,
-    triggerToast, 
+    triggerToast,
     setShowToast,
   };
 };

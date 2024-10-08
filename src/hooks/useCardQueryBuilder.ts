@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Hook used to build card queries.
+ */
+
 import { CardOrder } from "combatcritters-ts";
 import { ICardQueryBuilder } from "combatcritters-ts";
 import { ICardQuery } from "combatcritters-ts";
@@ -10,10 +15,9 @@ export const useCardQueryBuilder = (
   rarityFilterOptions: number[],
   owned: boolean
 ) => {
+  const [cardQuery, setCardQuery] = useState<ICardQuery>();
 
-  const [cardQuery, setCardQuery] = useState<ICardQuery> ();
-
-  useEffect(()=> {
+  useEffect(() => {
     cardQueryBuilder.reset();
     cardQueryBuilder.setRaritiesInclude(true);
     cardQueryBuilder.setOrder(sortOption);
@@ -23,5 +27,4 @@ export const useCardQueryBuilder = (
   }, [sortOption, owned, rarityFilterOptions]);
 
   return cardQuery;
-
 };

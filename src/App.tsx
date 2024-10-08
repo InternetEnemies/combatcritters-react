@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Main application component. Initializes the client.
+ */
+
 import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
@@ -17,7 +22,7 @@ function App() {
       try {
         // await client.register("kevin", "1234");
         await client.login("kevin", "1234");
-        console.log(client.user.username+" is logged in.");
+        console.log(client.user.username + " is logged in.");
       } catch (error) {
       } finally {
         setIsInitialized(true);

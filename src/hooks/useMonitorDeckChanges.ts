@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Hook that monitors if the localDeck matches the selectedDeck.
+ */
+
 import { useState, useEffect } from "react";
 import { ISortableDeck } from "interfaces/ISortableDeck";
 import { IDeck } from "combatcritters-ts/src/objects";
@@ -11,7 +16,7 @@ export const useMonitorDeckChanges = (
   useEffect(() => {
     const checkForChanges = async () => {
       if (localDeck && selectedDeck) {
-        const selectedDeckCards = await selectedDeck.getCards(); 
+        const selectedDeckCards = await selectedDeck.getCards();
 
         const hasChanges = (): boolean => {
           if (localDeck.name !== selectedDeck.name) {
@@ -40,7 +45,7 @@ export const useMonitorDeckChanges = (
       }
     };
 
-    checkForChanges(); 
+    checkForChanges();
   }, [localDeck, selectedDeck]);
 
   return changesMade;

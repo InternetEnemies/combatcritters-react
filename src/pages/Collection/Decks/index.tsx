@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief The deck component in the Collection page.
+ */
+
 import React, { useState, useEffect } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import "./decks.css";
@@ -5,7 +10,6 @@ import SortableCard from "components/SortableCard";
 import CreateDeck from "components/CreateDeck";
 import { IDeck } from "combatcritters-ts/src/objects";
 import { ISortableDeck } from "interfaces/ISortableDeck";
-import { DeckManager } from "combatcritters-ts";
 import Button from "components/Button";
 import { convertToSortableDeck } from "utils/collectionUtils";
 import Dropdown from "components/Dropdown";
@@ -28,19 +32,18 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
   const { showToast, setShowToast, triggerToast, toastMessage } = useToast();
   const [decks, setDecks] = useState<IDeck[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<IDeck | null>(null);
-  // const [selectedDeck, setSelectedDeck] = useState<IDeck>();
 
   useEffect(() => {
     const fetchDecks = async () => {
       try {
-        const fetchedDecks = await deckManager.getDecks(); 
-        setDecks(fetchedDecks); 
+        const fetchedDecks = await deckManager.getDecks();
+        setDecks(fetchedDecks);
       } catch (error) {
-        console.error("Error fetching decks:", error); 
+        console.error("Error fetching decks:", error);
       }
     };
 
-    fetchDecks(); 
+    fetchDecks();
   }, [deckManager]);
 
   useEffect(() => {
@@ -58,7 +61,6 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
   const saveDeck = async () => {
     try {
       if (selectedDeck && localDeck) {
-        // await selectedDeck.setCards(localDeck.cards.map((card) => card.card));
         await selectedDeck.setCards(
           localDeck.cards.map((sortableCard) => sortableCard.card)
         );
@@ -130,7 +132,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
         <Dropdown
           dropdownOptions={deckDropdownOptions}
           selectedDropdownOption={{
-            id: selectedDeck?.deckid ?? 0,
+            id: selectedDeck?.deckid ?? 0, 
             name: selectedDeck?.name ?? "Select Deck",
           }}
           setSelectedDropdownOption={(option) => {

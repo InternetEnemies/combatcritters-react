@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Singleton class for getting the client instance.
+ */
+
 import { Client } from "combatcritters-ts";
 import { IClient } from "combatcritters-ts";
 
