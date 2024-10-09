@@ -8,8 +8,7 @@ import { IUser } from "combatcritters-ts";
 import { useEffect, useState } from "react";
 import { IDeck } from "combatcritters-ts";
 
-export const useFriendsList = () => {
-  const [friends, setFriends] = useState<IUser[]>([]);
+export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) => void) => {
   const [selectedFriend, setSelectedFriend] = useState<IUser | null>(null);
   const [showDeck, setShowDeck] = useState(false);
   const [_, setFriendsDeck] = useState<IDeck | null>(null);

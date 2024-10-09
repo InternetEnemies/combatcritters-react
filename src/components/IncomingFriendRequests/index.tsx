@@ -7,10 +7,15 @@ import React from "react";
 import "./incomingFriendRequests.css";
 import { useManageFriendRequests } from "hooks/useManageFriendRequests";
 import checkmark from "assets/icons/checkmark.svg";
+import { IUser } from "combatcritters-ts";
 
-const IncomingFriendRequests: React.FC = () => {
+interface FriendsProps {
+  friends: IUser[];
+  setFriends: (friends: IUser[]) => void;
+}
+const IncomingFriendRequests: React.FC<FriendsProps> = ({friends, setFriends}) => {
   const { friendRequests, acceptFriendRequest } =
-    useManageFriendRequests();
+    useManageFriendRequests(friends, setFriends);
 
   return (
     <div className="friendRequestsRoot">

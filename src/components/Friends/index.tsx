@@ -8,10 +8,15 @@ import React from "react";
 import "./friends.css";
 import { useFriendsList } from "hooks/useFriendsList";
 import FriendDeckPopup from "components/FriendDeck";
+import { IUser } from "combatcritters-ts";
 
-const Friends: React.FC = () => {
-  const { friends, selectedFriend, showDeck, setShowDeck, onFriendClick } =
-    useFriendsList();
+interface FriendsProps {
+  friends: IUser[];
+  setFriends: (friends: IUser[]) => void;
+}
+const Friends: React.FC<FriendsProps> = ({friends, setFriends}) => {
+  const { selectedFriend, showDeck, setShowDeck, onFriendClick } =
+    useFriendsList(friends, setFriends);
   return (
     <div className="friendsListContainer">
       <h3 className="friendsTitle">Your Friends</h3>

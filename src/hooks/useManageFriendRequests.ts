@@ -7,7 +7,10 @@ import { ClientSingleton } from "ClientSingleton";
 import { IUser } from "combatcritters-ts";
 import { useEffect, useState } from "react";
 
-export const useManageFriendRequests = () => {
+export const useManageFriendRequests = (
+  friends: IUser[],
+  setFriends: (friends: IUser[]) => void
+) => {
   const [friendRequests, setFriendRequests] = useState<IUser[]>([]);
 
   useEffect(() => {
@@ -27,14 +30,17 @@ export const useManageFriendRequests = () => {
   const acceptFriendRequest = async (user: IUser) => {
     try {
       await ClientSingleton.getInstance().user.friends.addFriend(user);
-      setFriendRequests(
-        (prevRequests) =>
-          prevRequests.filter((request) => request.id !== user.id)
+
+      setFriendRequests((prevRequests) =>
+        prevRequests.filter((request) => request.id !== user.id)
       );
+
+      setFriends([...friends, user]);
     } catch (error) {
       console.error("Error accepting friend request:", error);
     }
   };
+
 
   return { friendRequests, acceptFriendRequest };
 };
