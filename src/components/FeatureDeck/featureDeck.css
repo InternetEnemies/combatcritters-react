@@ -1,0 +1,82 @@
+
+
+.deckContainer {
+  margin-left: 100px;
+  height: 550px;
+  width: 800px; 
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  align-items: flex-start;
+}
+
+.deckContainer,
+.deckListContainer,
+.deckContentContainer {
+  box-sizing: border-box; 
+}
+
+.deckListContainer {
+  width: 200px;
+  height: 100%; 
+  overflow-y: auto; 
+  border: 1px solid #555555;
+}
+
+.deckList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.deckItem {
+  padding: 10px 15px;
+  margin: 5px 0;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.deckItem:hover {
+  background-color: #e0e0e0;
+  transform: translateX(5px);
+}
+
+.deckItem.active {
+  background-color: #cceeff;
+  font-weight: bold;
+}
+
+.deckContentContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  flex-grow: 1;
+  height: 100%; 
+  margin-left: 20px; 
+  padding: 20px;
+  background-color: #1b027d;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid black;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+  gap: 10px; 
+}
+
+.gridItem {
+  width: 130px; 
+  height: auto;
+  background-color: lightgray;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
