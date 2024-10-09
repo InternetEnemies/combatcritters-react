@@ -48,3 +48,5 @@ npm start
 ```
 
 Your frontend app should now be running at `http://localhost:3000`.
+
+**Note:** currently Firefox is the only supported browser that works with our application (please ensure HTTPS only mode is turned off on your Firefox browser).
