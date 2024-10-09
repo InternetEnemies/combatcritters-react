@@ -12,11 +12,9 @@ export const useMonitorFriendRequests = () => {
   useEffect(() => {
     const fetchFriendRequests = async () => {
       try {
-        //TODO uncomment this once shits workin
-        // const friendRequests =
-        //   await ClientSingleton.getInstance().user.friends.getFriendsRequests();
-        // setNumberOfRequests(friendRequests.length);
-        setNumberOfRequests(0);
+        const friendRequests =
+          await ClientSingleton.getInstance().user.friends.getFriendsRequests();
+        setNumberOfRequests(friendRequests.length);
       } catch (error) {
         console.error("Error fetching friend requests:", error);
       }
