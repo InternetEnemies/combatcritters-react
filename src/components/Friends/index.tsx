@@ -9,7 +9,7 @@ import "./friends.css";
 import { useFriendsList } from "hooks/useFriendsList";
 import FriendDeckPopup from "components/FriendDeck";
 
-const Friends: React.FC = ({}) => {
+const Friends: React.FC = () => {
   const { friends, selectedFriend, showDeck, setShowDeck, onFriendClick } =
     useFriendsList();
   return (

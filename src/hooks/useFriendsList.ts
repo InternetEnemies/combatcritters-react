@@ -12,7 +12,7 @@ export const useFriendsList = () => {
   const [friends, setFriends] = useState<IUser[]>([]);
   const [selectedFriend, setSelectedFriend] = useState<IUser | null>(null);
   const [showDeck, setShowDeck] = useState(false);
-  const [friendsDeck, setFriendsDeck] = useState<IDeck | null>(null);
+  const [_, setFriendsDeck] = useState<IDeck | null>(null);
 
   useEffect(() => {
     const fetchFriends = async () => {

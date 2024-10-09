@@ -7,7 +7,6 @@ import React from "react";
 import "./incomingFriendRequests.css";
 import { useManageFriendRequests } from "hooks/useManageFriendRequests";
 import checkmark from "assets/icons/checkmark.svg";
-import cross from "assets/icons/cross.svg";
 
 const IncomingFriendRequests: React.FC = () => {
   const { friendRequests, acceptFriendRequest } =

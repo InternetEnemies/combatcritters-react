@@ -1,10 +1,10 @@
 import React from "react";
-import { IDeck, ICard } from "combatcritters-ts"; 
+import { ICard } from "combatcritters-ts"; 
 import Card from "components/Card";
 import "./featureDeck.css";
 import { useDeckProfileList } from "hooks/useDeckProfileList";
 
-const FeatureDeck: React.FC = ({}) => {
+const FeatureDeck: React.FC = () => {
 const { decks, featuredDeck, setFeaturedDeck, cards } = useDeckProfileList();
 
   return (
