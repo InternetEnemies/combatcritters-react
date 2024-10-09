@@ -1,14 +1,21 @@
+import React from "react";
 import "./navBar.css";
-import ProfileButton from "components/ProfileButton"; 
+import ProfileButton from "components/ProfileButton";
+import { useNavigate } from "react-router-dom";
 
 const NavBar: React.FC = () => {
+  const navigate = useNavigate(); 
+
+  const toCollection = () => {
+    navigate("/collection");
+  };
 
   return (
     <div className="navBarRoot">
-      <ProfileButton
-        hasNotifications={true}
-        notificationCount={1}
-      />
+      <button className="collectionButton" onClick={toCollection}>
+        Go to Collection
+      </button>
+      <ProfileButton />
     </div>
   );
 };

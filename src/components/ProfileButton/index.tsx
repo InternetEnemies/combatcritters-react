@@ -2,18 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import "./profileButton.css";
 import profileIcon from "assets/icons/profile.svg";
 import ProfilePopdown from "components/ProfilePopdown";
+import { useMonitorFriendRequests } from "hooks/useMonitorFriendRequests";
 
-interface ProfileButtonProps {
-  hasNotifications: boolean;
-  notificationCount?: number;
-}
-
-const ProfileButton: React.FC<ProfileButtonProps> = ({
-  hasNotifications,
-  notificationCount = 0,
-}) => {
+const ProfileButton: React.FC = () => {
   const [isPopdownVisible, setIsPopdownVisible] = useState(false);
   const popdownRef = useRef<HTMLDivElement>(null);
+  const numberOfRequests  = useMonitorFriendRequests(); 
 
   const togglePopdown = () => {
     setIsPopdownVisible((prev) => !prev);
@@ -39,10 +33,8 @@ const ProfileButton: React.FC<ProfileButtonProps> = ({
       <button className="profileButton" onClick={togglePopdown}>
         <div className="profileIconContainer">
           <img src={profileIcon} alt="Profile Icon" className="svgIcon" />
-          {hasNotifications && (
-            <span className="notificationBadge">
-              {notificationCount > 0 ? notificationCount : ""}
-            </span>
+          {numberOfRequests > 0 && (
+            <span className="notificationBadge">{numberOfRequests}</span>
           )}
         </div>
       </button>

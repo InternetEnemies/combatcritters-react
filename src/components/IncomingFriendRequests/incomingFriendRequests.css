@@ -1,0 +1,58 @@
+.friendRequestsRoot {
+  padding: 20px;
+  width: 350px;  
+  height: 200px;
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  border: 1px solid #ccc; 
+  box-sizing: border-box; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  background-color: white;
+}
+
+.friendRequestsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%; 
+}
+
+.friendRequestItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  width: 80%; 
+  max-width: 350px; 
+  margin: 0 auto; 
+}
+
+.actionButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.iconButton:hover {
+  transform: scale(1.1);
+}
+
+.acceptIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.rejectIcon {
+  width: 20px;
+  height: 20px;
+}
