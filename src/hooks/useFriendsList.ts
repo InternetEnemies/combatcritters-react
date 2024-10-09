@@ -25,6 +25,7 @@ export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) 
     };
 
     fetchFriends();
+    // eslint-disable-next-line
   }, []);
 
   const onFriendClick = async (user: IUser) => {
