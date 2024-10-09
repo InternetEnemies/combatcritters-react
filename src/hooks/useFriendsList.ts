@@ -11,6 +11,7 @@ import { IDeck } from "combatcritters-ts";
 export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) => void) => {
   const [selectedFriend, setSelectedFriend] = useState<IUser | null>(null);
   const [showDeck, setShowDeck] = useState(false);
+  // eslint-disable-next-line
   const [_, setFriendsDeck] = useState<IDeck | null>(null);
 
   useEffect(() => {
@@ -25,7 +26,6 @@ export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) 
 
     fetchFriends();
   }, []);
-
 
   const onFriendClick = async (user: IUser) => {
     setSelectedFriend(user);
