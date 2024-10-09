@@ -1,0 +1,29 @@
+.sendFriendRequestContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px; 
+  margin: 0 auto; 
+}
+
+.friendRequestInput {
+  flex: 1;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.sendRequestButton {
+  padding: 8px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sendRequestButton:hover {
+  background-color: #45a049;
+}
