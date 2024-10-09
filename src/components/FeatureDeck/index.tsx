@@ -10,7 +10,7 @@ const { decks, featuredDeck, setFeaturedDeck, cards } = useDeckProfileList();
   return (
     <div className="deckContainer">
       <div className="deckListContainer">
-        <h3>Your Decks</h3>
+        <h3 className="decksTitle">Feature a Deck<br/> on your Profile</h3>
         <ul className="deckList">
           {decks.map((deck) => (
             <li
