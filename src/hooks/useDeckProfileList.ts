@@ -15,9 +15,6 @@ export const useDeckProfileList = () => {
           await ClientSingleton.getInstance().user.decks.getDecks();
         setDecks(userDecks);
 
-        // if (userDecks.length > 0) {
-        //   setFeaturedDeck(userDecks[0]);
-        // }
         const deck = await ClientSingleton.getInstance().user.profile.getDeck();
         if(deck) {
           setFeaturedDeck(deck);
