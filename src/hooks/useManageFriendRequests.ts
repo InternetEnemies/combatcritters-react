@@ -4,7 +4,7 @@
  */
 
 import { ClientSingleton } from "ClientSingleton";
-import { Client, IUser } from "combatcritters-ts";
+import { IUser } from "combatcritters-ts";
 import { useEffect, useState } from "react";
 
 export const useManageFriendRequests = () => {
