@@ -15,8 +15,12 @@ export const useDeckProfileList = () => {
           await ClientSingleton.getInstance().user.decks.getDecks();
         setDecks(userDecks);
 
-        if (userDecks.length > 0) {
-          setFeaturedDeck(userDecks[0]);
+        // if (userDecks.length > 0) {
+        //   setFeaturedDeck(userDecks[0]);
+        // }
+        const deck = await ClientSingleton.getInstance().user.profile.getDeck();
+        if(deck) {
+          setFeaturedDeck(deck);
         }
       } catch (error) {
         console.error("Failed to fetch decks:", error);
@@ -30,6 +34,7 @@ export const useDeckProfileList = () => {
     const fetchCards = async () => {
       if (featuredDeck) {
         try {
+          ClientSingleton.getInstance().user.profile.setDeck(featuredDeck);
           const deckCards = await featuredDeck.getCards(); 
           setCards(deckCards);
         } catch (error) {
