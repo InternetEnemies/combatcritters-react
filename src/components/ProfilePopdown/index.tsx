@@ -7,7 +7,6 @@ interface PopdownProps {
 }
 
 const ProfilePopdown: React.FC<PopdownProps> = ({ isVisible }) => {
-  const navigate = useNavigate();
 
   const handleProfileClick = () => {
    navigate("/profile");

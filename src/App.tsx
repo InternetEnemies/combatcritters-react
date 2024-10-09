@@ -3,7 +3,6 @@
  * @Brief Main application component. 
  */
 
-import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
