@@ -42,36 +42,3 @@ export const useFriendsList = () => {
 
   return { friends, selectedFriend, showDeck, setShowDeck, onFriendClick };
 };
-
-// import { getUsers, ITestUser } from "ITestUser";
-// import { ClientSingleton } from "ClientSingleton";
-// import { IUser } from "combatcritters-ts";
-// import { useEffect, useState } from "react";
-// import { IDeck } from "combatcritters-ts";
-
-// export const useFriendsList = () => {
-//   const [friends, setFriends] = useState<ITestUser[]>([]);
-//   const [selectedFriend, setSelectedFriend] = useState<ITestUser | null>(null);
-//   const [showDeck, setShowDeck] = useState(false);
-
-//   useEffect(() => {
-//     const fetchFriends = async () => {
-//       try {
-//         const f = await getUsers();
-//         setFriends(f);
-//       } catch (error) {
-//         console.error("Error fetching friends:", error);
-//       }
-//     };
-
-//     fetchFriends();
-//   }, []);
-
-//   const onFriendClick = async (user: ITestUser) => {
-//     setSelectedFriend(user);
-
-//     setShowDeck(true);
-//   };
-
-//   return { friends, selectedFriend, showDeck, setShowDeck, onFriendClick };
-// };
