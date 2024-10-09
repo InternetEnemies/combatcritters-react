@@ -1,0 +1,66 @@
+.friendsListContainer {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 310px;
+  height: 300px; 
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; 
+}
+
+.friendsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.friendItem {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.friendItem:hover {
+  background-color: #f0f0f0;
+}
+
+.friendItem:active {
+  background-color: #e0e0e0;
+}
+
+.friendItem:last-child {
+  border-bottom: none;
+}
+
+.friendItem p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.friendItem:hover p {
+  font-weight: bold;
+}
+
+.friendsTitle {
+  text-align: center;
+}
+
+.friendItemIcon {
+  margin-left: auto;
+  font-size: 16px;
+  color: #666;
+}
+
+.friendItemIcon:hover {
+  color: #000;
+}
