@@ -1,16 +1,19 @@
 import React from "react";
-import { ICard } from "combatcritters-ts"; 
+import { ICard } from "combatcritters-ts";
 import Card from "components/Card";
 import "./featureDeck.css";
-import { useDeckProfileList } from "hooks/useDeckProfileList";
+import { useDeckProfileList } from "pages/Profile/hooks/useDeckProfileList";
 
 const FeatureDeck: React.FC = () => {
-const { decks, featuredDeck, setFeaturedDeck, cards } = useDeckProfileList();
+  const { decks, featuredDeck, setFeaturedDeck, cards } = useDeckProfileList();
 
   return (
     <div className="deckContainer">
       <div className="deckListContainer">
-        <h3 className="decksTitle">Feature a Deck<br/> on your Profile</h3>
+        <h3 className="decksTitle">
+          Feature a Deck
+          <br /> on your Profile
+        </h3>
         <ul className="deckList">
           {decks.map((deck) => (
             <li

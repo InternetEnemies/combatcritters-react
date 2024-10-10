@@ -6,15 +6,15 @@
 
 import React from "react";
 import "./friends.css";
-import { useFriendsList } from "hooks/useFriendsList";
-import FriendDeckPopup from "components/FriendDeck";
+import { useFriendsList } from "pages/Profile/hooks/useFriendsList";
+import FriendDeckPopup from "pages/Profile/components/FriendDeck";
 import { IUser } from "combatcritters-ts";
 
 interface FriendsProps {
   friends: IUser[];
   setFriends: (friends: IUser[]) => void;
 }
-const Friends: React.FC<FriendsProps> = ({friends, setFriends}) => {
+const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
   const { selectedFriend, showDeck, setShowDeck, onFriendClick } =
     useFriendsList(friends, setFriends);
   return (

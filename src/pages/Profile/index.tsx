@@ -1,15 +1,14 @@
 import React from "react";
 import NavBar from "components/NavBar";
 import "./profile.css";
-import FeatureDeck from "components/FeatureDeck";
-import IncomingFriendRequests from "components/IncomingFriendRequests";
-import SendFriendRequest from "components/SendFriendRequest";
-import Friends from "components/Friends";
+import FeatureDeck from "pages/Profile/components/FeatureDeck";
+import IncomingFriendRequests from "pages/Profile/components/IncomingFriendRequests";
+import SendFriendRequest from "pages/Profile/components/SendFriendRequest";
+import Friends from "pages/Profile/components/Friends";
 import { useState } from "react";
 import { IUser } from "combatcritters-ts";
 
 const Profile: React.FC = () => {
-
   const [friends, setFriends] = useState<IUser[]>([]);
 
   return (
@@ -18,9 +17,9 @@ const Profile: React.FC = () => {
       <div className="profileContainer">
         <FeatureDeck />
         <div className="friendsContainer">
-          <Friends friends={friends} setFriends={setFriends}/>
-          <IncomingFriendRequests friends={friends} setFriends={setFriends}/>
-          <SendFriendRequest/>
+          <Friends friends={friends} setFriends={setFriends} />
+          <IncomingFriendRequests friends={friends} setFriends={setFriends} />
+          <SendFriendRequest />
         </div>
       </div>
     </div>
