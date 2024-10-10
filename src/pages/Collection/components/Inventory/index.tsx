@@ -6,14 +6,14 @@ import { convertCardStackToSortable } from "utils/collectionUtils";
 import SortDropdown from "components/CardSortDropdown.ts";
 import Filter from "components/Filter";
 import Switch from "components/Switch";
-import { useCardSort } from "hooks/useCardSort";
-import { useCardFilter } from "hooks/useCardFilter";
+import { useCardSort } from "pages/Collection/hooks/useCardSort";
+import { useCardFilter } from "pages/Collection/hooks/useCardFilter";
 import {
   ICardQueryBuilder,
   IUserCardsManager,
   UserCardsManager,
 } from "combatcritters-ts";
-import { useCardQueryBuilder } from "hooks/useCardQueryBuilder";
+import { useCardQueryBuilder } from "pages/Collection/hooks/useCardQueryBuilder";
 import { ClientSingleton } from "ClientSingleton";
 
 interface InventoryProps {

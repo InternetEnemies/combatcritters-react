@@ -1,6 +1,6 @@
 import React from "react";
 import "./navBar.css";
-import ProfileButton from "components/ProfileButton";
+import ProfileButton from "components/NavBar/components/ProfileButton";
 import { useNavigate } from "react-router-dom";
 
 const NavBar: React.FC = () => {
