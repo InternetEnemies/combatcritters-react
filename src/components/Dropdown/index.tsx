@@ -11,9 +11,8 @@ interface DropdownProps<T> {
   dropdownOptions: IDropdownOption<T>[];
   selectedDropdownOption: IDropdownOption<T>;
   setSelectedDropdownOption: (option: IDropdownOption<T>) => void;
-  isEmpty?: boolean; 
-  isEmptyMessage?: string;
-  className?: string;
+  isEmpty?: boolean; //Are there any items in the list?
+  isEmptyMessage?: string; //Message to display in list if there are no items.
   labelPrefix?: string; // Optional prefix to add before each of the dropdown options.
 }
 
@@ -21,14 +20,13 @@ const Dropdown = <T,>({
   dropdownOptions,
   selectedDropdownOption,
   setSelectedDropdownOption,
-  isEmpty = false,
-  isEmptyMessage = "No options", 
-  className,
+  isEmpty = false, //Default to items in the list
+  isEmptyMessage = "No options", //Default message
   labelPrefix,
 }: DropdownProps<T>) => {
   if (isEmpty) {
     return (
-      <div className={`dropdown ${className ? className : ""}`}>
+      <div className="dropdown ">
         <select disabled className="select">
           <option>{isEmptyMessage}</option>
         </select>
@@ -37,7 +35,7 @@ const Dropdown = <T,>({
   }
 
   return (
-    <div className={`dropdown ${className ? className : ""}`}>
+    <div className="dropdown">
       <select
         value={selectedDropdownOption.label}
         onChange={(e) => {
