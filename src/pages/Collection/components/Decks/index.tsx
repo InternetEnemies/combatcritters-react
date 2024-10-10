@@ -131,14 +131,19 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
       <div className="deckChooserContainer">
         <Dropdown
           dropdownOptions={deckDropdownOptions}
-          selectedDropdownOption={{
-            id: selectedDeck?.deckid ?? 0,
-            name: selectedDeck?.name ?? "Select Deck",
-          }}
+          selectedDropdownOption={
+            selectedDeck
+              ? { label: selectedDeck.name, value: selectedDeck }
+              : { label: "No deck selected", value: null }
+          }
           setSelectedDropdownOption={(option) => {
-            const selected = decks.find((deck) => deck.deckid === option.id);
-            setSelectedDeck(selected || null);
+            const selected = decks.find(
+              (deck) => deck.deckid === option?.value?.deckid
+            );
+            setSelectedDeck(selected || null); 
           }}
+          isEmpty={deckDropdownOptions.length === 0} 
+          isEmptyMessage="No decks available"
         />
         <div className="createDeleteContainer">
           <ConfirmationButton
@@ -151,6 +156,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
           <CreateDeck onCreateDeck={createDeck} />
         </div>
       </div>
+
       <div
         className="deckCardsGrid"
         ref={setNodeRef}
@@ -172,6 +178,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
           <p>No deck selected.</p>
         )}
       </div>
+
       <div className="cancelDeleteContainer">
         {changesMade ? (
           <ConfirmationButton

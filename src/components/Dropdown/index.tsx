@@ -7,28 +7,42 @@ import React from "react";
 import "./dropdown.css";
 import { IDropdownOption } from "interfaces/IDropdownOption";
 
-interface DropdownProps {
-  dropdownOptions: IDropdownOption[];
-  selectedDropdownOption: IDropdownOption;
-  setSelectedDropdownOption: (option: IDropdownOption) => void;
+interface DropdownProps<T> {
+  dropdownOptions: IDropdownOption<T>[];
+  selectedDropdownOption: IDropdownOption<T>;
+  setSelectedDropdownOption: (option: IDropdownOption<T>) => void;
+  isEmpty?: boolean; 
+  isEmptyMessage?: string;
   className?: string;
-  labelPrefix?: string; //Optional prefix to add before each of the dropdown options.
+  labelPrefix?: string; // Optional prefix to add before each of the dropdown options.
 }
 
-const Dropdown: React.FC<DropdownProps> = ({
+const Dropdown = <T,>({
   dropdownOptions,
   selectedDropdownOption,
   setSelectedDropdownOption,
+  isEmpty = false,
+  isEmptyMessage = "No options", 
   className,
-  labelPrefix, 
-}) => {
+  labelPrefix,
+}: DropdownProps<T>) => {
+  if (isEmpty) {
+    return (
+      <div className={`dropdown ${className ? className : ""}`}>
+        <select disabled className="select">
+          <option>{isEmptyMessage}</option>
+        </select>
+      </div>
+    );
+  }
+
   return (
-    <div className={`dropdown ${className}`}>
+    <div className={`dropdown ${className ? className : ""}`}>
       <select
-        value={selectedDropdownOption.id}
+        value={selectedDropdownOption.label}
         onChange={(e) => {
           const selectedOption = dropdownOptions.find(
-            (option) => option.id === Number(e.target.value)
+            (option) => option.label === e.target.value
           );
           if (selectedOption) {
             setSelectedDropdownOption(selectedOption);
@@ -37,8 +51,8 @@ const Dropdown: React.FC<DropdownProps> = ({
         className="select"
       >
         {dropdownOptions.map((option) => (
-          <option key={option.id} value={option.id}>
-            {`${labelPrefix ? labelPrefix : ""}${option.name}`}
+          <option key={option.label} value={option.label}>
+            {`${labelPrefix ? labelPrefix : ""}${option.label}`}
           </option>
         ))}
       </select>

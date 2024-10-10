@@ -19,14 +19,14 @@ const DecksDropdown: React.FC<DeckDropdownProps> = ({
   setSelectedDeck,
 }) => {
   const [deckDropdownOptions, setDeckDropdownOptions] = useState<
-    IDropdownOption[]
+    IDropdownOption<IDeck>[]
   >([]);
 
-  //Convert decks[] into IDropdownOption[]
+  // Convert decks[] into IDropdownOption[]
   useEffect(() => {
     const options = decks.map((deck) => ({
-      id: deck.deckid,
-      name: deck.name,
+      label: deck.name, 
+      value: deck, 
     }));
     setDeckDropdownOptions(options);
   }, [decks]);
@@ -49,8 +49,8 @@ const DecksDropdown: React.FC<DeckDropdownProps> = ({
           Select a deck
         </option>
         {deckDropdownOptions.map((option) => (
-          <option key={option.id} value={option.id}>
-            {option.name}
+          <option key={option.value.deckid} value={option.value.deckid}>
+            {option.label}
           </option>
         ))}
       </select>
