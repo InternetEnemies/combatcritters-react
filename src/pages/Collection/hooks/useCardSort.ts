@@ -4,19 +4,28 @@
  */
 
 import { useState } from "react";
-import { ICardSortOption } from "interfaces/ICardSortOption";
+import { IDropdownOption } from "interfaces/IDropdownOption";
 import { CardOrder } from "combatcritters-ts";
 
 export const useCardSort = () => {
-  const [sortOptions] = useState<ICardSortOption[]>([
-    { name: "Rarity", id: CardOrder.RARITY },
-    { name: "Name", id: CardOrder.NAME },
-    { name: "Play Cost", id: CardOrder.PLAY_COST },
+  const [sortOptions] = useState<IDropdownOption<CardOrder>[]>([
+    {
+      label: "Rarity",
+      value: CardOrder.RARITY, 
+    },
+    {
+      label: "Name",
+      value: CardOrder.NAME,
+    },
+    {
+      label: "Play Cost",
+      value: CardOrder.PLAY_COST,
+    },
   ]);
 
-  const [selectedSortOption, setSelectedSortOption] = useState<ICardSortOption>(
-    sortOptions[0]
-  );
+  const [selectedSortOption, setSelectedSortOption] = useState<
+    IDropdownOption<CardOrder>
+  >(sortOptions[0]);
 
   return {
     sortOptions,
