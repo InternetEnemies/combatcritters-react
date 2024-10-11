@@ -7,17 +7,17 @@ import React, { useState, useEffect } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import "./decks.css";
 import SortableCard from "components/SortableCard";
-import CreateDeck from "components/CreateDeck";
+import CreateDeck from "pages/Collection/components/CreateDeck";
 import { IDeck } from "combatcritters-ts/src/objects";
 import { ISortableDeck } from "interfaces/ISortableDeck";
 import Button from "components/Button";
 import { convertToSortableDeck } from "utils/collectionUtils";
 import Dropdown from "components/Dropdown";
-import { useDeckSelect } from "hooks/useDeckSelect";
+import { useDeckSelect } from "pages/Collection/hooks/useDeckSelect";
 import ConfirmationButton from "components/ConfirmationButton";
 import Toast from "components/Toast";
 import { useToast } from "hooks/useToast";
-import { useMonitorDeckChanges } from "hooks/useMonitorDeckChanges";
+import { useMonitorDeckChanges } from "pages/Collection/hooks/useMonitorDeckChanges";
 import deleteIcon from "assets/icons/delete.svg";
 import { ClientSingleton } from "ClientSingleton";
 
@@ -132,7 +132,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
         <Dropdown
           dropdownOptions={deckDropdownOptions}
           selectedDropdownOption={{
-            id: selectedDeck?.deckid ?? 0, 
+            id: selectedDeck?.deckid ?? 0,
             name: selectedDeck?.name ?? "Select Deck",
           }}
           setSelectedDropdownOption={(option) => {

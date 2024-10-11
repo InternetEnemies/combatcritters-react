@@ -5,7 +5,7 @@
 
 import React from "react";
 import "./incomingFriendRequests.css";
-import { useManageFriendRequests } from "hooks/useManageFriendRequests";
+import { useManageFriendRequests } from "pages/Profile/hooks/useManageFriendRequests";
 import checkmark from "assets/icons/checkmark.svg";
 import { IUser } from "combatcritters-ts";
 
@@ -13,9 +13,14 @@ interface FriendsProps {
   friends: IUser[];
   setFriends: (friends: IUser[]) => void;
 }
-const IncomingFriendRequests: React.FC<FriendsProps> = ({friends, setFriends}) => {
-  const { friendRequests, acceptFriendRequest } =
-    useManageFriendRequests(friends, setFriends);
+const IncomingFriendRequests: React.FC<FriendsProps> = ({
+  friends,
+  setFriends,
+}) => {
+  const { friendRequests, acceptFriendRequest } = useManageFriendRequests(
+    friends,
+    setFriends
+  );
 
   return (
     <div className="friendRequestsRoot">
@@ -32,7 +37,6 @@ const IncomingFriendRequests: React.FC<FriendsProps> = ({friends, setFriends}) =
                 >
                   <img src={checkmark} alt="Accept" className="acceptIcon" />
                 </button>
-                
               </div>
             </li>
           ))}

@@ -25,7 +25,6 @@ const ConfirmationButton: React.FC<ConfirmationButtonProps> = ({
   };
 
   const handleConfirm = () => {
-    console.log("here");
     onClick();
     setShowDialog(false);
   };
