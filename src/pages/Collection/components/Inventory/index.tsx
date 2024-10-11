@@ -94,6 +94,7 @@ const Inventory: React.FC<InventoryProps> = ({
           dropdownOptions={sortOptions}
           selectedDropdownOption={selectedSortOption}
           setSelectedDropdownOption={setSelectedSortOption}
+          labelPrefix="Sort by Card "
         />
       </div>
       <div className="cardGrid">
