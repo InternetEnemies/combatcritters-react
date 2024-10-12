@@ -83,7 +83,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
     }
   };
 
-  const { deckDropdownOptions } = useDeckSelect(
+  const { deckDropdownOptions, selectedDropdownOption, setSelectedDropdownOption } = useDeckSelect(
     selectedDeck,
     setSelectedDeck,
     setLocalDeck,
@@ -132,16 +132,9 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
         <Dropdown
           dropdownOptions={deckDropdownOptions}
           selectedDropdownOption={
-            selectedDeck
-              ? { label: selectedDeck.name, value: selectedDeck }
-              : { label: "No deck selected", value: null }
+            selectedDropdownOption
           }
-          setSelectedDropdownOption={(option) => {
-            const selected = decks.find(
-              (deck) => deck.deckid === option?.value?.deckid
-            );
-            setSelectedDeck(selected || null); 
-          }}
+          setSelectedDropdownOption={setSelectedDropdownOption}
           isEmpty={deckDropdownOptions.length === 0} 
           isEmptyMessage="No decks available"
         />

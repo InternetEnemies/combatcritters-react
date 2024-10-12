@@ -40,13 +40,22 @@ export const useDeckSelect = (
     }
   }, [decks]);
 
-  // Updates the selected deck when the dropdown selection changes.
-  useEffect(() => {
-    if (selectedDropdownOption) {
-      const newSelectedDeck = selectedDropdownOption.value; // Deck is the value
-      setSelectedDeck(newSelectedDeck);
+  // Updates the selected deck and saves the previous deck when the dropdown selection changes.
+ useEffect(() => {
+   const handleDeckChange = async () => {
+    if(changesMade) {
+      await saveDeck(); 
     }
-  }, [selectedDropdownOption, setSelectedDeck]);
+
+     if (selectedDropdownOption) {
+       const newSelectedDeck = selectedDropdownOption.value;
+       setSelectedDeck(newSelectedDeck);
+     }
+   };
+
+   handleDeckChange(); 
+ }, [selectedDropdownOption, setSelectedDeck]);
+
 
   // Updates localDeck to match the newly selectedDeck
   useEffect(() => {
