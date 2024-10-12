@@ -3,7 +3,7 @@ import "./inventory.css";
 import { ISortableCard } from "interfaces/ISortableCard";
 import SortableCard from "components/SortableCard";
 import { convertCardStackToSortable } from "utils/collectionUtils";
-import SortDropdown from "components/CardSortDropdown.ts";
+import Dropdown from "components/Dropdown";
 import Filter from "components/Filter";
 import Switch from "components/Switch";
 import { useCardSort } from "pages/Collection/hooks/useCardSort";
@@ -49,13 +49,13 @@ const Inventory: React.FC<InventoryProps> = ({
     () =>
       rarityFilterOptions
         .filter((option) => option.toggled === true)
-        .map((option) => option.id),
+        .map((option) => option.value),
     [rarityFilterOptions]
   );
 
   const cardQuery = useCardQueryBuilder(
     cardQueryBuilder,
-    selectedSortOption.id,
+    selectedSortOption.value,
     memoizedRarityFilterOptions,
     ownedFilter
   );
@@ -90,10 +90,11 @@ const Inventory: React.FC<InventoryProps> = ({
             setFilterOptions={setRarityFilterOptions}
           />
         </div>
-        <SortDropdown
+        <Dropdown
           dropdownOptions={sortOptions}
           selectedDropdownOption={selectedSortOption}
           setSelectedDropdownOption={setSelectedSortOption}
+          labelPrefix="Sort by Card "
         />
       </div>
       <div className="cardGrid">

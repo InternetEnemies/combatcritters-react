@@ -9,13 +9,13 @@ import { CardRarity } from "combatcritters-ts";
 
 export const useCardFilter = () => {
   const [rarityFilterOptions, setRarityFilterOptions] = useState<
-    IFilterOption[]
+    IFilterOption<CardRarity>[]
   >([
-    { name: "Common", id: CardRarity.COMMON, toggled: false },
-    { name: "Uncommon", id: CardRarity.UNCOMMON, toggled: false },
-    { name: "Rare", id: CardRarity.RARE, toggled: false },
-    { name: "Epic", id: CardRarity.EPIC, toggled: false },
-    { name: "Legendary", id: CardRarity.LEGENDARY, toggled: false },
+    { label: "Common", value: CardRarity.COMMON, toggled: false },
+    { label: "Uncommon", value: CardRarity.UNCOMMON, toggled: false },
+    { label: "Rare", value: CardRarity.RARE, toggled: false },
+    { label: "Epic", value: CardRarity.EPIC, toggled: false },
+    { label: "Legendary", value: CardRarity.LEGENDARY, toggled: false },
   ]);
 
   const [ownedFilter, setOwnedFilter] = useState<boolean>(true);

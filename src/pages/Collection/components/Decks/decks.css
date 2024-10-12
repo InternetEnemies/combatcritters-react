@@ -30,27 +30,11 @@
   padding:1cqw;
 }
 
-.decksRoot .select {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-  cursor: pointer;
-  align-items: center;
-  max-width: 200px;
-}
 
 .trashIcon {
   width: 45px;
   height: 45px;
   color: white;
-}
-
-.decksRoot .select:hover {
-  background-color: #45a049; 
 }
 
 .createDeleteContainer {
