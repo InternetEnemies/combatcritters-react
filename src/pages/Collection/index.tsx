@@ -34,7 +34,6 @@ const Collection: React.FC = () => {
       onDragMove={handleDragOver}
     >
       <div className="collectionRoot">
-        <NavBar />
         <div className="invDecksContainer">
           <SortableContext
             items={
