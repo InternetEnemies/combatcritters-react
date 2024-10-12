@@ -3,8 +3,8 @@
  * @Brief Object for a general filter option.
  */
 
-export interface IFilterOption {
-  name: string;
-  id: number;
+export interface IFilterOption<T> {
+  label: string;
+  value: T;
   toggled: boolean;
 }
