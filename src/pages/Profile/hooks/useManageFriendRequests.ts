@@ -9,7 +9,9 @@ import { useEffect, useState } from "react";
 
 export const useManageFriendRequests = (
   friends: IUser[],
-  setFriends: (friends: IUser[]) => void
+  setFriends: (friends: IUser[]) => void,
+  numberOfRequests: number,
+  setNumberOfRequests: (num: number) => void
 ) => {
   const [friendRequests, setFriendRequests] = useState<IUser[]>([]);
 
@@ -36,6 +38,8 @@ export const useManageFriendRequests = (
       );
 
       setFriends([...friends, user]);
+
+      setNumberOfRequests(numberOfRequests-1);
     } catch (error) {
       console.error("Error accepting friend request:", error);
     }

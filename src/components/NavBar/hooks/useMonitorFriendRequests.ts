@@ -5,23 +5,31 @@
 
 import { ClientSingleton } from "ClientSingleton";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-export const useMonitorFriendRequests = () => {
-  const [numberOfRequests, setNumberOfRequests] = useState(0);
+export const useMonitorFriendRequests = (setNumberOfRequests: (num: number) => void) => {
+  const location = useLocation();
 
+
+  const fetchFriendRequests = async () => {
+    try {
+      const friendRequests =
+        await ClientSingleton.getInstance().user.friends.getFriendsRequests();
+      setNumberOfRequests(friendRequests.length);
+    } catch (error) {
+      console.error("Error fetching friend requests:", error);
+    }
+  };
+
+  //Fetch friend requests on mount
   useEffect(() => {
-    const fetchFriendRequests = async () => {
-      try {
-        const friendRequests =
-          await ClientSingleton.getInstance().user.friends.getFriendsRequests();
-        setNumberOfRequests(friendRequests.length);
-      } catch (error) {
-        console.error("Error fetching friend requests:", error);
-      }
-    };
-
     fetchFriendRequests();
   }, []);
 
-  return numberOfRequests;
+  //Fetch friend requests on page change
+   useEffect(() => {
+     fetchFriendRequests();
+   }, [location]);
+
+  return;
 };

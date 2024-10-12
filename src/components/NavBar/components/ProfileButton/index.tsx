@@ -4,10 +4,15 @@ import profileIcon from "assets/icons/profile.svg";
 import ProfilePopdown from "components/ProfilePopdown";
 import { useMonitorFriendRequests } from "components/NavBar/hooks/useMonitorFriendRequests";
 
-const ProfileButton: React.FC = () => {
+interface ProfileButtonProps {
+  numberOfRequests: number;
+  setNumberOfRequests: (num: number) => void;
+}
+
+const ProfileButton: React.FC<ProfileButtonProps> = ({numberOfRequests, setNumberOfRequests}) => {
   const [isPopdownVisible, setIsPopdownVisible] = useState(false);
   const popdownRef = useRef<HTMLDivElement>(null);
-  const numberOfRequests = useMonitorFriendRequests();
+  useMonitorFriendRequests(setNumberOfRequests);
 
   const togglePopdown = () => {
     setIsPopdownVisible((prev) => !prev);

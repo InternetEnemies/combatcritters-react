@@ -12,14 +12,20 @@ import { IUser } from "combatcritters-ts";
 interface FriendsProps {
   friends: IUser[];
   setFriends: (friends: IUser[]) => void;
+  numberOfRequests: number;
+  setNumberOfRequests: (num: number) => void;
 }
 const IncomingFriendRequests: React.FC<FriendsProps> = ({
   friends,
   setFriends,
+  numberOfRequests,
+  setNumberOfRequests
 }) => {
   const { friendRequests, acceptFriendRequest } = useManageFriendRequests(
     friends,
-    setFriends
+    setFriends,
+    numberOfRequests, 
+    setNumberOfRequests
   );
 
   return (
