@@ -9,7 +9,6 @@ import { SortableContext } from "@dnd-kit/sortable";
 import Inventory from "./components/Inventory";
 import Decks from "./components/Decks";
 import { ISortableDeck } from "interfaces/ISortableDeck";
-import NavBar from "components/NavBar";
 import "./collection.css";
 import { ISortableCard } from "interfaces/ISortableCard";
 import SortableCard from "components/SortableCard";

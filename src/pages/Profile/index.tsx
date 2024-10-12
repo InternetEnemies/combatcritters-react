@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "components/NavBar";
 import "./profile.css";
 import FeatureDeck from "pages/Profile/components/FeatureDeck";
 import IncomingFriendRequests from "pages/Profile/components/IncomingFriendRequests";
