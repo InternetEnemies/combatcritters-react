@@ -16,6 +16,7 @@ import Profile from "pages/Profile";
 import { useState } from "react";
 import NavBar from "components/NavBar";
 import "./app.css";
+import ProtectedRoutes from "components/ProtectedRoutes";
 
 function App() {
   const [numberOfRequests, setNumberOfRequests] = useState(0); // Number of friend requests
@@ -39,17 +40,20 @@ function App() {
       <div className="appPagesContainer">
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/collection" element={<Collection />} />
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/profile"
-            element={
-              <Profile
-                numberOfRequests={numberOfRequests}
-                setNumberOfRequests={setNumberOfRequests}
-              />
-            }
-          />
+
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/collection" element={<Collection />} />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  numberOfRequests={numberOfRequests}
+                  setNumberOfRequests={setNumberOfRequests}
+                />
+              }
+            />
+          </Route>
         </Routes>
       </div>
     </div>
