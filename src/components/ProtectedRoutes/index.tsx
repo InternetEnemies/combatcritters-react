@@ -1,15 +1,14 @@
+import { Outlet, Navigate } from "react-router-dom";
 import { ClientSingleton } from "ClientSingleton";
-import Login from "pages/Login";
-import { Outlet } from "react-router-dom";
 
 const useAuth = () => {
-    return ClientSingleton.getInstance().isLoggedIn();
-}
+  return ClientSingleton.getInstance().isLoggedIn();
+};
 
 const ProtectedRoutes = () => {
-    const isAuth = useAuth();
+  const isAuth = useAuth();
 
-    return isAuth ? <Outlet /> : <Login/>;
-}
+  return isAuth ? <Outlet /> : <Navigate to="/login" />;
+};
 
 export default ProtectedRoutes;
