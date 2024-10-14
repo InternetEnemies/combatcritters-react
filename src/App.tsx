@@ -1,6 +1,6 @@
 /**
  * @Created 2024-10-07
- * @Brief Main application component. 
+ * @Brief Main application component.
  */
 
 import {
@@ -8,22 +8,60 @@ import {
   Routes,
   Route,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 import Collection from "pages/Collection";
 import Login from "pages/Login";
 import Profile from "pages/Profile";
+import { useState } from "react";
+import NavBar from "components/NavBar";
+import "./app.css";
 
 function App() {
+  const [numberOfRequests, setNumberOfRequests] = useState(0); // Number of friend requests
+  const location = useLocation();
+
+  // Check if the navbar should be visible
+  const isNavbarVisible =
+    location.pathname !== "/login" && location.pathname !== "/";
+
+  return (
+    <div className="appRoot">
+      {isNavbarVisible && (
+        <div className="navBarContainer">
+          <NavBar
+            numberOfRequests={numberOfRequests}
+            setNumberOfRequests={setNumberOfRequests}
+          />
+        </div>
+      )}
+
+      <div className="appPagesContainer">
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/collection" element={<Collection />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                numberOfRequests={numberOfRequests}
+                setNumberOfRequests={setNumberOfRequests}
+              />
+            }
+          />
+        </Routes>
+      </div>
+    </div>
+  );
+}
+
+function AppWrapper() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/collection" element={<Collection />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile/>}/>
-      </Routes>
+      <App />
     </Router>
   );
 }
 
-export default App;
+export default AppWrapper;
