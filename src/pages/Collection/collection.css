@@ -1,8 +1,7 @@
 .collectionRoot {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+  height: 100%; 
 }
 
 .invDecksContainer {
@@ -10,8 +9,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 3cqw;
+  gap: 3vw;
   background-color: var(--primary-background-color);
   width: 100%;
-  height: 100%;
+  flex-grow: 1; 
 }

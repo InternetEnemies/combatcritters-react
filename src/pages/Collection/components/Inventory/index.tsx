@@ -49,7 +49,7 @@ const Inventory: React.FC<InventoryProps> = ({
     () =>
       rarityFilterOptions
         .filter((option) => option.toggled === true)
-        .map((option) => option.id),
+        .map((option) => option.value),
     [rarityFilterOptions]
   );
 

@@ -8,12 +8,12 @@ import "./filter.css";
 import filterIcon from "assets/icons/filter.svg";
 import { IFilterOption } from "interfaces/IFilterOption";
 
-interface FilterProps {
-  filterOptions: IFilterOption[];
-  setFilterOptions: (options: IFilterOption[]) => void;
+interface FilterProps<T> {
+  filterOptions: IFilterOption<T>[];
+  setFilterOptions: (options: IFilterOption<T>[]) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({ filterOptions, setFilterOptions }) => {
+const Filter = <T,>({ filterOptions, setFilterOptions }: FilterProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -37,9 +37,9 @@ const Filter: React.FC<FilterProps> = ({ filterOptions, setFilterOptions }) => {
     };
   }, [dropdownRef]);
 
-  const toggleFilter = (filterId: number) => {
+  const toggleFilter = (filterLabel: string) => {
     const updatedOptions = filterOptions.map((filter) =>
-      filter.id === filterId ? { ...filter, toggled: !filter.toggled } : filter
+      filter.label === filterLabel ? { ...filter, toggled: !filter.toggled } : filter
     );
     setFilterOptions(updatedOptions);
   };
@@ -55,13 +55,13 @@ const Filter: React.FC<FilterProps> = ({ filterOptions, setFilterOptions }) => {
       {isOpen && (
         <div className="dropdownMenu">
           {filterOptions.map((filter) => (
-            <label key={filter.id} className="filterOption">
+            <label key={filter.label} className="filterOption">
               <input
                 type="checkbox"
                 checked={filter.toggled}
-                onChange={() => toggleFilter(filter.id)}
+                onChange={() => toggleFilter(filter.label)}
               />
-              {filter.name}
+              {filter.label}
             </label>
           ))}
         </div>
