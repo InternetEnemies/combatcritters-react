@@ -15,7 +15,7 @@ export const useDeckSelect = (
   setLocalDeck: (deck: ISortableDeck | null) => void,
   decks: IDeck[],
   changesMade: boolean,
-  saveDeck: () => void
+  saveDeck: () => Promise<void>
 ) => {
   const [deckDropdownOptions, setDeckDropdownOptions] = useState<
     IDropdownOption<IDeck>[]
@@ -27,8 +27,8 @@ export const useDeckSelect = (
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const options = decks.map((deck) => ({
-      label: deck.name, 
-      value: deck, 
+      label: deck.name,
+      value: deck,
     }));
     setDeckDropdownOptions(options);
 
@@ -40,12 +40,20 @@ export const useDeckSelect = (
     }
   }, [decks]);
 
-  // Updates the selected deck when the dropdown selection changes.
+  // Updates the selected deck and saves the previous deck when the dropdown selection changes.
   useEffect(() => {
-    if (selectedDropdownOption) {
-      const newSelectedDeck = selectedDropdownOption.value; // Deck is the value
-      setSelectedDeck(newSelectedDeck);
-    }
+    const handleDeckChange = async () => {
+      if (changesMade) {
+        await saveDeck();
+      }
+
+      if (selectedDropdownOption) {
+        const newSelectedDeck = selectedDropdownOption.value;
+        setSelectedDeck(newSelectedDeck);
+      }
+    };
+
+    handleDeckChange();
   }, [selectedDropdownOption, setSelectedDeck]);
 
   // Updates localDeck to match the newly selectedDeck
