@@ -94,6 +94,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
 
   const createDeck = async (deckName: string) => {
     try {
+      await saveDeck();
       const createdDeck = await deckManager.createDeck(deckName);
       const updatedDecks = await deckManager.getDecks();
       setDecks(updatedDecks);
