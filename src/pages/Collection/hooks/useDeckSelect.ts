@@ -37,6 +37,8 @@ export const useDeckSelect = (
         (option) => option.value.deckid === selectedDeck.deckid
       );
       setSelectedDropdownOption(matchingOption || null);
+    } else if (options && options.length > 0) {
+      setSelectedDropdownOption(options[0]);
     }
   }, [decks]);
 
