@@ -11,22 +11,19 @@ interface ButtonProps {
   onClick: () => void;
   className?: string;
   disabled?: boolean;
-  style?: React.CSSProperties;
 }
 
 const Button: React.FC<ButtonProps> = ({
   text,
   onClick,
-  className = "",
+  className = "defaultButton",
   disabled = false,
-  style = {},
 }) => {
   return (
     <button
-      className={`customButton ${className}`}
+      className={className}
       onClick={onClick}
       disabled={disabled}
-      style={style}
     >
       {text}
     </button>

@@ -7,8 +7,11 @@ interface NavbarProps {
   numberOfRequests: number;
   setNumberOfRequests: (num: number) => void;
 }
-const NavBar: React.FC<NavbarProps> = ({numberOfRequests, setNumberOfRequests}) => {
-  const navigate = useNavigate(); 
+const NavBar: React.FC<NavbarProps> = ({
+  numberOfRequests,
+  setNumberOfRequests,
+}) => {
+  const navigate = useNavigate();
 
   const toCollection = () => {
     navigate("/collection");
@@ -16,10 +19,16 @@ const NavBar: React.FC<NavbarProps> = ({numberOfRequests, setNumberOfRequests}) 
 
   return (
     <div className="navBarRoot">
-      <button className="collectionButton" onClick={toCollection}>
-        Go to Collection
-      </button>
-      <ProfileButton numberOfRequests={numberOfRequests} setNumberOfRequests={setNumberOfRequests}/>
+      <div className="navButtonsContainer">
+        <span className="navButton" >Home</span>
+        <span className="navButton" onClick={toCollection}>
+          Deck Builder
+        </span>
+      </div>
+      <ProfileButton
+        numberOfRequests={numberOfRequests}
+        setNumberOfRequests={setNumberOfRequests}
+      />
     </div>
   );
 };

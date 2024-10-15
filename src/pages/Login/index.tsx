@@ -58,6 +58,7 @@ const Login: React.FC = () => {
           setIsLeftToggled={setLoginSelected}
           leftOption="Login"
           rightOption="Signup"
+          className="login"
         />
 
         <div>

@@ -1,9 +1,4 @@
-/**
- * @Created 2024-10-07
- * @Brief General dropdown component.
- */
-
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./dropdown.css";
 import { IDropdownOption } from "interfaces/IDropdownOption";
 
@@ -24,36 +19,63 @@ const Dropdown = <T,>({
   isEmptyMessage = "No options", // Default message
   labelPrefix,
 }: DropdownProps<T>) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null); // Create a reference for the dropdown
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false); // Close the dropdown if clicked outside
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside); // Clean up the event listener
+    };
+  }, []);
+
   if (isEmpty) {
     return (
       <div className="dropdown">
-        <select disabled className="select">
-          <option>{isEmptyMessage}</option>
-        </select>
+        <div className="select disabled">
+          <span>{isEmptyMessage}</span>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="dropdown">
-      <select
-        value={selectedDropdownOption ? selectedDropdownOption.label : ""} 
-        onChange={(e) => {
-          const selectedOption = dropdownOptions.find(
-            (option) => option.label === e.target.value
-          );
-          if (selectedOption) {
-            setSelectedDropdownOption(selectedOption);
-          }
-        }}
-        className="select"
-      >
-        {dropdownOptions.map((option) => (
-          <option key={option.label} value={option.label}>
-            {`${labelPrefix ? labelPrefix : ""}${option.label}`}
-          </option>
-        ))}
-      </select>
+    <div className="dropdown" ref={dropdownRef}>
+      <div className="select" onClick={toggleDropdown}>
+        <span>
+          {selectedDropdownOption
+            ? `${labelPrefix ? labelPrefix : ""}${selectedDropdownOption.label}`
+            : "Select an option"}
+        </span>
+        <span className={`dropdown-arrow ${isOpen ? "open" : ""}`}>▼</span>
+      </div>
+      {isOpen && (
+        <ul className="dropdown-menu">
+          {dropdownOptions.map((option) => (
+            <li
+              key={option.label}
+              className="dropdown-item"
+              onClick={() => {
+                setSelectedDropdownOption(option);
+                setIsOpen(false);
+              }}
+            >
+              {`${labelPrefix ? labelPrefix : ""}${option.label}`}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

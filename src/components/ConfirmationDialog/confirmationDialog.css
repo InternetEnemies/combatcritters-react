@@ -13,35 +13,16 @@
 
 .confirmationDialog {
   background-color: white;
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
-  max-width: 400px;
+  max-width: 300px;
   width: 100%;
 }
 
 .confirmationDialogButtons {
   display: flex;
-  justify-content: space-between;
-}
-
-.confirmButton {
-  background-color: #0b9b0b;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.cancelButton {
-  background-color: #fc2424;
-  color: #333;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 16px;
+  justify-content: center; 
+  gap: 8px;
 }

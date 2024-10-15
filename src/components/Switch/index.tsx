@@ -11,6 +11,7 @@ interface SwitchProps {
   setIsLeftToggled: (isToggled: boolean) => void;
   leftOption: string;
   rightOption: string;
+  className?: string;
 }
 
 const Switch: React.FC<SwitchProps> = ({
@@ -18,6 +19,7 @@ const Switch: React.FC<SwitchProps> = ({
   setIsLeftToggled,
   leftOption,
   rightOption,
+  className="defaultSwitchRoot"
 }) => {
   const handleLeftClick = () => {
     setIsLeftToggled(true);
@@ -28,7 +30,7 @@ const Switch: React.FC<SwitchProps> = ({
   };
 
   return (
-    <div className="switchRoot">
+    <div className={className}>
       <span
         className={`option leftOption ${isLeftToggled ? "active" : "notActive"}`}
         onClick={handleLeftClick}

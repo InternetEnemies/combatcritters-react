@@ -39,18 +39,21 @@ const Filter = <T,>({ filterOptions, setFilterOptions }: FilterProps<T>) => {
 
   const toggleFilter = (filterLabel: string) => {
     const updatedOptions = filterOptions.map((filter) =>
-      filter.label === filterLabel ? { ...filter, toggled: !filter.toggled } : filter
+      filter.label === filterLabel
+        ? { ...filter, toggled: !filter.toggled }
+        : filter
     );
     setFilterOptions(updatedOptions);
   };
 
   return (
     <div className="dropdown" ref={dropdownRef}>
-      <button onClick={toggleDropdown} className="filter-button">
-        <div className="filterIconContainer">
-          <img src={filterIcon} alt="Filter Icon" className="filterIcon" />
-        </div>
-      </button>
+      <img
+        src={filterIcon}
+        alt="Filter Icon"
+        className="filterIcon"
+        onClick={toggleDropdown}
+      />
 
       {isOpen && (
         <div className="dropdownMenu">

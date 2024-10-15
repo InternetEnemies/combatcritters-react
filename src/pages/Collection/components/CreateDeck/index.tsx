@@ -57,11 +57,7 @@ const CreateDeck: React.FC<CreateDeckProps> = ({ onCreateDeck }) => {
 
   return (
     <div className="createDeckRoot">
-      <Button
-        text="+"
-        onClick={handleTogglePopover}
-        className="createDeckButton"
-      />
+      <span className="createDeckButton" onClick={handleTogglePopover}>+</span>
 
       {isPopoverOpen && (
         <div className="popover" ref={popoverRef}>
@@ -75,7 +71,6 @@ const CreateDeck: React.FC<CreateDeckProps> = ({ onCreateDeck }) => {
           <Button
             text="Create"
             onClick={handleCreateDeck}
-            className="createDeckButton"
           />
         </div>
       )}

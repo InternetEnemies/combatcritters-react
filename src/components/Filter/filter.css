@@ -3,59 +3,63 @@
   display: inline-block;
 }
 
-.filterButton {
-  background-color: transparent; 
-  border: none; 
-  cursor: pointer; 
-  padding: 0;
-  outline: none; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.filterIconContainer {
-  width: 32px;
-  height: 32px;
-  border-radius: 100px;
-  overflow: hidden;
-}
-
 .filterIcon {
-  width: 100%;
-  height: 100%;
-  border-radius: 100px;
+  width: 38px;
+  height: 38px;
   object-fit: cover;
+  border-radius: 4px;
+  background-color: var(--custom-black);
+  cursor: pointer; 
 }
 
 .filterButton:hover .filterIcon,
 .filterButton:focus .filterIcon {
   transform: scale(1.1);
-  filter: brightness(1.2); 
+  filter: brightness(1.2);
+  cursor: pointer;
 }
 
 .dropdownMenu {
+  color: var(--custom-cream);
   display: block;
   position: absolute;
-  background-color: white;
+  background-color: var(--custom-dark-blue);
   min-width: 160px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  border-radius: 4px;
   margin-top: 8px;
   padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: 100%;
+  left: 0;
 }
+
+.dropdownMenu::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 12px;
+  border-width: 0 12px 12px 12px; 
+  border-style: solid;
+  border-color: transparent transparent var(--custom-dark-blue) transparent;
+  display: block;
+  width: 0;
+  height: 0;
+}
+
+
 .filterOption {
   display: block;
   padding: 8px;
-  cursor: pointer;
+  cursor: pointer; 
+  transition: background-color 0.2s ease, color 0.2s ease; 
 }
 
 .filterOption input {
   margin-right: 10px;
 }
 
-.filterOption:hover {
-  background-color: #f1f1f1;
+.filterIcon:hover {
+  filter: brightness(1.1); 
 }
