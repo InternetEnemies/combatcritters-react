@@ -1,10 +1,11 @@
 /**
  * @Created 2024-10-07
- * @Brief Confirmation dialog popup. 
+ * @Brief Confirmation dialog popup.
  */
 
 import React, { useEffect, useRef } from "react";
 import "./confirmationDialog.css";
+import Button from "components/Button";
 
 interface ConfirmationDialogProps {
   show: boolean;
@@ -49,12 +50,8 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       <div className="confirmationDialog" ref={dialogRef}>
         <p>{message}</p>
         <div className="confirmationDialogButtons">
-          <button className="cancelButton" onClick={() => setShowDialog(false)}>
-            Cancel
-          </button>
-          <button className="confirmButton" onClick={onConfirm}>
-            Confirm
-          </button>
+          <Button text="No" onClick={() => setShowDialog(false)} />
+          <Button text="Yes" onClick={onConfirm} />
         </div>
       </div>
     </div>
