@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./profileButton.css";
 import profileIcon from "assets/icons/profile.svg";
-import ProfilePopdown from "components/ProfilePopdown";
+import ProfilePopdown from "components/NavBar/components/ProfilePopdown";
 import { useMonitorFriendRequests } from "components/NavBar/hooks/useMonitorFriendRequests";
 
 interface ProfileButtonProps {
