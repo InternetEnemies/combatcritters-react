@@ -15,6 +15,7 @@ import {
 } from "combatcritters-ts";
 import { useCardQueryBuilder } from "pages/Collection/hooks/useCardQueryBuilder";
 import { ClientSingleton } from "ClientSingleton";
+import "../../collection.css";
 
 interface InventoryProps {
   selectedCards: ISortableCard[];
@@ -76,35 +77,44 @@ const Inventory: React.FC<InventoryProps> = ({
   }, [userCardsManager, cardQuery, setSelectedCards]);
 
   return (
-    <div className="inventoryRoot">
-      <div className="filterSortContainer">
-        <div className="filterContainer">
-          <Switch
-            isLeftToggled={ownedFilter}
-            setIsLeftToggled={setOwnedFilter}
-            leftOption={"Owned"}
-            rightOption={"All"}
-          />
-          <Filter
-            filterOptions={rarityFilterOptions}
-            setFilterOptions={setRarityFilterOptions}
-          />
+    <div className="decksInventoryRoot inventoryRoot">
+      <span className="decksInventoryIdentifier">Inventory</span>
+      <div className="decksInventoryContainer">
+        <div className="filterSortContainer decksInventorySelect">
+          <div className="dropdownFilterWrapper">
+            <Dropdown
+              dropdownOptions={sortOptions}
+              selectedDropdownOption={selectedSortOption}
+              setSelectedDropdownOption={setSelectedSortOption}
+              labelPrefix="Sort by Card "
+            />
+            <div className="filterWrapper">
+              <Filter
+                filterOptions={rarityFilterOptions}
+                setFilterOptions={setRarityFilterOptions}
+              />
+            </div>
+          </div>
+
+          <div className="switchWrapper">
+            <Switch
+              isLeftToggled={ownedFilter}
+              setIsLeftToggled={setOwnedFilter}
+              leftOption={"Owned"}
+              rightOption={"All"}
+              className={"inventory"}
+            />
+          </div>
         </div>
-        <Dropdown
-          dropdownOptions={sortOptions}
-          selectedDropdownOption={selectedSortOption}
-          setSelectedDropdownOption={setSelectedSortOption}
-          labelPrefix="Sort by Card "
-        />
-      </div>
-      <div className="cardGrid">
-        {selectedCards.map((sortableCard) => (
-          <SortableCard
-            key={sortableCard.instanceId}
-            sortableCard={sortableCard}
-            translucent={true}
-          />
-        ))}
+        <div className="cardGrid decksInventoryGrid">
+          {selectedCards.map((sortableCard) => (
+            <SortableCard
+              key={sortableCard.instanceId}
+              sortableCard={sortableCard}
+              translucent={true}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

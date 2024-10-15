@@ -1,102 +1,12 @@
-.inventoryRoot {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 660px;
-  height: 660px;
-  border: .1cqw solid lightslategrey;
+.inventoryRoot .switchWrapper {
+  margin-right: 2.7%;
 }
 
-.filterSortContainer {
-  display: flex;
+.inventoryRoot .dropdownFilterWrapper {
+  display:flex;
   flex-direction: row;
-  width: 100%;
-  height: 100px;
-  background-color: rgb(2, 21, 74);
-  align-items: center;
-  justify-content: space-between;
-}
-
-.inventoryRoot .cardGrid {
-  padding:1cqw;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
-  width: 100%;
-  height: 100%;
-  background-color: rgb(3, 35, 122);
-  overflow-y: auto;
-  /* gap: 1px; */
-  justify-items: center;
-  row-gap: 20px;
-  box-sizing:border-box;
-  padding:1cqw;
+  margin-left: 2.7%;
+  gap: 10px;
 }
 
 
-.filterContainer {
-  margin-left: 30px;
-  display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-}
-
-.inventoryRoot .cardSortDropdownRoot {
-  margin-right: 30px;
-}
-
-
-.inventoryRoot .switchRoot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 160px; 
-  height: 40px; 
-  border-radius: 2px;
-  background-color: #ddd; 
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  position: relative;
-  overflow: hidden; 
-}
-
-.inventoryRoot .option {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-weight: bold;
-  color: #555;
-  transition: color 0.3s ease, background-color 0.3s ease;
-  z-index: 2;
-}
-
-.inventoryRoot .active {
-  color: white;
-}
-
-.inventoryRoot .notActive {
-  background-color: white;
-  color: #ad1e1e;
-}
-
-.inventoryRoot .switchSlider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%; 
-  height: 100%;
-  border-radius: 25px;
-  background-color: rgb(3, 35, 122); 
-  transition: left 0.3s ease;
-  z-index: 1;
-}
-
-.inventoryRoot .switchSlider.toggled {
-  left: 50%; 
-}
-
-.inventoryRoot .switchRoot:hover .switchSlider {
-  background-color: rgb(101, 115, 156); 
-}
