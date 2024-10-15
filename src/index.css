@@ -5,9 +5,37 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "mainFont";
+  src: url("/src/assets/fonts/OpenSans.ttf") format("truetype");
+  font-style: normal;
+}
+
 :root {
-    --primary-background-color: #182f4c;
+    --custom-dark-blue: #003049;
+    --custom-light-blue: #669bbc;
+    --custom-cream: #fdf0d5;
+    --custom-red: #c1121f;
+    --custom-dark-red: #780000;
+    --custom-black: #1b1b1b;
+    --custom-orange: #e0782b;
+    --custom-tan: #dacb99;
+    --custom-cyan: #7bbdc6;
+
+    --custom-dark-blue-rgb: 0, 48, 73;
+    --custom-light-blue-rgb: 102, 155, 188;
+    --custom-cream-rgb: 253, 240, 213;
+    --custom-red-rgb: 193, 18, 31;
+    --custom-dark-red-rgb: 120, 0, 0;
+    --custom-black-rgb: 27, 27, 27;
+    --custom-orange-rgb: 224, 120 43;
+    --custom-tan-rgb: 218, 203, 153;
+    --custom-cyan-rgb: 123, 189, 198;
+
+    
+
     --login-font: "pressStart";
+    --main-font: "mainFont";
     box-sizing:border-box;
 }
 
