@@ -20,6 +20,7 @@ import { useToast } from "hooks/useToast";
 import { useMonitorDeckChanges } from "pages/Collection/hooks/useMonitorDeckChanges";
 import deleteIcon from "assets/icons/delete.svg";
 import { ClientSingleton } from "ClientSingleton";
+import "../../collection.css";
 
 interface DeckProps {
   localDeck: ISortableDeck | null;
@@ -83,7 +84,11 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
     }
   };
 
-  const { deckDropdownOptions, selectedDropdownOption, setSelectedDropdownOption } = useDeckSelect(
+  const {
+    deckDropdownOptions,
+    selectedDropdownOption,
+    setSelectedDropdownOption,
+  } = useDeckSelect(
     selectedDeck,
     setSelectedDeck,
     setLocalDeck,
@@ -128,62 +133,73 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
   };
 
   return (
-    <div className="decksRoot" style={style}>
-      <div className="deckChooserContainer">
-        <Dropdown
-          dropdownOptions={deckDropdownOptions}
-          selectedDropdownOption={
-            selectedDropdownOption
-          }
-          setSelectedDropdownOption={setSelectedDropdownOption}
-          isEmpty={deckDropdownOptions.length === 0} 
-          isEmptyMessage="No decks available"
-        />
-        <div className="createDeleteContainer">
-          <ConfirmationButton
-            onClick={deleteDeck}
-            confirmationMessage="Are you sure you want to delete this deck?"
-            child={
-              <img className="trashIcon" src={deleteIcon} alt="Delete Deck" />
-            }
-          />
-          <CreateDeck onCreateDeck={createDeck} />
+    <div className="decksInventoryRoot" style={style}>
+      <span className="decksInventoryIdentifier">Decks</span>
+      <div className="decksInventoryContainer">
+        <div className="deckChooserContainer decksInventorySelect">
+          <div className="dropdownWrapper">
+            <Dropdown
+              dropdownOptions={deckDropdownOptions}
+              selectedDropdownOption={selectedDropdownOption}
+              setSelectedDropdownOption={setSelectedDropdownOption}
+              isEmpty={deckDropdownOptions.length === 0}
+              isEmptyMessage="No decks available"
+            />
+          </div>
+
+          <div className="createDeleteContainer">
+            <ConfirmationButton
+              onClick={deleteDeck}
+              confirmationMessage="Are you sure you want to delete this deck?"
+              child={
+                <img
+                  className="trashIcon"
+                  src={deleteIcon}
+                  alt="Delete Deck"
+                  style={{ width: "30px", height: "30px" }}
+                />
+              }
+            />
+            <CreateDeck onCreateDeck={createDeck} />
+          </div>
         </div>
-      </div>
 
-      <div
-        className="deckCardsGrid"
-        ref={setNodeRef}
-        key={localDeck ? localDeck.id : "no-deck"}
-      >
-        {localDeck ? (
-          localDeck.cards.length === 0 ? (
-            <p>No cards in this deck.</p>
+        <div
+          className="deckCardsGrid decksInventoryGrid"
+          ref={setNodeRef}
+          key={localDeck ? localDeck.id : "no-deck"}
+        >
+          {localDeck ? (
+            localDeck.cards.length === 0 ? (
+              <p>No cards in this deck.</p>
+            ) : (
+              localDeck.cards.map((card) => (
+                <SortableCard
+                  key={card.instanceId}
+                  sortableCard={card}
+                  translucent={false}
+                />
+              ))
+            )
           ) : (
-            localDeck.cards.map((card) => (
-              <SortableCard
-                key={card.instanceId}
-                sortableCard={card}
-                translucent={false}
-              />
-            ))
-          )
-        ) : (
-          <p>No deck selected.</p>
-        )}
-      </div>
+            <p>No deck selected.</p>
+          )}
+        </div>
 
-      <div className="cancelDeleteContainer">
-        {changesMade ? (
-          <ConfirmationButton
-            onClick={cancelChanges}
-            confirmationMessage="Are you sure you want to cancel changes?"
-            child={<Button onClick={() => {}} text="Cancel" />}
-          />
-        ) : (
-          <Button text="Cancel" onClick={() => {}} />
-        )}
-        <Button text={"Save"} onClick={saveDeck} />
+        <div className="footerContainer">
+          <div className="cancelSaveWrapper">
+            {changesMade ? (
+              <ConfirmationButton
+                onClick={cancelChanges}
+                confirmationMessage="Are you sure you want to cancel changes?"
+                child={<Button onClick={() => {}} text="Cancel" />}
+              />
+            ) : (
+              <Button text="Cancel" onClick={() => {}} />
+            )}
+            <Button text={"Save"} onClick={saveDeck} />
+          </div>
+        </div>
       </div>
 
       <Toast show={showToast} setShow={setShowToast} message={toastMessage} />
