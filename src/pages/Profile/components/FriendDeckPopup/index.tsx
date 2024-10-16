@@ -36,6 +36,7 @@ const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({ user, isVisible, setV
         }
       };
       setDeckAndCards();
+      console.log(user.id);
     }
   }, [user]);
   

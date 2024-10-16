@@ -11,7 +11,8 @@ export const useManageFriendRequests = (
   friends: IUser[],
   setFriends: (friends: IUser[]) => void,
   numberOfRequests: number,
-  setNumberOfRequests: (num: number) => void
+  setNumberOfRequests: (num: number) => void,
+  triggerToast: (msg: string) => void,
 ) => {
   const [friendRequests, setFriendRequests] = useState<IUser[]>([]);
 
@@ -40,6 +41,7 @@ export const useManageFriendRequests = (
       setFriends([...friends, user]);
 
       setNumberOfRequests(numberOfRequests-1);
+      triggerToast(user.username + " Added as a Friend!");
     } catch (error) {
       console.error("Error accepting friend request:", error);
     }
