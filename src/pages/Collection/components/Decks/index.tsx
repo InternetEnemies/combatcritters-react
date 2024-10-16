@@ -51,7 +51,8 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
     if (decks.length > 0) {
       setSelectedDeck(decks[0]);
     }
-  }, [decks]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const changesMade = useMonitorDeckChanges(localDeck, selectedDeck);
 
