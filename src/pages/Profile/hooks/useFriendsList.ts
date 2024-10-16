@@ -40,7 +40,7 @@ export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) 
     if(friendsDeck) {
       setShowDeck(true);
     } else {
-      triggerToast(user.username + " has no Featured Deck");
+      triggerToast(user.username + " has no featured deck");
     }
   };
 
