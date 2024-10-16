@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief Hook that manages featuring the user's decks.
+ */
+
 import { useState, useEffect } from "react";
 import { IDeck } from "combatcritters-ts/src/objects";
 import { ClientSingleton } from "ClientSingleton";
@@ -16,7 +21,7 @@ export const useDeckProfileList = () => {
         setDecks(userDecks);
 
         const deck = await ClientSingleton.getInstance().user.profile.getDeck();
-        if(deck) {
+        if (deck) {
           setFeaturedDeck(deck);
         }
       } catch (error) {
@@ -32,7 +37,7 @@ export const useDeckProfileList = () => {
       if (featuredDeck) {
         try {
           ClientSingleton.getInstance().user.profile.setDeck(featuredDeck);
-          const deckCards = await featuredDeck.getCards(); 
+          const deckCards = await featuredDeck.getCards();
           setCards(deckCards);
         } catch (error) {
           console.error("Failed to fetch cards:", error);

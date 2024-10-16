@@ -9,14 +9,17 @@ import "./friends.css";
 import { useFriendsList } from "pages/Profile/hooks/useFriendsList";
 import FriendDeckPopup from "pages/Profile/components/FriendDeck";
 import { IUser } from "combatcritters-ts";
+import { useToast } from "hooks/useToast";
+import Toast from "components/Toast";
 
 interface FriendsProps {
   friends: IUser[];
   setFriends: (friends: IUser[]) => void;
 }
 const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
+  const { showToast, setShowToast, triggerToast, toastMessage } = useToast();
   const { selectedFriend, showDeck, setShowDeck, onFriendClick } =
-    useFriendsList(friends, setFriends);
+    useFriendsList(friends, setFriends, triggerToast);
   return (
     <div className="friendsListContainer">
       <h3 className="friendsTitle">Your Friends</h3>
@@ -40,6 +43,7 @@ const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
         isVisible={showDeck}
         setVisibility={setShowDeck}
       />
+      <Toast show={showToast} setShow={setShowToast} message={toastMessage} />
     </div>
   );
 };
