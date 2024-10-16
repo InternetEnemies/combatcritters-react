@@ -7,7 +7,7 @@
 import React from "react";
 import "./friends.css";
 import { useFriendsList } from "pages/Profile/hooks/useFriendsList";
-import FriendDeckPopup from "pages/Profile/components/FriendDeck";
+import FriendDeckPopup from "pages/Profile/components/FriendDeckPopup";
 import { IUser } from "combatcritters-ts";
 
 interface FriendsProps {
