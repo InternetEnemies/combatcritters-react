@@ -47,6 +47,10 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
     fetchDecks();
   }, [deckManager]);
 
+  /*
+  * On mount, set the selected deck to the first deck in the 
+  * user's inventory (if they have a first deck).
+  */
   useEffect(() => {
     if (decks.length > 0) {
       setSelectedDeck(decks[0]);
