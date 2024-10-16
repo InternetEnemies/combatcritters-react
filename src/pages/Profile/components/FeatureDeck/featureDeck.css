@@ -8,6 +8,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   align-items: flex-start;
   background-color: var(--custom-white);
+  border-radius: 8px;
 }
 
 .deckContainer,
@@ -53,8 +54,25 @@
   font-weight: bold;
 }
 
+.popupContainer {
+  position:relative;
+  width: 80%;
+  height: 100%;
+  
+}
+
+.popupContainer p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  text-align: center; 
+  font-size: large;
+}
+
 .cardsGrid {
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  background-color: #ececec;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   padding: 1cqw;
@@ -63,10 +81,9 @@
   height: 100%;
   overflow-y: auto;
   justify-items: center;
-  row-gap: 15px; /* Space between rows */
-  column-gap: 15px; /* Space between columns */
+  row-gap: 15px; 
+  column-gap: 15px;
   box-sizing: border-box;
   padding: 1cqw;
-  /* background-color: var(--custom-tan); */
   margin-left: 20px;
 }
