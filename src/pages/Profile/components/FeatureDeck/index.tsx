@@ -31,23 +31,17 @@ const FeatureDeck: React.FC = () => {
         </ul>
       </div>
 
-      <div className="deckContentContainer">
-        {featuredDeck ? (
-          <div>
-            <div className="cardsGrid">
-              {cards.length > 0 ? (
-                cards.map((card: ICard) => (
-                  <Card key={card.cardid} card={card} />
-                ))
-              ) : (
-                <p>No cards available in this deck.</p>
-              )}
-            </div>
-          </div>
-        ) : (
-          <p>Select a deck to view its cards.</p>
-        )}
-      </div>
+      {featuredDeck ? (
+        <div className="cardsGrid">
+          {cards.length > 0 ? (
+            cards.map((card: ICard) => <Card key={card.cardid} card={card} />)
+          ) : (
+            <p>No cards available in this deck.</p>
+          )}
+        </div>
+      ) : (
+        <p>Select a deck to view its cards.</p>
+      )}
     </div>
   );
 };

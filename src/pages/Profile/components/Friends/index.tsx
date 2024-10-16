@@ -18,7 +18,7 @@ const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
   const { selectedFriend, showDeck, setShowDeck, onFriendClick } =
     useFriendsList(friends, setFriends);
   return (
-    <div className="friendsListContainer">
+    <div className="friendsListContainer sharedFriendStyles">
       <h3 className="friendsTitle">Your Friends</h3>
       <ul className="friendsList">
         {friends.length > 0 ? (

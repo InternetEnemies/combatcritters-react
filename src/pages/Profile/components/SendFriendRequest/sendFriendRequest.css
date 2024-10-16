@@ -2,8 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 400px; 
-  margin: 0 auto; 
+  height: 20px;
+  /* width: 400px;  */
+  /* margin: 0 auto;  */
 }
 
 .friendRequestInput {
@@ -15,15 +16,8 @@
   box-sizing: border-box;
 }
 
-.sendRequestButton {
-  padding: 8px 15px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
+.sendButton {
+  height: 25px;
+  width: 25px;
   cursor: pointer;
-}
-
-.sendRequestButton:hover {
-  background-color: #45a049;
 }

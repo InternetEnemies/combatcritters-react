@@ -6,6 +6,7 @@
 import React, { useState } from "react";
 import "./sendFriendRequest.css";
 import { ClientSingleton } from "ClientSingleton";
+import sendButton from "assets/icons/send.svg";
 
 const SendFriendRequest: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -19,7 +20,7 @@ const SendFriendRequest: React.FC = () => {
   };
 
   return (
-    <div className="sendFriendRequestContainer">
+    <div className="sendFriendRequestContainer sharedFriendStyles">
       <input
         type="text"
         value={username}
@@ -27,9 +28,7 @@ const SendFriendRequest: React.FC = () => {
         placeholder="Send Friend Request"
         className="friendRequestInput"
       />
-      <button onClick={handleSendRequest} className="sendRequestButton">
-        Send
-      </button>
+      <img className="sendButton" src={sendButton} alt="Send Button" onClick={handleSendRequest}/>
     </div>
   );
 };
