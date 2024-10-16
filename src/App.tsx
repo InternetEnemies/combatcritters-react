@@ -17,6 +17,7 @@ import { useState } from "react";
 import NavBar from "components/NavBar";
 import "./app.css";
 import ProtectedRoutes from "components/ProtectedRoutes";
+import Packs from "pages/Packs";
 
 function App() {
   const [numberOfRequests, setNumberOfRequests] = useState(0); // Number of friend requests
@@ -53,6 +54,7 @@ function App() {
                 />
               }
             />
+            <Route path="/packs" element={<Packs/>}/>
           </Route>
         </Routes>
       </div>
