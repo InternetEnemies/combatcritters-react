@@ -31,21 +31,17 @@ const FeatureDeck: React.FC = () => {
         </ul>
       </div>
 
-      <div className="deckContentContainer">
+      <div className="popupContainer">
         {featuredDeck ? (
-          <div>
-            <div className="cardsGrid">
-              {cards.length > 0 ? (
-                cards.map((card: ICard) => (
-                  <Card key={card.cardid} card={card} />
-                ))
-              ) : (
-                <p>No cards available in this deck.</p>
-              )}
-            </div>
+          <div className="cardsGrid">
+            {cards.length > 0 ? (
+              cards.map((card: ICard) => <Card key={card.cardid} card={card} />)
+            ) : (
+              <p>No cards in this deck.</p>
+            )}
           </div>
         ) : (
-          <p>Select a deck to view its cards.</p>
+          <p>No deck currently featured.</p>
         )}
       </div>
     </div>

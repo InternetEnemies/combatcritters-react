@@ -7,7 +7,7 @@
 import React from "react";
 import "./friends.css";
 import { useFriendsList } from "pages/Profile/hooks/useFriendsList";
-import FriendDeckPopup from "pages/Profile/components/FriendDeck";
+import FriendDeckPopup from "pages/Profile/components/FriendDeckPopup";
 import { IUser } from "combatcritters-ts";
 import { useToast } from "hooks/useToast";
 import Toast from "components/Toast";
@@ -21,7 +21,7 @@ const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
   const { selectedFriend, showDeck, setShowDeck, onFriendClick } =
     useFriendsList(friends, setFriends, triggerToast);
   return (
-    <div className="friendsListContainer">
+    <div className="friendsListContainer sharedFriendStyles">
       <h3 className="friendsTitle">Your Friends</h3>
       <ul className="friendsList">
         {friends.length > 0 ? (
