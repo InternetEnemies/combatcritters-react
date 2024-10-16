@@ -8,11 +8,11 @@ import { IUser } from "combatcritters-ts";
 import { useEffect, useState } from "react";
 import { IDeck } from "combatcritters-ts";
 
-export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) => void) => {
+export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) => void, triggerToast: (msg: string) => void) => {
   const [selectedFriend, setSelectedFriend] = useState<IUser | null>(null);
   const [showDeck, setShowDeck] = useState(false);
   // eslint-disable-next-line
-  const [_, setFriendsDeck] = useState<IDeck | null>(null);
+  const [friendsDeck, setFriendsDeck] = useState<IDeck | null>(null);
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -37,7 +37,11 @@ export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) 
     } catch (error) {
       console.error("Error fetching friend's deck:" + error);
     }
-    setShowDeck(true);
+    if(friendsDeck) {
+      setShowDeck(true);
+    } else {
+      triggerToast(user.username + " has no Featured Feck");
+    }
   };
 
   return { friends, selectedFriend, showDeck, setShowDeck, onFriendClick };

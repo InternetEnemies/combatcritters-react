@@ -23,7 +23,7 @@ const Profile: React.FC<ProfileProps> = ({
       <div className="profileContainer">
         <FeatureDeck />
         <div className="friendsContainer">
-          <Friends friends={friends} setFriends={setFriends} />
+          <Friends friends={friends} setFriends={setFriends}/>
           <IncomingFriendRequests
             friends={friends}
             setFriends={setFriends}
