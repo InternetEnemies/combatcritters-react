@@ -16,8 +16,13 @@ const SendFriendRequest: React.FC = () => {
 
   const handleSendRequest = () => {
     try {
-      ClientSingleton.getInstance().user.friends.addFriend(username);
-      triggerToast("Friend Request Sent!");
+      setUsername(username.trim());
+      if (username === "") {
+        triggerToast("Invalid Username");
+      } else {
+        ClientSingleton.getInstance().user.friends.addFriend(username);
+        triggerToast("Friend Request Sent!");
+      }
     } catch (error) {
       console.error("Error sending friend request:" + error);
     }
