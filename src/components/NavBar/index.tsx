@@ -17,12 +17,19 @@ const NavBar: React.FC<NavbarProps> = ({
     navigate("/collection");
   };
 
+  const toPacks = () => {
+    navigate("/packs");
+  }
+
   return (
     <div className="navBarRoot">
       <div className="navButtonsContainer">
-        <span className="navButton" >Home</span>
+        <span className="navButton">Home</span>
         <span className="navButton" onClick={toCollection}>
           Deck Builder
+        </span>
+        <span className="navButton" onClick={toPacks}>
+          Packs
         </span>
       </div>
       <ProfileButton
