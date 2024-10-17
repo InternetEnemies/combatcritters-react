@@ -8,6 +8,7 @@
   font-size: 4.2cqw;
   background-color: rgb(235, 229, 222);
   font-family: 'robotoRegular'; 
+  box-sizing: content-box;
 }
 
 .descriptionRoot.critter {

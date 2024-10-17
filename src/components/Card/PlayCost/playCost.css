@@ -12,6 +12,7 @@
   align-items: center;
   border: 1px solid rgb(206, 4, 4);
   font-size: 8cqw;
+  box-sizing: content-box;
 }
 
 .playCost {
