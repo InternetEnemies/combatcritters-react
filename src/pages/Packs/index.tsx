@@ -7,49 +7,18 @@ import React from "react";
 import "./packs.css";
 import Pack from "components/Pack";
 import { IPack } from "combatcritters-ts";
-import { useState } from "react";
-import { PacksManager } from "TestWrapper/PacksManager";
-import { useEffect } from "react";
 import PackSidebar from "./components/PackSidebar";
+import { usePackManager } from "./hooks/usePackManager";
 
 const Packs = () => {
-  const [packs, setPacks] = useState<IPack[]>([]);
-  const [packsManager] = useState<PacksManager>(new PacksManager()); //TODO: remove this
-  const [selectedPack, setSelectedPack] = useState<IPack | null>(null);
-  const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
-
-  /*
-    On mount, fetch the user's packs.
-  */
-  useEffect(() => {
-    const fetchPacks = async () => {
-      try {
-        const fetchedPacks = await packsManager.getPacks(); //TODO: change this
-        setPacks(fetchedPacks);
-      } catch (error) {
-        console.error("Error fetching packs: ", error);
-      }
-    };
-
-    fetchPacks();
-    //TODO: remove this once it is integrated
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  /*
-    When a pack is clicked, display the pack set list on the PackSidebar.
-  */
-  useEffect(() => {
-    if (selectedPack) {
-      setIsSidebarVisible(true);
-    } else {
-      setIsSidebarVisible(false);
-    }
-  }, [selectedPack]);
-
-  const handlePackClick = (pack: IPack) => {
-    setSelectedPack(pack);
-  };
+  const {
+    packs,
+    selectedPack,
+    setSelectedPack,
+    isSidebarVisible,
+    setIsSidebarVisible,
+    handlePackClick,
+  } = usePackManager();
 
   const openPack = async (pack: IPack) => {
     try {
