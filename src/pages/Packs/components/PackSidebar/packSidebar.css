@@ -1,0 +1,75 @@
+.packSidebarRoot {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 550px;
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+    background-image: url("/public/assets/backgrounds/gradient.svg");
+}
+
+.packSidebarRoot.visible {
+  transform: translateX(0);
+}
+
+.packSidebarRoot.notVisible {
+  transform: translateX(100%);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 999; 
+}
+
+.packTitle {
+  text-align: center;   
+  width: auto;        
+  align-self: center;  
+  font-size: 30px;
+  color: var(--custom-white);
+  margin-top: 40px;
+}
+
+.setListGridContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 475px;
+  height: 80%;
+}
+
+.setListGrid {
+  display: grid;
+  justify-items: center; 
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+  column-gap: 2px;
+  row-gap: 20px;
+  padding:10px;
+  overflow-y: scroll;
+}
+
+.separator {
+  margin: 0;
+  width: 90%;        
+  border-top: 1px solid rgba(var(--custom-cream-rgb), .5);  
+}
+
+.buttonWrapper {
+    margin-top: 20px;
+}
