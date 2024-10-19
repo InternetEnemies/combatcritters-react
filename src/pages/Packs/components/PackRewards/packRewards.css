@@ -1,0 +1,92 @@
+.packRewardsRoot {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.packRewardsRoot.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.packRewardsRoot.visible .starburstImage {
+  animation: openFromCenter 0.15s ease-out forwards;
+}
+
+.packRewardsRoot.notVisible {
+  opacity: 0;
+}
+
+.packRewardsRoot.notVisible .starburstImage {
+  animation: closeFromCenter 0.15s ease-out forwards;
+}
+
+.starburstImage {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  pointer-events: none;
+  transition: transform 0.1s ease;
+  mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+  mask-size: cover;
+}
+
+@keyframes openFromCenter {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes closeFromCenter {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+.rewardsContainer {
+  display: flex;
+  flex-direction: row;
+  height: 50%;
+  width: 80%;
+  gap: 70px;
+}
+
+.rewardsContainer.rewardsList {
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.rewardsContainer.rewardsListScrollable {
+  overflow-x: auto; 
+  overflow-y: hidden;
+  justify-content: flex-start; 
+  align-items: center;
+  white-space: nowrap; 
+  padding: 0;
+  margin: 0; 
+}
+
+.rewardsListScrollable::before, .rewardsListScrollable::after {
+  content: "";
+  flex: 0 0 0; 
+}
