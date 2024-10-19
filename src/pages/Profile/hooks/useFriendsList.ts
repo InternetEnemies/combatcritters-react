@@ -7,8 +7,9 @@ import { ClientSingleton } from "ClientSingleton";
 import { IUser } from "combatcritters-ts";
 import { useEffect, useState } from "react";
 import { IDeck } from "combatcritters-ts";
+import { toast } from "react-toastify";
 
-export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) => void, triggerToast: (msg: string) => void) => {
+export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) => void) => {
   const [selectedFriend, setSelectedFriend] = useState<IUser | null>(null);
   const [showDeck, setShowDeck] = useState(false);
   // eslint-disable-next-line
@@ -40,7 +41,7 @@ export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) 
     if(friendsDeck) {
       setShowDeck(true);
     } else {
-      triggerToast(user.username + " has no Featured Feck");
+      toast(user.username + " has no Featured Feck");
     }
   };
 

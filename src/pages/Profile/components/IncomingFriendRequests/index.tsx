@@ -8,8 +8,6 @@ import "./incomingFriendRequests.css";
 import { useManageFriendRequests } from "pages/Profile/hooks/useManageFriendRequests";
 import checkmark from "assets/icons/checkmark.svg";
 import { IUser } from "combatcritters-ts";
-import { useToast } from "hooks/useToast";
-import Toast from "components/Toast";
 
 interface FriendsProps {
   friends: IUser[];
@@ -23,14 +21,12 @@ const IncomingFriendRequests: React.FC<FriendsProps> = ({
   numberOfRequests,
   setNumberOfRequests,
 }) => {
-  const { showToast, setShowToast, triggerToast, toastMessage } = useToast();
 
   const { friendRequests, acceptFriendRequest } = useManageFriendRequests(
     friends,
     setFriends,
     numberOfRequests,
-    setNumberOfRequests,
-    triggerToast
+    setNumberOfRequests
   );
 
   return (
@@ -55,7 +51,6 @@ const IncomingFriendRequests: React.FC<FriendsProps> = ({
       ) : (
         <p>No incoming friend requests</p>
       )}
-      <Toast show={showToast} setShow={setShowToast} message={toastMessage} />
     </div>
   );
 };
