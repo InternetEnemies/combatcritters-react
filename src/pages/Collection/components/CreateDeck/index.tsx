@@ -6,8 +6,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./createDeck.css";
 import Button from "components/Button";
-import Toast from "components/Toast";
-import { useToast } from "hooks/useToast";
+import { toast } from "react-toastify";
 
 interface CreateDeckProps {
   onCreateDeck: (deckName: string) => void; //Callback function for when the user creates their deck.
@@ -16,7 +15,6 @@ interface CreateDeckProps {
 const CreateDeck: React.FC<CreateDeckProps> = ({ onCreateDeck }) => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
   const [deckName, setDeckName] = useState("");
-  const { showToast, toastMessage, triggerToast, setShowToast } = useToast();
   const popoverRef = useRef<HTMLDivElement>(null);
 
   const handleTogglePopover = () => {
@@ -45,7 +43,7 @@ const CreateDeck: React.FC<CreateDeckProps> = ({ onCreateDeck }) => {
 
   const handleCreateDeck = () => {
     if (!deckName.trim()) {
-      triggerToast("Deck name cannot be empty!");
+      toast.error("Deck name cannot be empty!");
       return;
     }
 
@@ -74,8 +72,6 @@ const CreateDeck: React.FC<CreateDeckProps> = ({ onCreateDeck }) => {
           />
         </div>
       )}
-
-      <Toast show={showToast} setShow={setShowToast} message={toastMessage} />
     </div>
   );
 };

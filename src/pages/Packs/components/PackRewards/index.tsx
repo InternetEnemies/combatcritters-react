@@ -7,6 +7,7 @@ import Button from "components/Button";
 import "./packRewards.css";
 import { ICard } from "combatcritters-ts";
 import Card from "components/Card";
+import { toast } from "react-toastify";
 
 interface PackRewardsProps {
   rewards: ICard[];
@@ -21,6 +22,7 @@ const PackRewards: React.FC<PackRewardsProps> = ({
 }) => {
   const handleCollectClick = () => {
     setIsVisible(false);
+    toast("Cards Added to Inventory!");
   };
 
   /*

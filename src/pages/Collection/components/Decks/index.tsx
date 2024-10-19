@@ -15,12 +15,11 @@ import { convertToSortableDeck } from "utils/collectionUtils";
 import Dropdown from "components/Dropdown";
 import { useDeckSelect } from "pages/Collection/hooks/useDeckSelect";
 import ConfirmationButton from "components/ConfirmationButton";
-import Toast from "components/Toast";
-import { useToast } from "hooks/useToast";
 import { useMonitorDeckChanges } from "pages/Collection/hooks/useMonitorDeckChanges";
 import deleteIcon from "assets/icons/delete.svg";
 import { ClientSingleton } from "ClientSingleton";
 import "../../collection.css";
+import { toast } from "react-toastify";
 
 interface DeckProps {
   localDeck: ISortableDeck | null;
@@ -30,7 +29,6 @@ interface DeckProps {
 
 const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
   const [deckManager] = useState(ClientSingleton.getInstance().user.decks);
-  const { showToast, setShowToast, triggerToast, toastMessage } = useToast();
   const [decks, setDecks] = useState<IDeck[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<IDeck | null>(null);
 
@@ -71,7 +69,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
           localDeck.cards.map((sortableCard) => sortableCard.card)
         );
         await selectedDeck.commit();
-        triggerToast("Deck Saved!");
+        toast.success("Deck Saved!");
 
         setLocalDeck(await convertToSortableDeck(selectedDeck));
         setSelectedDeck(selectedDeck);
@@ -110,7 +108,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
       setDecks(updatedDecks);
       setSelectedDeck(createdDeck);
       setLocalDeck(await convertToSortableDeck(createdDeck));
-      triggerToast("Deck Created!");
+      toast.success("Deck Created!");
     } catch (error) {
       console.error("Error creating the deck:", error);
     }
@@ -207,7 +205,6 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
         </div>
       </div>
 
-      <Toast show={showToast} setShow={setShowToast} message={toastMessage} />
     </div>
   );
 };
