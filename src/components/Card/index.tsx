@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-07
+ * @Brief The Card view that is used throughout the application.
+ */
+
 import React from "react";
 import Header from "./Header";
 import CardImage from "./CardImage";
