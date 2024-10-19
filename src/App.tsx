@@ -18,6 +18,9 @@ import NavBar from "components/NavBar";
 import "./app.css";
 import ProtectedRoutes from "components/ProtectedRoutes";
 import Packs from "pages/Packs";
+import { ToastContainer, Bounce } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+  
 
 function App() {
   const [numberOfRequests, setNumberOfRequests] = useState(0); // Number of friend requests
@@ -54,10 +57,24 @@ function App() {
                 />
               }
             />
-            <Route path="/packs" element={<Packs/>}/>
+            <Route path="/packs" element={<Packs />} />
           </Route>
         </Routes>
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={4000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce} 
+        toastStyle={{ backgroundColor: "#333", color: "white" }}
+      />
     </div>
   );
 }
