@@ -3,31 +3,30 @@
  * @Brief Packs page compnent.
  */
 
-import React from "react";
 import "./packs.css";
 import Pack from "components/Pack";
-import { IPack } from "combatcritters-ts";
 import PackSidebar from "./components/PackSidebar";
-import { usePackManager } from "./hooks/usePackManager";
+import { usePackBrowser } from "./hooks/usePackBrowser";
+import PackRewards from "./components/PackRewards";
+import { usePackRewards } from "./hooks/usePackRewards";
 
 const Packs = () => {
   const {
     packs,
+    setPacks,
     selectedPack,
     setSelectedPack,
     isSidebarVisible,
     setIsSidebarVisible,
     handlePackClick,
-  } = usePackManager();
+  } = usePackBrowser();
 
-  const openPack = async (pack: IPack) => {
-    try {
-      return await pack.open();
-    } catch (error) {
-      console.log("Error opening pack:" + error);
-      return [];
-    }
-  };
+  const {
+    rewards,
+    isPackRewardsVisible,
+    setIsPackRewardsVisible,
+    openPack,
+  } = usePackRewards(setIsSidebarVisible, setPacks);
 
   return (
     <div className="packsRoot">
@@ -37,6 +36,7 @@ const Packs = () => {
             pack={pack}
             onClick={handlePackClick}
             style={{ cursor: "pointer" }}
+            key={index}
           />
         ))}
       </div>
@@ -47,6 +47,7 @@ const Packs = () => {
         isVisible={isSidebarVisible}
         setIsVisible={setIsSidebarVisible}
       />
+      <PackRewards rewards={rewards} isVisible={isPackRewardsVisible} setIsVisible={setIsPackRewardsVisible}/>
     </div>
   );
 };

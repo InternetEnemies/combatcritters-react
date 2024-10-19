@@ -1,16 +1,15 @@
 /**
  * @Created 2024-10-07
- * @Brief Hook used to fetch the packs from the inventory.
+ * @Brief Hook used to fetch the packs from the inventory and fetch their contents.
  */
 
+import { ClientSingleton } from "ClientSingleton";
 import { IPack } from "combatcritters-ts";
 import { useState } from "react";
 import { useEffect } from "react";
-import { PacksManager } from "TestWrapper/PacksManager";
 
-export const usePackManager = () => {
+export const usePackBrowser = () => {
   const [packs, setPacks] = useState<IPack[]>([]);
-  const [packsManager] = useState<PacksManager>(new PacksManager()); //TODO: remove this
   const [selectedPack, setSelectedPack] = useState<IPack | null>(null);
   const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
 
@@ -20,7 +19,7 @@ export const usePackManager = () => {
   useEffect(() => {
     const fetchPacks = async () => {
       try {
-        const fetchedPacks = await packsManager.getPacks(); //TODO: change this
+        const fetchedPacks = await ClientSingleton.getInstance().user.packs.getPacks();
         setPacks(fetchedPacks);
       } catch (error) {
         console.error("Error fetching packs: ", error);
@@ -28,8 +27,6 @@ export const usePackManager = () => {
     };
 
     fetchPacks();
-    //TODO: remove this once it is integrated
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /*
@@ -49,6 +46,7 @@ export const usePackManager = () => {
 
   return {
     packs,
+    setPacks,
     selectedPack,
     setSelectedPack,
     isSidebarVisible,
