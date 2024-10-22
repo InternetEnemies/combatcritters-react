@@ -1,0 +1,18 @@
+.vendorSelectionRoot {
+    height: 100%;
+    width: 100%;
+    background-color: red;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.vendorViewGrid {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    align-items: center; 
+    gap: 20px; 
+    padding: 20px; 
+    width: 70%;
+}
