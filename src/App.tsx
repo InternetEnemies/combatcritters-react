@@ -20,6 +20,7 @@ import ProtectedRoutes from "components/ProtectedRoutes";
 import Packs from "pages/Packs";
 import { ToastContainer, Bounce } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Vendors from "pages/Vendors";
   
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
               }
             />
             <Route path="/packs" element={<Packs />} />
+            <Route path="/packs" element={<Vendors/>} />
           </Route>
         </Routes>
       </div>
