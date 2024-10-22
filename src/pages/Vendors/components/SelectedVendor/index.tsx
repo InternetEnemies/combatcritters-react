@@ -3,8 +3,9 @@
  * @Brief Component for the selected vendor.
  */
 
-import { IVendor } from "combatcritters-ts";
+import { IOffer, IVendor } from "combatcritters-ts";
 import "./selectedVendor.css";
+import { useState } from "react";
 
 interface SelectedVendorProps {
   isVisible: boolean;
@@ -13,10 +14,11 @@ interface SelectedVendorProps {
 }
 
 const SelectedVendor: React.FC<SelectedVendorProps> = ({isVisible, selectedVendor, setSelectedVendor}) => {
+  const [offers, setOffers] = useState<IOffer[]>([]);
+
   const handleButtonClick = () => {
     setSelectedVendor(null);
   }
-
   
   if(!isVisible) {
     return null;
