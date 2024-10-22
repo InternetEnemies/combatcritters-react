@@ -59,7 +59,7 @@ function App() {
               }
             />
             <Route path="/packs" element={<Packs />} />
-            <Route path="/packs" element={<Vendors/>} />
+            <Route path="/vendors" element={<Vendors/>} />
           </Route>
         </Routes>
       </div>
