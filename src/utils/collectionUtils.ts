@@ -4,11 +4,11 @@
  */
 
 import { v4 as uuidv4 } from "uuid";
-import { ICard } from "combatcritters-ts/src/objects";
+import { ICard } from "combatcritters-ts";
 import { ISortableCard } from "interfaces/ISortableCard";
 import { ISortableDeck } from "interfaces/ISortableDeck";
-import { IDeck } from "combatcritters-ts/src/objects";
-import { IItemStack } from "combatcritters-ts/src/objects";
+import { IDeck } from "combatcritters-ts";
+import { IItemStack } from "combatcritters-ts";
 
 export const convertCardStackToSortable = (
   cardStacks: IItemStack<ICard>[]

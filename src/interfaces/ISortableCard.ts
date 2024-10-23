@@ -3,7 +3,7 @@
  * @Brief Object with unique ID to be used with drag and drop.
  */
 
-import { ICard } from "combatcritters-ts/src/objects";
+import { ICard } from "combatcritters-ts";
 
 export interface ISortableCard {
   instanceId: string;

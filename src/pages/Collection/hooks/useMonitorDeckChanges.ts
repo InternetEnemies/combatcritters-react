@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from "react";
 import { ISortableDeck } from "interfaces/ISortableDeck";
-import { IDeck } from "combatcritters-ts/src/objects";
+import { IDeck } from "combatcritters-ts";
 
 export const useMonitorDeckChanges = (
   localDeck: ISortableDeck | null,

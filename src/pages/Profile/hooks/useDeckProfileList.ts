@@ -4,9 +4,9 @@
  */
 
 import { useState, useEffect } from "react";
-import { IDeck } from "combatcritters-ts/src/objects";
+import { IDeck } from "combatcritters-ts";
 import { ClientSingleton } from "ClientSingleton";
-import { ICard } from "combatcritters-ts/src/objects";
+import { ICard } from "combatcritters-ts";
 
 export const useDeckProfileList = () => {
   const [decks, setDecks] = useState<IDeck[]>([]);
