@@ -1,5 +1,5 @@
 import "./description.css"
-import { ICard, ICardCritter, ICardItem } from "combatcritters-ts/src/objects";
+import { ICard, ICardCritter, ICardItem } from "combatcritters-ts";
 import { ICardVisitor } from "combatcritters-ts";
   
 const Description: React.FC<{ card: ICard }> = ({ card }) => {

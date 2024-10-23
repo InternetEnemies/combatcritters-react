@@ -13,8 +13,8 @@ import PlayCost from "./PlayCost";
 import Type from "./Type";
 import "./card.css";
 import CardCount from "./CardCount";
-import { ICard } from "combatcritters-ts/src/objects";
-import { CardRarity } from "combatcritters-ts/src/objects";
+import { ICard } from "combatcritters-ts";
+import { CardRarity } from "combatcritters-ts";
 
 interface CardProps {
   card: ICard;
