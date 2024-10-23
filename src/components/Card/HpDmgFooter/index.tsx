@@ -3,7 +3,7 @@ import {
   ICard,
   ICardCritter,
   ICardItem,
-} from "combatcritters-ts/src/objects";
+} from "combatcritters-ts";
 import { ICardVisitor } from "combatcritters-ts";
 import "./hpDmgFooter.css"
 import { CardRarity } from "combatcritters-ts";

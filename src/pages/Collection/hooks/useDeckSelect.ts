@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect } from "react";
-import { IDeck } from "combatcritters-ts/src/objects";
+import { IDeck } from "combatcritters-ts";
 import { IDropdownOption } from "interfaces/IDropdownOption";
 import { ISortableDeck } from "interfaces/ISortableDeck";
 import { convertToSortableDeck } from "utils/collectionUtils";
