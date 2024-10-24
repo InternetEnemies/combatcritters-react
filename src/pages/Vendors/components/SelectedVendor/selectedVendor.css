@@ -1,13 +1,19 @@
 .selectedVendorRoot {
+    display: flex;
+    flex-direction: row;
     position: relative;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     width: 100%;
+    gap: 50px;
 }
 
 .vendorSelectionButton {
     position: absolute;
+    top: 0px;
     left: 50%;
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -17,6 +23,24 @@
     z-index: 1000;
 }
 
+.vendorInfoAndOffersContainer {
+    width: 60%;
+    height: 88%;
+}
+
+
 .vendorSelectionButton:hover {
     background-color: blue;
+}
+
+.offersGridWrapper {
+    width: 100%;
+    height: 50%;
+    background: blue;
+}
+
+.selectedOfferWrapper {
+    background-color: #ececec;
+    width: 30%;
+    height: 88%;
 }
