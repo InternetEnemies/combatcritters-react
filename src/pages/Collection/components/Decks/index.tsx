@@ -8,7 +8,7 @@ import { useDroppable } from "@dnd-kit/core";
 import "./decks.css";
 import SortableCard from "components/SortableCard";
 import CreateDeck from "pages/Collection/components/CreateDeck";
-import { IDeck } from "combatcritters-ts/src/objects";
+import { IDeck } from "combatcritters-ts";
 import { ISortableDeck } from "interfaces/ISortableDeck";
 import Button from "components/Button";
 import { convertToSortableDeck } from "utils/collectionUtils";
