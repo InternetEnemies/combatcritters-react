@@ -20,11 +20,16 @@ interface CardProps {
   card: ICard;
   cardCount?: number;
   style?: React.CSSProperties;
+  onClick?: (card?: ICard) => void; // Can be called with or without the card parameter.
 }
 
-const Card: React.FC<CardProps> = ({ card, cardCount, style }) => {
+const Card: React.FC<CardProps> = ({ card, cardCount, style, onClick = () => {} }) => {
+  const handleClick = () => {
+    onClick?.(card); // Pass the card if provided.
+  };
+
   return (
-    <div className={`cardRoot ${CardRarity[card.rarity]}`} style={style}>
+    <div onClick={handleClick} className={`cardRoot ${CardRarity[card.rarity]}`} style={style}>
       <Header card={card} />
       <div className={`cardInner ${CardRarity[card.rarity]}`}>
         <CardImage imagePath={"/assets/images/cardImage.jpeg"} />
