@@ -21,6 +21,10 @@ const NavBar: React.FC<NavbarProps> = ({
     navigate("/packs");
   }
 
+  const toVendors = () => {
+    navigate("/vendors");
+  }
+
   return (
     <div className="navBarRoot">
       <div className="navButtonsContainer">
@@ -30,6 +34,9 @@ const NavBar: React.FC<NavbarProps> = ({
         </span>
         <span className="navButton" onClick={toPacks}>
           Packs
+        </span>
+        <span className="navButton" onClick={toVendors}>
+          Vendors
         </span>
       </div>
       <ProfileButton
