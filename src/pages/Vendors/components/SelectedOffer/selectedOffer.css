@@ -1,0 +1,14 @@
+.selectedOfferRoot {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vendorReceivesContainer {
+  max-height: 300px;
+  overflow-y: auto; 
+  border: 1px solid #ccc; 
+  padding: 10px; 
+}
