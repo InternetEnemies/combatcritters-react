@@ -21,15 +21,22 @@ interface CardProps {
   cardCount?: number;
   style?: React.CSSProperties;
   onClick?: (card?: ICard) => void; // Can be called with or without the card parameter.
+  scale?: number; // Scale the size of the card
 }
 
-const Card: React.FC<CardProps> = ({ card, cardCount, style, onClick = () => {} }) => {
+const Card: React.FC<CardProps> = ({ card, cardCount, style, onClick = () => {}, scale=1 }) => {
+  const WIDTH: number = 132.6 * scale; //The default width of the card * scale
+
   const handleClick = () => {
     onClick?.(card); // Pass the card if provided.
   };
 
   return (
-    <div onClick={handleClick} className={`cardRoot ${CardRarity[card.rarity]}`} style={style}>
+    <div
+      onClick={handleClick}
+      className={`cardRoot ${CardRarity[card.rarity]}`}
+      style={{ ...style, width: `${WIDTH}px` }}
+    >
       <Header card={card} />
       <div className={`cardInner ${CardRarity[card.rarity]}`}>
         <CardImage imagePath={"/assets/images/cardImage.jpeg"} />

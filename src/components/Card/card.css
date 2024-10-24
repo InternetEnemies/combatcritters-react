@@ -19,8 +19,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 132.6px;
-  height: 195px;
+  aspect-ratio: 68/100;
 
   --border-color: rgb(49, 49, 49);
 
