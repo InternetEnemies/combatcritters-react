@@ -8,6 +8,9 @@ RUN npm install
 
 COPY . .
 
+ARG REACT_APP_API
+ENV REACT_APP_API $REACT_APP_API
+
 RUN npm run build --production
 
 RUN npm install -g serve
