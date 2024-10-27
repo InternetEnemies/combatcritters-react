@@ -29,4 +29,4 @@ jobs:
           platforms: linux/amd64
           push: true
           target: prod
-          tags: ${{ vars.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{ github.events.release.tag_name }}
+          tags: ${{ vars.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{ github.event.release.tag_name }}
