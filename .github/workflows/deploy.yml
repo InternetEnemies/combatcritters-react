@@ -22,6 +22,8 @@ jobs:
           platforms: linux/amd64
           push: true
           target: prod
+          build-args:
+            - REACT_APP_API=http://api.combatcritters.ca:4000
           tags: ${{ vars.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:latest
       - name: Build and push version
         uses: docker/build-push-action@v6
@@ -29,4 +31,6 @@ jobs:
           platforms: linux/amd64
           push: true
           target: prod
+          build-args:
+            - REACT_APP_API=http://api.combatcritters.ca:4000
           tags: ${{ vars.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{ github.event.release.tag_name }}
