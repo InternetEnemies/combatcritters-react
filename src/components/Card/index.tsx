@@ -24,7 +24,13 @@ interface CardProps {
   scale?: number; // Scale the size of the card
 }
 
-const Card: React.FC<CardProps> = ({ card, cardCount, style, onClick = () => {}, scale=1 }) => {
+const Card: React.FC<CardProps> = ({
+  card,
+  cardCount,
+  style,
+  onClick = () => {},
+  scale = 1,
+}) => {
   const WIDTH: number = 132.6 * scale; //The default width of the card * scale
 
   const handleClick = () => {
