@@ -1,0 +1,16 @@
+.currencyRoot {
+    display:flex;
+    flex-direction: row;
+    aspect-ratio: 20/10;
+    align-items: center;
+    container-type: inline-size;
+}
+
+.currencyAmount {
+    font-size: 50cqw;
+}
+
+.currencyImage {
+    height: 100%;
+    width: auto;
+}
