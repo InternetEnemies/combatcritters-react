@@ -22,6 +22,7 @@
     --custom-tan: #dacb99;
     --custom-cyan: #7bbdc6;
     --custom-white: #FFFFF0;
+    --custom-mint-green: #74ba8b;
 
     --custom-dark-blue-rgb: 0, 48, 73;
     --custom-light-blue-rgb: 102, 155, 188;
@@ -29,10 +30,11 @@
     --custom-red-rgb: 193, 18, 31;
     --custom-dark-red-rgb: 120, 0, 0;
     --custom-black-rgb: 27, 27, 27;
-    --custom-orange-rgb: 224, 120 43;
+    --custom-orange-rgb: 224, 120, 43;
     --custom-tan-rgb: 218, 203, 153;
     --custom-cyan-rgb: 123, 189, 198;
     --custom-white-rgb: 255, 255, 240;
+    --custom-mint-green-rgb: 116, 186, 139;
 
     
 
