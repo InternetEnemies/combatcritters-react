@@ -101,6 +101,7 @@ const RequiredOfferItem: React.FC<RequiredOfferItemProps> = ({
    */
   useEffect(() => {
     userOfferItem.giveItem.getItem().accept(visitor);
+    // eslint-disable-next-line
   }, [userOfferItem]);
 
   return content;
