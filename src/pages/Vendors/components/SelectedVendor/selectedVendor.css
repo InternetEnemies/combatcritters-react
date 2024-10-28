@@ -1,46 +1,63 @@
 .selectedVendorRoot {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    gap: 50px;
+  display: flex;
+  gap: 50px; 
+  padding-top: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  justify-content: center;
+  align-items: center; 
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  background-image: url("/public/assets/backgrounds/pattern-randomized-blue.svg");
 }
 
 .vendorSelectionButton {
-    position: absolute;
-    top: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    z-index: 1000;
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 1000;
 }
-
-.vendorInfoAndOffersContainer {
-    width: 60%;
-    height: 88%;
-}
-
 
 .vendorSelectionButton:hover {
-    background-color: blue;
+  background-color: blue;
 }
 
-.offersGridWrapper {
-    width: 100%;
-    height: 50%;
-    background: blue;
+.vendorViewAndOffersContainer,
+.selectedOfferWrapper {
+  height: 93%;
+  flex-shrink: 0;
+  flex-grow: 0;
 }
 
 .selectedOfferWrapper {
-    background-color: #ececec;
-    width: 30%;
-    height: 88%;
+  flex: 1;
+}
+
+.vendorViewAndOffersContainer {
+  flex: 2; 
+  display: flex;
+  flex-direction: column;
+  background-color: var(--custom-mint-green);
+  border: 1px solid var(--custom-cream);
+  border-radius: 5px;
+}
+
+.vendorViewWrapper {
+  width: 100%;
+}
+
+.offersGridWrapper {
+  width: 100%;
+  height: 473px;
+  margin-top: 10px;
+
 }
