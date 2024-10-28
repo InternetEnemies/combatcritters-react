@@ -1,7 +1,14 @@
+/**
+ * @Created 2024-10-28
+ * @Brief The Nav Bar...
+ */
+
 import React from "react";
 import "./navBar.css";
 import ProfileButton from "components/NavBar/components/ProfileButton";
 import { useNavigate } from "react-router-dom";
+import CurrencyComp from "components/CurrencyComp";
+import { useCurrency } from "contexts/CurrencyContext";
 
 interface NavbarProps {
   numberOfRequests: number;
@@ -11,7 +18,9 @@ const NavBar: React.FC<NavbarProps> = ({
   numberOfRequests,
   setNumberOfRequests,
 }) => {
+  const SCALE_CURRENCY = 1.15;
   const navigate = useNavigate();
+  const { userCurrencyAmount } = useCurrency();
 
   const toCollection = () => {
     navigate("/collection");
@@ -19,11 +28,11 @@ const NavBar: React.FC<NavbarProps> = ({
 
   const toPacks = () => {
     navigate("/packs");
-  }
+  };
 
   const toVendors = () => {
     navigate("/vendors");
-  }
+  };
 
   return (
     <div className="navBarRoot">
@@ -39,10 +48,19 @@ const NavBar: React.FC<NavbarProps> = ({
           Vendors
         </span>
       </div>
-      <ProfileButton
-        numberOfRequests={numberOfRequests}
-        setNumberOfRequests={setNumberOfRequests}
-      />
+
+      <div className="currencyAndProfileContainer">
+        <CurrencyComp
+          amount={userCurrencyAmount}
+          style={{ color: "var(--custom-white)" }}
+          scale={SCALE_CURRENCY}
+        />
+
+        <ProfileButton
+          numberOfRequests={numberOfRequests}
+          setNumberOfRequests={setNumberOfRequests}
+        />
+      </div>
     </div>
   );
 };
