@@ -1,7 +1,7 @@
 .vendorSelectionRoot {
     height: 100%;
     width: 100%;
-    background-color: red;
+    background-image: url("/public/assets/backgrounds/pattern-randomized-blue.svg");
     display: flex;
     justify-content: center; 
     align-items: center;
