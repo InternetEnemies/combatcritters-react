@@ -1,0 +1,58 @@
+.selectedVendorViewRoot {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+.selectedVendorImageWrapper {
+    flex: .65; 
+    height: auto; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+}
+
+.selectedVendorImage {
+  height: 100%; 
+  width: 100%;  
+}
+
+
+.nameRepResetContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 1;
+    flex: 3;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.nameResetContainer, .levelBarWrapper {
+    margin-left: 20px;
+}
+
+.nameResetContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.nameResetContainer .vendorName {
+    font-size: 40px;
+    align-self: center;
+}
+
+.refreshTimeWrapper {
+    margin-right: 20px;
+}
+
+.levelBarWrapper {
+    align-self: center;
+}
