@@ -25,6 +25,7 @@
 
 
 .nameRepResetContainer {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -50,7 +51,9 @@
 }
 
 .refreshTimeWrapper {
-    margin-right: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .levelBarWrapper {

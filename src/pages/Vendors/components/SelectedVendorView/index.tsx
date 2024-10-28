@@ -6,6 +6,7 @@
 import { IVendor, IVendorReputation } from "combatcritters-ts";
 import "./selectedVendorView.css";
 import LevelBar from "../LevelBar";
+import Refresh from "../Refresh";
 
 interface SelectedVendorViewProps {
   //Not the most elegant solution. I am passing this here because I need to
@@ -34,9 +35,9 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
           <span className="vendorName">{vendor.name}</span>
           {/* TODO: this should be refreshTime={vendor.refreshTime} once integrated */}
           {/* https://github.com/InternetEnemies/combatcritters-react/issues/58 */}
-          {/* <div className="refreshTimeWrapper">
+          <div className="refreshTimeWrapper">
             <Refresh refreshTime="2024-10-27T20:16:59.879440" />
-          </div> */}
+          </div>
         </div>
         <div className="levelBarWrapper">
           <LevelBar reputation={vendorReputation} scaleLength={LEVEL_BAR_SCALE} />
