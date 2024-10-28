@@ -13,7 +13,7 @@ export class ClientSingleton {
 
   public static getInstance(): IClient {
     if (!this.instance) {
-      this.instance = Client.fromApi("http://api.combatcritters.ca:4000");
+      this.instance = Client.fromApi(process.env.REACT_APP_API ?? "http://api.combatcritters.ca:4000");
     }
     return this.instance;
   }
