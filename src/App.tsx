@@ -19,9 +19,9 @@ import "./app.css";
 import ProtectedRoutes from "components/ProtectedRoutes";
 import Packs from "pages/Packs";
 import { ToastContainer, Bounce } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import Vendors from "pages/Vendors";
-  
+import { CurrencyProvider } from "contexts/CurrencyContext";
 
 function App() {
   const [numberOfRequests, setNumberOfRequests] = useState(0); // Number of friend requests
@@ -59,7 +59,7 @@ function App() {
               }
             />
             <Route path="/packs" element={<Packs />} />
-            <Route path="/vendors" element={<Vendors/>} />
+            <Route path="/vendors" element={<Vendors />} />
           </Route>
         </Routes>
       </div>
@@ -74,7 +74,7 @@ function App() {
         draggable
         pauseOnHover
         theme="dark"
-        transition={Bounce} 
+        transition={Bounce}
         toastStyle={{ backgroundColor: "#333", color: "white" }}
       />
     </div>
@@ -83,9 +83,11 @@ function App() {
 
 function AppWrapper() {
   return (
-    <Router>
-      <App />
-    </Router>
+    <CurrencyProvider>
+      <Router>
+        <App />
+      </Router>
+    </CurrencyProvider>
   );
 }
 
