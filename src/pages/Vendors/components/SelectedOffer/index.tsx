@@ -3,49 +3,97 @@
  * @Brief Displays information about the selected offer and provides a purchase button.
  */
 
-import { ICard, ICurrency, IOffer, IPack, ITradeItem } from "combatcritters-ts";
+import {
+  ICard,
+  ICurrency,
+  IOffer,
+  IPack,
+  IUserOfferState,
+} from "combatcritters-ts";
 import "./selectedOffer.css";
 import { useEffect, useState } from "react";
 import RequiredOfferItem from "../RequiredOfferItem";
 import Item from "components/Item";
+import Button from "components/Button";
+import { toast } from "react-toastify";
+import { useCurrency } from "contexts/CurrencyContext";
 
 interface SelectedOfferProps {
   offer: IOffer | null;
   vendorName: string;
+  refreshVendorReputation: () => void;
 }
 
-const SelectedOffer: React.FC<SelectedOfferProps> = ({ offer, vendorName }) => {
-  const [tradeItems, setTradeItems] = useState<ITradeItem<IPack | ICard | ICurrency>[]>([]);
+const SelectedOffer: React.FC<SelectedOfferProps> = ({
+  offer,
+  vendorName,
+  refreshVendorReputation,
+}) => {
+  const [userOfferState, setUserOfferState] = useState<IUserOfferState<
+    IPack | ICard | ICurrency
+  > | null>(null);
 
-  useEffect(() => {
-    const fetchTradeItems = async () => {
+  const { handleTransaction } = useCurrency();
+
+  const handleDealClick = () => {
+    const acceptOffer = async () => {
       if (offer) {
-        const tradeItems = await offer.compareUserItems();
-        setTradeItems(tradeItems);
-      } else {
-        setTradeItems([]);
+        try {
+          await handleTransaction(offer.accept); //CurrencyContext should handle transaction
+          refreshVendorReputation(); //Vendor rep should increase
+          toast("Transaction Successful!");
+        } catch (error) {
+          console.log("Error accepting offer:" + error);
+          toast("Error accepting offer");
+          return;
+        }
       }
     };
 
-    fetchTradeItems();
+    if (userOfferState?.canPurchase) {
+      acceptOffer();
+    } else {
+      toast("Missing Required Items");
+    }
+  };
+
+  /**
+   * On offer change, fetch userOfferState from the backend.
+   */
+  useEffect(() => {
+    const fetchUserOfferState = async () => {
+      if (offer) {
+        const fetchedOfferState = await offer.compareUserItems();
+        setUserOfferState(fetchedOfferState);
+      } else {
+        setUserOfferState(null);
+      }
+    };
+
+    fetchUserOfferState();
   }, [offer]);
 
+  if (!offer) {
+    return null;
+  }
 
   return (
     <div className="selectedOfferRoot">
       <div className="vendorReceivesContainer">
-        <h3 className="selectedOfferText">
-          {vendorName} Receives:
-          {tradeItems.map((tradeItem, index) => {
-            return <RequiredOfferItem key={index} tradeItem={tradeItem}/>;
-          })}
-        </h3>
+        <span className="selectedOfferText">{vendorName} Receives:</span>
+        <div className="vendorReceivesGrid">
+          {userOfferState?.userOfferItems.map((offerItem, index) => (
+            <RequiredOfferItem key={index} userOfferItem={offerItem} />
+          ))}
+        </div>
       </div>
       <div className="youReceiveContainer">
-        <h3 className="selectedOfferText">You Receive:</h3>
-        {offer ? <Item item={offer.receiveItem.getItem()}/>: <></>}
+        <span className="selectedOfferText">You Receive:</span>
+        <Item item={offer.receiveItem.getItem()} />
       </div>
-      <div className="purchaseContainer"></div>
+      <div className="dealButtonWrapper">
+        <Button text="Deal" onClick={handleDealClick} />
+      </div>
     </div>
   );
 };
