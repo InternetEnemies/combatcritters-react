@@ -1,3 +1,8 @@
+/**
+ * @Created 2024-10-28
+ * @Brief View for IItem.
+ */
+
 import React from "react";
 import {
   ICardCritter,
@@ -9,6 +14,7 @@ import {
 import Card from "components/Card";
 import Pack from "components/Pack";
 import { ICard } from "combatcritters-ts";
+import Currency from "components/CurrencyComp";
 
 interface ItemProps {
   item: IPack | ICard | ICurrency;
@@ -33,9 +39,7 @@ const Item: React.FC<ItemProps> = ({
       content = <Card card={item} scale={scaleCard} />;
     },
     visitCurrency: (currency: ICurrency): void => {
-      content = (
-        <div style={{ width: "10px", height: "10px" }}></div> //TODO
-      );
+      content = <Currency amount={currency.coins} scale={scaleCurrency} />;
     },
     visitPack: (pack: IPack): void => {
       content = <Pack pack={pack} scale={scalePack} />;
