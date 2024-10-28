@@ -18,12 +18,12 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  const {updateCurrency} = useCurrency();
+  const { updateCurrency } = useCurrency();
 
   const handleLogin = async () => {
     try {
       await ClientSingleton.getInstance().login(username, password);
-      await updateCurrency();
+      await updateCurrency(); //Fetch currency on login
       navigate("/collection");
     } catch (e) {
       setError("Failed to log in.");
