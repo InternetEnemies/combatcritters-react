@@ -18,7 +18,7 @@ const Offer: React.FC<OfferProps> = ({ offer, onClick = () => {} }) => {
   };
 
   return (
-    <div onClick={handleClick}>
+    <div onClick={handleClick} style={{cursor:"pointer"}}>
       <Item item={offer.receiveItem.getItem()} />
     </div>
   );
