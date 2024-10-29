@@ -28,14 +28,18 @@ interface DeckProps {
 }
 
 const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
-  const [deckManager] = useState(ClientSingleton.getInstance().user.decks);
   const [decks, setDecks] = useState<IDeck[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<IDeck | null>(null);
 
+  /*
+   * On mount, fetch the user's decks and set the selected deck to
+   * the first deck in the user's inventory (if they have a first deck).
+   */
   useEffect(() => {
     const fetchDecks = async () => {
       try {
-        const fetchedDecks = await deckManager.getDecks();
+        const fetchedDecks =
+          await ClientSingleton.getInstance().user.decks.getDecks();
         setDecks(fetchedDecks);
       } catch (error) {
         console.error("Error fetching decks:", error);
@@ -43,13 +47,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
     };
 
     fetchDecks();
-  }, [deckManager]);
 
-  /*
-  * On mount, set the selected deck to the first deck in the 
-  * user's inventory (if they have a first deck).
-  */
-  useEffect(() => {
     if (decks.length > 0) {
       setSelectedDeck(decks[0]);
     }
@@ -103,8 +101,10 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
   const createDeck = async (deckName: string) => {
     try {
       await saveDeck();
-      const createdDeck = await deckManager.createDeck(deckName);
-      const updatedDecks = await deckManager.getDecks();
+      const createdDeck =
+        await ClientSingleton.getInstance().user.decks.createDeck(deckName);
+      const updatedDecks =
+        await ClientSingleton.getInstance().user.decks.getDecks();
       setDecks(updatedDecks);
       setSelectedDeck(createdDeck);
       setLocalDeck(await convertToSortableDeck(createdDeck));
@@ -117,14 +117,12 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
   const deleteDeck = async () => {
     if (selectedDeck) {
       try {
-        await deckManager.deleteDeck(selectedDeck);
-        const updatedDecks = await deckManager.getDecks();
+        await ClientSingleton.getInstance().user.decks.deleteDeck(selectedDeck);
+        const updatedDecks =
+          await ClientSingleton.getInstance().user.decks.getDecks();
         setDecks(updatedDecks);
-        if (decks.length > 0) {
-          setSelectedDeck(decks[0]);
-        } else {
-          setSelectedDeck(null);
-        }
+        setSelectedDeck(null);
+
       } catch (error) {
         console.error("Error deleting the deck:", error);
       }
@@ -204,7 +202,6 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
