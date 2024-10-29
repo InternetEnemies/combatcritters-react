@@ -20,6 +20,7 @@ import deleteIcon from "assets/icons/delete.svg";
 import { ClientSingleton } from "ClientSingleton";
 import "../../collection.css";
 import { toast } from "react-toastify";
+import ValidityIndicator from "../ValidityIndicator";
 
 interface DeckProps {
   localDeck: ISortableDeck | null;
@@ -188,6 +189,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
         </div>
 
         <div className="footerContainer">
+          <ValidityIndicator localDeck={localDeck}/>
           <div className="cancelSaveWrapper">
             {changesMade ? (
               <ConfirmationButton
