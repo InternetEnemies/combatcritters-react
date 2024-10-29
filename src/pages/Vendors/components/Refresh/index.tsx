@@ -4,6 +4,7 @@
  */
 import React, { useEffect, useState } from "react";
 import { calculateCountdown } from "utils/time";
+import "./refresh.css";
 
 interface RefreshProps {
   refreshTime: string;
@@ -24,10 +25,19 @@ const Refresh: React.FC<RefreshProps> = ({ refreshTime }) => {
       setCountdown(calculateCountdown(refreshTime));
     }, 1000);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, [refreshTime]);
 
-  return <span>{countdown}</span>; 
+  return (
+    <div className="refreshRoot">
+      <img
+        className="refreshIcon"
+        src="assets/images/refresh.svg"
+        alt="Refresh icon"
+      />
+      <span>{countdown}</span>
+    </div>
+  );
 };
 
 export default Refresh;

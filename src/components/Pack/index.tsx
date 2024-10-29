@@ -8,17 +8,29 @@ import "./pack.css";
 
 interface PackProps {
   pack: IPack;
-  onClick?: (pack: IPack) => void;
+  onClick?: (pack?: IPack) => void; // Can be called with or without the pack parameter.
   style?: React.CSSProperties;
+  scale?: number; //Scale the size of the pack
 }
 
-const Pack: React.FC<PackProps> = ({ pack, onClick = () => {}, style }) => {
+const Pack: React.FC<PackProps> = ({
+  pack,
+  onClick = () => {},
+  style,
+  scale = 1,
+}) => {
+  const WIDTH: number = 132.6 * scale; //Default width of the pack * scale
+
   const handleClick = () => {
-    onClick(pack);
+    onClick?.(pack); // Pass the pack if provided.
   };
 
   return (
-    <div onClick={handleClick} className="packRoot" style={style}>
+    <div
+      onClick={handleClick}
+      className="packRoot"
+      style={{ ...style, width: `${WIDTH}px` }}
+    >
       <span className="packName">{pack.name}</span>
       <img src={pack.image} className="packImage" alt="Pack" />
     </div>

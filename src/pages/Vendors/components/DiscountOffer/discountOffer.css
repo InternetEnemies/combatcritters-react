@@ -1,0 +1,18 @@
+.discountOfferContainer {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.discountText {
+  position: absolute;
+  right: 0px;
+  width: 80px;
+  height: auto; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  color: white;
+  background-color: rgba(73, 73, 73, .9);
+}

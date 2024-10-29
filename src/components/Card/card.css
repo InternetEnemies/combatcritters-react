@@ -14,12 +14,12 @@
 
 .cardRoot {
   container-type: inline-size;
+  transform-origin: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 132.6px;
-  height: 195px;
+  aspect-ratio: 68/100;
 
   --border-color: rgb(49, 49, 49);
 
@@ -35,7 +35,7 @@
   border: 3px solid #000000;
   cursor: pointer;
   user-select: none;
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
 
 .footerInfo {
