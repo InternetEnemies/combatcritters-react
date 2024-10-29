@@ -72,23 +72,17 @@ const RequiredOfferItem: React.FC<RequiredOfferItemProps> = ({
         return userCurrencyAmount >= requiredCurrency.coins;
       };
       setContent(
-        hasRequiredCurrency() ? (
-          <CurrencyComp
-            amount={requiredCurrency.coins}
-            style={{
-              color: AMOUNT_MET_COLOUR,
-            }}
-            scale={CURRENCY_SCALE}
-          />
-        ) : (
-          <CurrencyComp
-            amount={requiredCurrency.coins}
-            scale={CURRENCY_SCALE}
-            style={{
-              color: AMOUNT_NOT_MET_COLOUR,
-            }}
-          />
-        )
+        <CurrencyComp
+          amount={requiredCurrency.coins}
+          scale={CURRENCY_SCALE}
+          style={
+            hasRequiredCurrency()
+              ? { color: AMOUNT_MET_COLOUR }
+              : {
+                  color: AMOUNT_NOT_MET_COLOUR,
+                }
+          }
+        />
       );
     },
     visitPack: (_requiredPack: IPack): void => {
