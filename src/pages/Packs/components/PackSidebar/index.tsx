@@ -4,7 +4,7 @@
  *        the setlist of a pack and provides the open pack button.
  */
 
-import { IPack } from "combatcritters-ts";
+import { IUserPack } from "combatcritters-ts";
 import "./packSidebar.css";
 import { ICard } from "combatcritters-ts";
 import Button from "components/Button";
@@ -12,9 +12,9 @@ import Card from "components/Card";
 import { useEffect, useState } from "react";
 
 interface PackSidebarProps {
-  pack: IPack | null;
-  setPack: (pack: IPack | null) => void;
-  openPack: (pack: IPack) => Promise<void>; //Callback so the parent can update the packs on open.
+  pack: IUserPack | null;
+  setPack: (pack: IUserPack | null) => void;
+  openPack: (pack: IUserPack) => Promise<void>; //Callback so the parent can update the packs on open.
   isVisible: boolean;
   setIsVisible: (isVisible: boolean) => void;
 }
