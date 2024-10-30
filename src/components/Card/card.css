@@ -36,6 +36,7 @@
   cursor: pointer;
   user-select: none;
   box-sizing: border-box;
+  position: relative;
 }
 
 .footerInfo {
