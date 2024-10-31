@@ -4,13 +4,13 @@
  */
 
 import { ClientSingleton } from "ClientSingleton";
-import { IPack } from "combatcritters-ts";
+import { IUserPack } from "combatcritters-ts";
 import { useState } from "react";
 import { useEffect } from "react";
 
 export const usePackBrowser = () => {
-  const [packs, setPacks] = useState<IPack[]>([]);
-  const [selectedPack, setSelectedPack] = useState<IPack | null>(null);
+  const [packs, setPacks] = useState<IUserPack[]>([]);
+  const [selectedPack, setSelectedPack] = useState<IUserPack | null>(null);
   const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
 
   /*
@@ -20,7 +20,9 @@ export const usePackBrowser = () => {
     const fetchPacks = async () => {
       try {
         const fetchedPacks = await ClientSingleton.getInstance().user.packs.getPacks();
-        setPacks(fetchedPacks);
+        setPacks(fetchedPacks.map((packStack) => {
+          return packStack.getItem();
+        }));
       } catch (error) {
         console.error("Error fetching packs: ", error);
       }
@@ -40,7 +42,7 @@ export const usePackBrowser = () => {
     }
   }, [selectedPack]);
 
-  const handlePackClick = (pack: IPack) => {
+  const handlePackClick = (pack: IUserPack) => {
     setSelectedPack(pack);
   };
 
