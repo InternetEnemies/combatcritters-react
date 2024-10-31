@@ -1,0 +1,40 @@
+.levelBarRoot {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  padding: 0 10px; /* Padding to add space between elements */
+  height: 50px; /* Starting height */
+  width: 100%; /* Flex container to control width */
+}
+
+.progressBar {
+  height: 30%; /* Percentage of the parent's height */
+  background-color: grey;
+  flex-grow: 1; /* Allows the progress bar to take up remaining space */
+  position: relative;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.3s ease-in-out;
+}
+
+.currAndNextLevelContainer {
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  flex-grow: 0;
+  height: 100%; /* Sets the height relative to .levelBarRoot */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  background-color: red;
+  border-radius: 50%; /* Keeps it circular */
+  margin: 0 -10px; /* Overlaps the progress bar on each side */
+  z-index: 2; /* Places above the progress bar */
+}

@@ -1,0 +1,53 @@
+.selectedOfferRoot {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--custom-mint-green);
+    border-radius: 5px;
+    color: var(--custom-black);
+    border: 1px solid var(--custom-cream);
+}
+
+.selectedOfferText {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 3px;
+}
+
+.vendorReceivesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+.vendorReceivesGrid {
+  max-height: 300px;
+  overflow-y: auto;
+  width: 90%;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  row-gap: 15px; 
+  column-gap: 10px;
+  align-items: center;
+  justify-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(var(--custom-cream-rgb),.6);
+  border-radius: 2px;
+  margin-top:3px;
+}
+.youReceiveContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dealButtonWrapper {
+  margin-bottom: 8px;;
+}

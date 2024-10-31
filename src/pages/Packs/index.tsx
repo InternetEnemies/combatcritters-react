@@ -34,9 +34,10 @@ const Packs = () => {
         {packs.map((pack, index) => (
           <Pack
             pack={pack}
-            onClick={handlePackClick}
+            onClick={() => handlePackClick(pack)}
             style={{ cursor: "pointer" }}
             key={index}
+            scale={1.4}
           />
         ))}
       </div>

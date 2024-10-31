@@ -4,7 +4,7 @@
  */
 import { IVendor } from "combatcritters-ts";
 import "./vendorSelection.css";
-import VendorView from "../VendorView";
+import VendorView from "../SelectionVendorView";
 
 interface VendorSelectionProps {
   isVisible: boolean;
