@@ -20,16 +20,23 @@ const Profile: React.FC<ProfileProps> = ({
 
   return (
     <div className="profileRoot">
-      <div className="profileContainer">
+      <div className="featureDeckWrapper">
         <FeatureDeck />
-        <div className="friendsContainer">
-          <Friends friends={friends} setFriends={setFriends}/>
+      </div>
+
+      <div className="friendsContainer">
+        <div className="friendsWrapper">
+          <Friends friends={friends} setFriends={setFriends} />
+        </div>
+        <div className="incomingFriendRequestsWrapper">
           <IncomingFriendRequests
             friends={friends}
             setFriends={setFriends}
             numberOfRequests={numberOfRequests}
             setNumberOfRequests={setNumberOfRequests}
           />
+        </div>
+        <div className="sendFriendRequestWrapper">
           <SendFriendRequest />
         </div>
       </div>

@@ -15,10 +15,10 @@ interface FriendsProps {
   setFriends: (friends: IUser[]) => void;
 }
 const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
-  const { selectedFriend, showDeck, setShowDeck, onFriendClick } =
+  const { selectedFriend, setSelectedFriend, showDeck, setShowDeck, onFriendClick } =
     useFriendsList(friends, setFriends);
   return (
-    <div className="friendsListContainer sharedFriendStyles">
+    <div className="friendsListContainer">
       <h3 className="friendsTitle">Your Friends</h3>
       <ul className="friendsList">
         {friends.length > 0 ? (
@@ -39,6 +39,7 @@ const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
         user={selectedFriend}
         isVisible={showDeck}
         setVisibility={setShowDeck}
+        setSelectedFriend={setSelectedFriend}
       />
     </div>
   );
