@@ -15,18 +15,28 @@ interface FriendDeckPopupProps {
   user: IUser | null;
   isVisible: boolean;
   setVisibility: (isVisible: boolean) => void;
+  setSelectedFriend: (user: IUser | null) => void;
 }
 
-const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({ user, isVisible, setVisibility }) => {
+const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({
+  user,
+  isVisible,
+  setVisibility,
+  setSelectedFriend,
+}) => {
   const [featuredDeck, setFeaturedDeck] = useState<IDeck | null>(null);
   const [deckCards, setDeckCards] = useState<ICard[] | null>(null);
 
+  /**
+   * On user change, fetch the user's featured deck and fetch the cards in the deck.
+   */
   useEffect(() => {
     if (user) {
       const setDeckAndCards = async () => {
         try {
           const featuredD = await user.profile.getDeck();
           setFeaturedDeck(featuredD);
+
           if (featuredD) {
             const cards = await featuredD.getCards();
             setDeckCards(cards);
@@ -36,15 +46,19 @@ const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({ user, isVisible, setV
         }
       };
       setDeckAndCards();
-      console.log(user.id);
     }
   }, [user]);
-  
-  if (!isVisible || !user) return null;
 
   const handleClose = () => {
     setVisibility(false);
+    setFeaturedDeck(null);
+    setDeckCards(null);
+    setSelectedFriend(null);
   };
+
+  if (!isVisible || !user || !featuredDeck) {
+    return null;
+  }
 
   return (
     <div className="popupOverlay" onClick={handleClose}>
@@ -53,15 +67,12 @@ const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({ user, isVisible, setV
           ×
         </button>
         <h3>{user.username}'s Deck</h3>
-        {featuredDeck && deckCards && deckCards.length > 0 ? (
-          <div className="cardsContainer">
-            {deckCards.map((card, index) => (
-              <Card key={index} card={card} />
-            ))}
-          </div>
-        ) : (
-          <p>No cards in this deck.</p>
-        )}
+
+        <div className="cardsContainer">
+          {deckCards?.map((card, index) => (
+            <Card key={index} card={card} />
+          ))}
+        </div>
       </div>
     </div>
   );
