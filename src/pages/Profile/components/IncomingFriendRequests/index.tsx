@@ -30,7 +30,7 @@ const IncomingFriendRequests: React.FC<FriendsProps> = ({
   );
 
   return (
-    <div className="friendRequestsRoot sharedFriendStyles">
+    <div className="friendRequestsRoot">
       <h3>Incoming Friend Requests</h3>
       {friendRequests.length > 0 ? (
         <ul className="friendRequestsList">

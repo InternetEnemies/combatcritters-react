@@ -1,34 +1,38 @@
 .friendRequestsRoot {
-  /* padding: 20px; */
-  height: 200px;
+  height: 100%;
+  width: 100%;
   overflow-y: auto; 
   overflow-x: hidden; 
-  /* border: 1px solid #ccc;  */
-  /* box-sizing: border-box;  */
   display: flex;
   flex-direction: column;
   align-items: center; 
-  /* background-color: white; */
 }
 
 .friendRequestsList {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  width: 100%; 
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Additional gap between items */
 }
+
 
 .friendRequestItem {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-  width: 80%; 
-  max-width: 350px; 
-  margin: 0 auto; 
+  border-radius: 3px;
+  gap: 5px;
+  margin-bottom: 20px; 
+  width: 100%;
+  margin: 0 auto;
+  background-color: #dadada;
 }
+
 
 .actionButtons {
   display: flex;
@@ -43,7 +47,7 @@
 }
 
 .iconButton:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 .acceptIcon {
