@@ -19,7 +19,7 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
   vendorReputation,
   vendor,
 }) => {
-  const LEVEL_BAR_SCALE = 1.2;
+  const LEVEL_BAR_SCALE = 1.6;
   return (
     <div className="selectedVendorViewRoot">
       <div className="selectedVendorImageWrapper">
@@ -36,11 +36,11 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
           {/* TODO: this should be refreshTime={vendor.refreshTime} once integrated */}
           {/* https://github.com/InternetEnemies/combatcritters-react/issues/58 */}
           <div className="refreshTimeWrapper">
-            <Refresh refreshTime="2024-10-27T20:16:59.879440" />
+            <Refresh refreshTime="2024-10-27T20:16:59.879440" style={{color:"var(--custom-black)"}}/>
           </div>
         </div>
         <div className="levelBarWrapper">
-          <LevelBar reputation={vendorReputation} scaleLength={LEVEL_BAR_SCALE} />
+          <LevelBar reputation={vendorReputation} scaleLength={LEVEL_BAR_SCALE}/>
         </div>
       </div>
     </div>
