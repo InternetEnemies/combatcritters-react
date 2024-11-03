@@ -33,7 +33,7 @@
   text-align: center;
   font-weight: bold;
   color: #333;
-  background-color: red;
+  background-color: var(--custom-orange);
   border-radius: 50%; /* Keeps it circular */
   margin: 0 -10px; /* Overlaps the progress bar on each side */
   z-index: 2; /* Places above the progress bar */
