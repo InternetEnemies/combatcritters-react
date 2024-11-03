@@ -19,7 +19,7 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
   vendorReputation,
   vendor,
 }) => {
-  const LEVEL_BAR_SCALE = 1.6;
+  const LEVEL_BAR_SCALE = 2;
   return (
     <div className="selectedVendorViewRoot">
       <div className="selectedVendorImageWrapper">
