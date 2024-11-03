@@ -24,7 +24,11 @@ const Vendors = () => {
         setSelectedVendor={setSelectedVendor}
         isVisible={vendorSelectionVisible}
       />
-      <SelectedVendor isVisible={selectedVendorVisible} selectedVendor={selectedVendor} setSelectedVendor={setSelectedVendor}/>
+      <SelectedVendor
+        isVisible={selectedVendorVisible}
+        selectedVendor={selectedVendor}
+        setSelectedVendor={setSelectedVendor}
+      />
     </div>
   );
 };
