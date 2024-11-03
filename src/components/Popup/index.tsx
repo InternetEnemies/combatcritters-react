@@ -9,8 +9,8 @@ import "./popup.css";
 interface PopupProps {
   popupContent: React.ReactNode;
   isVisible: boolean;
-  setIsVisible: (visible: boolean) => void;
-  onClose?: () => void;
+  setIsVisible: (visible: boolean) => void; //Callback to set the popup visibility
+  onClose?: () => void; //Optional callback to execute on close
 }
 
 const Popup: React.FC<PopupProps> = ({
@@ -19,21 +19,20 @@ const Popup: React.FC<PopupProps> = ({
   setIsVisible,
   onClose = () => {},
 }) => {
-  if (!isVisible) return null; 
+  if (!isVisible) return null;
 
-  const handleOverlayClick = () => {
+  const handleClose = () => {
     setIsVisible(false);
     onClose();
   };
 
   return (
-    <div className="popupRoot" onClick={handleOverlayClick}>
-      <div className="popupContentWrapper" onClick={(e) => e.stopPropagation()}>
-        <span className="closePopupButton" onClick={handleOverlayClick}>
+    <div className="popupRoot" onClick={handleClose}>
+      <div className="popupContentWrapper" onClick={handleClose}>
+        <span className="closePopupButton" onClick={handleClose}>
           &times;
         </span>
-
-        {popupContent}
+        <div onClick={(e) => e.stopPropagation()}>{popupContent}</div>
       </div>
     </div>
   );
