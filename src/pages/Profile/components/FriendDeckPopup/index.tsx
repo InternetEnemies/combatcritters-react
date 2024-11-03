@@ -12,12 +12,14 @@ import { ICard } from "combatcritters-ts";
 import Card from "components/Card";
 
 interface FriendDeckPopupProps {
-  user: IUser | null;
+  friend: IUser | null;
+  deck: IDeck | null;
+  deckCards: ICard[] | null;
 }
 
-const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({ user }) => {
-  const [featuredDeck, setFeaturedDeck] = useState<IDeck | null>(null);
-  const [deckCards, setDeckCards] = useState<ICard[] | null>(null);
+const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({ friend, deck, deckCards }) => {
+  // const [featuredDeck, setFeaturedDeck] = useState<IDeck | null>(null);
+  // const [deckCards, setDeckCards] = useState<ICard[] | null>(null);
 
   /**
    * On user change, fetch the user's featured deck and fetch the cards in the deck.
@@ -41,13 +43,13 @@ const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({ user }) => {
   //   }
   // }, [user]);
 
-  if (!user || !featuredDeck) {
+  if (!friend || !deck || !deckCards) {
     return null;
   }
 
   return (
     <div className="friendDeckPopupRoot">
-      <h3>{user.username}'s Deck</h3>
+      <h3>{friend.username}'s Deck</h3>
 
       <div className="cardsContainer">
         {deckCards?.map((card, index) => (
