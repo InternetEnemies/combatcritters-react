@@ -5,6 +5,7 @@
 import { IVendor } from "combatcritters-ts";
 import "./selectionVendorView.css";
 import Refresh from "../Refresh";
+import LevelBar from "../LevelBar";
 
 interface SelectionVendorViewProps {
   onClick: (vendor: IVendor) => void;
@@ -24,14 +25,13 @@ const SelectionVendorView: React.FC<SelectionVendorViewProps> = ({ onClick, vend
         src="assets/images/testVendor.webp"
         alt="Vendor"
       />
-      <span>{vendor.name}</span>
-      <div className="levelAndRefreshContainer">
-        <span>lvl {vendor.reputation.level}</span>
-        <br />
-        {/* TODO: this should be refreshTime={vendor.refreshTime} once integrated */}
-        {/* https://github.com/InternetEnemies/combatcritters-react/issues/58 */}
-        <Refresh refreshTime="2024-10-27T20:16:59.879440" />
-      </div>
+      <div className="vendorName">{vendor.name}</div>
+      {/* <span>lvl {vendor.reputation.level}</span> */}
+      {/* <br /> */}
+      {/* TODO: this should be refreshTime={vendor.refreshTime} once integrated */}
+      {/* https://github.com/InternetEnemies/combatcritters-react/issues/58 */}
+      <Refresh refreshTime="2024-11-04T20:16:59.879440" style={{color:"var(--custom-white)"}}/>
+      <LevelBar reputation={vendor.reputation} scaleLength={.8} scale={.8}/>
     </div>
   );
 };
