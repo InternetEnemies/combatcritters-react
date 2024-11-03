@@ -52,12 +52,13 @@
 .nameResetContainer .vendorName {
     font-size: 40px;
     align-self: center;
+    font-weight: bold;
 }
 
 .refreshTimeWrapper {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 15px;
+  right: 0px;
 }
 
 .levelBarWrapper {
