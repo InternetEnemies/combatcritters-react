@@ -15,7 +15,6 @@
 .validityPopupRoot .popupContent {
   position: relative;
   background-color: var(--custom-white);
-  padding: 10px;
   border-radius: 8px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
   min-width: 300px; 
@@ -27,12 +26,17 @@
   text-align: left; 
   overflow: hidden;
   animation: fadeInScale 0.3s ease;
+  overflow-y: auto;
+}
+
+.popupContent {
+  max-height: 300px;
 }
 
 .validityPopupRoot .closeButton {
-  position: absolute;
-  top: 5px;
-  right: 5px;
+  position: sticky;
+  top: 0px;  
+  margin-left: auto; 
   background: none;
   border: none;
   font-size: 20px;
@@ -41,6 +45,7 @@
   cursor: pointer;
   line-height: 1;
   transition: color 0.2s ease;
+  z-index: 1;
 }
 
 .validityPopupRoot .closeButton:hover {
