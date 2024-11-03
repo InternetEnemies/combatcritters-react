@@ -23,25 +23,22 @@ const ValidityIndicator: React.FC<ValidityIndicatorProps> = ({ localDeck }) => {
    * On localDeck change, update the validity indicator.
    */
   useEffect(() => {
-    if (localDeck) {
-      //TODO uncomment this
-      //
-      // const cards: ICard[] = localDeck.cards.map((card) => {
-      //   return card.card;
-      // });
-      // setDeckValidity(ClientSingleton.getInstance().user.decks.deckValidator.validate(cards));
-      setDeckValidity(
-        new DeckValidity(Math.random() < 0.5, [
-          "Issue2",
-          "Issjkhkjhkkkjhkkhkjkhkhjkkhhkue3",
-          "Issue4",
-          "irsfsd",
-          "Issue1",
-          "Issue # fjdslfdsfjlk",
-        ])
-      );
-    }
+    const validateDeck = async () => {
+      if (localDeck) {
+        const cards: ICard[] = localDeck.cards.map((card) => card.card);
+
+        const validity =
+          await ClientSingleton.getInstance().user.decks.validator.validate(
+            cards
+          );
+
+        setDeckValidity(validity);
+      }
+    };
+
+    validateDeck(); 
   }, [localDeck]);
+
 
   if (!localDeck || !deckValidity) {
     return <div></div>;
