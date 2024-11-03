@@ -6,15 +6,22 @@
 import { ClientSingleton } from "ClientSingleton";
 import { IUser } from "combatcritters-ts";
 import { useEffect, useState } from "react";
-import { IDeck } from "combatcritters-ts";
-import { toast } from "react-toastify";
 
-export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) => void) => {
+export const useFriendsList = (
+  friends: IUser[],
+  setFriends: (friends: IUser[]) => void
+) => {
   const [selectedFriend, setSelectedFriend] = useState<IUser | null>(null);
   const [showDeck, setShowDeck] = useState(false);
-  // eslint-disable-next-line
-  const [friendsDeck, setFriendsDeck] = useState<IDeck | null>(null);
 
+  const onFriendClick = (user: IUser) => {
+    setShowDeck(true);
+    setSelectedFriend(user);
+  };
+
+  /**
+   * On mount, fetch the user's friends
+   */
   useEffect(() => {
     const fetchFriends = async () => {
       try {
@@ -29,21 +36,5 @@ export const useFriendsList = (friends: IUser[], setFriends: (friends: IUser[]) 
     // eslint-disable-next-line
   }, []);
 
-  const onFriendClick = async (user: IUser) => {
-    setSelectedFriend(user);
-
-    try {
-      const deck = await ClientSingleton.getInstance().user.profile.getDeck();
-      setFriendsDeck(deck);
-    } catch (error) {
-      console.error("Error fetching friend's deck:" + error);
-    }
-    if(friendsDeck) {
-      setShowDeck(true);
-    } else {
-      toast(user.username + " has no Featured Feck");
-    }
-  };
-
-  return { friends, selectedFriend, showDeck, setShowDeck, onFriendClick };
+  return { friends, selectedFriend, setSelectedFriend, showDeck, setShowDeck, onFriendClick };
 };

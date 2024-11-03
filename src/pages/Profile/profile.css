@@ -2,40 +2,54 @@
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background-color: var(--custom-dark-blue);
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 40px;
+  gap: 40px;
 }
 
-.profileContainer {
-  display: flex;
-  flex-direction: row;
-  width: 90%;
-  height: 80%;
-  /* background:red; */
-  align-items: center;
-  justify-content: space-between;
+.featureDeckWrapper, .friendsContainer {
+  height: 80vh;
+}
+
+.featureDeckWrapper {
+  flex: 2;
 }
 
 .friendsContainer {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-  gap: 20px;
-  width: 30%;
-  height: 100%;
-  /* padding: 20px; */
+  justify-content: space-around;
+  gap: 40px;
+  flex: 1;
 }
 
-.sharedFriendStyles {
-  padding: 20px;
-  /* border: 1px solid blue; */
-  border-radius: 8px;
-  width: 80%;
-  /* margin: 0 auto; */
+.friendsWrapper, .incomingFriendRequestsWrapper, .sendFriendRequestWrapper {
   background-color: var(--custom-white);
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
+}
+
+.friendsWrapper, .incomingFriendRequestsWrapper {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.friendsWrapper {
+  width: 100%;
+  flex: 2;
+}
+
+.incomingFriendRequestsWrapper {
+  width: 100%;
+  flex:1;
+}
+
+.sendFriendRequestWrapper {
+  width: 100%;
+  flex:.2;
+  padding: 10px;
 }

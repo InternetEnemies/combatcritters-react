@@ -27,7 +27,7 @@ const SendFriendRequest: React.FC = () => {
   };
 
   return (
-    <div className="sendFriendRequestContainer sharedFriendStyles">
+    <div className="sendFriendRequestContainer">
       <input
         type="text"
         value={username}
