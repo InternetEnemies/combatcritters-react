@@ -9,14 +9,25 @@ import "./friends.css";
 import { useFriendsList } from "pages/Profile/hooks/useFriendsList";
 import FriendDeckPopup from "pages/Profile/components/FriendDeckPopup";
 import { IUser } from "combatcritters-ts";
+import Popup from "components/Popup";
 
 interface FriendsProps {
   friends: IUser[];
   setFriends: (friends: IUser[]) => void;
 }
 const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
-  const { selectedFriend, setSelectedFriend, showDeck, setShowDeck, onFriendClick } =
-    useFriendsList(friends, setFriends);
+  const {
+    selectedFriend,
+    setSelectedFriend,
+    showDeck,
+    setShowDeck,
+    onFriendClick,
+  } = useFriendsList(friends, setFriends);
+
+  const handlePopupClose = () => {
+    setSelectedFriend(null);
+  };
+
   return (
     <div className="friendsListContainer">
       <h3 className="friendsTitle">Your Friends</h3>
@@ -35,12 +46,14 @@ const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
           <p>You have no friends yet.</p>
         )}
       </ul>
-      <FriendDeckPopup
-        user={selectedFriend}
-        isVisible={showDeck}
-        setVisibility={setShowDeck}
-        setSelectedFriend={setSelectedFriend}
-      />
+      {
+        <Popup
+          popupContent={<FriendDeckPopup user={selectedFriend} />}
+          isVisible={showDeck}
+          setIsVisible={setShowDeck}
+          onClose={handlePopupClose}
+        />
+      }
     </div>
   );
 };

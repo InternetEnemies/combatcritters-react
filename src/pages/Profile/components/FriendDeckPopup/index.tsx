@@ -13,66 +13,46 @@ import Card from "components/Card";
 
 interface FriendDeckPopupProps {
   user: IUser | null;
-  isVisible: boolean;
-  setVisibility: (isVisible: boolean) => void;
-  setSelectedFriend: (user: IUser | null) => void;
 }
 
-const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({
-  user,
-  isVisible,
-  setVisibility,
-  setSelectedFriend,
-}) => {
+const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({ user }) => {
   const [featuredDeck, setFeaturedDeck] = useState<IDeck | null>(null);
   const [deckCards, setDeckCards] = useState<ICard[] | null>(null);
 
   /**
    * On user change, fetch the user's featured deck and fetch the cards in the deck.
    */
-  useEffect(() => {
-    if (user) {
-      const setDeckAndCards = async () => {
-        try {
-          const featuredD = await user.profile.getDeck();
-          setFeaturedDeck(featuredD);
+  // useEffect(() => {
+  //   if (user) {
+  //     const setDeckAndCards = async () => {
+  //       try {
+  //         const featuredD = await user.profile.getDeck();
+  //         setFeaturedDeck(featuredD);
 
-          if (featuredD) {
-            const cards = await featuredD.getCards();
-            setDeckCards(cards);
-          }
-        } catch (error) {
-          console.error("Error during profile fetch:" + error);
-        }
-      };
-      setDeckAndCards();
-    }
-  }, [user]);
+  //         if (featuredD) {
+  //           const cards = await featuredD.getCards();
+  //           setDeckCards(cards);
+  //         }
+  //       } catch (error) {
+  //         console.error("Error during profile fetch:" + error);
+  //       }
+  //     };
+  //     setDeckAndCards();
+  //   }
+  // }, [user]);
 
-  const handleClose = () => {
-    setVisibility(false);
-    setFeaturedDeck(null);
-    setDeckCards(null);
-    setSelectedFriend(null);
-  };
-
-  if (!isVisible || !user || !featuredDeck) {
+  if (!user || !featuredDeck) {
     return null;
   }
 
   return (
-    <div className="popupOverlay" onClick={handleClose}>
-      <div className="popupContent" onClick={(e) => e.stopPropagation()}>
-        <button className="closeButton" onClick={handleClose}>
-          ×
-        </button>
-        <h3>{user.username}'s Deck</h3>
+    <div className="friendDeckPopupRoot">
+      <h3>{user.username}'s Deck</h3>
 
-        <div className="cardsContainer">
-          {deckCards?.map((card, index) => (
-            <Card key={index} card={card} />
-          ))}
-        </div>
+      <div className="cardsContainer">
+        {deckCards?.map((card, index) => (
+          <Card key={index} card={card} />
+        ))}
       </div>
     </div>
   );

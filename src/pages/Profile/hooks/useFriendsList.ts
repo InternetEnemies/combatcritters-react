@@ -4,7 +4,7 @@
  */
 
 import { ClientSingleton } from "ClientSingleton";
-import { IUser } from "combatcritters-ts";
+import { ICard, IDeck, IUser } from "combatcritters-ts";
 import { useEffect, useState } from "react";
 
 export const useFriendsList = (
@@ -13,6 +13,8 @@ export const useFriendsList = (
 ) => {
   const [selectedFriend, setSelectedFriend] = useState<IUser | null>(null);
   const [showDeck, setShowDeck] = useState(false);
+  const [featuredDeck, setFeaturedDeck] = useState<IDeck | null>(null);
+  const [deckCards, setDeckCards] = useState<ICard[] | null>(null);
 
   const onFriendClick = (user: IUser) => {
     setShowDeck(true);
@@ -36,5 +38,34 @@ export const useFriendsList = (
     // eslint-disable-next-line
   }, []);
 
-  return { friends, selectedFriend, setSelectedFriend, showDeck, setShowDeck, onFriendClick };
+  /**
+   * On user change, fetch the user's featured deck and fetch the cards in the deck.
+   */
+  useEffect(() => {
+    if (selectedFriend) {
+      const setDeckAndCards = async () => {
+        try {
+          const featuredD = await selectedFriend.profile.getDeck();
+          setFeaturedDeck(featuredD);
+
+          if (featuredD) {
+            const cards = await featuredD.getCards();
+            setDeckCards(cards);
+          }
+        } catch (error) {
+          console.error("Error during profile fetch:" + error);
+        }
+      };
+      setDeckAndCards();
+    }
+  }, [selectedFriend]);
+
+  return {
+    friends,
+    selectedFriend,
+    setSelectedFriend,
+    showDeck,
+    setShowDeck,
+    onFriendClick,
+  };
 };
