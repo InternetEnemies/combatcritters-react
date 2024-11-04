@@ -9,29 +9,14 @@ import { IDeckValidity } from "combatcritters-ts";
 
 interface ValidityPopupProps {
   deckValidity: IDeckValidity | null;
-  showPopup: boolean;
-  setShowPopup: (show: boolean) => void;
 }
 
 const ValidityPopup: React.FC<ValidityPopupProps> = ({
   deckValidity,
-  showPopup,
-  setShowPopup,
 }) => {
-  if (!showPopup) {
-    return null;
-  }
-
-  const handleOverlayClick = () => {
-    setShowPopup(false);
-  };
 
   return (
-    <div className="validityPopupRoot" onClick={handleOverlayClick}>
-      <div className="popupContent" onClick={(e) => e.stopPropagation()}>
-        <button className="closeButton" onClick={() => setShowPopup(false)}>
-          &times;
-        </button>
+    <div className="validityPopupRoot" >
         <span>Deck Issues:</span>
         {deckValidity ? (
           <ul>
@@ -42,7 +27,6 @@ const ValidityPopup: React.FC<ValidityPopupProps> = ({
         ) : (
           <p>No issues found.</p>
         )}
-      </div>
     </div>
   );
 };
