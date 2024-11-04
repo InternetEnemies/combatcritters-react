@@ -15,6 +15,7 @@ import "./card.css";
 import CardCount from "./CardCount";
 import { ICard } from "combatcritters-ts";
 import { CardRarity } from "combatcritters-ts";
+import {ClientSingleton} from "../../ClientSingleton";
 
 interface CardProps {
   card: ICard;
@@ -45,7 +46,7 @@ const Card: React.FC<CardProps> = ({
     >
       <Header card={card} />
       <div className={`cardInner ${CardRarity[card.rarity]}`}>
-        <CardImage imagePath={"/assets/images/cardImage.jpeg"} />
+        <CardImage imagePath={`${ClientSingleton.mediaRoot}/${card.image}`} />
         <Abilities card={card} />
         <Description card={card} />
       </div>

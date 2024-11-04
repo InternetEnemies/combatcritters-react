@@ -5,6 +5,7 @@
 
 import { IPack } from "combatcritters-ts";
 import "./pack.css";
+import {ClientSingleton} from "../../ClientSingleton";
 
 interface PackProps {
   pack: IPack;
@@ -32,9 +33,7 @@ const Pack: React.FC<PackProps> = ({
       style={{ ...style, width: `${WIDTH}px` }}
     >
       <span className="packName">{pack.name}</span>
-      {/* TODO uncomment this when pack images are addd to the backend in iteration 3 */}
-      {/* <img src={pack.image} className="packImage" alt="Pack" /> */}
-      <img src={"assets/images/pack.png"} className="packImage" alt="Pack" />
+      <img src={`${ClientSingleton.mediaRoot}/${pack.image}`} className="packImage" alt="Pack" />
     </div>
   );
 };
