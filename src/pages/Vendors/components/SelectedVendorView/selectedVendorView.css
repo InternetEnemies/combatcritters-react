@@ -50,7 +50,7 @@
 }
 
 .nameResetContainer .vendorName {
-    font-size: 40px;
+    font-size: 30px;
     align-self: center;
     font-weight: bold;
 }
@@ -59,6 +59,7 @@
   position: absolute;
   top: 15px;
   right: 2px;
+  
 }
 
 .levelBarWrapper {
