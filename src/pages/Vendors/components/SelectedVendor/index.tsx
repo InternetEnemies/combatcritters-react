@@ -4,9 +4,7 @@
  */
 
 import {
-  IDiscountOffer,
   IOffer,
-  ISpecialOffer,
   IVendor,
   IVendorReputation,
 } from "combatcritters-ts";
@@ -28,8 +26,9 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
   setSelectedVendor,
 }) => {
   const [offers, setOffers] = useState<IOffer[]>([]);
-  const [discountOffers, setDiscountOffers] = useState<IDiscountOffer[]>([]);
-  const [specialOffers, setSpecialOffers] = useState<ISpecialOffer[]>([]);
+  //TODO uncomment this
+  // const [discountOffers, setDiscountOffers] = useState<IDiscountOffer[]>([]);
+  // const [specialOffers, setSpecialOffers] = useState<ISpecialOffer[]>([]);
   const [selectedOffer, setSelectedOffer] = useState<IOffer | null>(null);
   const [vendorReputation, setVendorReputation] = useState<IVendorReputation>();
 
