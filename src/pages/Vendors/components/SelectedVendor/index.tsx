@@ -4,9 +4,7 @@
  */
 
 import {
-  IDiscountOffer,
   IOffer,
-  ISpecialOffer,
   IVendor,
   IVendorReputation,
 } from "combatcritters-ts";
@@ -28,8 +26,9 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
   setSelectedVendor,
 }) => {
   const [offers, setOffers] = useState<IOffer[]>([]);
-  const [discountOffers, setDiscountOffers] = useState<IDiscountOffer[]>([]);
-  const [specialOffers, setSpecialOffers] = useState<ISpecialOffer[]>([]);
+  //TODO uncomment this
+  // const [discountOffers, setDiscountOffers] = useState<IDiscountOffer[]>([]);
+  // const [specialOffers, setSpecialOffers] = useState<ISpecialOffer[]>([]);
   const [selectedOffer, setSelectedOffer] = useState<IOffer | null>(null);
   const [vendorReputation, setVendorReputation] = useState<IVendorReputation>();
 
@@ -40,11 +39,13 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
     const fetchOffers = async () => {
       if (selectedVendor) {
         const offers = await selectedVendor.getOffers();
-        const specialOffers = await selectedVendor.getSpecialOffers();
-        const discountOffers = await selectedVendor.discountOffers();
+        //TODO uncomment this
+        // const specialOffers = await selectedVendor.getSpecialOffers();
+        // const discountOffers = await selectedVendor.discountOffers();
         setOffers(offers);
-        setSpecialOffers(specialOffers);
-        setDiscountOffers(discountOffers);
+        //TODO uncomment this
+        // setSpecialOffers(specialOffers);
+        // setDiscountOffers(discountOffers);
         setVendorReputation(selectedVendor.reputation);
       } else {
         setOffers([]);
@@ -88,8 +89,11 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
         <hr className="separator" style={{ alignSelf: "center"}}></hr>
         <div className="offersGridWrapper">
           <OffersGrid
-            discountOffers={discountOffers}
-            specialOffers={specialOffers}
+            //TODO uncomment these once specials and discounts are finished
+            // discountOffers={discountOffers}
+            // specialOffers={specialOffers}
+            discountOffers={[]}
+            specialOffers={[]}
             offers={offers}
             setSelectedOffer={setSelectedOffer}
           />

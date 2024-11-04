@@ -32,7 +32,9 @@ const Pack: React.FC<PackProps> = ({
       style={{ ...style, width: `${WIDTH}px` }}
     >
       <span className="packName">{pack.name}</span>
-      <img src={pack.image} className="packImage" alt="Pack" />
+      {/* TODO uncomment this when pack images are addd to the backend in iteration 3 */}
+      {/* <img src={pack.image} className="packImage" alt="Pack" /> */}
+      <img src={"assets/images/pack.png"} className="packImage" alt="Pack" />
     </div>
   );
 };
