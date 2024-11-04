@@ -1,7 +1,5 @@
 .packsRoot {
   display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 20px;
   background-color: var(--custom-tan);
   background-image: url("/public/assets/backgrounds/pattern-randomized-blue.svg");
