@@ -26,9 +26,7 @@ const SelectionVendorView: React.FC<SelectionVendorViewProps> = ({ onClick, vend
         alt="Vendor"
       />
       <div className="vendorName">{vendor.name}</div>
-      {/* TODO: this should be refreshTime={vendor.refreshTime} once integrated */}
-      {/* https://github.com/InternetEnemies/combatcritters-react/issues/58 */}
-      <Refresh refreshTime="2024-11-04T20:16:59.879440" style={{color:"var(--custom-white)"}}/>
+      <Refresh refreshTime={vendor.refrest_time} style={{color:"var(--custom-white)"}}/>
       <LevelBar reputation={vendor.reputation} scaleLength={.8} scale={.8}/>
     </div>
   );
