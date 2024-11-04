@@ -3,11 +3,10 @@
  * @Brief Popup for viewing a friends featured deck.
  */
 
-import React, { useState } from "react";
+import React from "react";
 import { IUser } from "combatcritters-ts";
 import "./friendDeckPopup.css";
 import { IDeck } from "combatcritters-ts";
-import { useEffect } from "react";
 import { ICard } from "combatcritters-ts";
 import Card from "components/Card";
 
@@ -17,32 +16,11 @@ interface FriendDeckPopupProps {
   deckCards: ICard[] | null;
 }
 
-const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({ friend, deck, deckCards }) => {
-  // const [featuredDeck, setFeaturedDeck] = useState<IDeck | null>(null);
-  // const [deckCards, setDeckCards] = useState<ICard[] | null>(null);
-
-  /**
-   * On user change, fetch the user's featured deck and fetch the cards in the deck.
-   */
-  // useEffect(() => {
-  //   if (user) {
-  //     const setDeckAndCards = async () => {
-  //       try {
-  //         const featuredD = await user.profile.getDeck();
-  //         setFeaturedDeck(featuredD);
-
-  //         if (featuredD) {
-  //           const cards = await featuredD.getCards();
-  //           setDeckCards(cards);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error during profile fetch:" + error);
-  //       }
-  //     };
-  //     setDeckAndCards();
-  //   }
-  // }, [user]);
-
+const FriendDeckPopup: React.FC<FriendDeckPopupProps> = ({
+  friend,
+  deck,
+  deckCards,
+}) => {
   if (!friend || !deck || !deckCards) {
     return null;
   }
