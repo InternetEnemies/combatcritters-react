@@ -27,10 +27,8 @@ const VendorSelection: React.FC<VendorSelectionProps> = ({
 
   return (
     <div className="vendorSelectionRoot">
-      {/* TODO: Remove the slice function once integrated*/}
-      {/* https://github.com/InternetEnemies/combatcritters-react/issues/58 */}
       <div className="vendorViewGrid">
-        {vendors.slice(0, 5).map((vendor, index) => {
+        {vendors.map((vendor, index) => {
           return (
             <VendorView
               key={index}

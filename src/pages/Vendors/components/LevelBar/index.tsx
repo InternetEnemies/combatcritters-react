@@ -3,7 +3,7 @@
  * @Brief The level progress bar view of a vendor.
  */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./levelBar.css";
 import { IVendorReputation } from "combatcritters-ts";
 
@@ -21,14 +21,15 @@ const LevelBar: React.FC<LevelBarProps> = ({
   const WIDTH = 300 * scale * scaleLength; //Default width * scale * scaleLength
   const HEIGHT = 30 * scale; //Default height * scale
 
-  //TODO use this instead
-  // https://github.com/InternetEnemies/combatcritters-react/issues/60
-  //  const progressPercentage = ((reputation.current_xp - reputation.prev_level_xp) - (reputation.next_level_xp - reputation.prev_level_xp)) * 100;
-  const progressPercentage = 45;
+  const [progressPercentage, setProgressPercentage] = useState<number>(0);
+
+
 
   // On reputation change, update the progress bar.
   useEffect(() => {
-    console.log(reputation.current_xp / reputation.next_level_xp);
+    setProgressPercentage(
+      (reputation.current_xp / reputation.next_level_xp) * 100
+    );
   }, [reputation]);
 
   return (

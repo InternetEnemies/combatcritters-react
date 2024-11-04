@@ -33,10 +33,8 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
       <div className="nameRepResetContainer">
         <div className="nameResetContainer">
           <span className="vendorName">{vendor.name}</span>
-          {/* TODO: this should be refreshTime={vendor.refreshTime} once integrated */}
-          {/* https://github.com/InternetEnemies/combatcritters-react/issues/58 */}
           <div className="refreshTimeWrapper">
-            <Refresh refreshTime="2024-10-27T20:16:59.879440" style={{color:"var(--custom-black)"}}/>
+            <Refresh refreshTime={vendor.refrest_time} style={{color:"var(--custom-black)"}}/>
           </div>
         </div>
         <div className="levelBarWrapper">
