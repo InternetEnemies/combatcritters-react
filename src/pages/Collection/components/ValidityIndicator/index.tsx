@@ -3,13 +3,14 @@
  * @Brief Deck validity indicator.
  */
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./validityIndicator.css";
 import { ISortableDeck } from "interfaces/ISortableDeck";
-import { DeckValidity, ICard, IDeckValidity } from "combatcritters-ts";
+import { ICard, IDeckValidity } from "combatcritters-ts";
 import { ClientSingleton } from "ClientSingleton";
 import ValidityPopup from "../ValidityPopup";
 import { toast } from "react-toastify";
+import Popup from "components/Popup";
 
 interface ValidityIndicatorProps {
   localDeck: ISortableDeck | null;
@@ -36,35 +37,44 @@ const ValidityIndicator: React.FC<ValidityIndicatorProps> = ({ localDeck }) => {
       }
     };
 
-    validateDeck(); 
+    validateDeck();
   }, [localDeck]);
 
-
+  /**
+   * Don't display an indicator if there isn't a selected deck.
+   */
   if (!localDeck || !deckValidity) {
     return <div></div>;
   }
 
   const handleClick = () => {
-    deckValidity.isValid ? (toast("Deck is Valid")) : (setShowPopup(true));
-  }
+    deckValidity.isValid ? toast("Deck is Valid") : setShowPopup(true);
+    console.log("Indicator clicking");
+  };
 
   return (
-    <div className="validityIndicatorRoot" onClick={handleClick}>
-      {deckValidity.isValid ? (
-        <img
-          src="assets/images/checkmark.svg"
-          alt="Checkmark"
-          className="validityIndicator"
-        />
-      ) : (
-        <img
-          src="assets/images/cross.svg"
-          alt="Invalid"
-          className="validityIndicator"
-        />
-      )}
-      <ValidityPopup deckValidity={deckValidity} showPopup={showPopup} setShowPopup={setShowPopup}/>
-    </div>
+    <>
+      <div className="validityIndicatorRoot" onClick={handleClick}>
+        {deckValidity.isValid ? (
+          <img
+            src="assets/images/checkmark.svg"
+            alt="Checkmark"
+            className="validityIndicator"
+          />
+        ) : (
+          <img
+            src="assets/images/cross.svg"
+            alt="Invalid"
+            className="validityIndicator"
+          />
+        )}
+      </div>
+      <Popup
+        popupContent={<ValidityPopup deckValidity={deckValidity} />}
+        isVisible={showPopup}
+        setIsVisible={setShowPopup}
+      />
+    </>
   );
 };
 
