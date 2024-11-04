@@ -86,7 +86,7 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
             />
           ) : null}
         </div>
-        <hr className="separator" style={{ alignSelf: "center" }}></hr>
+        <hr className="separator" style={{ alignSelf: "center"}}></hr>
         <div className="offersGridWrapper">
           <OffersGrid
             //TODO uncomment these once specials and discounts are finished

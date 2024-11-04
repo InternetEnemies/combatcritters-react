@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    background-color: var(--custom-mint-green);
+    background-color: #82A48D;
     border-radius: 5px;
     color: var(--custom-black);
     border: 1px solid var(--custom-cream);

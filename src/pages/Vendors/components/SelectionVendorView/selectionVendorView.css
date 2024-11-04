@@ -7,10 +7,22 @@
     flex-direction: column;
     align-items: center;
     color: var(--custom-white);
+    border: 1px solid rgba(var(--custom-cream-rgb),.3);
+    gap: 3px;
+    border-radius: 3px;
+}
+
+.selectionVendorViewRoot .vendorName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    background-color: #444;
 }
 
 .vendorImage {
     margin-top:10px;
     width: 80%;
     height: auto;
+    border: 3px solid rgba(var(--custom-cream-rgb),.2);
 }
