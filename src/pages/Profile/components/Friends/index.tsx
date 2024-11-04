@@ -6,33 +6,26 @@
 
 import React, { useEffect, useState } from "react";
 import "./friends.css";
-import { useFriendsList } from "pages/Profile/hooks/useFriendsList";
 import FriendDeckPopup from "pages/Profile/components/FriendDeckPopup";
 import { ICard, IDeck, IUser } from "combatcritters-ts";
 import Popup from "components/Popup";
 import { ClientSingleton } from "ClientSingleton";
+import { toast } from "react-toastify";
 
 interface FriendsProps {
   friends: IUser[];
   setFriends: (friends: IUser[]) => void;
 }
 const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
-  // const {
-  //   selectedFriend,
-  //   setSelectedFriend,
-  //   showDeck,
-  //   setShowDeck,
-  //   onFriendClick,
-  // } = useFriendsList(friends, setFriends);
-
   const [selectedFriend, setSelectedFriend] = useState<IUser | null>(null);
   const [showDeck, setShowDeck] = useState(false);
   const [featuredDeck, setFeaturedDeck] = useState<IDeck | null>(null);
-  const [featuredDeckCards, setFeaturedDeckCards] = useState<ICard[] | null>(null);
+  const [featuredDeckCards, setFeaturedDeckCards] = useState<ICard[] | null>(
+    null
+  );
 
   const onFriendClick = (user: IUser) => {
     setSelectedFriend(user);
-    setShowDeck(true);
   };
 
   /**
@@ -53,7 +46,7 @@ const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
   }, []);
 
   /**
-   * On user change, fetch the user's featured deck and fetch the cards in the deck.
+   * On selectedFriend change, fetch and set the user's featuredDeck and the user's featuredDeckCards.
    */
   useEffect(() => {
     if (selectedFriend) {
@@ -67,12 +60,23 @@ const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
             setFeaturedDeckCards(cards);
           }
         } catch (error) {
+          toast(selectedFriend.username + " has no Featured Deck");
           console.error("Error during profile fetch:" + error);
         }
       };
       setDeckAndCards();
     }
   }, [selectedFriend]);
+
+  /**
+   * On featuredDeckCards change, display the featured deck. When featuredDeckCards is !null
+   * the popup will be displayed.
+   */
+  useEffect(() => {
+    if (featuredDeckCards) {
+      setShowDeck(true);
+    }
+  }, [featuredDeckCards]);
 
   const handlePopupClose = () => {
     setSelectedFriend(null);
@@ -100,7 +104,13 @@ const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
       </ul>
       {
         <Popup
-          popupContent={<FriendDeckPopup friend={selectedFriend} deck={featuredDeck} deckCards={featuredDeckCards}/>}
+          popupContent={
+            <FriendDeckPopup
+              friend={selectedFriend}
+              deck={featuredDeck}
+              deckCards={featuredDeckCards}
+            />
+          }
           isVisible={showDeck}
           setIsVisible={setShowDeck}
           onClose={handlePopupClose}
