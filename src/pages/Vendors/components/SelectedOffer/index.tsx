@@ -39,7 +39,10 @@ const SelectedOffer: React.FC<SelectedOfferProps> = ({
     const acceptOffer = async () => {
       if (offer) {
         try {
-          await handleTransaction(offer.accept); //CurrencyContext should handle transaction
+          const acceptOffer = async () => {
+            await offer.accept();
+          }
+          await handleTransaction(acceptOffer); //CurrencyContext should handle transaction
           refreshVendorReputation(); //Vendor rep should increase
           toast("Transaction Successful!");
         } catch (error) {
