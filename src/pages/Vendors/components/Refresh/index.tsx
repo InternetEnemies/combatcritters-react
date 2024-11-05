@@ -3,7 +3,7 @@
  * @Brief Countdown component.
  */
 import React, { useEffect, useState } from "react";
-import { calculateCountdown } from "utils/time";
+import { calculateCountdown } from "pages/Vendors/utils/timeUtils";
 import "./refresh.css";
 
 interface RefreshProps {
