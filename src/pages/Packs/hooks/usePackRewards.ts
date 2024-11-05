@@ -6,11 +6,10 @@
 import { IUserPack } from "combatcritters-ts";
 import { useState } from "react";
 import { ICard } from "combatcritters-ts";
-import { ClientSingleton } from "ClientSingleton";
 
 export const usePackRewards = (
   setIsSidebarVisible: (isVisible: boolean) => void, //Close the sidebar when the rewards popup appears
-  setPacks: (packs: IUserPack[]) => void //Update the packs when a pack is opened
+  fetchAndSetPacks: () => void //Update the packs when a pack is opened
 ) => {
   const [rewards, setRewards] = useState<ICard[]>([]);
   const [isPackRewardsVisible, setIsPackRewardsVisible] =
@@ -23,10 +22,7 @@ export const usePackRewards = (
       setRewards(openedRewards);
       setIsPackRewardsVisible(true);
       setIsSidebarVisible(false);
-      const packs = await ClientSingleton.getInstance().user.packs.getPacks();
-      setPacks(packs.map((packStack)=> {
-        return packStack.getItem();
-      }));
+      fetchAndSetPacks();
     } catch (error) {
       console.log("Error opening pack:" + error);
       setRewards([]);

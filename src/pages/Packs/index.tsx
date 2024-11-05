@@ -13,12 +13,12 @@ import { usePackRewards } from "./hooks/usePackRewards";
 const Packs = () => {
   const {
     packs,
-    setPacks,
     selectedPack,
     setSelectedPack,
     isSidebarVisible,
     setIsSidebarVisible,
     handlePackClick,
+    fetchAndSetPacks
   } = usePackBrowser();
 
   const {
@@ -26,7 +26,7 @@ const Packs = () => {
     isPackRewardsVisible,
     setIsPackRewardsVisible,
     openPack,
-  } = usePackRewards(setIsSidebarVisible, setPacks);
+  } = usePackRewards(setIsSidebarVisible, fetchAndSetPacks);
 
   return (
     <div className="packsRoot">
