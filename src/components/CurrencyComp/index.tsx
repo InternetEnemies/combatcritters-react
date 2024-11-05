@@ -17,19 +17,25 @@ const CurrencyComp: React.FC<CurrencyCompProps> = ({
   style,
   scale = 1,
 }) => {
-  const WIDTH: number = 40 * scale; //The default width of the currency * scale
+  const FONT_SIZE: number = 1 * scale; //The default width of the currency * scale
   const GAP: number = 3 * scale; // The default gap * scale
 
   return (
     <div
       className="currencyRoot"
-      style={{ ...style, width: `${WIDTH}px`, gap: `${GAP}px` }}
+      style={{
+        ...style,
+        fontSize: `${FONT_SIZE}em`,
+        gap: `${GAP}px`,
+        lineHeight: 1,
+      }}
     >
       <span className="currencyAmount">{amount}</span>
       <img
         className="currencyImage"
         src="assets/images/currency.svg"
         alt="Currency"
+        style={{ height: `${FONT_SIZE}em` }}
       />
     </div>
   );

@@ -65,22 +65,13 @@
   padding: 0;
   outline: none;
 }
-
 .currencyAndProfileContainer {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 33px;
-  position: relative;
+  gap: 21px; 
 }
 
-.currencyAndProfileContainer::before {
-  content: "";
-  position: absolute;
-  left: 57%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+.currencyAndProfileContainer .divider {
   width: 1px;
   height: 24px;
   background-color: rgba(var(--custom-cream-rgb), 0.5);
