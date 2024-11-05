@@ -7,11 +7,8 @@ import { IVendor, IVendorReputation } from "combatcritters-ts";
 import "./selectedVendorView.css";
 import LevelBar from "../LevelBar";
 import Refresh from "../Refresh";
-import { useEffect } from "react";
 
 interface SelectedVendorViewProps {
-  //Not the most elegant solution. I am passing this here because I need to
-  //re-render whenever the vendor reputation changes.
   vendorReputation: IVendorReputation;
   vendor: IVendor;
   vendorLevel: number;
