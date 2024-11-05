@@ -40,7 +40,6 @@ const SelectedOffer: React.FC<SelectedOfferProps> = ({
     const acceptOffer = async () => {
       if (offer) {
         try {
-         
           const acceptOffer = async () => {
             let purchaseStatus = await offer.accept();
             onOfferAccept(purchaseStatus.reputation);
@@ -48,10 +47,10 @@ const SelectedOffer: React.FC<SelectedOfferProps> = ({
 
           await handleTransaction(acceptOffer); //CurrencyContext should handle transaction
 
-          toast("Transaction Successful!");
+          toast("Transaction Successful!", { toastId: "transactionSuccessful" });
         } catch (error) {
           console.log("Error accepting offer:" + error);
-          toast("Error accepting offer");
+          toast("Error accepting offer", {toastId: "errorAcceptingOffer"});
           return;
         }
       }
@@ -60,7 +59,7 @@ const SelectedOffer: React.FC<SelectedOfferProps> = ({
     if (userOfferState?.canPurchase) {
       acceptOffer();
     } else {
-      toast("Missing Required Items");
+      toast("Missing Required Items", {toastId: "missingItems"});
     }
   };
 

@@ -48,7 +48,7 @@ const ValidityIndicator: React.FC<ValidityIndicatorProps> = ({ localDeck }) => {
   }
 
   const handleClick = () => {
-    deckValidity.isValid ? toast("Deck is Valid") : setShowPopup(true);
+    deckValidity.isValid ? toast.success("Deck is Valid", {toastId: "validDeck"}) : setShowPopup(true);
     console.log("Indicator clicking");
   };
 
