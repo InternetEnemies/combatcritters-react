@@ -43,7 +43,7 @@ const CreateDeck: React.FC<CreateDeckProps> = ({ onCreateDeck }) => {
 
   const handleCreateDeck = () => {
     if (!deckName.trim()) {
-      toast.error("Deck name cannot be empty!");
+      toast.error("Deck name cannot be empty!", {toastId: "deckError"});
       return;
     }
 
