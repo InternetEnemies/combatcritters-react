@@ -15,8 +15,12 @@
 
 .cardName {
   font-size: 7cqw;
-  font-family: 'mtgBold', sans-serif; 
-  color: white; 
+  font-family: 'mtgBold', sans-serif;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  max-width: 100%;
 }
 
 .headerRoot.COMMON {
