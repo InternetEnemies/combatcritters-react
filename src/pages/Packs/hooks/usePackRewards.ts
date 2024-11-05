@@ -23,7 +23,6 @@ export const usePackRewards = (
       setRewards(openedRewards);
       setIsPackRewardsVisible(true);
       setIsSidebarVisible(false);
-      const packs = await ClientSingleton.getInstance().user.packs.getPacks();
       fetchAndSetPacks();
     } catch (error) {
       console.log("Error opening pack:" + error);
