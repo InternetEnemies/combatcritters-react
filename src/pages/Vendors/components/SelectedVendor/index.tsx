@@ -3,11 +3,7 @@
  * @Brief Separate page for the selected vendor.
  */
 
-import {
-  IOffer,
-  IVendor,
-  IVendorReputation,
-} from "combatcritters-ts";
+import { IOffer, IVendor, IVendorReputation } from "combatcritters-ts";
 import "./selectedVendor.css";
 import { useEffect, useState } from "react";
 import OffersGrid from "../OffersGrid";
@@ -31,33 +27,59 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
   // const [specialOffers, setSpecialOffers] = useState<ISpecialOffer[]>([]);
   const [selectedOffer, setSelectedOffer] = useState<IOffer | null>(null);
   const [vendorReputation, setVendorReputation] = useState<IVendorReputation>();
+  const [vendorLevel, setVendorLevel] = useState<number>(0);
+  const [vendorLevelProgress, setVendorLevelProgress] = useState<number>(0);
 
   /*
-    On vendor select, fetch all the different types of offers from the selectedVendor.
+    On vendor select, fetch and set all the different types of offers from the selectedVendor.
   */
   useEffect(() => {
-    const fetchOffers = async () => {
-      if (selectedVendor) {
-        const offers = await selectedVendor.getOffers();
-        //TODO uncomment this
-        // const specialOffers = await selectedVendor.getSpecialOffers();
-        // const discountOffers = await selectedVendor.discountOffers();
-        setOffers(offers);
-        //TODO uncomment this
-        // setSpecialOffers(specialOffers);
-        // setDiscountOffers(discountOffers);
-        setVendorReputation(selectedVendor.reputation);
-      } else {
-        setOffers([]);
-      }
-    };
     setSelectedOffer(null); //There shouldn't be any selectedOffer when a new vendor has been selected.
-    fetchOffers();
+    fetchAndSetOffers();
+    if (selectedVendor) {
+      updateReputation(selectedVendor.reputation);
+      console.log("Curr time: " + Date.now());
+      console.log(
+        "Refresh time: " + new Date(selectedVendor.refrest_time).getTime()
+      );
+      console.log("Refresh time string: " + selectedVendor.refrest_time);
+    }
   }, [selectedVendor]);
 
-  const handleButtonClick = () => {
-    setSelectedVendor(null);
+  /**
+   *
+   * @param reputation
+   */
+  const updateReputation = (reputation: IVendorReputation) => {
+    setVendorReputation(reputation);
+    setVendorLevel(reputation.level);
+    setVendorLevelProgress(
+      ((reputation.current_xp - reputation.prev_level_xp) /
+        (reputation.next_level_xp - reputation.prev_level_xp)) *
+        100
+    );
   };
+
+  const fetchAndSetOffers = async () => {
+    if (selectedVendor) {
+      const offers = await selectedVendor.getOffers();
+      //TODO uncomment this
+      // const specialOffers = await selectedVendor.getSpecialOffers();
+      // const discountOffers = await selectedVendor.discountOffers();
+      setOffers(offers);
+      //TODO uncomment this
+      // setSpecialOffers(specialOffers);
+      // setDiscountOffers(discountOffers);
+    } else {
+      setOffers([]);
+    }
+
+    refreshVendorReputation();
+  };
+
+  // const handleButtonClick = () => {
+  //   setSelectedVendor(null);
+  // };
 
   /**
    * Re-render vendorReputation
@@ -74,7 +96,12 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
 
   return (
     <div className="selectedVendorRoot">
-      <button onClick={handleButtonClick} className="vendorSelectionButton">
+      <button
+        onClick={() => {
+          setSelectedVendor(null);
+        }}
+        className="vendorSelectionButton"
+      >
         Vendor Selection
       </button>
       <div className="vendorViewAndOffersContainer">
@@ -83,10 +110,13 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
             <SelectedVendorView
               vendor={selectedVendor}
               vendorReputation={vendorReputation}
+              vendorLevel={vendorLevel}
+              vendorLevelProgress={vendorLevelProgress}
+              onLevelUp={fetchAndSetOffers}
             />
           ) : null}
         </div>
-        <hr className="separator" style={{ alignSelf: "center"}}></hr>
+        <hr className="separator" style={{ alignSelf: "center" }}></hr>
         <div className="offersGridWrapper">
           <OffersGrid
             //TODO uncomment these once specials and discounts are finished

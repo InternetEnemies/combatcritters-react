@@ -8,44 +8,55 @@ import "./levelBar.css";
 import { IVendorReputation } from "combatcritters-ts";
 
 interface LevelBarProps {
-  reputation: IVendorReputation;
+  vendorReputation: IVendorReputation;
+  vendorLevel?: number;
+  vendorLevelProgress?: number;
+  onLevelUp?: () => Promise<void>;
   scale?: number; //Scales both the length and height
   scaleLength?: number; //Strictly scales the length of the progress bar
 }
 
 const LevelBar: React.FC<LevelBarProps> = ({
-  reputation,
+  vendorReputation,
+  vendorLevel = vendorReputation.level,
+  vendorLevelProgress = ((vendorReputation.current_xp -
+    vendorReputation.prev_level_xp) /
+    (vendorReputation.next_level_xp - vendorReputation.prev_level_xp)) *
+    100,
+  onLevelUp = () => {},
   scale = 1,
   scaleLength = 1,
 }) => {
   const WIDTH = 300 * scale * scaleLength; //Default width * scale * scaleLength
   const HEIGHT = 30 * scale; //Default height * scale
-
-  const [progressPercentage, setProgressPercentage] = useState<number>(0);
-
-
-
-  // On reputation change, update the progress bar.
+  // On level up, callback to the parent component.
   useEffect(() => {
-    setProgressPercentage(
-      (reputation.current_xp / reputation.next_level_xp) * 100
-    );
-  }, [reputation]);
+    const levelUp = async () => {
+      try {
+        await onLevelUp();
+      } catch (error) {
+        console.log("Error on level up: " + error);
+      }
+    };
+    levelUp();
+  }, [vendorLevel]);
 
   return (
     <div
       className="levelBarRoot"
       style={{ width: `${WIDTH}px`, height: `${HEIGHT}px` }}
     >
-      <div className="currAndNextLevelContainer">{reputation.level}</div>
+      <div className="currAndNextLevelContainer">{vendorLevel}</div>
       <div className="progressBar">
         {" "}
         <div
           className="progressFill"
-          style={{ width: `${progressPercentage}%` }}
+          style={{
+            width: `${vendorLevelProgress}%`,
+          }}
         ></div>
       </div>
-      <div className="currAndNextLevelContainer">{reputation.level + 1}</div>
+      <div className="currAndNextLevelContainer">{vendorLevel + 1}</div>
     </div>
   );
 };

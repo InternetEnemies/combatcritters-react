@@ -7,19 +7,27 @@ import { IVendor, IVendorReputation } from "combatcritters-ts";
 import "./selectedVendorView.css";
 import LevelBar from "../LevelBar";
 import Refresh from "../Refresh";
+import { useEffect } from "react";
 
 interface SelectedVendorViewProps {
   //Not the most elegant solution. I am passing this here because I need to
   //re-render whenever the vendor reputation changes.
   vendorReputation: IVendorReputation;
   vendor: IVendor;
+  vendorLevel: number;
+  vendorLevelProgress: number;
+  onLevelUp: () => Promise<void>;
 }
 
 const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
   vendorReputation,
   vendor,
+  vendorLevel = vendorReputation.level,
+  vendorLevelProgress,
+  onLevelUp,
 }) => {
   const LEVEL_BAR_SCALE = 2;
+
   return (
     <div className="selectedVendorViewRoot">
       <div className="selectedVendorImageWrapper">
@@ -34,11 +42,20 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
         <div className="nameResetContainer">
           <span className="vendorName">{vendor.name}</span>
           <div className="refreshTimeWrapper">
-            <Refresh refreshTime={vendor.refrest_time} style={{color:"var(--custom-black)"}}/>
+            <Refresh
+              refreshTime={vendor.refrest_time}
+              style={{ color: "var(--custom-black)" }}
+            />
           </div>
         </div>
         <div className="levelBarWrapper">
-          <LevelBar reputation={vendorReputation} scaleLength={LEVEL_BAR_SCALE}/>
+          <LevelBar
+            vendorReputation={vendorReputation}
+            vendorLevel={vendorLevel}
+            vendorLevelProgress={vendorLevelProgress}
+            onLevelUp={onLevelUp}
+            scaleLength={LEVEL_BAR_SCALE}
+          />
         </div>
       </div>
     </div>

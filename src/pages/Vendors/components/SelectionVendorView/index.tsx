@@ -27,7 +27,7 @@ const SelectionVendorView: React.FC<SelectionVendorViewProps> = ({ onClick, vend
       />
       <div className="vendorName">{vendor.name}</div>
       <Refresh refreshTime={vendor.refrest_time} style={{color:"var(--custom-white)"}}/>
-      <LevelBar reputation={vendor.reputation} scaleLength={.8} scale={.8}/>
+      <LevelBar vendorReputation={vendor.reputation} scaleLength={.8} scale={.8}/>
     </div>
   );
 };
