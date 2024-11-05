@@ -8,6 +8,7 @@ import { IClient } from "combatcritters-ts";
 
 export class ClientSingleton {
   private static instance: IClient | undefined;
+  public static mediaRoot: string = process.env.REACT_APP_MEDIA_ROOT ?? "https://combatcritters.s3.us-east-1.amazonaws.com"
 
   private constructor() {}
 
