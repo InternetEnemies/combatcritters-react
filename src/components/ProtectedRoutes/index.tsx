@@ -1,14 +1,23 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { ClientSingleton } from "ClientSingleton";
-
-const useAuth = () => {
-  return ClientSingleton.getInstance().isLoggedIn();
-};
+import {useEffect, useState} from "react";
 
 const ProtectedRoutes = () => {
-  const isAuth = useAuth();
+  const [isAuth, setAuth] = useState(false);
+  let [isReady, setReady] = useState(false);
+  useEffect(() => {
+    const updateAuth = async () => {
+      setAuth(await ClientSingleton.getInstance().isLoggedIn());
+      setReady(true);
+    }
+    updateAuth();
+  }, []);
 
-  return isAuth ? <Outlet /> : <Navigate to="/login" />;
+  if (isReady) {
+    return isAuth ? <Outlet /> : <Navigate to="/login" />;
+  } else {
+    return <div></div>
+  }
 };
 
 export default ProtectedRoutes;
