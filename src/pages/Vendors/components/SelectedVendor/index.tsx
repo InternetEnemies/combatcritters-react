@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import OffersGrid from "../OffersGrid";
 import SelectedOffer from "../SelectedOffer";
 import SelectedVendorView from "../SelectedVendorView";
+import { calcRepProgress } from "pages/Vendors/utils/levelBarUtils";
 
 interface SelectedVendorProps {
   isVisible: boolean;
@@ -38,25 +39,19 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
     fetchAndSetOffers();
     if (selectedVendor) {
       updateReputation(selectedVendor.reputation);
-      console.log("Curr time: " + Date.now());
-      console.log(
-        "Refresh time: " + new Date(selectedVendor.refrest_time).getTime()
-      );
-      console.log("Refresh time string: " + selectedVendor.refrest_time);
     }
   }, [selectedVendor]);
 
   /**
-   *
-   * @param reputation
+   * Sets the various repution states.
+   * 
+   * @param reputation Reputation of the vendor.
    */
   const updateReputation = (reputation: IVendorReputation) => {
     setVendorReputation(reputation);
     setVendorLevel(reputation.level);
     setVendorLevelProgress(
-      ((reputation.current_xp - reputation.prev_level_xp) /
-        (reputation.next_level_xp - reputation.prev_level_xp)) *
-        100
+      calcRepProgress(reputation)
     );
   };
 
@@ -76,10 +71,6 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
 
     refreshVendorReputation();
   };
-
-  // const handleButtonClick = () => {
-  //   setSelectedVendor(null);
-  // };
 
   /**
    * Re-render vendorReputation
@@ -112,7 +103,7 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
               vendorReputation={vendorReputation}
               vendorLevel={vendorLevel}
               vendorLevelProgress={vendorLevelProgress}
-              onLevelUp={fetchAndSetOffers}
+              onLevelUp={fetchAndSetOffers} //On level up, refresh all the offers
             />
           ) : null}
         </div>
@@ -133,7 +124,7 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
         <SelectedOffer
           offer={selectedOffer}
           vendorName={selectedVendor ? selectedVendor.name : "Vendor"}
-          refreshVendorReputation={refreshVendorReputation}
+          onOfferAccept={updateReputation}
         />
       </div>
     </div>
