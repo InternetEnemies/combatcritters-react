@@ -16,7 +16,7 @@ const ProtectedRoutes = () => {
   if (isReady) {
     return isAuth ? <Outlet /> : <Navigate to="/login" />;
   } else {
-    return <p>loading...</p>
+    return <div></div>
   }
 };
 
