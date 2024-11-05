@@ -1,6 +1,6 @@
 .cardImage {
     width: 75%;
-    height:auto;
+    aspect-ratio: 1;
     justify-content: center;
     border: 1.4cqw solid var(--border-color);
     box-sizing: content-box;
