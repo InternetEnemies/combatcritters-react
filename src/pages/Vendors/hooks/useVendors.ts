@@ -17,10 +17,6 @@ export const useVendors = () => {
   const [selectedVendorVisible, setSelectedVendorVisible] =
     useState<boolean>(false);
 
-  /*
-    On mount, fetch the vendors.
-  */
-  useEffect(() => {
     const fetchVendors = async () => {
       try {
         const fetchedVendors =
@@ -29,8 +25,11 @@ export const useVendors = () => {
       } catch (error) {
         console.error("Error fetching vendors:", error);
       }
-    };
-
+    }
+  /*
+    On mount, fetch the vendors.
+  */
+  useEffect(() => {
     fetchVendors();
   }, []);
 
@@ -45,6 +44,7 @@ export const useVendors = () => {
     } else {
       setSelectedVendorVisible(false);
       setVendorSelectionVisible(true);
+      fetchVendors();
     }
   }, [selectedVendor]);
 

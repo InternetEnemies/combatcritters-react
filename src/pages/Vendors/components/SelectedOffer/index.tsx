@@ -9,6 +9,7 @@ import {
   IOffer,
   IPack,
   IUserOfferState,
+  IVendorReputation,
 } from "combatcritters-ts";
 import "./selectedOffer.css";
 import { useEffect, useState } from "react";
@@ -21,13 +22,13 @@ import { useCurrency } from "contexts/CurrencyContext";
 interface SelectedOfferProps {
   offer: IOffer | null;
   vendorName: string;
-  refreshVendorReputation: () => void;
+  onOfferAccept: (reputation: IVendorReputation) => void; //Update the vendor's reputation on offer accept.
 }
 
 const SelectedOffer: React.FC<SelectedOfferProps> = ({
   offer,
   vendorName,
-  refreshVendorReputation,
+  onOfferAccept,
 }) => {
   const [userOfferState, setUserOfferState] = useState<IUserOfferState<
     IPack | ICard | ICurrency
@@ -39,11 +40,14 @@ const SelectedOffer: React.FC<SelectedOfferProps> = ({
     const acceptOffer = async () => {
       if (offer) {
         try {
+         
           const acceptOffer = async () => {
-            await offer.accept();
-          }
+            let purchaseStatus = await offer.accept();
+            onOfferAccept(purchaseStatus.reputation);
+          };
+
           await handleTransaction(acceptOffer); //CurrencyContext should handle transaction
-          refreshVendorReputation(); //Vendor rep should increase
+
           toast("Transaction Successful!");
         } catch (error) {
           console.log("Error accepting offer:" + error);
