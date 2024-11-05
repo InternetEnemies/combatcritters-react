@@ -6,12 +6,13 @@
 import React, { useEffect, useState } from "react";
 import "./levelBar.css";
 import { IVendorReputation } from "combatcritters-ts";
+import { calcRepProgress } from "pages/Vendors/utils/levelBarUtils";
 
 interface LevelBarProps {
   vendorReputation: IVendorReputation;
   vendorLevel?: number;
   vendorLevelProgress?: number;
-  onLevelUp?: () => Promise<void>;
+  onLevelUp?: () => Promise<void>; //Optional callback to execute on vendor level up
   scale?: number; //Scales both the length and height
   scaleLength?: number; //Strictly scales the length of the progress bar
 }
@@ -19,16 +20,14 @@ interface LevelBarProps {
 const LevelBar: React.FC<LevelBarProps> = ({
   vendorReputation,
   vendorLevel = vendorReputation.level,
-  vendorLevelProgress = ((vendorReputation.current_xp -
-    vendorReputation.prev_level_xp) /
-    (vendorReputation.next_level_xp - vendorReputation.prev_level_xp)) *
-    100,
-  onLevelUp = () => {},
+  vendorLevelProgress = calcRepProgress(vendorReputation),
+  onLevelUp = () => Promise.resolve(),
   scale = 1,
   scaleLength = 1,
 }) => {
   const WIDTH = 300 * scale * scaleLength; //Default width * scale * scaleLength
   const HEIGHT = 30 * scale; //Default height * scale
+
   // On level up, callback to the parent component.
   useEffect(() => {
     const levelUp = async () => {
