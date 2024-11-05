@@ -3,7 +3,7 @@
  * @Brief The level progress bar view of a vendor.
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./levelBar.css";
 import { IVendorReputation } from "combatcritters-ts";
 import { calcRepProgress } from "pages/Vendors/utils/levelBarUtils";
@@ -38,7 +38,7 @@ const LevelBar: React.FC<LevelBarProps> = ({
       }
     };
     levelUp();
-  }, [vendorLevel]);
+  }, [vendorLevel, onLevelUp]);
 
   return (
     <div

@@ -40,6 +40,7 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
     if (selectedVendor) {
       updateReputation(selectedVendor.reputation);
     }
+    //eslint-disable-next-line
   }, [selectedVendor]);
 
   /**
@@ -55,23 +56,6 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
     );
   };
 
-  const fetchAndSetOffers = async () => {
-    if (selectedVendor) {
-      const offers = await selectedVendor.getOffers();
-      //TODO uncomment this
-      // const specialOffers = await selectedVendor.getSpecialOffers();
-      // const discountOffers = await selectedVendor.discountOffers();
-      setOffers(offers);
-      //TODO uncomment this
-      // setSpecialOffers(specialOffers);
-      // setDiscountOffers(discountOffers);
-    } else {
-      setOffers([]);
-    }
-
-    refreshVendorReputation();
-  };
-
   /**
    * Re-render vendorReputation
    */
@@ -79,6 +63,25 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
     if (selectedVendor) {
       setVendorReputation(selectedVendor.reputation);
     }
+  };
+
+  const fetchAndSetOffers = async () => {
+    if (selectedVendor) {
+      const offers = await selectedVendor.getOffers();
+      //TODO uncomment this
+      //https://github.com/InternetEnemies/combatcritters-react/issues/54
+      // const specialOffers = await selectedVendor.getSpecialOffers();
+      // const discountOffers = await selectedVendor.discountOffers();
+      setOffers(offers);
+      //TODO uncomment this
+      //https://github.com/InternetEnemies/combatcritters-react/issues/54
+      // setSpecialOffers(specialOffers);
+      // setDiscountOffers(discountOffers);
+    } else {
+      setOffers([]);
+    }
+
+    refreshVendorReputation();
   };
 
   if (!isVisible) {

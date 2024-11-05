@@ -27,7 +27,7 @@
 
 
 .vendorReceivesGrid {
-  max-height: 300px;
+  height: 300px;
   overflow-y: auto;
   width: 90%;
   padding: 10px;
