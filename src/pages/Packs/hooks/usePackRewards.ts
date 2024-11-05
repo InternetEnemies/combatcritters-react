@@ -6,7 +6,6 @@
 import { IUserPack } from "combatcritters-ts";
 import { useState } from "react";
 import { ICard } from "combatcritters-ts";
-import { ClientSingleton } from "ClientSingleton";
 
 export const usePackRewards = (
   setIsSidebarVisible: (isVisible: boolean) => void, //Close the sidebar when the rewards popup appears
