@@ -22,7 +22,7 @@ const PackRewards: React.FC<PackRewardsProps> = ({
 }) => {
   const handleCollectClick = () => {
     setIsVisible(false);
-    toast("Cards Added to Inventory!");
+    toast("Cards Added to Inventory!", {toastId: "cardsAdded"});
   };
 
   /*

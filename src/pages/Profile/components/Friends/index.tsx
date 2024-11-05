@@ -60,7 +60,7 @@ const Friends: React.FC<FriendsProps> = ({ friends, setFriends }) => {
             setFeaturedDeckCards(cards);
           }
         } catch (error) {
-          toast(selectedFriend.username + " has no Featured Deck");
+          toast(selectedFriend.username + " has no Featured Deck", {toastId: "noFeaturedDeck"});
           console.error("Error during profile fetch:" + error);
         }
       };

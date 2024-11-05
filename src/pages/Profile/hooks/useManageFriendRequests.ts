@@ -41,7 +41,7 @@ export const useManageFriendRequests = (
       setFriends([...friends, user]);
 
       setNumberOfRequests(numberOfRequests-1);
-      toast(user.username + " Added as a Friend!");
+      toast(user.username + " Added as a Friend!", {toastId: "friendAdded"});
     } catch (error) {
       console.error("Error accepting friend request:", error);
     }
