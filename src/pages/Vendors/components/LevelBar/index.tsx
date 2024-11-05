@@ -38,7 +38,8 @@ const LevelBar: React.FC<LevelBarProps> = ({
       }
     };
     levelUp();
-  }, [vendorLevel, onLevelUp]);
+    //eslint-disable-next-line
+  }, [vendorLevel]);
 
   return (
     <div
