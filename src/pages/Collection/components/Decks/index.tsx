@@ -11,7 +11,7 @@ import CreateDeck from "pages/Collection/components/CreateDeck";
 import { IDeck } from "combatcritters-ts";
 import { ISortableDeck } from "interfaces/ISortableDeck";
 import Button from "components/Button";
-import { convertToSortableDeck } from "utils/collectionUtils";
+import { convertToSortableDeck } from "pages/Collection/utils/collectionUtils";
 import Dropdown from "components/Dropdown";
 import { useDeckSelect } from "pages/Collection/hooks/useDeckSelect";
 import ConfirmationButton from "components/ConfirmationButton";
@@ -123,7 +123,6 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
           await ClientSingleton.getInstance().user.decks.getDecks();
         setDecks(updatedDecks);
         setSelectedDeck(null);
-
       } catch (error) {
         console.error("Error deleting the deck:", error);
       }
@@ -189,7 +188,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
         </div>
 
         <div className="footerContainer">
-          <ValidityIndicator localDeck={localDeck}/>
+          <ValidityIndicator localDeck={localDeck} />
           <div className="cancelSaveWrapper">
             {changesMade ? (
               <ConfirmationButton

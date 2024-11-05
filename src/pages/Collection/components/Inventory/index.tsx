@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import "./inventory.css";
 import { ISortableCard } from "interfaces/ISortableCard";
 import SortableCard from "components/SortableCard";
-import { convertCardStackToSortable } from "utils/collectionUtils";
+import { convertCardStackToSortable } from "pages/Collection/utils/collectionUtils";
 import Dropdown from "components/Dropdown";
 import Filter from "components/Filter";
 import Switch from "components/Switch";
