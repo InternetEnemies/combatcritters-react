@@ -56,6 +56,8 @@ const NavBar: React.FC<NavbarProps> = ({
           scale={SCALE_CURRENCY}
         />
 
+        <div className="divider"></div>
+
         <ProfileButton
           numberOfRequests={numberOfRequests}
           setNumberOfRequests={setNumberOfRequests}
