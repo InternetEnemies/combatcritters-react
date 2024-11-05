@@ -42,8 +42,8 @@ const SelectedOffer: React.FC<SelectedOfferProps> = ({
         try {
          
           const acceptOffer = async () => {
-            let reputation = await offer.accept();
-            onOfferAccept(reputation);
+            let purchaseStatus = await offer.accept();
+            onOfferAccept(purchaseStatus.reputation);
           };
 
           await handleTransaction(acceptOffer); //CurrencyContext should handle transaction
