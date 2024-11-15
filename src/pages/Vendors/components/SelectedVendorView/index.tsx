@@ -7,6 +7,8 @@ import { IVendor, IVendorReputation } from "combatcritters-ts";
 import "./selectedVendorView.css";
 import LevelBar from "../LevelBar";
 import Refresh from "../Refresh";
+import useCountdownRefresh from "pages/Vendors/hooks/useCountdownRefresh";
+import { count } from "console";
 
 interface SelectedVendorViewProps {
   vendorReputation: IVendorReputation;
@@ -24,6 +26,7 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
   onLevelUp,
 }) => {
   const LEVEL_BAR_SCALE = 2;
+  const {countdown} = useCountdownRefresh(vendor);
 
   return (
     <div className="selectedVendorViewRoot">
@@ -40,7 +43,7 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
           <span className="vendorName">{vendor.name}</span>
           <div className="refreshTimeWrapper">
             <Refresh
-              refreshTime={vendor.refrest_time}
+              countdown={countdown}
               style={{ color: "var(--custom-black)" }}
             />
           </div>
