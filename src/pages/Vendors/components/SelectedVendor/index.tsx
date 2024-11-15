@@ -10,6 +10,7 @@ import OffersGrid from "../OffersGrid";
 import SelectedOffer from "../SelectedOffer";
 import SelectedVendorView from "../SelectedVendorView";
 import { calcRepProgress } from "pages/Vendors/utils/levelBarUtils";
+import useCountdownRefresh from "pages/Vendors/hooks/useCountdownRefresh";
 
 interface SelectedVendorProps {
   isVisible: boolean;
@@ -30,6 +31,13 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
   const [vendorReputation, setVendorReputation] = useState<IVendorReputation>();
   const [vendorLevel, setVendorLevel] = useState<number>(0);
   const [vendorLevelProgress, setVendorLevelProgress] = useState<number>(0);
+
+  const onVendorRefresh = () => {
+    fetchAndSetOffers();
+    setSelectedOffer(null);
+  };
+  
+  const {countdown} = useCountdownRefresh(selectedVendor, onVendorRefresh);
 
   /*
     On vendor select, fetch and set all the different types of offers from the selectedVendor.
