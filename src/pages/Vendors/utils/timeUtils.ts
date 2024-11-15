@@ -32,3 +32,7 @@ export const calculateCountdown = (futureTime: string): string => {
 
   return countdownDisplay; 
 };
+
+export const isCountdownComplete = (time: string) => {
+  return time === "00:00:00";
+}
