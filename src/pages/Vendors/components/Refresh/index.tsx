@@ -7,28 +7,11 @@ import { calculateCountdown } from "pages/Vendors/utils/timeUtils";
 import "./refresh.css";
 
 interface RefreshProps {
-  refreshTime: string;
+  countdown: string;
   style?: React.CSSProperties;
 }
 
-const Refresh: React.FC<RefreshProps> = ({ refreshTime, style }) => {
-  const [countdown, setCountdown] = useState("00:00:00");
-
-  /*
-    Calculate countdown immediately on mount and then update countdown every second.
-  */
-  useEffect(() => {
-    // Immediately calculate the countdown on mount.
-    setCountdown(calculateCountdown(refreshTime));
-
-    const interval = setInterval(() => {
-      // Update the countdown every second
-      setCountdown(calculateCountdown(refreshTime));
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [refreshTime]);
-
+const Refresh: React.FC<RefreshProps> = ({ countdown, style }) => {
   return (
     <div className="refreshRoot" style={{...style}}>
       <svg
