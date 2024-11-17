@@ -1,0 +1,54 @@
+.wagerRoot {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/public/assets/backgrounds/pattern-randomized-blue.svg");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wagerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 90%;
+    height: 90%;
+    background-color: red;
+}
+
+.wagerInnerContainer {
+    display: flex;
+    flex-direction: row;
+    height: 80%;
+    width: 100%;
+    background-color: blue;
+    align-items: center;
+    justify-content: center;
+}
+
+.wagerRoot span {
+    font-size: 20px;
+}
+
+.wageredItems {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.opponentAndUserWager {
+    flex:1;
+    width: 100%;
+    background-color: white;
+}
+
+.wagerInventory {
+    height: 100%;
+    flex: 1;
+    background-color: green;
+}

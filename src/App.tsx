@@ -22,6 +22,7 @@ import { ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Vendors from "pages/Vendors";
 import { CurrencyProvider } from "contexts/CurrencyContext";
+import Wager from "pages/Wager";
 
 function App() {
   const [numberOfRequests, setNumberOfRequests] = useState(0); // Number of friend requests
@@ -29,7 +30,9 @@ function App() {
 
   // Check if the navbar should be visible
   const isNavbarVisible =
-    location.pathname !== "/login" && location.pathname !== "/";
+    location.pathname !== "/login" &&
+    location.pathname !== "/" &&
+    location.pathname !== "/wager";
 
   return (
     <div className="appRoot">
@@ -60,6 +63,7 @@ function App() {
             />
             <Route path="/packs" element={<Packs />} />
             <Route path="/vendors" element={<Vendors />} />
+            <Route path="/wager" element={<Wager/>}/>
           </Route>
         </Routes>
       </div>
