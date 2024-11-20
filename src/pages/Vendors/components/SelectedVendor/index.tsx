@@ -3,7 +3,7 @@
  * @Brief Separate page for the selected vendor.
  */
 
-import { IOffer, IVendor, IVendorReputation } from "combatcritters-ts";
+import { IDiscountOffer, IOffer, ISpecialOffer, IVendor, IVendorReputation } from "combatcritters-ts";
 import "./selectedVendor.css";
 import { useEffect, useState } from "react";
 import OffersGrid from "../OffersGrid";
@@ -25,8 +25,8 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
 }) => {
   const [offers, setOffers] = useState<IOffer[]>([]);
   //TODO uncomment this
-  // const [discountOffers, setDiscountOffers] = useState<IDiscountOffer[]>([]);
-  // const [specialOffers, setSpecialOffers] = useState<ISpecialOffer[]>([]);
+  const [discountOffers, setDiscountOffers] = useState<IDiscountOffer[]>([]);
+  const [specialOffers, setSpecialOffers] = useState<ISpecialOffer[]>([]);
   const [selectedOffer, setSelectedOffer] = useState<IOffer | null>(null);
   const [vendorReputation, setVendorReputation] = useState<IVendorReputation>();
   const [vendorLevel, setVendorLevel] = useState<number>(0);
@@ -35,9 +35,10 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
   const onVendorRefresh = () => {
     fetchAndSetOffers();
     setSelectedOffer(null);
+    console.log("onVendorRefresh");
   };
   
-  const {countdown} = useCountdownRefresh(selectedVendor, onVendorRefresh);
+  // useCountdownRefresh(null, onVendorRefresh);
 
   /*
     On vendor select, fetch and set all the different types of offers from the selectedVendor.
@@ -78,13 +79,13 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
       const offers = await selectedVendor.getOffers();
       //TODO uncomment this
       //https://github.com/InternetEnemies/combatcritters-react/issues/54
-      // const specialOffers = await selectedVendor.getSpecialOffers();
-      // const discountOffers = await selectedVendor.discountOffers();
+      const specialOffers = await selectedVendor.getSpecialOffers();
+      const discountOffers = await selectedVendor.discountOffers();
       setOffers(offers);
       //TODO uncomment this
       //https://github.com/InternetEnemies/combatcritters-react/issues/54
-      // setSpecialOffers(specialOffers);
-      // setDiscountOffers(discountOffers);
+      setSpecialOffers(specialOffers);
+      setDiscountOffers(discountOffers);
     } else {
       setOffers([]);
     }
@@ -115,6 +116,7 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
               vendorLevel={vendorLevel}
               vendorLevelProgress={vendorLevelProgress}
               onLevelUp={fetchAndSetOffers} //On level up, refresh all the offers
+              onVendorRefresh={onVendorRefresh}
             />
           ) : null}
         </div>
@@ -122,10 +124,10 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
         <div className="offersGridWrapper">
           <OffersGrid
             //TODO uncomment these once specials and discounts are finished
-            // discountOffers={discountOffers}
-            // specialOffers={specialOffers}
-            discountOffers={[]}
-            specialOffers={[]}
+            discountOffers={discountOffers}
+            specialOffers={specialOffers}
+            // discountOffers={[]}
+            // specialOffers={[]}
             offers={offers}
             setSelectedOffer={setSelectedOffer}
           />

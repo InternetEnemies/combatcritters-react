@@ -9,7 +9,6 @@ import "./login.css";
 import { useNavigate } from "react-router-dom";
 import Button from "components/Button";
 import Switch from "components/Switch";
-import { useCurrency } from "contexts/CurrencyContext";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -18,12 +17,11 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  const { updateCurrency } = useCurrency();
 
   const handleLogin = async () => {
     try {
       await ClientSingleton.getInstance().login(username, password);
-      await updateCurrency(); //Fetch currency on login
+     
       navigate("/collection");
     } catch (e) {
       setError("Failed to log in.");
@@ -42,7 +40,6 @@ const Login: React.FC = () => {
     try {
       await ClientSingleton.getInstance().register(username, password);
       await ClientSingleton.getInstance().login(username, password);
-      await updateCurrency();
       navigate("/collection");
     } catch (e) {
       setError("Failed to register.");

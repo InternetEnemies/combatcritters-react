@@ -13,10 +13,9 @@ const useCountdownRefresh = (
   vendor: IVendor | null,
   onRefresh: () => void = () => {}
 ) => {
-  const POLLING_FREQ = 100; //Polling frequency in ms
+  const POLLING_FREQ = 50; //Polling frequency in ms
   const tempRefreshTime = "2024-11-06T14:52:30";
-  const tempFutureTime = "2024-11-06T18:52:30";
-  const [refreshTime, setRefreshTime] = useState<string>(tempRefreshTime);
+  const [refreshTime, setRefreshTime] = useState<string>("00:00:00");
   const [countdown, setCountdown] = useState(
     calculateCountdown(tempRefreshTime)
   );
@@ -24,6 +23,7 @@ const useCountdownRefresh = (
 
   useEffect(() => {
     if (!vendor) {
+      console.log("Vendor null");
       return;
     }
     // setCountdown(calculateCountdown(vendor.refrest_time));
@@ -53,6 +53,7 @@ const useCountdownRefresh = (
             setRefreshTime(fetchedVendor.refrest_time);
             setCountdownFinished(false);
             onRefresh();
+            console.log("Countdown complete");
           }
         } catch (error) {
           console.log("Error fetching vendor: " + error);
@@ -61,8 +62,9 @@ const useCountdownRefresh = (
       fetchVendor();
     }, POLLING_FREQ);
 
+
     return () => clearInterval(interval);
-  }, [countdownFinished]);
+  }, [countdownFinished, onRefresh]);
 
   return { countdown };
 };

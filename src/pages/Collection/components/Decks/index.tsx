@@ -68,7 +68,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
           localDeck.cards.map((sortableCard) => sortableCard.card)
         );
         await selectedDeck.commit();
-        toast.success("Deck Saved!");
+        toast.success("Deck Saved!", {toastId: "deckSaved"});
 
         setLocalDeck(await convertToSortableDeck(selectedDeck));
         setSelectedDeck(selectedDeck);
@@ -109,7 +109,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
       setDecks(updatedDecks);
       setSelectedDeck(createdDeck);
       setLocalDeck(await convertToSortableDeck(createdDeck));
-      toast.success("Deck Created!");
+      toast.success("Deck Created!", {toastId:"deckCreated"});
     } catch (error) {
       console.error("Error creating the deck:", error);
     }

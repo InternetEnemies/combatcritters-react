@@ -16,6 +16,7 @@ interface SelectedVendorViewProps {
   vendorLevel: number;
   vendorLevelProgress: number;
   onLevelUp: () => Promise<void>;
+  onVendorRefresh: () => void ;
 }
 
 const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
@@ -24,9 +25,10 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
   vendorLevel = vendorReputation.level,
   vendorLevelProgress,
   onLevelUp,
+  onVendorRefresh
 }) => {
   const LEVEL_BAR_SCALE = 2;
-  const {countdown} = useCountdownRefresh(vendor);
+  const {countdown} = useCountdownRefresh(vendor, onVendorRefresh);
 
   return (
     <div className="selectedVendorViewRoot">

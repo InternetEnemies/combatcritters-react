@@ -14,7 +14,7 @@ interface SelectionVendorViewProps {
 }
 
 const SelectionVendorView: React.FC<SelectionVendorViewProps> = ({ onClick, vendor }) => {
-  const {countdown} = useCountdownRefresh(vendor);
+  const {countdown} = useCountdownRefresh(vendor, () => {console.log("Logging vendor name",vendor.name)});
   const handleClick = () => {
     onClick(vendor);
   };

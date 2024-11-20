@@ -13,22 +13,26 @@ export const usePackBrowser = () => {
   const [selectedPack, setSelectedPack] = useState<IUserPack | null>(null);
   const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
 
+  const fetchAndSetPacks = async () => {
+    try {
+      const fetchedPackStacks =
+        await ClientSingleton.getInstance().user.packs.getPacks();
+      const packList: IUserPack[] = [];
+      fetchedPackStacks.forEach((packStack) => {
+        for (let i = 0; i < packStack.getAmount(); i++) {
+          packList.push(packStack.getItem());
+        }
+        setPacks(packList);
+      });
+    } catch (error) {
+      console.error("Error fetching packs: ", error);
+    }
+  }
   /*
-    On mount, fetch the user's packs.
+    On mount, fetch and set the user's packs.
   */
   useEffect(() => {
-    const fetchPacks = async () => {
-      try {
-        const fetchedPacks = await ClientSingleton.getInstance().user.packs.getPacks();
-        setPacks(fetchedPacks.map((packStack) => {
-          return packStack.getItem();
-        }));
-      } catch (error) {
-        console.error("Error fetching packs: ", error);
-      }
-    };
-
-    fetchPacks();
+    fetchAndSetPacks();
   }, []);
 
   /*
@@ -48,11 +52,11 @@ export const usePackBrowser = () => {
 
   return {
     packs,
-    setPacks,
     selectedPack,
     setSelectedPack,
     isSidebarVisible,
     setIsSidebarVisible,
     handlePackClick,
+    fetchAndSetPacks
   };
 };
