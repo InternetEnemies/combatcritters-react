@@ -31,17 +31,17 @@
   overflow-y: auto;
   width: 90%;
   padding: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr; 
-  row-gap: 15px; 
-  column-gap: 10px;
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 15px 10px; 
   align-items: center;
-  justify-items: center;
+  justify-content: center; 
   background-color: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(var(--custom-cream-rgb),.6);
+  border: 1px solid rgba(var(--custom-cream-rgb), 0.6);
   border-radius: 2px;
-  margin-top:3px;
+  margin-top: 3px;
 }
+
 .youReceiveContainer {
   display: flex;
   flex-direction: column;
