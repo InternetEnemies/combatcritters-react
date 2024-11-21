@@ -10,7 +10,6 @@ import OffersGrid from "../OffersGrid";
 import SelectedOffer from "../SelectedOffer";
 import SelectedVendorView from "../SelectedVendorView";
 import { calcRepProgress } from "pages/Vendors/utils/levelBarUtils";
-import useCountdownRefresh from "pages/Vendors/hooks/useCountdownRefresh";
 
 interface SelectedVendorProps {
   isVisible: boolean;
@@ -24,7 +23,6 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
   setSelectedVendor,
 }) => {
   const [offers, setOffers] = useState<IOffer[]>([]);
-  //TODO uncomment this
   const [discountOffers, setDiscountOffers] = useState<IDiscountOffer[]>([]);
   const [specialOffers, setSpecialOffers] = useState<ISpecialOffer[]>([]);
   const [selectedOffer, setSelectedOffer] = useState<IOffer | null>(null);
@@ -35,11 +33,8 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
   const onVendorRefresh = () => {
     fetchAndSetOffers();
     setSelectedOffer(null);
-    console.log("onVendorRefresh");
   };
   
-  // useCountdownRefresh(null, onVendorRefresh);
-
   /*
     On vendor select, fetch and set all the different types of offers from the selectedVendor.
   */
@@ -77,13 +72,9 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
   const fetchAndSetOffers = async () => {
     if (selectedVendor) {
       const offers = await selectedVendor.getOffers();
-      //TODO uncomment this
-      //https://github.com/InternetEnemies/combatcritters-react/issues/54
       const specialOffers = await selectedVendor.getSpecialOffers();
       const discountOffers = await selectedVendor.discountOffers();
       setOffers(offers);
-      //TODO uncomment this
-      //https://github.com/InternetEnemies/combatcritters-react/issues/54
       setSpecialOffers(specialOffers);
       setDiscountOffers(discountOffers);
     } else {
@@ -123,11 +114,8 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
         <hr className="separator" style={{ alignSelf: "center" }}></hr>
         <div className="offersGridWrapper">
           <OffersGrid
-            //TODO uncomment these once specials and discounts are finished
             discountOffers={discountOffers}
             specialOffers={specialOffers}
-            // discountOffers={[]}
-            // specialOffers={[]}
             offers={offers}
             setSelectedOffer={setSelectedOffer}
           />
