@@ -37,6 +37,7 @@ const Decks: React.FC<DeckProps> = ({ localDeck, setLocalDeck, highlight }) => {
    * the first deck in the user's inventory (if they have a first deck).
    */
   useEffect(() => {
+    ClientSingleton.getInstance().user.decks.validator.refresh();
     const fetchDecks = async () => {
       try {
         const fetchedDecks =
