@@ -1,70 +1,61 @@
-// useCountdown.ts
 import { useEffect, useState } from "react";
 import {
   calculateCountdown,
   isCountdownComplete,
 } from "pages/Vendors/utils/timeUtils";
 import { IVendor } from "combatcritters-ts";
-import { toast } from "react-toastify";
-import { count } from "console";
 import { ClientSingleton } from "ClientSingleton";
 
 const useCountdownRefresh = (
   vendor: IVendor | null,
   onRefresh: () => void = () => {}
 ) => {
-  const POLLING_FREQ = 50; //Polling frequency in ms
-  const tempRefreshTime = "2024-11-06T14:52:30";
-  const [refreshTime, setRefreshTime] = useState<string>("00:00:00");
-  const [countdown, setCountdown] = useState(
-    calculateCountdown(tempRefreshTime)
-  );
+  const POLLING_FREQ = 1000; // Polling frequency in ms
+  const [refreshTime, setRefreshTime] = useState<string | null>(null);
+  const [countdown, setCountdown] = useState<string>("");
   const [countdownFinished, setCountdownFinished] = useState(false);
 
+  // Set the vendor's refresh time when a new vendor is selected
   useEffect(() => {
-    if (!vendor) {
-      console.log("Vendor null");
-      return;
-    }
-    // setCountdown(calculateCountdown(vendor.refrest_time));
+    setRefreshTime(vendor ? vendor.refrest_time : null);
+  }, [vendor]);
+
+  // Update countdown every second
+  useEffect(() => {
+    if (!vendor || !refreshTime) return;
 
     const interval = setInterval(() => {
-      if (isCountdownComplete(countdown)) {
-        setCountdownFinished(true);
-      }
-
-      setCountdown(calculateCountdown(refreshTime));
+      const timeLeft = calculateCountdown(refreshTime);
+      setCountdown(timeLeft);
+      setCountdownFinished(isCountdownComplete(timeLeft));
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [countdown, refreshTime]);
+  }, [refreshTime, vendor]);
 
+  // Poll for vendor refresh when countdown finishes
   useEffect(() => {
-    if (!vendor || !countdownFinished) {
-      return;
-    }
+    if (!vendor || !countdownFinished) return;
 
-    const interval = setInterval(() => {
-      const fetchVendor = async () => {
-        try {
-          const fetchedVendor: IVendor =
-            await ClientSingleton.getInstance().vendors.getVendor(vendor.id);
-          if (!isCountdownComplete(fetchedVendor.refrest_time)) {
-            setRefreshTime(fetchedVendor.refrest_time);
-            setCountdownFinished(false);
-            onRefresh();
-            console.log("Countdown complete");
-          }
-        } catch (error) {
-          console.log("Error fetching vendor: " + error);
+    const interval = setInterval(async () => {
+      try {
+        const fetchedVendor: IVendor =
+          await ClientSingleton.getInstance().vendors.getVendor(vendor.id);
+        setRefreshTime(fetchedVendor.refrest_time);
+
+        if (
+          !isCountdownComplete(calculateCountdown(fetchedVendor.refrest_time))
+        ) {
+          setCountdownFinished(false);
+          onRefresh();
         }
-      };
-      fetchVendor();
+      } catch (error) {
+        console.error("Error fetching vendor: ", error);
+      }
     }, POLLING_FREQ);
 
-
     return () => clearInterval(interval);
-  }, [countdownFinished, onRefresh]);
+  }, [countdownFinished, vendor, onRefresh]);
 
   return { countdown };
 };
