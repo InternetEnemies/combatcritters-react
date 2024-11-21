@@ -16,7 +16,7 @@ const useCountdownRefresh = (
   vendor: IVendor | null,
   onRefresh: () => void = () => {}
 ) => {
-  const POLLING_FREQ = 1000; // Polling frequency in ms
+  const POLLING_FREQ = 100; // Polling frequency in ms
   const [refreshTime, setRefreshTime] = useState<string | null>(null);
   const [countdown, setCountdown] = useState<string>("");
   const [countdownFinished, setCountdownFinished] = useState(false);
