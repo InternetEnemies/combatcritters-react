@@ -30,6 +30,9 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
   const [vendorLevel, setVendorLevel] = useState<number>(0);
   const [vendorLevelProgress, setVendorLevelProgress] = useState<number>(0);
 
+  /**
+   * When the vendor's timer reaches 0, this function resets their offers.
+   */
   const onVendorRefresh = () => {
     fetchAndSetOffers();
     setSelectedOffer(null);

@@ -1,3 +1,9 @@
+/**
+ * @Created 2024-11-21
+ * @Brief Hook for managing the vendor refresh logic. When the vendor's timer reaches 0, this hook
+ *        will begin polling the backend to get the new refresh time.
+ */
+
 import { useEffect, useState } from "react";
 import {
   calculateCountdown,
