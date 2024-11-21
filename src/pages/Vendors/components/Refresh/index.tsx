@@ -2,16 +2,19 @@
  * @Created 2024-10-22
  * @Brief Countdown component.
  */
-import React, { useEffect, useState } from "react";
-import { calculateCountdown } from "pages/Vendors/utils/timeUtils";
+import React, { useEffect } from "react";
 import "./refresh.css";
+import { IVendor } from "combatcritters-ts";
+import useCountdownRefresh from "pages/Vendors/hooks/useCountdownRefresh";
 
 interface RefreshProps {
-  countdown: string;
+  vendor: IVendor | null;
+  onVendorRefresh?: () => void;
   style?: React.CSSProperties;
 }
 
-const Refresh: React.FC<RefreshProps> = ({ countdown, style }) => {
+const Refresh: React.FC<RefreshProps> = ({ vendor, onVendorRefresh, style }) => {
+  const { countdown } = useCountdownRefresh(vendor, onVendorRefresh);
   return (
     <div className="refreshRoot" style={{...style}}>
       <svg
