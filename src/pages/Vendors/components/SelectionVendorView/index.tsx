@@ -6,15 +6,16 @@ import { IVendor } from "combatcritters-ts";
 import "./selectionVendorView.css";
 import Refresh from "../Refresh";
 import LevelBar from "../LevelBar";
-import useCountdownRefresh from "pages/Vendors/hooks/useCountdownRefresh";
 
 interface SelectionVendorViewProps {
   onClick: (vendor: IVendor) => void;
   vendor: IVendor;
 }
 
-const SelectionVendorView: React.FC<SelectionVendorViewProps> = ({ onClick, vendor }) => {
-  const {countdown} = useCountdownRefresh(vendor, () => {console.log("Logging vendor name",vendor.name)});
+const SelectionVendorView: React.FC<SelectionVendorViewProps> = ({
+  onClick,
+  vendor,
+}) => {
   const handleClick = () => {
     onClick(vendor);
   };
@@ -28,8 +29,12 @@ const SelectionVendorView: React.FC<SelectionVendorViewProps> = ({ onClick, vend
         alt="Vendor"
       />
       <div className="vendorName">{vendor.name}</div>
-      <Refresh countdown={countdown} style={{color:"var(--custom-white)"}}/>
-      <LevelBar vendorReputation={vendor.reputation} scaleLength={.8} scale={.8}/>
+      <Refresh vendor={vendor} style={{ color: "var(--custom-white)" }} />
+      <LevelBar
+        vendorReputation={vendor.reputation}
+        scaleLength={0.8}
+        scale={0.8}
+      />
     </div>
   );
 };
