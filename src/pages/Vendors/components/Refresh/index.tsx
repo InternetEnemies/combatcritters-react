@@ -2,7 +2,6 @@
  * @Created 2024-10-22
  * @Brief Countdown component.
  */
-import React, { useEffect } from "react";
 import "./refresh.css";
 import { IVendor } from "combatcritters-ts";
 import useCountdownRefresh from "pages/Vendors/hooks/useCountdownRefresh";
