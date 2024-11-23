@@ -6,9 +6,11 @@
 import { IPack } from "combatcritters-ts";
 import "./pack.css";
 import {ClientSingleton} from "../../ClientSingleton";
+import CardCount from "components/Card/CardCount";
 
 interface PackProps {
   pack: IPack;
+  packCount?: number;
   onClick?: (pack?: IPack) => void; // Can be called with or without the pack parameter.
   style?: React.CSSProperties;
   scale?: number; //Scale the size of the pack
@@ -16,6 +18,7 @@ interface PackProps {
 
 const Pack: React.FC<PackProps> = ({
   pack,
+  packCount,
   onClick = () => {},
   style,
   scale = 1,
@@ -33,7 +36,12 @@ const Pack: React.FC<PackProps> = ({
       style={{ ...style, width: `${WIDTH}px` }}
     >
       <span className="packName">{pack.name}</span>
-      <img src={`${ClientSingleton.mediaRoot}/${pack.image}`} className="packImage" alt="Pack" />
+      <img
+        src={`${ClientSingleton.mediaRoot}/${pack.image}`}
+        className="packImage"
+        alt="Pack"
+      />
+      {packCount !== undefined && <CardCount amount={packCount} />}
     </div>
   );
 };
