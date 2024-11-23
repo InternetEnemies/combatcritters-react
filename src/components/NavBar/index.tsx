@@ -20,7 +20,7 @@ const NavBar: React.FC<NavbarProps> = ({
 }) => {
   const SCALE_CURRENCY = 1.15;
   const navigate = useNavigate();
-  const { userCurrencyAmount } = useCurrency();
+  const { userCurrency } = useCurrency();
 
   const toCollection = () => {
     navigate("/collection");
@@ -55,7 +55,7 @@ const NavBar: React.FC<NavbarProps> = ({
 
       <div className="currencyAndProfileContainer">
         <CurrencyComp
-          amount={userCurrencyAmount}
+          amount={userCurrency.coins}
           style={{ color: "var(--custom-white)" }}
           scale={SCALE_CURRENCY}
         />

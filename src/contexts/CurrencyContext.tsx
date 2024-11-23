@@ -4,10 +4,11 @@
  */
 
 import { ClientSingleton } from "ClientSingleton";
+import { Currency, ICurrency } from "combatcritters-ts";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface CurrencyContextType {
-  userCurrencyAmount: number;
+  userCurrency: ICurrency;
   updateCurrency: () => Promise<void>;
   handleTransaction: (transactionFunc: () => Promise<void>) => Promise<void>;
 }
@@ -17,7 +18,9 @@ const CurrencyContext = createContext<CurrencyContextType | undefined>(
 );
 
 export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
-  const [userCurrencyAmount, setUserCurrencyAmount] = useState<number>(0);
+  const [userCurrency, setUserCurrencyAmount] = useState<ICurrency>(
+    new Currency(0)
+  );
 
   /*
     Update the currency based on what's in the backend
@@ -26,7 +29,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
     try {
       const fetchedCurrency =
         await ClientSingleton.getInstance().user.currency.getCurrency();
-      setUserCurrencyAmount(fetchedCurrency.coins);
+      setUserCurrencyAmount(fetchedCurrency);
     } catch (error) {
       console.error("Error fetching currency:", error);
     }
@@ -43,7 +46,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <CurrencyContext.Provider
-      value={{ userCurrencyAmount, updateCurrency, handleTransaction }}
+      value={{ userCurrency, updateCurrency, handleTransaction }}
     >
       {children}
     </CurrencyContext.Provider>
