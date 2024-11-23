@@ -25,7 +25,7 @@ const RequiredOfferItem: React.FC<RequiredOfferItemProps> = ({
   const AMOUNT_MET_COLOUR = "#02e60a";
   const AMOUNT_NOT_MET_COLOUR = "#ff0000";
   let [content, setContent] = useState<React.ReactElement | null>(null);
-  const { userCurrencyAmount } = useCurrency();
+  const { userCurrency } = useCurrency();
 
   //Return true iff the user has the necessary amount of cards or packs for the trade.
   const hasRequiredAmount = (): boolean => {
@@ -69,7 +69,7 @@ const RequiredOfferItem: React.FC<RequiredOfferItemProps> = ({
     },
     visitCurrency: (requiredCurrency: ICurrency): void => {
       const hasRequiredCurrency = (): boolean => {
-        return userCurrencyAmount >= requiredCurrency.coins;
+        return userCurrency.coins >= requiredCurrency.coins;
       };
       setContent(
         <CurrencyComp
