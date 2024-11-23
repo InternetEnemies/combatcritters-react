@@ -1,0 +1,17 @@
+.cardWagerRoot {
+    position: relative;
+}
+
+.addCardIcon {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    bottom: 6px;
+    right: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease; 
+}
+
+.cardWagerRoot:hover .addCardIcon {
+    transform: scale(1.15);
+}

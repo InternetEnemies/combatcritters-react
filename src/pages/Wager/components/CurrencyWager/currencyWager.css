@@ -1,0 +1,21 @@
+.currencyWagerRoot {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    background-color: #00000022;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid rgba(var(--custom-black-rgb), .2);
+    color: var(--custom-white);
+}
+
+.addCurrencyIcon {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.currencyWagerRoot:hover .addCurrencyIcon {
+    transform: scale(1.15);
+}
