@@ -1,54 +1,71 @@
 .wagerRoot {
-    width: 100vw;
-    height: 100vh;
-    background-image: url("/public/assets/backgrounds/pattern-randomized-blue.svg");
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/public/assets/backgrounds/pattern-randomized.svg");
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wagerContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    width: 90%;
-    height: 90%;
-    background-color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 94%;
+  height: 92%;
 }
 
 .wagerInnerContainer {
-    display: flex;
-    flex-direction: row;
-    height: 80%;
-    width: 100%;
-    background-color: blue;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  height: 80%;
+  width: 100%;
+  gap:2%;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+
 }
 
-.wagerRoot span {
-    font-size: 20px;
+.wagerRoot .wagerTitle {
+  font-size: 30px;
+  color: var(--custom-dark-blue);
+  font-weight: bold;
+
 }
 
 .wageredItems {
-    display: flex;
-    flex-direction: column;
-    flex: 2;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 58%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  
 }
 
 .opponentAndUserWager {
-    flex:1;
-    width: 100%;
-    background-color: white;
+  flex: 1;
+  width: 100%;
 }
 
 .wagerInventory {
-    height: 100%;
-    flex: 1;
-    background-color: green;
+  /* background-color: red; */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  padding: 1cqw;
+  width: 40%;
+  height: 100%;
+  overflow-y: auto;
+  justify-items: center;
+  row-gap: 20px;
+  /* background-color: #00000055; */
+   background-image: url("/public/assets/backgrounds/gradient.svg");
+   border: 1px solid var(--custom-black);
+   border-radius: 5px;
 }
+
