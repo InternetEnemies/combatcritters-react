@@ -23,7 +23,10 @@ interface CardProps {
   style?: React.CSSProperties;
   onClick?: (card?: ICard) => void; // Can be called with or without the card parameter.
   scale?: number; // Scale the size of the card
+  health?: number;
 }
+
+export const DEFAULT_CARD_WIDTH = 132.6;
 
 const Card: React.FC<CardProps> = ({
   card,
@@ -31,8 +34,9 @@ const Card: React.FC<CardProps> = ({
   style,
   onClick = () => {},
   scale = 1,
+  health
 }) => {
-  const WIDTH: number = 132.6 * scale; //The default width of the card * scale
+  const WIDTH: number = DEFAULT_CARD_WIDTH * scale;
 
   const handleClick = () => {
     onClick?.(card); // Pass the card if provided.
@@ -50,7 +54,7 @@ const Card: React.FC<CardProps> = ({
         <Abilities card={card} />
         <Description card={card} />
       </div>
-      <HpDmgFooter card={card} />
+      <HpDmgFooter card={card} health={health}/>
       <PlayCost playCost={card.playcost} />
       <Type card={card} />
       {cardCount !== undefined && <CardCount amount={cardCount} />}
