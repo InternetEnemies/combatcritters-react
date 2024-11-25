@@ -1,6 +1,6 @@
 /**
  * @Created 2024-11-25
- * @Brief The card view used in Hand.
+ * @Brief The draggable card used in Hand.
  */
 
 import React from "react";
