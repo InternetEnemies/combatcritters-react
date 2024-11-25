@@ -1,0 +1,47 @@
+.playAreaRoot {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playAreaCardsContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #00000066;
+}
+
+.endTurnContainer,
+.healthEnergyContainer {
+  width: 10%;
+  height: 100%;
+  padding-bottom: 10%;
+  padding-top: 10%;
+}
+
+.bufferCards,
+.inPlayCards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  height: 80%;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px;
+}
+
+.bufferCard {
+  aspect-ratio: 68/100;
+  border-radius: 8px;
+  width: 110px;
+  background-color: red;
+}
