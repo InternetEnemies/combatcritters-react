@@ -5,7 +5,7 @@
 
 import { ICardState } from "interfaces/ICardState";
 import Card, { DEFAULT_CARD_WIDTH } from "components/Card";
-import "./battleCardSlot.css"
+import "./battleCardSlot.css";
 
 interface BattleCardSlotProps {
   cardState: ICardState | null;
@@ -22,14 +22,19 @@ const BattleCardSlot: React.FC<BattleCardSlotProps> = ({
 }) => {
   const WIDTH: number = DEFAULT_CARD_WIDTH * scale;
   return (
-    <div className="battleCardSlot">
+    <div
+      className={`battleCardSlot ${isPlayerSlot ? "playerSlot" : ""}`}
+      style={{ width: `${WIDTH}px` }}
+    >
       {cardState ? (
-        <Card card={cardState.card} scale={scale} />
+        <div className="cardContainer">
+          <Card card={cardState.card} scale={scale} style={{cursor:"default"}}/>
+          {isPlayerSlot && <img src="assets/images/skull.svg" className="skullButton"/>}
+        </div>
       ) : (
         <div
           className="cardRoot cardSlotPlaceholder"
           style={{
-            width: `${WIDTH}px`,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

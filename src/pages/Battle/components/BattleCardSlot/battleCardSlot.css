@@ -2,3 +2,35 @@
     width: 50%;
     height: auto;
 }
+
+.battleCardSlot {
+  position: relative;
+}
+
+.cardContainer {
+  position: relative;
+}
+
+.skullButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(20%, -175%);
+  display: none;
+  z-index: 10;
+  width: 40%;
+  height: auto;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.skullButton:hover {
+  filter: brightness(85%); 
+}
+
+.playerSlot .cardContainer:hover .skullButton {
+  display: block;
+}
