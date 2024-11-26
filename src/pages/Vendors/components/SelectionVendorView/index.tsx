@@ -12,7 +12,10 @@ interface SelectionVendorViewProps {
   vendor: IVendor;
 }
 
-const SelectionVendorView: React.FC<SelectionVendorViewProps> = ({ onClick, vendor }) => {
+const SelectionVendorView: React.FC<SelectionVendorViewProps> = ({
+  onClick,
+  vendor,
+}) => {
   const handleClick = () => {
     onClick(vendor);
   };
@@ -26,8 +29,12 @@ const SelectionVendorView: React.FC<SelectionVendorViewProps> = ({ onClick, vend
         alt="Vendor"
       />
       <div className="vendorName">{vendor.name}</div>
-      <Refresh refreshTime={vendor.refrest_time} style={{color:"var(--custom-white)"}}/>
-      <LevelBar vendorReputation={vendor.reputation} scaleLength={.8} scale={.8}/>
+      <Refresh vendor={vendor} style={{ color: "var(--custom-white)" }} />
+      <LevelBar
+        vendorReputation={vendor.reputation}
+        scaleLength={0.8}
+        scale={0.8}
+      />
     </div>
   );
 };

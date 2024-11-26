@@ -2,33 +2,18 @@
  * @Created 2024-10-22
  * @Brief Countdown component.
  */
-import React, { useEffect, useState } from "react";
-import { calculateCountdown } from "pages/Vendors/utils/timeUtils";
 import "./refresh.css";
+import { IVendor } from "combatcritters-ts";
+import useCountdownRefresh from "pages/Vendors/hooks/useCountdownRefresh";
 
 interface RefreshProps {
-  refreshTime: string;
+  vendor: IVendor | null;
+  onVendorRefresh?: () => void;
   style?: React.CSSProperties;
 }
 
-const Refresh: React.FC<RefreshProps> = ({ refreshTime, style }) => {
-  const [countdown, setCountdown] = useState("00:00:00");
-
-  /*
-    Calculate countdown immediately on mount and then update countdown every second.
-  */
-  useEffect(() => {
-    // Immediately calculate the countdown on mount.
-    setCountdown(calculateCountdown(refreshTime));
-
-    const interval = setInterval(() => {
-      // Update the countdown every second
-      setCountdown(calculateCountdown(refreshTime));
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [refreshTime]);
-
+const Refresh: React.FC<RefreshProps> = ({ vendor, onVendorRefresh, style }) => {
+  const { countdown } = useCountdownRefresh(vendor, onVendorRefresh);
   return (
     <div className="refreshRoot" style={{...style}}>
       <svg
