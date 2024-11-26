@@ -1,0 +1,95 @@
+.elixirHealthBarRoot {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.elixirHealthBarRoot.reversed {
+    flex-direction: column-reverse;
+}
+
+.elixirHealthInfo {
+    width: 100%;
+    align-self: center;
+    text-align: center;
+    font-size: .8rem;
+    margin: none;
+    padding: none;
+}
+
+.elixirHealthBar {
+    flex: 10;
+    width: 20%;
+    background-color: var(--custom-white);
+   
+    position: relative;
+
+}
+
+.health .elixirHealthBar {
+ margin-bottom: -16.5%;
+}
+
+.elixir .elixirHealthBar {
+    margin-bottom: -25%;;
+}
+
+.health.reversed .elixirHealthBar {
+    margin-bottom: 0%;
+    margin-top: -20%;
+}
+
+.elixir.reversed .elixirHealthBar {
+    margin-bottom: 0%;
+    margin-top: -12%;
+}
+
+
+.segmentsContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+.segment {
+    border: .5px solid black;
+    height: 100%;
+    width: 100%;
+}
+
+.segment:not(:last-child) {
+  border-bottom: none; 
+}
+
+
+
+
+.barPercentage {
+    width: 100%;
+    background-color: red;
+    position: absolute;
+    bottom:0;
+    transition: height 0.3s ease-in-out;
+}
+
+
+
+.reversed .barPercentage {
+    top:0;
+}
+
+
+.elixir .barPercentage {
+    background-color: #E953FE;
+}
+
+.elixirHeartImage {
+    width: 70%;
+    height:auto;
+   z-index: 10;
+}
