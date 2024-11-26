@@ -34,3 +34,7 @@
 .playerSlot .cardContainer:hover .skullButton {
   display: block;
 }
+
+.cardSlotPlaceholder {
+  cursor: default;
+}
