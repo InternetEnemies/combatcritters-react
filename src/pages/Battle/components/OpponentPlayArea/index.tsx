@@ -6,8 +6,9 @@
 import "../../styles/sharedPlayArea.css";
 import { ICardState } from "interfaces/ICardState";
 import LoadingCards from "../LoadingCards";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import BattleCardSlot from "../BattleCardSlot";
+import ElixirHealthBar from "../ElixirHealthBar";
 
 interface OpponentPlayAreaProps {
   bufferCards: (ICardState | null)[];
@@ -21,10 +22,23 @@ const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
   useEffect(() => {
     console.log(bufferCards);
   }, [bufferCards]);
-  //TODO remove this
+
   return (
-    <div className="playAreaRoot">
-      <div className="healthEnergyContainer"></div>
+    <div className="playAreaRoot" >
+      <div className="healthEnergyContainer" >
+        <ElixirHealthBar
+          currAmount={3}
+          maxAmount={5}
+          isHealth={false}
+          isUsersBar={false}
+        />
+        <ElixirHealthBar
+          currAmount={20}
+          maxAmount={25}
+          isHealth={true}
+          isUsersBar={false}
+        />
+      </div>
       <div className="playAreaCardsContainer">
         <div className="bufferCards">
           {bufferCards.map((cardState, index) => (
