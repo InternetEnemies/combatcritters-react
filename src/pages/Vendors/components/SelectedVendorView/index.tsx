@@ -14,6 +14,7 @@ interface SelectedVendorViewProps {
   vendorLevel: number;
   vendorLevelProgress: number;
   onLevelUp: () => Promise<void>;
+  onVendorRefresh: () => void ;
 }
 
 const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
@@ -22,9 +23,9 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
   vendorLevel = vendorReputation.level,
   vendorLevelProgress,
   onLevelUp,
+  onVendorRefresh
 }) => {
   const LEVEL_BAR_SCALE = 2;
-
   return (
     <div className="selectedVendorViewRoot">
       <div className="selectedVendorImageWrapper">
@@ -40,7 +41,8 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
           <span className="vendorName">{vendor.name}</span>
           <div className="refreshTimeWrapper">
             <Refresh
-              refreshTime={vendor.refrest_time}
+              vendor={vendor}
+              onVendorRefresh={onVendorRefresh}
               style={{ color: "var(--custom-black)" }}
             />
           </div>
