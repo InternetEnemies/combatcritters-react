@@ -20,9 +20,18 @@
 .endTurnContainer,
 .healthEnergyContainer {
   width: 10%;
-  height: 100%;
-  padding-bottom: 10%;
-  padding-top: 10%;
+  height: 95%;
+}
+
+.healthEnergyContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.endTurnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bufferCards,
