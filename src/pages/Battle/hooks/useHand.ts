@@ -58,7 +58,7 @@ export const useHand = (
         newCards[Number(over.id)] = { card: draggedCard, health: 3 };
         setUserBufferCards(newCards);
       } else {
-        toast.error("Card already played in this slot");
+        toast.error("You have already played a card in this slot");
       }
 
       console.log(draggedCard);
