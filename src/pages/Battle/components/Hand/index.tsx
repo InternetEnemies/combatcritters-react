@@ -17,10 +17,12 @@ const Hand: React.FC<HandProps> = ({ hand, activeCardId }) => {
   return (
     <div className="handRoot">
       <div className="handTitle">
+        <div className="weirdLineThingy" />
         <span>Hand</span>
+
         <img className="cardsTrioImage" src="assets/images/cardsTrio.svg" />
+        <div className="weirdLineThingy" />
       </div>
-      <hr className="separator" />
       <div className="handCards">
         {hand.map((card, index) => (
           <HandCard
