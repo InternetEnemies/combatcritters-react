@@ -12,15 +12,23 @@ import Hand from "./components/Hand";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { useHand } from "./hooks/useHand";
 import HandCard from "./components/HandCard";
+import { useState } from "react";
 
 const Battle = () => {
+  const [maxEnergy, setMaxEnergy] = useState<number>(0);
+  const [maxHealth, setMaxHealth] = useState<number>(0);
+
   const {
     oppBufferCards,
     setOppBufferCards,
     oppInPlayCards,
     setOppInPlayCards,
     isOpponentTurn,
-    setIsOpponentTurn
+    setIsOpponentTurn,
+    opponentHealth,
+    setOpponentHealth,
+    opponentEnergy,
+    setOpponentEnergy
   } = useManageOpponent();
 
   const {
@@ -29,7 +37,11 @@ const Battle = () => {
     userInPlayCards,
     setUserInPlayCards,
     isPlayerTurn,
-    setIsPlayerTurn
+    setIsPlayerTurn, 
+    userHealth,
+    setUserHealth,
+    userEnergy,
+    setUserEnergy
   } = useManageUser();
 
   const {
@@ -38,6 +50,8 @@ const Battle = () => {
     activeCardId,
     handleDragStart,
     handleDragEnd,
+    drawPileSize,
+    setDrawPileSize
   } = useHand(userBufferCards, setUserBufferCards);
 
   return (
@@ -48,6 +62,10 @@ const Battle = () => {
             bufferCards={oppBufferCards}
             inPlayCards={oppInPlayCards}
             isOpponentTurn={isOpponentTurn}
+            opponentEnergy={opponentEnergy}
+            opponentHealth={opponentHealth}
+            maxEnergy={maxEnergy}
+            maxHealth={maxHealth}
           />
         </div>
         <div className="playArea">
@@ -56,6 +74,10 @@ const Battle = () => {
             inPlayCards={userInPlayCards}
             isPlayerTurn={isPlayerTurn}
             isDragging={activeCardId !== null}
+            userHealth={userHealth}
+            userEnergy={userEnergy}
+            maxEnergy={maxEnergy}
+            maxHealth={maxHealth}
           />
         </div>
         <div className="handContainer">

@@ -26,12 +26,20 @@ export const useManageOpponent = () => {
 
   const [isOpponentTurn, setIsOpponentTurn] = useState<boolean>(true);
 
+  const [opponentHealth, setOpponentHealth] = useState<number>(0);
+
+  const [opponentEnergy, setOpponentEnergy] = useState<number>(0);
+
   return {
     oppBufferCards,
     setOppBufferCards,
     oppInPlayCards,
     setOppInPlayCards,
     isOpponentTurn,
-    setIsOpponentTurn
+    setIsOpponentTurn,
+    opponentHealth, 
+    setOpponentHealth,
+    opponentEnergy,
+    setOpponentEnergy
   };
 };
