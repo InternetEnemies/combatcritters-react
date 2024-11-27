@@ -19,6 +19,8 @@ const Battle = () => {
     setOppBufferCards,
     oppInPlayCards,
     setOppInPlayCards,
+    isOpponentTurn,
+    setIsOpponentTurn
   } = useManageOpponent();
 
   const {
@@ -26,6 +28,8 @@ const Battle = () => {
     setUserBufferCards,
     userInPlayCards,
     setUserInPlayCards,
+    isPlayerTurn,
+    setIsPlayerTurn
   } = useManageUser();
 
   const {
@@ -34,33 +38,34 @@ const Battle = () => {
     activeCardId,
     handleDragStart,
     handleDragEnd,
-    handleDragOver,
   } = useHand(userBufferCards, setUserBufferCards);
 
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
+    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} >
       <div className="battleRoot">
         <div className="playArea">
           <OpponentPlayArea
             bufferCards={oppBufferCards}
             inPlayCards={oppInPlayCards}
+            isOpponentTurn={isOpponentTurn}
           />
         </div>
         <div className="playArea">
           <UserPlayArea
             bufferCards={userBufferCards}
             inPlayCards={userInPlayCards}
+            isPlayerTurn={isPlayerTurn}
             isDragging={activeCardId !== null}
           />
         </div>
         <div className="handContainer">
-          <Hand hand={hand} activeCardId={activeCardId} />
+          <Hand hand={hand} />
         </div>
       </div>
       <DragOverlay>
         {activeCardId !== null && (
           <HandCard
-            card={hand[parseInt(activeCardId, 10)]} // Get the active card by ID
+            card={hand[parseInt(activeCardId, 10)]} // Card being dragged
             scale={0.85}
             dragId={activeCardId}
           />

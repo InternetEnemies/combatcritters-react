@@ -29,7 +29,7 @@
 .healthEnergyContainer {
   display: flex;
   flex-direction: row;
-  background-color: rgba(var(--custom-dark-blue-rgb), .8);
+  background-color: rgba(var(--custom-dark-blue-rgb), .97);
   padding-top: 1%;
   padding-bottom: 1%;
   border-radius: 10px;
@@ -61,4 +61,10 @@
   border-radius: 8px;
   width: 110px;
   background-color: red;
+}
+
+
+.turnFinishedCheck {
+  width: 65%;
+  height: auto;
 }

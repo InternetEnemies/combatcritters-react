@@ -18,10 +18,6 @@ const ElixirHealthBar: React.FC<ElixirHealthBarProps> = ({
   isUsersBar,
   isHealth,
 }) => {
-  const imagePath = isHealth
-    ? "assets/images/heart.svg"
-    : "assets/images/elixir.svg";
-
   return (
     <div
       className={`elixirHealthBarRoot 
@@ -41,11 +37,15 @@ const ElixirHealthBar: React.FC<ElixirHealthBarProps> = ({
         <div
           className="barPercentage"
           style={{
-            height: `${(currAmount/maxAmount)*100}%`,
+            height: `${(currAmount / maxAmount) * 100}%`,
           }}
         ></div>
       </div>
-      <img className="elixirHeartImage" src={imagePath} alt="Heart" />
+      <img
+        className="elixirHeartImage"
+        src={isHealth ? "assets/images/heart.svg" : "assets/images/elixir.svg"}
+        alt="Heart"
+      />
     </div>
   );
 };

@@ -23,10 +23,14 @@ export const useManageUser = () => {
     null,
   ]);
 
+  const [isPlayerTurn, setIsPlayerTurn] = useState<boolean>(true);
+
   return {
     userBufferCards,
     setUserBufferCards,
     userInPlayCards,
     setUserInPlayCards,
+    isPlayerTurn,
+    setIsPlayerTurn
   };
 };

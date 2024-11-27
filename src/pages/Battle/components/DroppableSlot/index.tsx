@@ -26,7 +26,12 @@ const DroppableSlot: React.FC<DroppableSlotProps> = ({
   });
 
   const style: React.CSSProperties = {
-    backgroundColor: isOver ? "red" : isDragging ? "lightgreen" : "transparent",
+    //Highlight the slots when a card is being dragged
+    backgroundColor: isOver
+      ? "#4bff45"
+      : isDragging
+      ? "#46cc41"
+      : "transparent",
     transition: "background-color 0.2s ease",
     borderRadius: "8px",
   };

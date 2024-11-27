@@ -5,12 +5,24 @@
 
 import "./loadingCards.css";
 
-const LoadingCards = ({}) => {
+const LoadingCards = () => {
   return (
     <div className="loadingCardsRoot">
-      <img className="loadingCard" src="/assets/images/playingCard.svg" />
-      <img className="loadingCard" src="/assets/images/playingCard.svg" />
-      <img className="loadingCard" src="/assets/images/playingCard.svg" />
+      <img
+        alt="Playing card"
+        className="loadingCard"
+        src="/assets/images/playingCard.svg"
+      />
+      <img
+        alt="Playing card"
+        className="loadingCard"
+        src="/assets/images/playingCard.svg"
+      />
+      <img
+        alt="Playing card"
+        className="loadingCard"
+        src="/assets/images/playingCard.svg"
+      />
     </div>
   );
 };

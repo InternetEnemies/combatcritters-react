@@ -1,27 +1,28 @@
 /**
  * @Created 2024-11-25
- * @Brief Component containing all the opponent components.
+ * @Brief Contains all the component related components.
  */
 
 import "../../styles/sharedPlayArea.css";
 import { ICardState } from "interfaces/ICardState";
 import LoadingCards from "../LoadingCards";
-import { useEffect, useState } from "react";
 import BattleCardSlot from "../BattleCardSlot";
 import ElixirHealthBar from "../ElixirHealthBar";
 
 interface OpponentPlayAreaProps {
   bufferCards: (ICardState | null)[];
   inPlayCards: (ICardState | null)[];
+  isOpponentTurn: boolean;
 }
 
 const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
   bufferCards,
   inPlayCards,
+  isOpponentTurn,
 }) => {
   return (
-    <div className="playAreaRoot" >
-      <div className="healthEnergyContainer" >
+    <div className="playAreaRoot">
+      <div className="healthEnergyContainer">
         <ElixirHealthBar
           currAmount={3}
           maxAmount={5}
@@ -61,7 +62,15 @@ const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
         </div>
       </div>
       <div className="endTurnContainer">
-        <LoadingCards />
+        {isOpponentTurn ? (
+          <LoadingCards />
+        ) : (
+          <img
+            className="turnFinishedCheck"
+            alt="Checkmark"
+            src="assets/images/checkmark2.svg"
+          />
+        )}
       </div>
     </div>
   );

@@ -1,33 +1,30 @@
-
 /**
  * @Created 2024-11-25
  * @Brief Contains all the user related components.
  */
 import "../../styles/sharedPlayArea.css";
-import "./userPlayArea.css"
+import "./userPlayArea.css";
 import { ICardState } from "interfaces/ICardState";
-import LoadingCards from "../LoadingCards";
 import BattleCardSlot from "../BattleCardSlot";
 import DroppableSlot from "pages/Battle/components/DroppableSlot";
-import HealthBar from "../ElixirHealthBar";
 import ElixirHealthBar from "../ElixirHealthBar";
-import { useState } from "react";
 
 interface UserPlayAreaProps {
   bufferCards: (ICardState | null)[];
   inPlayCards: (ICardState | null)[];
   isDragging: boolean;
+  isPlayerTurn: boolean;
 }
 
 const UserPlayArea: React.FC<UserPlayAreaProps> = ({
   bufferCards,
   inPlayCards,
-  isDragging
+  isDragging,
+  isPlayerTurn,
 }) => {
-
   return (
     <div className="playAreaRoot">
-      <div className="healthEnergyContainer" >
+      <div className="healthEnergyContainer">
         <ElixirHealthBar
           currAmount={2}
           maxAmount={5}
@@ -66,11 +63,19 @@ const UserPlayArea: React.FC<UserPlayAreaProps> = ({
         </div>
       </div>
       <div className="endTurnContainer">
-        <img
-          className="endTurnButton"
-          alt="End turn"
-          src="assets/images/playButton.svg"
-        />
+        {isPlayerTurn ? (
+          <img
+            className="endTurnButton"
+            alt="End turn"
+            src="assets/images/playButton.svg"
+          />
+        ) : (
+          <img
+            className="turnFinishedCheck"
+            alt="Checkmark"
+            src="assets/images/checkmark2.svg"
+          />
+        )}
       </div>
     </div>
   );

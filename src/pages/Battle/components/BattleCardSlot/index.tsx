@@ -1,6 +1,7 @@
 /**
- * @Created 2024-10-07
- * @Brief The Pack view that is used throughout the application.
+ * @Created 2024-11-27
+ * @Brief The slot component used in the battle page. This can be either a card
+ *        or a placeholder slot.
  */
 
 import { ICardState } from "interfaces/ICardState";
@@ -29,7 +30,7 @@ const BattleCardSlot: React.FC<BattleCardSlotProps> = ({
       {cardState ? (
         <div className="cardContainer">
           <Card card={cardState.card} scale={scale} style={{cursor:"default"}}/>
-          {isPlayerSlot && <img src="assets/images/skull.svg" className="skullButton"/>}
+          {isPlayerSlot && <img alt="Skull" src="assets/images/skull.svg" className="skullButton"/>}
         </div>
       ) : (
         <div

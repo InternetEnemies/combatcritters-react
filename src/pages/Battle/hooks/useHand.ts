@@ -3,13 +3,11 @@
  * @Brief Manages the logic related to the hand (including drag and drop).
  */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ICard } from "combatcritters-ts";
-import { ClientSingleton } from "ClientSingleton";
 import {
   DragStartEvent,
   DragEndEvent,
-  DragOverEvent,
 } from "@dnd-kit/core";
 import { ICardState } from "interfaces/ICardState";
 import { toast } from "react-toastify";
@@ -21,33 +19,19 @@ export const useHand = (
   const [hand, setHand] = useState<ICard[]>([]); 
   const [activeCardId, setActiveCardId] = useState<string | null>(null);
 
-  useEffect(() => {
-    const setHandCards = async () => {
-      const builder =
-        await ClientSingleton.getInstance().user.cards.getBuilder();
-      const cards = await ClientSingleton.getInstance().user.cards.getCards(
-        builder.build()
-      );
-      setHand([
-        cards[0].getItem(),
-        cards[0].getItem(),
-        cards[0].getItem(),
-        cards[1].getItem(),
-        cards[0].getItem(),
-        cards[0].getItem(),
-        cards[0].getItem(),
-        cards[1].getItem(),
-      ]);
-    };
-    setHandCards();
-  }, []);
-
+  /**
+   * On drag start, set the active card id to the dragged card.
+   */
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
     setActiveCardId(active.id.toString());
   };
 
+  /**
+   * On drag end, add the card to the buffer cards if the drop area was over a buffer slot
+   */
   const handleDragEnd = (event: DragEndEvent) => {
+    
     const { active, over } = event;
     const draggedCard = hand[Number(active.id)];
     let newCards = [...userBufferCards];
@@ -60,19 +44,9 @@ export const useHand = (
       } else {
         toast.error("You have already played a card in this slot");
       }
-
-      console.log(draggedCard);
     }
 
     setActiveCardId(null);
-  };
-
-  const handleDragOver = (event: DragOverEvent) => {
-    const { over } = event;
-
-    if (over) {
-      console.log(`Dragging over: ${over.id}`);
-    }
   };
 
   return {
@@ -81,6 +55,5 @@ export const useHand = (
     activeCardId,
     handleDragStart,
     handleDragEnd,
-    handleDragOver,
   };
 };
