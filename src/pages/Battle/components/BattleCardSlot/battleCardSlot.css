@@ -37,4 +37,5 @@
 
 .cardSlotPlaceholder {
   cursor: default;
+  border: 2px solid rgba(var(--custom-white-rgb), .5);
 }
