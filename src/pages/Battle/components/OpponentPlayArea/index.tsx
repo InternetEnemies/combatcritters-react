@@ -19,10 +19,6 @@ const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
   bufferCards,
   inPlayCards,
 }) => {
-  useEffect(() => {
-    console.log(bufferCards);
-  }, [bufferCards]);
-
   return (
     <div className="playAreaRoot" >
       <div className="healthEnergyContainer" >
@@ -52,7 +48,6 @@ const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
           ))}
         </div>
 
-        <hr className="separator"></hr>
         <div className="inPlayCards">
           {inPlayCards.map((cardState, index) => (
             <BattleCardSlot
