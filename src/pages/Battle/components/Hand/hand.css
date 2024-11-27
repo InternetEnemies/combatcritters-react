@@ -8,14 +8,30 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  border: 2px solid var(--custom-black);
+}
+
+.weirdLineThingy {
+  width: 40%;
+  height: .5px;
+  background-color: white;
 }
 
 .handTitle {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   color: var(--custom-white);
+}
+
+.handTitle img {
+  margin-right: 2%;
+}
+
+.handTitle span {
+  margin-left: 2%;;
 }
 
 .handRoot .cardsTrioImage {
