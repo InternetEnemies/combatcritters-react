@@ -1,0 +1,34 @@
+.battleRoot {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(48, 120, 228);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2%;
+  background-image: url("/public/assets/images/battleBackground.webp");
+  background-size: cover;
+}
+
+.playArea {
+  width: 90%;
+  height: 45%;
+  transform: translateY(-5%);
+}
+
+.battleRoot .handContainer {
+  position: fixed;
+  bottom: 0;
+
+  height: 26%;
+  width: 65%;
+  transform: translateY(85%); 
+  text-align: center;
+  transition: transform .3s ease-in-out;
+  overflow: hidden; 
+}
+
+.handContainer:hover {
+  transform: translateY(0); 
+}
