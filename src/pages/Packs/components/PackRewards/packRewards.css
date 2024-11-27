@@ -73,7 +73,7 @@
 .rewardsContainer.rewardsList {
   justify-content: center;
   align-items: center;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 
 .rewardsContainer.rewardsListScrollable {
