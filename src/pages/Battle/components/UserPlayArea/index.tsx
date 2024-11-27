@@ -53,7 +53,6 @@ const UserPlayArea: React.FC<UserPlayAreaProps> = ({
             />
           ))}
         </div>
-        <hr className="separator"></hr>
         <div className="bufferCards">
           {bufferCards.map((cardState, index) => (
             <DroppableSlot
