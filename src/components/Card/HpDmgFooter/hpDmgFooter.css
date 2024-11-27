@@ -31,7 +31,7 @@
   justify-content: center;
   align-items: center;
   width: auto;
-  font-size: 8cqw;
+  font-size: 12cqw;
   font-family: "robotoRegular", sans-serif;
   gap: 0%;
 }
@@ -45,11 +45,11 @@
 }
 
 .hpImage {
-  width: 40%;
+  width: 50%;
   height: auto;
 }
 
 .swordImage {
-  width: 28%;
+  width: 35%;
   height: auto;
 }
