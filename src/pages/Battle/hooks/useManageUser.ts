@@ -25,12 +25,20 @@ export const useManageUser = () => {
 
   const [isPlayerTurn, setIsPlayerTurn] = useState<boolean>(true);
 
+  const [userHealth, setUserHealth] = useState<number>(0);
+
+  const [userEnergy, setUserEnergy] = useState<number>(0);
+
   return {
     userBufferCards,
     setUserBufferCards,
     userInPlayCards,
     setUserInPlayCards,
     isPlayerTurn,
-    setIsPlayerTurn
+    setIsPlayerTurn,
+    userHealth,
+    setUserHealth,
+    userEnergy,
+    setUserEnergy
   };
 };

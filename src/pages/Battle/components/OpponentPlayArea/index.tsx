@@ -13,25 +13,33 @@ interface OpponentPlayAreaProps {
   bufferCards: (ICardState | null)[];
   inPlayCards: (ICardState | null)[];
   isOpponentTurn: boolean;
+  opponentEnergy: number;
+  opponentHealth: number;
+  maxEnergy: number;
+  maxHealth: number;
 }
 
 const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
   bufferCards,
   inPlayCards,
   isOpponentTurn,
+  opponentEnergy,
+  opponentHealth,
+  maxEnergy,
+  maxHealth
 }) => {
   return (
     <div className="playAreaRoot">
       <div className="healthEnergyContainer">
         <ElixirHealthBar
-          currAmount={3}
-          maxAmount={5}
+          currAmount={opponentEnergy}
+          maxAmount={maxEnergy}
           isHealth={false}
           isUsersBar={false}
         />
         <ElixirHealthBar
-          currAmount={20}
-          maxAmount={25}
+          currAmount={opponentHealth}
+          maxAmount={maxHealth}
           isHealth={true}
           isUsersBar={false}
         />

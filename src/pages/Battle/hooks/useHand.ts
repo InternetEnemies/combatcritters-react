@@ -18,6 +18,7 @@ export const useHand = (
 ) => {
   const [hand, setHand] = useState<ICard[]>([]); 
   const [activeCardId, setActiveCardId] = useState<string | null>(null);
+  const [drawPileSize, setDrawPileSize] = useState<number>(0);
 
   /**
    * On drag start, set the active card id to the dragged card.
@@ -55,5 +56,7 @@ export const useHand = (
     activeCardId,
     handleDragStart,
     handleDragEnd,
+    drawPileSize,
+    setDrawPileSize
   };
 };

@@ -14,6 +14,10 @@ interface UserPlayAreaProps {
   inPlayCards: (ICardState | null)[];
   isDragging: boolean;
   isPlayerTurn: boolean;
+  userHealth: number;
+  userEnergy: number;
+  maxEnergy: number;
+  maxHealth: number;
 }
 
 const UserPlayArea: React.FC<UserPlayAreaProps> = ({
@@ -21,19 +25,24 @@ const UserPlayArea: React.FC<UserPlayAreaProps> = ({
   inPlayCards,
   isDragging,
   isPlayerTurn,
+  userHealth,
+  userEnergy,
+  maxEnergy, 
+  maxHealth
+  
 }) => {
   return (
     <div className="playAreaRoot">
       <div className="healthEnergyContainer">
         <ElixirHealthBar
-          currAmount={2}
-          maxAmount={5}
+          currAmount={userEnergy}
+          maxAmount={maxEnergy}
           isUsersBar={true}
           isHealth={false}
         />
         <ElixirHealthBar
-          currAmount={14}
-          maxAmount={25}
+          currAmount={userHealth}
+          maxAmount={maxHealth}
           isUsersBar={true}
           isHealth={true}
         />
