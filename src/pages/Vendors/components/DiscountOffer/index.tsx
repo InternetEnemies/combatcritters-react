@@ -20,7 +20,7 @@ const DiscountOffer: React.FC<DiscountOfferProps> = ({
 }) => {
   return (
     <div className="discountOfferContainer">
-      <span className="discountText">{discountOffer.discount}% Off!</span>
+      <span className="discountText" onClick={() => onClick(discountOffer)}>{discountOffer.discount}% Off!</span>
       <Offer offer={discountOffer} onClick={onClick} />
     </div>
   );
