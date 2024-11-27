@@ -8,12 +8,13 @@ import { ICardVisitor } from "combatcritters-ts";
 import "./hpDmgFooter.css"
 import { CardRarity } from "combatcritters-ts";
 
-const HpDmgFooter: React.FC<{ card: ICard }> = ({ card }) => {
+const HpDmgFooter: React.FC<{ card: ICard, health?: number }> = ({ card, health }) => {
   let content: React.ReactNode = null;
   let isVisible = true;
 
   const visitor: ICardVisitor = {
     visitCritter: (critter: ICardCritter): void => {
+      const displayedHealth = health ?? critter.health;
       content = (
         <div className={`footerRoot ${CardRarity[card.rarity]}`}>
           <div className="hp">
@@ -22,7 +23,7 @@ const HpDmgFooter: React.FC<{ card: ICard }> = ({ card }) => {
               src="/assets/images/heart.svg"
               alt="Heart"
             />
-            <span className="hpText"> {critter.health} </span>
+            <span className="hpText"> {displayedHealth} </span>
           </div>
           <div className="damage">
             <img

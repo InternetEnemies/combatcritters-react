@@ -33,11 +33,15 @@ const NavBar: React.FC<NavbarProps> = ({
   const toVendors = () => {
     navigate("/vendors");
   };
+  
+  const toBattle = () => {
+    navigate("/battle");
+  }
 
   return (
     <div className="navBarRoot">
       <div className="navButtonsContainer">
-        <span className="navButton">Home</span>
+        <span className="navButton" onClick={toBattle}>Battle</span>
         <span className="navButton" onClick={toCollection}>
           Deck Builder
         </span>

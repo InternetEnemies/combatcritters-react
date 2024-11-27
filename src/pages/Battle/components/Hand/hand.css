@@ -1,0 +1,53 @@
+.handRoot {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--custom-dark-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: 2px solid var(--custom-black);
+}
+
+.weirdLineThingy {
+  width: 40%;
+  height: .5px;
+  background-color: white;
+}
+
+.handTitle {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: var(--custom-white);
+}
+
+.handTitle img {
+  margin-right: 2%;
+}
+
+.handTitle span {
+  margin-left: 2%;;
+}
+
+.handRoot .cardsTrioImage {
+  width: 20px;
+  height: 20px;
+}
+
+.handCards {
+  display: flex;
+  flex-direction: row; 
+  align-items: center; 
+  justify-content: flex-start; 
+  gap: 20px;
+  height: 80%; 
+  width: 100%; 
+  overflow-x: auto; 
+  overflow-y: hidden; 
+  padding: 10px; 
+}
