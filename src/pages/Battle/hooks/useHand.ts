@@ -9,7 +9,7 @@ import {
   DragStartEvent,
   DragEndEvent,
 } from "@dnd-kit/core";
-import { ICardState } from "interfaces/ICardState";
+import { ICardState } from "combatcritters-ts";
 import { toast } from "react-toastify";
 
 export const useHand = (

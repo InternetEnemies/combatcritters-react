@@ -6,7 +6,7 @@
 import React from "react";
 import { useDroppable } from "@dnd-kit/core";
 import BattleCardSlot from "pages/Battle/components/BattleCardSlot";
-import { ICardState } from "interfaces/ICardState";
+import { ICardState } from "combatcritters-ts";
 
 interface DroppableSlotProps {
   slotId: string;
