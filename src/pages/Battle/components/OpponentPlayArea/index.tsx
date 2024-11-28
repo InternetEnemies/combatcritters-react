@@ -4,7 +4,7 @@
  */
 
 import "../../styles/sharedPlayArea.css";
-import { ICardState } from "interfaces/ICardState";
+import { ICardState } from "combatcritters-ts";
 import LoadingCards from "../LoadingCards";
 import BattleCardSlot from "../BattleCardSlot";
 import ElixirHealthBar from "../ElixirHealthBar";

@@ -4,7 +4,7 @@
  *        or a placeholder slot.
  */
 
-import { ICardState } from "interfaces/ICardState";
+import { ICardState } from "combatcritters-ts";
 import Card, { DEFAULT_CARD_WIDTH } from "components/Card";
 import "./battleCardSlot.css";
 

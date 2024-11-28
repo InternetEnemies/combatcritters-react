@@ -3,7 +3,7 @@
  * @Brief Hook to manage user state.
  */
 
-import { ICardState } from "interfaces/ICardState";
+import { ICardState } from "combatcritters-ts";
 import { useState } from "react";
 
 export const useManageUser = () => {

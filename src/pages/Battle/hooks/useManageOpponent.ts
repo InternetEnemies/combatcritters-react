@@ -4,7 +4,7 @@
  */
 
 import { useState } from "react";
-import { ICardState } from "interfaces/ICardState";
+import { ICardState } from "combatcritters-ts";
 
 export const useManageOpponent = () => {
 

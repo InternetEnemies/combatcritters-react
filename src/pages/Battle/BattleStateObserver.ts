@@ -4,8 +4,8 @@
  */
 
 import { ICard } from "combatcritters-ts";
-import { ICardState } from "interfaces/ICardState";
-import { IBattleStateObserver } from "interfaces/IBattleStateObserver";
+import { IBattleStateObserver } from "combatcritters-ts";
+import { ICardState } from "combatcritters-ts";
 
 class BattleStateObserver implements IBattleStateObserver {
   private setPlayerTurnCallback: (isPlayerTurn: boolean) => void;
@@ -82,7 +82,7 @@ class BattleStateObserver implements IBattleStateObserver {
     this.setPlayerBufferCardsCallback(cardStates);
   }
 
-  setEnemyBuffercards(cardStates: (ICardState | null)[]): void {
+  setEnemyBufferCards(cardStates: (ICardState | null)[]): void {
     this.setEnemyBufferCardsCallback(cardStates);
   }
 
