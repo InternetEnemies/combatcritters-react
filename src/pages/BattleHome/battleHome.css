@@ -1,0 +1,16 @@
+.battleHomeRoot {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url("/public/assets/backgrounds/pattern-randomized-blue.svg");
+    gap: 4%;
+}
+
+.battleButtonWrapper {
+    width: 30vh;
+    height: 30vh;
+    position: relative;
+}

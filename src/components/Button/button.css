@@ -21,3 +21,56 @@
   top: 5px;
   left: 5px;
 }
+
+
+
+
+
+
+.battleButton {
+  background-color: #ff0000; /* Bright red */
+  color: white;
+  font-size: 150.5%; /* Large text */
+  font-weight: bold;
+  border: 2px solid #cc0000; /* Darker red border */
+  border-radius: 50%; /* Rounded button */
+  width: 100%; /* Circular dimensions */
+  height: 100%;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  outline: none;
+  box-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff0000, 0 0 30px #b30000;
+}
+
+.battleButton:hover {
+  box-shadow: 0 0 15px #ff6666, 0 0 30px #ff0000, 0 0 45px #b30000;
+}
+
+.battleButton:active {
+  transform: scale(0.95); /* Slightly shrink */
+  box-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff0000, 0 0 15px #b30000;
+}
+
+.battleButton:disabled {
+  background-color: #a6a6a6; /* Gray for disabled */
+  border: 2px solid #8c8c8c;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff0000, 0 0 30px #b30000;
+  }
+  50% {
+    box-shadow: 0 0 20px #ff6666, 0 0 40px #ff0000, 0 0 60px #b30000;
+  }
+  100% {
+    box-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff0000, 0 0 30px #b30000;
+  }
+}
+
+.battleButton.glow {
+  animation: glow 1.5s infinite alternate;
+}
