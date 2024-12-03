@@ -144,7 +144,7 @@ export const BattleStateProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useBattleClient = (): BattleStateType => {
+export const useBattleState = (): BattleStateType => {
   const context = useContext(BattleStateContext);
   if (context === undefined) {
     throw new Error("useBattleClient must be used within a CurrencyProvider");

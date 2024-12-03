@@ -13,6 +13,7 @@ interface DroppableSlotProps {
   cardState: ICardState | null;
   scale: number;
   isDragging: boolean;
+  position: number;
 }
 
 const DroppableSlot: React.FC<DroppableSlotProps> = ({
@@ -20,6 +21,7 @@ const DroppableSlot: React.FC<DroppableSlotProps> = ({
   cardState,
   scale,
   isDragging,
+  position
 }) => {
   const { setNodeRef, isOver } = useDroppable({
     id: slotId,
@@ -43,6 +45,7 @@ const DroppableSlot: React.FC<DroppableSlotProps> = ({
         scale={scale}
         isPlayerSlot={true}
         isBuffer={true}
+        position={position}
       />
     </div>
   );

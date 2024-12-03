@@ -26,6 +26,8 @@ import Battle from "pages/Battle";
 import BattleHome from "pages/BattleHome";
 import { BattleClientProvider } from "contexts/BattleClientContext";
 import {BattleTest} from "./pages/BattleTest";
+import BattleStateObserver from "pages/Battle/BattleStateObserver";
+import { BattleStateProvider } from "contexts/BattleStateContext";
 
 function App() {
   const [numberOfRequests, setNumberOfRequests] = useState(0); // Number of friend requests
@@ -91,11 +93,13 @@ function App() {
 function AppWrapper() {
   return (
     <BattleClientProvider>
-      <CurrencyProvider>
-        <Router>
-          <App />
-        </Router>
-      </CurrencyProvider>
+      <BattleStateProvider>
+        <CurrencyProvider>
+          <Router>
+            <App />
+          </Router>
+        </CurrencyProvider>
+      </BattleStateProvider>
     </BattleClientProvider>
   );
 }

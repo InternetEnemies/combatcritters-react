@@ -13,10 +13,11 @@ import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { useHand } from "./hooks/useHand";
 import HandCard from "./components/HandCard";
 import { useState } from "react";
+import { useBattleState } from "contexts/BattleStateContext";
+import { useBattleClient } from "contexts/BattleClientContext";
 
 const Battle = () => {
-  const [maxEnergy, setMaxEnergy] = useState<number>(0);
-  const [maxHealth, setMaxHealth] = useState<number>(0);
+  const {battleClient} = useBattleClient();
 
   const {
     oppBufferCards,
@@ -28,32 +29,62 @@ const Battle = () => {
     opponentHealth,
     setOpponentHealth,
     opponentEnergy,
-    setOpponentEnergy
-  } = useManageOpponent();
-
-  const {
+    setOpponentEnergy,
     userBufferCards,
     setUserBufferCards,
     userInPlayCards,
     setUserInPlayCards,
     isPlayerTurn,
-    setIsPlayerTurn, 
+    setIsPlayerTurn,
     userHealth,
     setUserHealth,
     userEnergy,
-    setUserEnergy
-  } = useManageUser();
+    setUserEnergy,
+    hand, 
+    setHand,
+    drawPileSize,
+    setDrawPileSize,
+  } = useBattleState();
+  
+  // const {
+  //   oppBufferCards,
+  //   setOppBufferCards,
+  //   oppInPlayCards,
+  //   setOppInPlayCards,
+  //   isOpponentTurn,
+  //   setIsOpponentTurn,
+  //   opponentHealth,
+  //   setOpponentHealth,
+  //   opponentEnergy,
+  //   setOpponentEnergy
+  // } = useManageOpponent();
+
+  // const {
+  //   userBufferCards,
+  //   setUserBufferCards,
+  //   userInPlayCards,
+  //   setUserInPlayCards,
+  //   isPlayerTurn,
+  //   setIsPlayerTurn, 
+  //   userHealth,
+  //   setUserHealth,
+  //   userEnergy,
+  //   setUserEnergy
+  // } = useManageUser();
 
   const {
-    hand,
-    setHand,
+    // hand,
+    // setHand,
     activeCardId,
     handleDragStart,
     handleDragEnd,
-    drawPileSize,
-    setDrawPileSize
-  } = useHand(userBufferCards, setUserBufferCards);
+    // drawPileSize,
+    // setDrawPileSize
+  } = useHand(userBufferCards, setUserBufferCards, hand, setHand, drawPileSize, setDrawPileSize);
 
+  const endTurn = () => {
+    battleClient?.battleController.endTurn();
+  }
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} >
       <div className="battleRoot">
@@ -64,8 +95,7 @@ const Battle = () => {
             isOpponentTurn={isOpponentTurn}
             opponentEnergy={opponentEnergy}
             opponentHealth={opponentHealth}
-            maxEnergy={maxEnergy}
-            maxHealth={maxHealth}
+           
           />
         </div>
         <div className="playArea">
@@ -76,8 +106,7 @@ const Battle = () => {
             isDragging={activeCardId !== null}
             userHealth={userHealth}
             userEnergy={userEnergy}
-            maxEnergy={maxEnergy}
-            maxHealth={maxHealth}
+           
           />
         </div>
         <div className="handContainer">

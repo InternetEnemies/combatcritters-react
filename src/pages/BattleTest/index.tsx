@@ -17,6 +17,9 @@ export const BattleTest = () => {
     gameFound(opponent: string): void {
       setTitle(`found match with ${opponent}`);
     }
+    matchEnded(type: string): void {
+      
+    }
   }
 
   let battleObsv: IBattleStateObserver = {

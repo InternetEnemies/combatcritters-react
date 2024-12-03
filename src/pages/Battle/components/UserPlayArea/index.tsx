@@ -8,6 +8,7 @@ import { ICardState } from "combatcritters-ts";
 import BattleCardSlot from "../BattleCardSlot";
 import DroppableSlot from "pages/Battle/components/DroppableSlot";
 import ElixirHealthBar from "../ElixirHealthBar";
+import { useBattleClient } from "contexts/BattleClientContext";
 
 interface UserPlayAreaProps {
   bufferCards: (ICardState | null)[];
@@ -16,8 +17,6 @@ interface UserPlayAreaProps {
   isPlayerTurn: boolean;
   userHealth: number;
   userEnergy: number;
-  maxEnergy: number;
-  maxHealth: number;
 }
 
 const UserPlayArea: React.FC<UserPlayAreaProps> = ({
@@ -27,22 +26,28 @@ const UserPlayArea: React.FC<UserPlayAreaProps> = ({
   isPlayerTurn,
   userHealth,
   userEnergy,
-  maxEnergy, 
-  maxHealth
+
+
   
 }) => {
+  const {battleClient} = useBattleClient();
+
+  const endTurn = () => {
+    battleClient?.battleController.endTurn();
+  }
   return (
+
     <div className="playAreaRoot">
       <div className="healthEnergyContainer">
         <ElixirHealthBar
           currAmount={userEnergy}
-          maxAmount={maxEnergy}
+         
           isUsersBar={true}
           isHealth={false}
         />
         <ElixirHealthBar
           currAmount={userHealth}
-          maxAmount={maxHealth}
+       
           isUsersBar={true}
           isHealth={true}
         />
@@ -56,6 +61,7 @@ const UserPlayArea: React.FC<UserPlayAreaProps> = ({
               scale={0.85}
               isPlayerSlot={true}
               isBuffer={false}
+              position={index}
             />
           ))}
         </div>
@@ -67,6 +73,7 @@ const UserPlayArea: React.FC<UserPlayAreaProps> = ({
               cardState={cardState}
               scale={0.85}
               isDragging={isDragging}
+              position={index}
             />
           ))}
         </div>
@@ -77,6 +84,7 @@ const UserPlayArea: React.FC<UserPlayAreaProps> = ({
             className="endTurnButton"
             alt="End turn"
             src="assets/images/playButton.svg"
+            onClick={endTurn}
           />
         ) : (
           <img

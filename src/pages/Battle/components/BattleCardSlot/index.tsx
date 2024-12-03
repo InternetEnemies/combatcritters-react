@@ -7,12 +7,14 @@
 import { ICardState } from "combatcritters-ts";
 import Card, { DEFAULT_CARD_WIDTH } from "components/Card";
 import "./battleCardSlot.css";
+import { useBattleClient } from "contexts/BattleClientContext";
 
 interface BattleCardSlotProps {
   cardState: ICardState | null;
   scale: number;
   isPlayerSlot: boolean;
   isBuffer: boolean;
+  position: number;
 }
 
 const BattleCardSlot: React.FC<BattleCardSlotProps> = ({
@@ -20,8 +22,14 @@ const BattleCardSlot: React.FC<BattleCardSlotProps> = ({
   scale,
   isPlayerSlot,
   isBuffer,
+  position
 }) => {
   const WIDTH: number = DEFAULT_CARD_WIDTH * scale;
+  const {battleClient} = useBattleClient();
+
+  const sacrifice = () => {
+    battleClient?.battleController.sacrifice(position);
+  }
   return (
     <div
       className={`battleCardSlot ${isPlayerSlot ? "playerSlot" : ""}`}
@@ -29,8 +37,18 @@ const BattleCardSlot: React.FC<BattleCardSlotProps> = ({
     >
       {cardState ? (
         <div className="cardContainer">
-          <Card card={cardState.card} scale={scale} style={{cursor:"default"}}/>
-          {isPlayerSlot && <img alt="Skull" src="assets/images/skull.svg" className="skullButton"/>}
+          <Card
+            card={cardState.card}
+            scale={scale}
+            style={{ cursor: "default" }}
+          />
+          {isPlayerSlot && (
+            <img
+              alt="Skull"
+              src="assets/images/skull.svg"
+              className="skullButton"
+            />
+          )}
         </div>
       ) : (
         <div

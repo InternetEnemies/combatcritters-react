@@ -11,14 +11,19 @@ import { IDropdownOption } from "interfaces/IDropdownOption";
 import { IBattleStateObserver, ICard, ICardState, IDeck, IMatchStateObserver } from "combatcritters-ts";
 import { ClientSingleton } from "ClientSingleton";
 import { useBattleClient } from "contexts/BattleClientContext";
+import { useBattleState } from "contexts/BattleStateContext";
+import { useNavigate } from "react-router-dom";
 
 const BattleHome: React.FC = () => {
+  const navigate = useNavigate();
   const [deckDropdownOptions, setDeckDropdownOptions] = useState<
     IDropdownOption<IDeck>[]
   >([]);
   const [selectedDropdownOption, setSelectedDropdownOption] =
     useState<IDropdownOption<IDeck> | null>(null);
     const { battleClient, refreshClient } = useBattleClient();
+
+    const {battleStateObserver} = useBattleState();
 
 
   useEffect(() => {
@@ -45,8 +50,8 @@ const BattleHome: React.FC = () => {
   useEffect(() => {
     const setObserver = async () => {
       if (battleClient) {
-        battleClient.setBattleStateObserver(battleObsv);
-        console.log("herre");
+        battleClient.setBattleStateObserver(battleStateObserver);
+        // console.log("herre");
       }
     };
     setObserver();
@@ -54,7 +59,11 @@ const BattleHome: React.FC = () => {
 
   class MatchObserver implements IMatchStateObserver {
     gameFound(opponent: string): void {
-      console.log("Game found!");
+      console.log("Game found against opponent");
+      navigate("/battle");
+    }
+    matchEnded(type: string) : void {
+      navigate("/home");
     }
   }
 
