@@ -8,23 +8,30 @@ import "./battleHome.css";
 import Button from "components/Button";
 import Dropdown from "components/Dropdown";
 import { IDropdownOption } from "interfaces/IDropdownOption";
-import { IBattleStateObserver, ICard, ICardState, IDeck, IMatchStateObserver } from "combatcritters-ts";
+import {
+  IBattleStateObserver,
+  ICard,
+  ICardState,
+  IDeck,
+  IMatchStateObserver,
+} from "combatcritters-ts";
 import { ClientSingleton } from "ClientSingleton";
 import { useBattleClient } from "contexts/BattleClientContext";
 import { useBattleState } from "contexts/BattleStateContext";
 import { useNavigate } from "react-router-dom";
+import Loading from "./components/Loading";
 
 const BattleHome: React.FC = () => {
   const navigate = useNavigate();
+  const [showLoading, setShowLoading] = useState<boolean>(false);
   const [deckDropdownOptions, setDeckDropdownOptions] = useState<
     IDropdownOption<IDeck>[]
   >([]);
   const [selectedDropdownOption, setSelectedDropdownOption] =
     useState<IDropdownOption<IDeck> | null>(null);
-    const { battleClient, refreshClient } = useBattleClient();
+  const { battleClient, refreshClient } = useBattleClient();
 
-    const {battleStateObserver} = useBattleState();
-
+  const { battleStateObserver } = useBattleState();
 
   useEffect(() => {
     ClientSingleton.getInstance().user.decks.validator.refresh();
@@ -38,7 +45,6 @@ const BattleHome: React.FC = () => {
           value: deck,
         }));
         setDeckDropdownOptions(options);
-
       } catch (error) {
         console.error("Error fetching decks:", error);
       }
@@ -51,7 +57,7 @@ const BattleHome: React.FC = () => {
     const setObserver = async () => {
       if (battleClient) {
         battleClient.setBattleStateObserver(battleStateObserver);
-        // console.log("herre");
+        console.log("herre");
       }
     };
     setObserver();
@@ -62,7 +68,8 @@ const BattleHome: React.FC = () => {
       console.log("Game found against opponent");
       navigate("/battle");
     }
-    matchEnded(type: string) : void {
+    matchEnded(type: string): void {
+      console.log("Match Ended");
       navigate("/home");
     }
   }
@@ -108,6 +115,7 @@ const BattleHome: React.FC = () => {
       battleClient.matchController.match("pvp");
 
       battleClient.setMatchStateObserver(new MatchObserver());
+      setShowLoading(true);
     }
     console.log(battleClient);
     // refreshClient();
@@ -127,6 +135,7 @@ const BattleHome: React.FC = () => {
           className="battleButton"
         ></Button>
       </div>
+      <Loading showLoading={showLoading} setShowLoading={setShowLoading}/>
     </div>
   );
 };

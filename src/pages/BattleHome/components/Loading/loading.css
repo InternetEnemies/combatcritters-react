@@ -1,0 +1,45 @@
+
+/* Overlay to grey out the background */
+.loadingRoot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent grey */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it overlays other content */
+}
+
+.loadingIconContainer {
+    width: 40%;
+    height: 40%;
+    background-color: var(--custom-dark-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--custom-white);
+}
+
+/* Loading spinner */
+.loadingIcon {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3); /* Light white border */
+  border-top: 5px solid #ff0000; /* Solid white top border */
+  border-radius: 50%;
+  animation: spin 1s linear infinite; /* Rotate infinitely */
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
