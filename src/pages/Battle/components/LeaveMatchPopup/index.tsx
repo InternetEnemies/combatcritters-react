@@ -22,7 +22,7 @@ const LeaveMatchPopup: React.FC<LeaveMatchPopupProps> = ({ setShowPopup }) => {
   return (
     
     <div className="leaveMatchPopupRoot">
-      <span>Are you sure you want to abandon the match?</span>
+      <span>Are you sure you want to surrender?</span>
       <div className="confirmationButtonsContainer">
         <Button text="No" onClick={() => {setShowPopup(false)}} />
         <Button
