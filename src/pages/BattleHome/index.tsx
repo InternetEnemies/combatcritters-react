@@ -77,7 +77,7 @@ const BattleHome: React.FC = () => {
 
   const startmatch = async () => {
     if(!selectedDropdownOption) {
-      toast.error("You need to select a deck", {
+      toast.error("You must select a deck", {
         toastId: "needADeck",
       });
       return
