@@ -6,11 +6,14 @@ import {IBattleStateObserver} from "combatcritters-ts";
 
 export const BattleTest = () => {
     // todo remove this later
-    let bclient: Promise<IBattleClient> = getBattleClient();
+    const bclient = getBattleClient()
     const [title, setTitle] = useState("BattleTest");
     const [isTurn, setIsTurn] = useState(false);
 
     class MatchObserver implements IMatchStateObserver {
+        matchEnded(): void {
+            setTitle("game ended")
+        }
         gameFound(opponent: string): void {
             setTitle(`found match with ${opponent}`);
         }
@@ -21,16 +24,16 @@ export const BattleTest = () => {
             setIsTurn(!isTurn);
         },
         setPlayerHealth: function (health: number): void {
-            throw new Error("Function not implemented.");
+            console.log("phealth",health)
         },
         setEnemyHealth: function (health: number): void {
-            throw new Error("Function not implemented.");
+            console.log("ehealth",health)
         },
         setPlayerEnergy: function (energy: number): void {
-            throw new Error("Function not implemented.");
+            console.log("penergy",energy)
         },
         setEnemyEnergy: function (energy: number): void {
-            throw new Error("Function not implemented.");
+            console.log("eenergy",energy)
         },
         setHand: function (cards: ICard[]): void {
             throw new Error("Function not implemented.");
@@ -53,13 +56,22 @@ export const BattleTest = () => {
     }
     bclient.then((b) => {
         b.setBattleStateObserver(battleObsv)
+        b.setMatchStateObserver(new MatchObserver())
+        b.onStopped(() => { // create new battle client on close
+        })
+        console.log(bclient)
+        console.log(b)
     })
+    console.log(bclient)
+
     const startmatch = async () => {
         (await bclient).matchController.match("pvp");
-        (await bclient).setMatchStateObserver(new MatchObserver());
     }
     const endTurn = async () => {
-        (await bclient).battleController.endTurn()
+        (await bclient).battleController.endTurn();
+    }
+    const quitGame = async () => {
+        (await bclient).matchController.cancelMatch();
     }
     return (
         <div>
@@ -67,6 +79,7 @@ export const BattleTest = () => {
             <h2>{isTurn? "turn":"notTurn"}</h2>
             <button onClick={startmatch}>Matchmake</button>
             <button onClick={endTurn}>end turn</button>
+            <button onClick={quitGame}>end game</button>
         </div>
     )
 }
