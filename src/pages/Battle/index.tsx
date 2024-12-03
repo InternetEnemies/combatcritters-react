@@ -12,12 +12,16 @@ import Hand from "./components/Hand";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { useHand } from "./hooks/useHand";
 import HandCard from "./components/HandCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useBattleState } from "contexts/BattleStateContext";
 import { useBattleClient } from "contexts/BattleClientContext";
+import Popup from "components/Popup";
+import LeaveMatchPopup from "./components/LeaveMatchPopup";
+import { useNavigate } from "react-router-dom";
 
 const Battle = () => {
   const {battleClient} = useBattleClient();
+  const navigate = useNavigate();
 
   const {
     oppBufferCards,
@@ -45,6 +49,14 @@ const Battle = () => {
     drawPileSize,
     setDrawPileSize,
   } = useBattleState();
+
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+
+  useEffect(() => {
+    if(!battleClient) {
+      navigate("/home");
+    }
+  }, []);
   
   // const {
   //   oppBufferCards,
@@ -122,6 +134,8 @@ const Battle = () => {
           />
         )}
       </DragOverlay>
+      <img onClick={() => {setShowPopup(true)}} className="leaveIcon" src="/assets/images/logout.svg" alt="Leave"/>
+      <Popup popupContent={<LeaveMatchPopup setShowPopup={setShowPopup}/>} isVisible={showPopup} setIsVisible={setShowPopup}/>
     </DndContext>
   );
 };

@@ -89,7 +89,6 @@ export const BattleStateProvider = ({ children }: { children: ReactNode }) => {
   const [userEnergy, setUserEnergy] = useState<number>(0);
 
   const [hand, setHand] = useState<ICard[]>([]);
-  const [activeCardId, setActiveCardId] = useState<string | null>(null);
   const [drawPileSize, setDrawPileSize] = useState<number>(0);
 
   const [battleStateObserver, setBattleStateObserver] =
@@ -108,6 +107,10 @@ export const BattleStateProvider = ({ children }: { children: ReactNode }) => {
         setUserInPlayCards
       )
     );
+
+    useEffect(() => {
+      console.log(userInPlayCards);
+    },[userInPlayCards])
 
   return (
     <BattleStateContext.Provider
@@ -142,6 +145,8 @@ export const BattleStateProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </BattleStateContext.Provider>
   );
+
+  
 };
 
 export const useBattleState = (): BattleStateType => {

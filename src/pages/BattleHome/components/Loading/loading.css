@@ -1,40 +1,43 @@
 
-/* Overlay to grey out the background */
 .loadingRoot {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent grey */
+  background-color: rgba(0, 0, 0, 0.3); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensure it overlays other content */
+  z-index: 1000; 
 }
 
 .loadingIconContainer {
-    width: 40%;
-    height: 40%;
+    width: 30%;
+    height: 30%;
     background-color: var(--custom-dark-blue);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     color: var(--custom-white);
+    border-radius: 5px;
+    border: 1px solid rgba(var(--custom-cream-rgb), .2);
 }
 
-/* Loading spinner */
+.loadingIconContainer span {
+ font-size: 20px;;
+}
+
 .loadingIcon {
   width: 50px;
   height: 50px;
-  border: 5px solid rgba(255, 255, 255, 0.3); /* Light white border */
-  border-top: 5px solid #ff0000; /* Solid white top border */
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid var(--custom-orange);
   border-radius: 50%;
-  animation: spin 1s linear infinite; /* Rotate infinitely */
+  animation: spin 1s linear infinite;
 }
 
-/* Spinner animation */
 @keyframes spin {
   0% {
     transform: rotate(0deg);

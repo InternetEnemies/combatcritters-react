@@ -9,6 +9,7 @@ interface DropdownProps<T> {
   isEmpty?: boolean; // Are there any items in the list?
   isEmptyMessage?: string; // Message to display in list if there are no items.
   labelPrefix?: string; // Optional prefix to add before each of the dropdown options.
+  noSelectionLabel?: string; //Optional label indicating what to do when there is nothing selected.
 }
 
 const Dropdown = <T,>({
@@ -18,6 +19,7 @@ const Dropdown = <T,>({
   isEmpty = false, // Default to items in the list
   isEmptyMessage = "No options", // Default message
   labelPrefix,
+  noSelectionLabel = "Select an option"
 }: DropdownProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null); // Create a reference for the dropdown
@@ -56,7 +58,7 @@ const Dropdown = <T,>({
         <span>
           {selectedDropdownOption
             ? `${labelPrefix ? labelPrefix : ""}${selectedDropdownOption.label}`
-            : "Select an option"}
+            : noSelectionLabel}
         </span>
         <span className={`dropdown-arrow ${isOpen ? "open" : ""}`}>▼</span>
       </div>

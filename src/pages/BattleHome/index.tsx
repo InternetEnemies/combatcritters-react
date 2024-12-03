@@ -20,6 +20,7 @@ import { useBattleClient } from "contexts/BattleClientContext";
 import { useBattleState } from "contexts/BattleStateContext";
 import { useNavigate } from "react-router-dom";
 import Loading from "./components/Loading";
+import { toast } from "react-toastify";
 
 const BattleHome: React.FC = () => {
   const navigate = useNavigate();
@@ -55,17 +56,17 @@ const BattleHome: React.FC = () => {
 
   useEffect(() => {
     const setObserver = async () => {
-      if (battleClient) {
-        battleClient.setBattleStateObserver(battleStateObserver);
-        console.log("herre");
-      }
+        battleClient?.setBattleStateObserver(battleStateObserver);
+        battleClient?.onStopped(() => {
+          navigate("/home");
+        })
     };
     setObserver();
   }, [battleClient]);
 
   class MatchObserver implements IMatchStateObserver {
     gameFound(opponent: string): void {
-      console.log("Game found against opponent");
+      console.log("Game found against " + opponent);
       navigate("/battle");
     }
     matchEnded(type: string): void {
@@ -74,45 +75,21 @@ const BattleHome: React.FC = () => {
     }
   }
 
-  let battleObsv: IBattleStateObserver = {
-    setPlayerTurn: function (isPlayerTurn: boolean): void {
-      throw new Error("Function not implemented.");
-    },
-    setPlayerHealth: function (health: number): void {
-      throw new Error("Function not implemented.");
-    },
-    setEnemyHealth: function (health: number): void {
-      throw new Error("Function not implemented.");
-    },
-    setPlayerEnergy: function (energy: number): void {
-      throw new Error("Function not implemented.");
-    },
-    setEnemyEnergy: function (energy: number): void {
-      throw new Error("Function not implemented.");
-    },
-    setHand: function (cards: ICard[]): void {
-      throw new Error("Function not implemented.");
-    },
-    setDrawPileSize: function (size: number): void {
-      throw new Error("Function not implemented.");
-    },
-    setPlayerBufferCards: function (cardStates: (ICardState | null)[]): void {
-      throw new Error("Function not implemented.");
-    },
-    setEnemyBufferCards: function (cardStates: (ICardState | null)[]): void {
-      throw new Error("Function not implemented.");
-    },
-    setEnemyCards: function (cardStates: (ICardState | null)[]): void {
-      throw new Error("Function not implemented.");
-    },
-    setPlayerCards: function (cardStates: (ICardState | null)[]): void {
-      throw new Error("Function not implemented.");
-    },
-  };
-
   const startmatch = async () => {
+    if(!selectedDropdownOption) {
+      toast.error("You need to select a deck", {
+        toastId: "needADeck",
+      });
+      return
+    }
+    if(!((await selectedDropdownOption.value.getValidity()).isValid)) {
+      toast.error("Selected deck must be valid", {
+        toastId: "invalidDeck",
+      });
+      return;
+    }
     if (battleClient) {
-      battleClient.matchController.match("pvp");
+      battleClient.matchController.match("pvp", selectedDropdownOption.value);
 
       battleClient.setMatchStateObserver(new MatchObserver());
       setShowLoading(true);
@@ -127,6 +104,7 @@ const BattleHome: React.FC = () => {
         dropdownOptions={deckDropdownOptions}
         selectedDropdownOption={selectedDropdownOption}
         setSelectedDropdownOption={setSelectedDropdownOption}
+        noSelectionLabel="Select a deck"
       />
       <div className="battleButtonWrapper">
         <Button

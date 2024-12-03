@@ -80,7 +80,7 @@ export const BattleTest = () => {
   const startmatch = async () => {
     if (battleClient) {
     
-        (battleClient).matchController.match("pvp");
+        // (battleClient).matchController.match("pvp");
       
 
         (battleClient).setMatchStateObserver(new MatchObserver());

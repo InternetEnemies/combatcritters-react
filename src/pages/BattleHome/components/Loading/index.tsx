@@ -13,26 +13,24 @@ interface LoadingProps {
 }
 
 const Loading: React.FC<LoadingProps> = ({ showLoading, setShowLoading }) => {
+  const { battleClient, refreshClient } = useBattleClient();
 
-    const {battleClient, refreshClient} = useBattleClient();
   if (!showLoading) {
-    return null; 
+    return null;
   }
 
   const cancelSearch = () => {
-   
     battleClient?.matchController.cancelMatch();
     refreshClient();
     setShowLoading(false);
-    
-  }
+  };
 
   return (
     <div className="loadingRoot">
       <div className="loadingIconContainer">
-        <h1>Searching for opponent...</h1>
+        <span>Searching for an opponent...</span>
         <div className="loadingIcon"></div>
-        <Button text={"Cancel"} onClick={cancelSearch}/>
+        <Button text={"Cancel"} onClick={cancelSearch} />
       </div>
     </div>
   );

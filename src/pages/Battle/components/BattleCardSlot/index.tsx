@@ -41,6 +41,7 @@ const BattleCardSlot: React.FC<BattleCardSlotProps> = ({
             card={cardState.card}
             scale={scale}
             style={{ cursor: "default" }}
+            health={cardState.health}
           />
           {isPlayerSlot && (
             <img
