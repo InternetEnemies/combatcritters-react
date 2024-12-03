@@ -11,8 +11,8 @@ export const BattleTest = () => {
     const [isTurn, setIsTurn] = useState(false);
 
     class MatchObserver implements IMatchStateObserver {
-        matchEnded(): void {
-            setTitle("game ended")
+        matchEnded(type:string): void {
+            setTitle(`game ended: ${type}`)
         }
         gameFound(opponent: string): void {
             setTitle(`found match with ${opponent}`);
