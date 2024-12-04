@@ -6,7 +6,6 @@
 import Button from "components/Button";
 import "./leaveMatchPopup.css";
 import { useBattleClient } from "contexts/BattleClientContext";
-import { useNavigate } from "react-router-dom";
 
 interface LeaveMatchPopupProps {
   setShowPopup: (show: boolean) => void;
@@ -14,7 +13,6 @@ interface LeaveMatchPopupProps {
 
 const LeaveMatchPopup: React.FC<LeaveMatchPopupProps> = ({ setShowPopup }) => {
   const { battleClient } = useBattleClient();
-  const navigate = useNavigate();
 
   /**
    * Execute this function when the user confirms leave

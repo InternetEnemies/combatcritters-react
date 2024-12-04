@@ -67,6 +67,7 @@ export const BattleClientProvider = ({ children }: { children: ReactNode }) => {
       }
     };
     initialize();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [battleClient]);
 
   /**
