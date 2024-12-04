@@ -1,11 +1,9 @@
 /**
  * @Created 2024-10-28
- * @Brief Global battle client context.
+ * @Brief Global battle state context.
  */
 
 import {
-  BattleClient,
-  IBattleClient,
   IBattleStateObserver,
   ICard,
   ICardState,
@@ -16,9 +14,9 @@ import React, {
   useContext,
   useState,
   ReactNode,
-  useEffect,
 } from "react";
 
+//Please avert your eyes
 interface BattleStateType {
   userBufferCards: (ICardState | null)[];
   setUserBufferCards: (cards: (ICardState | null)[]) => void;
@@ -91,7 +89,7 @@ export const BattleStateProvider = ({ children }: { children: ReactNode }) => {
   const [hand, setHand] = useState<ICard[]>([]);
   const [drawPileSize, setDrawPileSize] = useState<number>(0);
 
-  const [battleStateObserver, setBattleStateObserver] =
+  const [battleStateObserver] =
     useState<IBattleStateObserver>(
       new BattleStateObserver(
         setIsPlayerTurn,
@@ -107,10 +105,6 @@ export const BattleStateProvider = ({ children }: { children: ReactNode }) => {
         setUserInPlayCards
       )
     );
-
-    useEffect(() => {
-      console.log(userInPlayCards);
-    },[userInPlayCards])
 
   return (
     <BattleStateContext.Provider
@@ -152,7 +146,7 @@ export const BattleStateProvider = ({ children }: { children: ReactNode }) => {
 export const useBattleState = (): BattleStateType => {
   const context = useContext(BattleStateContext);
   if (context === undefined) {
-    throw new Error("useBattleClient must be used within a CurrencyProvider");
+    throw new Error("useBattleState must be used within a BattleStateProvider");
   }
   return context;
 };

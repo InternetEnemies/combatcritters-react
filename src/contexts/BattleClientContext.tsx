@@ -4,7 +4,7 @@
  */
 
 import { BattleClient, IBattleClient } from "combatcritters-ts";
-import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface BattleClientType {
   battleClient: IBattleClient | null;
@@ -21,12 +21,14 @@ export const BattleClientProvider = ({ children }: { children: ReactNode }) => {
 
   const [battleClient, setBattleClient] = useState<IBattleClient | null>(null);
 
+  /**
+   * Get a new battle client
+   */
   const refreshClient = async () => {
     const refresh = async () => {
       try {
         const bClient = await BattleClient.getClient(battleRoot);
         setBattleClient(bClient);
-        console.log("Refreshing client");
       } catch (error) {
         console.error("Failed to refresh battle client:" + error);
       }
@@ -47,7 +49,7 @@ export const BattleClientProvider = ({ children }: { children: ReactNode }) => {
 export const useBattleClient = (): BattleClientType => {
   const context = useContext(BattleClientContext);
   if (context === undefined) {
-    throw new Error("useBattleClient must be used within a CurrencyProvider");
+    throw new Error("useBattleClient must be used within a BattleClientProvider");
   }
   return context;
 };

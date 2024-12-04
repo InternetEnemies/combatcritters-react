@@ -5,8 +5,6 @@
 
 import "./battle.css";
 import OpponentPlayArea from "./components/OpponentPlayArea";
-import { useManageOpponent } from "./hooks/useManageOpponent";
-import { useManageUser } from "./hooks/useManageUser";
 import UserPlayArea from "./components/UserPlayArea";
 import Hand from "./components/Hand";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
@@ -25,78 +23,36 @@ const Battle = () => {
 
   const {
     oppBufferCards,
-    setOppBufferCards,
     oppInPlayCards,
-    setOppInPlayCards,
     isOpponentTurn,
-    setIsOpponentTurn,
     opponentHealth,
-    setOpponentHealth,
     opponentEnergy,
-    setOpponentEnergy,
     userBufferCards,
-    setUserBufferCards,
     userInPlayCards,
-    setUserInPlayCards,
     isPlayerTurn,
-    setIsPlayerTurn,
     userHealth,
-    setUserHealth,
     userEnergy,
-    setUserEnergy,
     hand, 
-    setHand,
-    drawPileSize,
-    setDrawPileSize,
   } = useBattleState();
 
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
+  /**
+   * On mount, if the battle client isn't initialized, return home.
+   */
   useEffect(() => {
-    if(!battleClient) {
+    if (!battleClient) {
       navigate("/home");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
-  // const {
-  //   oppBufferCards,
-  //   setOppBufferCards,
-  //   oppInPlayCards,
-  //   setOppInPlayCards,
-  //   isOpponentTurn,
-  //   setIsOpponentTurn,
-  //   opponentHealth,
-  //   setOpponentHealth,
-  //   opponentEnergy,
-  //   setOpponentEnergy
-  // } = useManageOpponent();
-
-  // const {
-  //   userBufferCards,
-  //   setUserBufferCards,
-  //   userInPlayCards,
-  //   setUserInPlayCards,
-  //   isPlayerTurn,
-  //   setIsPlayerTurn, 
-  //   userHealth,
-  //   setUserHealth,
-  //   userEnergy,
-  //   setUserEnergy
-  // } = useManageUser();
 
   const {
-    // hand,
-    // setHand,
     activeCardId,
     handleDragStart,
     handleDragEnd,
-    // drawPileSize,
-    // setDrawPileSize
-  } = useHand(userBufferCards, setUserBufferCards, hand, setHand, drawPileSize, setDrawPileSize);
+  } = useHand(hand);
 
-  const endTurn = () => {
-    battleClient?.battleController.endTurn();
-  }
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} >
       <div className="battleRoot">

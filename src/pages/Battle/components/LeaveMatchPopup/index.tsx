@@ -15,6 +15,10 @@ interface LeaveMatchPopupProps {
 const LeaveMatchPopup: React.FC<LeaveMatchPopupProps> = ({ setShowPopup }) => {
   const { battleClient } = useBattleClient();
   const navigate = useNavigate();
+
+  /**
+   * Execute this function when the user confirms leave
+   */
   const leaveMatch = () => {
     battleClient?.matchController.cancelMatch();
      navigate("/home");
