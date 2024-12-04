@@ -19,9 +19,8 @@ const LeaveMatchPopup: React.FC<LeaveMatchPopupProps> = ({ setShowPopup }) => {
   /**
    * Execute this function when the user confirms leave
    */
-  const leaveMatch = () => {
+  const cancelMatch = () => {
     battleClient?.matchController.cancelMatch();
-     navigate("/home");
   };
   return (
     
@@ -31,7 +30,7 @@ const LeaveMatchPopup: React.FC<LeaveMatchPopupProps> = ({ setShowPopup }) => {
         <Button text="No" onClick={() => {setShowPopup(false)}} />
         <Button
           text="Yes"
-          onClick={leaveMatch}
+          onClick={cancelMatch}
         />
       </div>
     </div>
