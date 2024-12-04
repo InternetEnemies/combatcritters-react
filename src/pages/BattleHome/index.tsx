@@ -72,12 +72,6 @@ const BattleHome: React.FC = () => {
 
   return (
     <div className="battleHomeRoot">
-      <Dropdown
-        dropdownOptions={deckDropdownOptions}
-        selectedDropdownOption={selectedDropdownOption}
-        setSelectedDropdownOption={setSelectedDropdownOption}
-        noSelectionLabel="Select a deck"
-      />
       <div className="battleButtonWrapper">
         <Button
           text="Battle"
@@ -85,6 +79,12 @@ const BattleHome: React.FC = () => {
           className="battleButton"
         ></Button>
       </div>
+      <Dropdown
+        dropdownOptions={deckDropdownOptions}
+        selectedDropdownOption={selectedDropdownOption}
+        setSelectedDropdownOption={setSelectedDropdownOption}
+        noSelectionLabel="Select a deck"
+      />
       <Loading showLoading={showLoading} setShowLoading={setShowLoading} />
     </div>
   );
