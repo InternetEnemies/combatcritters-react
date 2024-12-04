@@ -25,8 +25,6 @@ import { CurrencyProvider } from "contexts/CurrencyContext";
 import Battle from "pages/Battle";
 import BattleHome from "pages/BattleHome";
 import { BattleClientProvider } from "contexts/BattleClientContext";
-import {BattleTest} from "./pages/BattleTest";
-import BattleStateObserver from "pages/Battle/BattleStateObserver";
 import { BattleStateProvider } from "contexts/BattleStateContext";
 
 function App() {
@@ -68,7 +66,6 @@ function App() {
             <Route path="/vendors" element={<Vendors />} />
             <Route path="/battle" element={<Battle/>}/>
             <Route path="/home" element={<BattleHome/>}/>
-            <Route path="/btest" element={<BattleTest/>} />
           </Route>
         </Routes>
       </div>
