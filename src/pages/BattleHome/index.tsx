@@ -8,17 +8,13 @@ import "./battleHome.css";
 import Button from "components/Button";
 import Dropdown from "components/Dropdown";
 import { IDropdownOption } from "interfaces/IDropdownOption";
-import { IDeck, IMatchStateObserver } from "combatcritters-ts";
+import { IDeck } from "combatcritters-ts";
 import { ClientSingleton } from "ClientSingleton";
 import { useBattleClient } from "contexts/BattleClientContext";
-import { useBattleState } from "contexts/BattleStateContext";
-import { useNavigate } from "react-router-dom";
 import Loading from "./components/Loading";
 import { toast } from "react-toastify";
 
 const BattleHome: React.FC = () => {
-  const navigate = useNavigate();
-
   const [showLoading, setShowLoading] = useState<boolean>(false);
 
   const [deckDropdownOptions, setDeckDropdownOptions] = useState<
@@ -28,9 +24,7 @@ const BattleHome: React.FC = () => {
   const [selectedDropdownOption, setSelectedDropdownOption] =
     useState<IDropdownOption<IDeck> | null>(null);
 
-  const { battleClient, refreshClient } = useBattleClient();
-
-  const { battleStateObserver } = useBattleState();
+  const { battleClient, fetchBattleClient } = useBattleClient();
 
   /**
    * On mount, fetch and set the user's deck and fetch a new battle client.
@@ -51,38 +45,10 @@ const BattleHome: React.FC = () => {
         console.error("Error fetching decks:", error);
       }
     };
-    refreshClient();
+    fetchBattleClient();
     fetchDecks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  /**
-   * Initialize the new battle client
-   */
-  useEffect(() => {
-    const setObserver = async () => {
-      battleClient?.setBattleStateObserver(battleStateObserver);
-      battleClient?.onStopped(() => {
-        navigate("/home");
-      });
-    };
-    setObserver();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [battleClient]);
-
-  /**
-   * The match observer attached to the battle client
-   */
-  class MatchObserver implements IMatchStateObserver {
-    gameFound(opponent: string): void {
-      console.log("Game found against " + opponent);
-      navigate("/battle");
-    }
-    matchEnded(_: string): void {
-      console.log("Match Ended");
-      navigate("/home");
-    }
-  }
 
   const startmatch = async () => {
     if (!selectedDropdownOption) {
@@ -100,7 +66,6 @@ const BattleHome: React.FC = () => {
     }
 
     battleClient?.matchController.match("pvp", selectedDropdownOption.value);
-    battleClient?.setMatchStateObserver(new MatchObserver());
 
     setShowLoading(true);
   };
