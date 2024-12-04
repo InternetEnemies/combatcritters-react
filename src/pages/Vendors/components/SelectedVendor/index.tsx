@@ -46,6 +46,11 @@ const SelectedVendor: React.FC<SelectedVendorProps> = ({
     fetchAndSetOffers();
     if (selectedVendor) {
       updateReputation(selectedVendor.reputation);
+    } else {
+      //When switching off a vendor, unset all the offers 
+      setOffers([]);
+      setSpecialOffers([]);
+      setDiscountOffers([]);
     }
     //eslint-disable-next-line
   }, [selectedVendor]);
