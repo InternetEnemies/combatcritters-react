@@ -30,6 +30,7 @@ const BattleCardSlot: React.FC<BattleCardSlotProps> = ({
   const sacrifice = () => {
     battleClient?.battleController.sacrifice(position);
   }
+
   return (
     <div
       className={`battleCardSlot ${isPlayerSlot ? "playerSlot" : ""}`}
@@ -48,6 +49,7 @@ const BattleCardSlot: React.FC<BattleCardSlotProps> = ({
               alt="Skull"
               src="assets/images/skull.svg"
               className="skullButton"
+              onClick={sacrifice}
             />
           )}
         </div>
