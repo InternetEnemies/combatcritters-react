@@ -13,7 +13,7 @@ interface LoadingProps {
 }
 
 const Loading: React.FC<LoadingProps> = ({ showLoading, setShowLoading }) => {
-  const { battleClient, refreshClient } = useBattleClient();
+  const { battleClient, fetchBattleClient } = useBattleClient();
 
   if (!showLoading) {
     return null;
@@ -21,7 +21,7 @@ const Loading: React.FC<LoadingProps> = ({ showLoading, setShowLoading }) => {
 
   const cancelSearch = () => {
     battleClient?.matchController.cancelMatch();
-    refreshClient();
+    fetchBattleClient();
     setShowLoading(false);
   };
 
