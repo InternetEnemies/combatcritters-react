@@ -33,7 +33,9 @@ function App() {
 
   // Check if the navbar should be visible
   const isNavbarVisible =
-    location.pathname !== "/login" && location.pathname !== "/" && location.pathname !== "/battle";
+    location.pathname !== "/login" &&
+    location.pathname !== "/" &&
+    location.pathname !== "/battle";
 
   return (
     <div className="appRoot">
@@ -64,8 +66,8 @@ function App() {
             />
             <Route path="/packs" element={<Packs />} />
             <Route path="/vendors" element={<Vendors />} />
-            <Route path="/battle" element={<Battle/>}/>
-            <Route path="/home" element={<BattleHome/>}/>
+            <Route path="/battle" element={<Battle />} />
+            <Route path="/home" element={<BattleHome />} />
           </Route>
         </Routes>
       </div>
@@ -89,15 +91,15 @@ function App() {
 
 function AppWrapper() {
   return (
-    <BattleClientProvider>
+    <Router>
       <BattleStateProvider>
-        <CurrencyProvider>
-          <Router>
+        <BattleClientProvider>
+          <CurrencyProvider>
             <App />
-          </Router>
-        </CurrencyProvider>
+          </CurrencyProvider>
+        </BattleClientProvider>
       </BattleStateProvider>
-    </BattleClientProvider>
+    </Router>
   );
 }
 
