@@ -1,0 +1,23 @@
+.leaveMatchPopupRoot {
+    width: 20vw;
+    height: 20vh;
+    padding: 10px;
+    background-color: var(--custom-dark-blue);
+    color: var(--custom-white);
+    border-radius: 5px;
+    border: 1px solid rgba(var(--custom-cream-rgb), .2);
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.confirmationButtonsContainer {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}

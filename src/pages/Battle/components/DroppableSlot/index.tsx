@@ -6,13 +6,14 @@
 import React from "react";
 import { useDroppable } from "@dnd-kit/core";
 import BattleCardSlot from "pages/Battle/components/BattleCardSlot";
-import { ICardState } from "interfaces/ICardState";
+import { ICardState } from "combatcritters-ts";
 
 interface DroppableSlotProps {
   slotId: string;
   cardState: ICardState | null;
   scale: number;
   isDragging: boolean;
+  position: number;
 }
 
 const DroppableSlot: React.FC<DroppableSlotProps> = ({
@@ -20,13 +21,19 @@ const DroppableSlot: React.FC<DroppableSlotProps> = ({
   cardState,
   scale,
   isDragging,
+  position
 }) => {
   const { setNodeRef, isOver } = useDroppable({
     id: slotId,
   });
 
   const style: React.CSSProperties = {
-    backgroundColor: isOver ? "red" : isDragging ? "lightgreen" : "transparent",
+    //Highlight the slots when a card is being dragged
+    backgroundColor: isOver
+      ? "#4bff45"
+      : isDragging
+      ? "#46cc41"
+      : "transparent",
     transition: "background-color 0.2s ease",
     borderRadius: "8px",
   };
@@ -38,6 +45,7 @@ const DroppableSlot: React.FC<DroppableSlotProps> = ({
         scale={scale}
         isPlayerSlot={true}
         isBuffer={true}
+        position={position}
       />
     </div>
   );

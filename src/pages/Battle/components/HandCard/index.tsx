@@ -15,7 +15,7 @@ interface HandCardProps {
 }
 
 const HandCard: React.FC<HandCardProps> = ({ card, scale, dragId }) => {
-  const { attributes, listeners, setNodeRef, transform, active, isDragging } =
+  const { attributes, listeners, setNodeRef } =
     useDraggable({
       id: dragId,
     });

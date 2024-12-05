@@ -7,33 +7,29 @@ import "./elixirHealthBar.css";
 
 interface ElixirHealthBarProps {
   currAmount: number;
-  maxAmount: number;
   isUsersBar: boolean;
   isHealth: boolean;
 }
 
 const ElixirHealthBar: React.FC<ElixirHealthBarProps> = ({
   currAmount,
-  maxAmount,
   isUsersBar,
   isHealth,
 }) => {
-  const imagePath = isHealth
-    ? "assets/images/heart.svg"
-    : "assets/images/elixir.svg";
-
+  const MAX_AMOUNT = isHealth ? 25 : 5;
   return (
+    
     <div
       className={`elixirHealthBarRoot 
         ${isHealth ? "health" : "elixir"} 
         ${!isUsersBar ? "reversed" : ""}`}
     >
       <div className="elixirHealthInfo">
-        {currAmount}/{maxAmount}
+        {currAmount}/{MAX_AMOUNT}
       </div>
       <div className="elixirHealthBar">
         <div className="segmentsContainer">
-          {Array.from({ length: maxAmount }).map((_, i) => (
+          {Array.from({ length: MAX_AMOUNT }).map((_, i) => (
             <div key={i} className="segment"></div>
           ))}
         </div>
@@ -41,11 +37,15 @@ const ElixirHealthBar: React.FC<ElixirHealthBarProps> = ({
         <div
           className="barPercentage"
           style={{
-            height: `${(currAmount/maxAmount)*100}%`,
+            height: `${(currAmount / MAX_AMOUNT) * 100}%`,
           }}
         ></div>
       </div>
-      <img className="elixirHeartImage" src={imagePath} alt="Heart" />
+      <img
+        className="elixirHeartImage"
+        src={isHealth ? "assets/images/heart.svg" : "assets/images/elixir.svg"}
+        alt="Heart"
+      />
     </div>
   );
 };

@@ -1,42 +1,53 @@
-
 /**
  * @Created 2024-11-25
  * @Brief Contains all the user related components.
  */
 import "../../styles/sharedPlayArea.css";
-import "./userPlayArea.css"
-import { ICardState } from "interfaces/ICardState";
-import LoadingCards from "../LoadingCards";
+import "./userPlayArea.css";
+import { ICardState } from "combatcritters-ts";
 import BattleCardSlot from "../BattleCardSlot";
 import DroppableSlot from "pages/Battle/components/DroppableSlot";
-import HealthBar from "../ElixirHealthBar";
 import ElixirHealthBar from "../ElixirHealthBar";
-import { useState } from "react";
+import { useBattleClient } from "contexts/BattleClientContext";
 
 interface UserPlayAreaProps {
   bufferCards: (ICardState | null)[];
   inPlayCards: (ICardState | null)[];
   isDragging: boolean;
+  isPlayerTurn: boolean;
+  userHealth: number;
+  userEnergy: number;
 }
 
 const UserPlayArea: React.FC<UserPlayAreaProps> = ({
   bufferCards,
   inPlayCards,
-  isDragging
-}) => {
+  isDragging,
+  isPlayerTurn,
+  userHealth,
+  userEnergy,
 
+
+  
+}) => {
+  const {battleClient} = useBattleClient();
+
+  const endTurn = () => {
+    battleClient?.battleController.endTurn();
+  }
   return (
+
     <div className="playAreaRoot">
-      <div className="healthEnergyContainer" >
+      <div className="healthEnergyContainer">
         <ElixirHealthBar
-          currAmount={2}
-          maxAmount={5}
+          currAmount={userEnergy}
+         
           isUsersBar={true}
           isHealth={false}
         />
         <ElixirHealthBar
-          currAmount={14}
-          maxAmount={25}
+          currAmount={userHealth}
+       
           isUsersBar={true}
           isHealth={true}
         />
@@ -50,10 +61,10 @@ const UserPlayArea: React.FC<UserPlayAreaProps> = ({
               scale={0.85}
               isPlayerSlot={true}
               isBuffer={false}
+              position={index}
             />
           ))}
         </div>
-        <hr className="separator"></hr>
         <div className="bufferCards">
           {bufferCards.map((cardState, index) => (
             <DroppableSlot
@@ -62,16 +73,26 @@ const UserPlayArea: React.FC<UserPlayAreaProps> = ({
               cardState={cardState}
               scale={0.85}
               isDragging={isDragging}
+              position={index}
             />
           ))}
         </div>
       </div>
       <div className="endTurnContainer">
-        <img
-          className="endTurnButton"
-          alt="End turn"
-          src="assets/images/playButton.svg"
-        />
+        {isPlayerTurn ? (
+          <img
+            className="endTurnButton"
+            alt="End turn"
+            src="assets/images/playButton.svg"
+            onClick={endTurn}
+          />
+        ) : (
+          <img
+            className="turnFinishedCheck"
+            alt="Checkmark"
+            src="assets/images/checkmark2.svg"
+          />
+        )}
       </div>
     </div>
   );

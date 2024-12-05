@@ -5,6 +5,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 1.5%;
 }
 
 .playAreaCardsContainer {
@@ -14,18 +15,25 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: #00000066;
+  background-color: rgba(var(--custom-dark-blue-rgb), .97);
+  border-radius: 10px;
+  border: 2px solid var(--custom-black);
 }
 
 .endTurnContainer,
 .healthEnergyContainer {
   width: 10%;
-  height: 95%;
+  height: 100%;
 }
 
 .healthEnergyContainer {
   display: flex;
   flex-direction: row;
+  background-color: rgba(var(--custom-dark-blue-rgb), .97);
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-radius: 10px;
+  border: 1px solid black;
 }
 
 .endTurnContainer {
@@ -53,4 +61,10 @@
   border-radius: 8px;
   width: 110px;
   background-color: red;
+}
+
+
+.turnFinishedCheck {
+  width: 65%;
+  height: auto;
 }

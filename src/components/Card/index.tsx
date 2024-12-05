@@ -7,7 +7,6 @@ import React from "react";
 import Header from "./Header";
 import CardImage from "./CardImage";
 import HpDmgFooter from "./HpDmgFooter";
-import Abilities from "./Abilities";
 import Description from "./Description";
 import PlayCost from "./PlayCost";
 import Type from "./Type";
@@ -51,7 +50,6 @@ const Card: React.FC<CardProps> = ({
       <Header card={card} />
       <div className={`cardInner ${CardRarity[card.rarity]}`}>
         <CardImage imagePath={`${ClientSingleton.mediaRoot}/${card.image}`} />
-        <Abilities card={card} />
         <Description card={card} />
       </div>
       <HpDmgFooter card={card} health={health}/>

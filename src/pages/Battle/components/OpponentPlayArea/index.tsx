@@ -1,40 +1,43 @@
 /**
  * @Created 2024-11-25
- * @Brief Component containing all the opponent components.
+ * @Brief Contains all the component related components.
  */
 
 import "../../styles/sharedPlayArea.css";
-import { ICardState } from "interfaces/ICardState";
+import { ICardState } from "combatcritters-ts";
 import LoadingCards from "../LoadingCards";
-import { useEffect, useState } from "react";
 import BattleCardSlot from "../BattleCardSlot";
 import ElixirHealthBar from "../ElixirHealthBar";
 
 interface OpponentPlayAreaProps {
   bufferCards: (ICardState | null)[];
   inPlayCards: (ICardState | null)[];
+  isOpponentTurn: boolean;
+  opponentEnergy: number;
+  opponentHealth: number;
+ 
 }
 
 const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
   bufferCards,
   inPlayCards,
+  isOpponentTurn,
+  opponentEnergy,
+  opponentHealth,
+ 
 }) => {
-  useEffect(() => {
-    console.log(bufferCards);
-  }, [bufferCards]);
-
   return (
-    <div className="playAreaRoot" >
-      <div className="healthEnergyContainer" >
+    <div className="playAreaRoot">
+      <div className="healthEnergyContainer">
         <ElixirHealthBar
-          currAmount={3}
-          maxAmount={5}
+          currAmount={opponentEnergy}
+        
           isHealth={false}
           isUsersBar={false}
         />
         <ElixirHealthBar
-          currAmount={20}
-          maxAmount={25}
+          currAmount={opponentHealth}
+         
           isHealth={true}
           isUsersBar={false}
         />
@@ -48,11 +51,11 @@ const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
               scale={0.85}
               isPlayerSlot={false}
               isBuffer={true}
+              position={index}
             />
           ))}
         </div>
 
-        <hr className="separator"></hr>
         <div className="inPlayCards">
           {inPlayCards.map((cardState, index) => (
             <BattleCardSlot
@@ -61,12 +64,21 @@ const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
               scale={0.85}
               isPlayerSlot={false}
               isBuffer={false}
+              position={index}
             />
           ))}
         </div>
       </div>
       <div className="endTurnContainer">
-        <LoadingCards />
+        {isOpponentTurn ? (
+          <LoadingCards />
+        ) : (
+          <img
+            className="turnFinishedCheck"
+            alt="Checkmark"
+            src="assets/images/checkmark2.svg"
+          />
+        )}
       </div>
     </div>
   );

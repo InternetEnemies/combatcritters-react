@@ -7,6 +7,9 @@
   align-items: center;
   justify-content: center;
   gap: 2%;
+  background-image: url("/public/assets/images/battleBackground.webp");
+  background-size: cover;
+  position: relative;
 }
 
 .playArea {
@@ -19,14 +22,24 @@
   position: fixed;
   bottom: 0;
 
-  height: 28%;
-  width: 70%;
+  height: 26%;
+  width: 65%;
   transform: translateY(85%); 
   text-align: center;
-  transition: transform 0.2s ease-in-out;
+  transition: transform .3s ease-in-out;
   overflow: hidden; 
 }
 
 .handContainer:hover {
   transform: translateY(0); 
+}
+
+
+.leaveIcon {
+  position: absolute;
+  width: 5%;
+  height: auto;
+  top: 2%;
+  right: 2%;
+  cursor: pointer;
 }

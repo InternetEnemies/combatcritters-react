@@ -41,7 +41,7 @@ const PackRewards: React.FC<PackRewardsProps> = ({
       <div className={`rewardsContainer ${listClass}`}>
         {rewards.map((card, index) => (
           <div className="rewardsListItem" key={index}>
-            <Card card={card} style={{ transform: "scale(1.3)" }} />
+            <Card card={card} scale={1.3} />
           </div>
         ))}
       </div>

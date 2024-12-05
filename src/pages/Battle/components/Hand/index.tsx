@@ -3,24 +3,25 @@
  * @Brief The user's hand.
  */
 
-import React, { useEffect } from "react";
+import React from "react";
 import "./hand.css";
 import HandCard from "../HandCard";
 import { ICard } from "combatcritters-ts";
 
 interface HandProps {
   hand: ICard[];
-  activeCardId: string | null; 
 }
 
-const Hand: React.FC<HandProps> = ({ hand, activeCardId }) => {
+const Hand: React.FC<HandProps> = ({ hand }) => {
   return (
     <div className="handRoot">
       <div className="handTitle">
+        <div className="weirdLineThingy" />
         <span>Hand</span>
-        <img className="cardsTrioImage" src="assets/images/cardsTrio.svg" />
+
+        <img alt="Cards trio" className="cardsTrioImage" src="assets/images/cardsTrio.svg" />
+        <div className="weirdLineThingy" />
       </div>
-      <hr className="separator" />
       <div className="handCards">
         {hand.map((card, index) => (
           <HandCard

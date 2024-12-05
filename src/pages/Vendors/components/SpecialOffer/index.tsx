@@ -20,7 +20,7 @@ const SpecialOffer: React.FC<SpecialOfferProps> = ({
 }) => {
   return (
     <div className="specialOfferContainer">
-      <div className="specialIconWrapper">
+      <div className="specialIconWrapper" onClick={() => onClick(specialOffer)}>
         <img
           src="assets/images/special.svg"
           alt="Special"
