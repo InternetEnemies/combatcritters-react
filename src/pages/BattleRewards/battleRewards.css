@@ -1,0 +1,90 @@
+.battleRewardsRoot {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-image: url("/public/assets/images/battleBackground.webp");
+  background-size: cover;
+}
+
+.battleRewardsTitle {
+  font-size: 60px;
+  color: var(--custom-white);
+  -webkit-text-stroke: .8px black;
+  
+}
+
+.matchRewardsContainer, .lostItemsContainer, .experienceGainedContainer {
+  background-color: rgba(var(--custom-dark-blue-rgb), .97);
+ border: 2px solid rgb(var(--custom-cream-rgb), .5);
+ border-radius: 5px;
+}
+
+.experienceGainedContainer {
+  width: 30%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--custom-cream);
+}
+
+.rewardsLostContainer {
+  width: 100%;
+  height: 450px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4%;
+}
+
+.matchRewardsContainer,
+.lostItemsContainer {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.matchRewardsContainer > span,
+.lostItemsContainer > span {
+  color: var(--custom-white);
+  margin: 8px;
+}
+
+.matchRewardsContainer > span,
+.lostItemsContainer > span {
+  text-align: center;
+}
+
+.rewardsLostCurrencyContainer {
+  aspect-ratio: 68/100;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.matchRewardsContainer > div,
+.lostItemsContainer > div {
+  padding-top: 2cqh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 20px;
+  overflow-y: auto;
+  justify-items: center;
+  row-gap: 20px;
+
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.battleRewardsRoot .separator {
+  justify-self: center;
+  align-self: center;
+}
