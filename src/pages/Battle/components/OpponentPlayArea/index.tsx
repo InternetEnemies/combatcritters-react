@@ -15,8 +15,7 @@ interface OpponentPlayAreaProps {
   isOpponentTurn: boolean;
   opponentEnergy: number;
   opponentHealth: number;
-  maxEnergy: number;
-  maxHealth: number;
+ 
 }
 
 const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
@@ -25,21 +24,20 @@ const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
   isOpponentTurn,
   opponentEnergy,
   opponentHealth,
-  maxEnergy,
-  maxHealth
+ 
 }) => {
   return (
     <div className="playAreaRoot">
       <div className="healthEnergyContainer">
         <ElixirHealthBar
           currAmount={opponentEnergy}
-          maxAmount={maxEnergy}
+        
           isHealth={false}
           isUsersBar={false}
         />
         <ElixirHealthBar
           currAmount={opponentHealth}
-          maxAmount={maxHealth}
+         
           isHealth={true}
           isUsersBar={false}
         />
@@ -53,6 +51,7 @@ const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
               scale={0.85}
               isPlayerSlot={false}
               isBuffer={true}
+              position={index}
             />
           ))}
         </div>
@@ -65,6 +64,7 @@ const OpponentPlayArea: React.FC<OpponentPlayAreaProps> = ({
               scale={0.85}
               isPlayerSlot={false}
               isBuffer={false}
+              position={index}
             />
           ))}
         </div>
