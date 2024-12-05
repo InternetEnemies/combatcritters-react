@@ -13,6 +13,7 @@
 
 
 .selectedVendorImageWrapper {
+    aspect-ratio: 1/1;
     flex: .65; 
     height: auto; 
     display: flex;
@@ -21,6 +22,7 @@
     overflow: hidden; 
     border: 3px solid rgba(var(--custom-black-rgb),.9);
 }
+
 
 .selectedVendorImage {
   height: 100%; 
