@@ -6,6 +6,7 @@ import { IVendor } from "combatcritters-ts";
 import "./selectionVendorView.css";
 import Refresh from "../Refresh";
 import LevelBar from "../LevelBar";
+import { ClientSingleton } from "ClientSingleton";
 
 interface SelectionVendorViewProps {
   onClick: (vendor: IVendor) => void;
@@ -25,7 +26,7 @@ const SelectionVendorView: React.FC<SelectionVendorViewProps> = ({
       {/* TODO: this will need to be changed to actually fetch vendor.image - not sure which issue that's associated with though */}
       <img
         className="vendorImage"
-        src="assets/images/testVendor.webp"
+        src={`${ClientSingleton.mediaRoot}/${vendor.image}`}
         alt="Vendor"
       />
       <div className="vendorName">{vendor.name}</div>
