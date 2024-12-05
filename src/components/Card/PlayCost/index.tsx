@@ -6,10 +6,11 @@ interface Props {
   
   const PlayCost: React.FC<Props> = ({ playCost }) => {
     return (
-        <div className="playCostRoot" >
-          <span className="playCost">{playCost}</span>
-        </div>
-      );
+      <div className="playCostRoot">
+        <img src="assets/images/cardElixir.svg" className="elixirImage" alt={"Elixir"}></img>
+        <span className="playCost">{playCost}</span>
+      </div>
+    );
     };
   
   export default PlayCost;

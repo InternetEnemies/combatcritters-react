@@ -1,21 +1,32 @@
 .playCostRoot {
   position: absolute;
-  width: 13%;
+  width: 19%;
   aspect-ratio: 1/1;
   height: auto;
-  bottom: 2.6%;  
-  right: 6%;
-  background-color: #f0f0f0;
-  border-radius: 50%;
+  bottom: 1.0%;  
+  right: 4%;
+
   display: flex;
   justify-content: center; 
   align-items: center;
-  border: 1px solid rgb(206, 4, 4);
-  font-size: 8cqw;
+  font-size: 9cqw;
   box-sizing: content-box;
+}
+
+.playCostRoot .elixirImage {
+  height: 100%;
+  width: auto;
+}
+
+.elixirImage {
+  position: absolute;
+  top: 5%;
 }
 
 .playCost {
     align-items: center;
     font-family: 'robotoRegular';
+    position: absolute;
+    left: 36%;
+    bottom: 10%;
 }
