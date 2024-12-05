@@ -23,6 +23,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Vendors from "pages/Vendors";
 import { CurrencyProvider } from "contexts/CurrencyContext";
 import Battle from "pages/Battle";
+import BattleHome from "pages/BattleHome";
+import { BattleClientProvider } from "contexts/BattleClientContext";
+import { BattleStateProvider } from "contexts/BattleStateContext";
 
 function App() {
   const [numberOfRequests, setNumberOfRequests] = useState(0); // Number of friend requests
@@ -30,7 +33,9 @@ function App() {
 
   // Check if the navbar should be visible
   const isNavbarVisible =
-    location.pathname !== "/login" && location.pathname !== "/" && location.pathname !== "/battle";
+    location.pathname !== "/login" &&
+    location.pathname !== "/" &&
+    location.pathname !== "/battle";
 
   return (
     <div className="appRoot">
@@ -61,7 +66,8 @@ function App() {
             />
             <Route path="/packs" element={<Packs />} />
             <Route path="/vendors" element={<Vendors />} />
-            <Route path="/battle" element={<Battle/>}/>
+            <Route path="/battle" element={<Battle />} />
+            <Route path="/home" element={<BattleHome />} />
           </Route>
         </Routes>
       </div>
@@ -85,11 +91,15 @@ function App() {
 
 function AppWrapper() {
   return (
-    <CurrencyProvider>
-      <Router>
-        <App />
-      </Router>
-    </CurrencyProvider>
+    <Router>
+      <BattleStateProvider>
+        <BattleClientProvider>
+          <CurrencyProvider>
+            <App />
+          </CurrencyProvider>
+        </BattleClientProvider>
+      </BattleStateProvider>
+    </Router>
   );
 }
 
