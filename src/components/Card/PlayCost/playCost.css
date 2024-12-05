@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center; 
   align-items: center;
-  font-size: 10cqw;
+  font-size: 9cqw;
   box-sizing: content-box;
 }
 
@@ -27,6 +27,6 @@
     align-items: center;
     font-family: 'robotoRegular';
     position: absolute;
-    left: 35%;
-    bottom: 8%;
+    left: 36%;
+    bottom: 10%;
 }
