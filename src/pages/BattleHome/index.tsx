@@ -72,19 +72,24 @@ const BattleHome: React.FC = () => {
 
   return (
     <div className="battleHomeRoot">
-      <div className="battleButtonWrapper">
-        <Button
-          text="Battle"
-          onClick={startmatch}
-          className="battleButton"
-        ></Button>
+      <div className="decksBattleButtonContainer">
+        <Dropdown
+          dropdownOptions={deckDropdownOptions}
+          selectedDropdownOption={selectedDropdownOption}
+          setSelectedDropdownOption={setSelectedDropdownOption}
+          noSelectionLabel="Select a deck"
+          style={{width: "100%"}}
+        />
+        <hr />
+        <div className="battleButtonWrapper">
+          <Button
+            text="Battle"
+            onClick={startmatch}
+            className="battleButton"
+          ></Button>
+        </div>
       </div>
-      <Dropdown
-        dropdownOptions={deckDropdownOptions}
-        selectedDropdownOption={selectedDropdownOption}
-        setSelectedDropdownOption={setSelectedDropdownOption}
-        noSelectionLabel="Select a deck"
-      />
+
       <Loading showLoading={showLoading} setShowLoading={setShowLoading} />
     </div>
   );
