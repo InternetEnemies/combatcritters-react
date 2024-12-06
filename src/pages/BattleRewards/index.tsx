@@ -1,117 +1,97 @@
-/**
- * @Created 2024-12-04
- * @Brief Battle rewards page.
- */
-
+import { useEffect, useState } from "react";
 import Button from "components/Button";
 import "./battleRewards.css";
-import LevelBar from "pages/Vendors/components/LevelBar";
 import {
-  Currency,
   ICard,
+  ICardItem,
   ICurrency,
-  IItemStack,
+  IItemVisitor,
   IPack,
-  VendorReputation,
 } from "combatcritters-ts";
 import Pack from "components/Pack";
-import { useEffect, useState } from "react";
-import { ClientSingleton } from "ClientSingleton";
 import CurrencyComp from "components/CurrencyComp";
 import Card from "components/Card";
-import { DEFAULT_CARD_WIDTH } from "components/Card";
+import { useNavigate } from "react-router-dom";
+import { useBattleState } from "contexts/BattleStateContext";
 
 const BattleRewards = () => {
-  const [currencyGained, setCurrencyGained] = useState<ICurrency | null>(null);
-  const [cardsGained, setCardsGained] = useState<IItemStack<ICard>[]>([]);
-  const [packsGained, setPacksGained] = useState<IItemStack<IPack>[]>([]);
+  const navigate = useNavigate();
+  const { rewards, type } = useBattleState();
+  const [rewardsComponents, setRewardsComponents] = useState<JSX.Element[]>([]);
+  const [mainMessage, setMainMessage] = useState<string>("");
+  const [buttonMessage, setButtonMessage] = useState<string>("");
 
-  const [currencyLost, setCurrencyLost] = useState<ICurrency | null>(null);
-  const [cardsLost, setCardsLost] = useState<IItemStack<ICard>[]>([]);
-  const [packsLost, setPacksLost] = useState<IItemStack<IPack>[]>([]);
-
-  const itemsLost = () => {
-    return !(
-      currencyLost === null &&
-      cardsLost.length === 0 &&
-      packsLost.length === 0
-    );
-  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const builder = ClientSingleton.getInstance().user.cards.getBuilder();
-      builder.setOwned(true);
+    if (type === "win") {
+      setMainMessage("You Won!");
+      setButtonMessage("Claim Victory");
+    } else if (type === "loss") {
+      setMainMessage("You were defeated");
+      setButtonMessage("Claim Defeat");
+    } else {
+      setMainMessage("It's a Tie!");
+      setButtonMessage("Claim Mediocrity");
+    }
+  },[rewards, type])
+  
 
-      const cards = await ClientSingleton.getInstance().user.cards.getCards(
-        builder.build()
-      );
-      const packs = await ClientSingleton.getInstance().user.packs.getPacks();
-      const currency: ICurrency = new Currency(10);
+  // Define the ItemVisitor class
+  class ItemVisitor implements IItemVisitor {
+    visitCritter(card: ICard): JSX.Element {
+      const component = <Card card={card} />;
+      setRewardsComponents((prev) => [...prev, component]);
+      return component;
+    }
 
-      setPacksGained(packs);
-      setCardsGained(cards);
-      setCurrencyGained(currency);
-    };
+    visitItem(item: ICardItem): JSX.Element {
+      const component = <Card card={item} />;
+      setRewardsComponents((prev) => [...prev, component]);
+      return component;
+    }
 
-    fetchData();
+    visitPack(pack: IPack): JSX.Element {
+      const component = <Pack pack={pack} />;
+      setRewardsComponents((prev) => [...prev, component]);
+      return component;
+    }
+
+    visitCurrency(currency: ICurrency): JSX.Element {
+      const component = <CurrencyComp amount={currency.coins} style={{color:"white"}}/>;
+      setRewardsComponents((prev) => [...prev, component]);
+      return component;
+    }
+  }
+
+  const itemVisitor = new ItemVisitor();
+
+  /**
+   * On mount, render all the components
+   */
+  useEffect(() => {
+    rewards.forEach((item) => {
+      item.getItem().accept(itemVisitor);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="battleRewardsRoot">
-      <span className="battleRewardsTitle">You Defeated Rob!</span>
-      <div className="experienceGainedContainer">
-        <span>12 Experience Gained!</span>
-        <LevelBar vendorReputation={new VendorReputation(3, 2, 10, 1)} />{" "}
-        {/*TODO Remove this */}
-      </div>
+      <span className="battleRewardsTitle">{mainMessage}</span>
+
       <div className="rewardsLostContainer">
         <div className="matchRewardsContainer">
           <span>Match Rewards</span>
           <hr className="separator" />
-          <div>
-            {currencyGained ? (
-              <div
-                className="rewardsLostCurrencyContainer"
-                style={{ width: `${DEFAULT_CARD_WIDTH}px` }}
-              >
-                <CurrencyComp amount={currencyGained.coins} style={{color:"var(--custom-white)"}}/>
-              </div>
-            ) : (
-              <></>
-            )}
-            {cardsGained.map((cardStack, index) => {
-              return (
-                <div>
-                  <Card
-                    card={cardStack.getItem()}
-                    cardCount={cardStack.getAmount()}
-                  />
-                </div>
-              );
-            })}
-            {packsGained.map((packStack, index) => {
-              return (
-                <Pack
-                  pack={packStack.getItem()}
-                  packCount={packStack.getAmount()}
-                />
-              );
-            })}
-          </div>
+          <div>{rewardsComponents}</div>
         </div>
-
-        {false ? (
-          <div className="lostItemsContainer">
-            <span>Items Lost</span>
-            <hr className="separator"/>
-            <div></div>
-          </div>
-        ) : (
-          <></>
-        )}
       </div>
-      <Button text="Claim Victory" onClick={() => {}} />
+      <Button
+        text={buttonMessage}
+        onClick={() => {
+          navigate("/home");
+        }}
+      />
     </div>
   );
 };

@@ -3,18 +3,9 @@
  * @Brief Global battle state context.
  */
 
-import {
-  IBattleStateObserver,
-  ICard,
-  ICardState,
-} from "combatcritters-ts";
+import { IBattleStateObserver, ICard, ICardState, IItem, IItemStack } from "combatcritters-ts";
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-} from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 //Please avert your eyes
 interface BattleStateType {
@@ -43,6 +34,10 @@ interface BattleStateType {
   drawPileSize: number;
   setDrawPileSize: (size: number) => void;
   battleStateObserver: IBattleStateObserver;
+  rewards: IItemStack<IItem>[];
+  setRewards: (rewards: IItemStack<IItem>[]) => void;
+  type: string;
+  setType: (type: string) => void;
 }
 
 const BattleStateContext = createContext<BattleStateType | undefined>(
@@ -89,22 +84,26 @@ export const BattleStateProvider = ({ children }: { children: ReactNode }) => {
   const [hand, setHand] = useState<ICard[]>([]);
   const [drawPileSize, setDrawPileSize] = useState<number>(0);
 
-  const [battleStateObserver] =
-    useState<IBattleStateObserver>(
-      new BattleStateObserver(
-        setIsPlayerTurn,
-        setUserHealth,
-        setOpponentHealth,
-        setUserEnergy,
-        setOpponentEnergy,
-        setHand,
-        setDrawPileSize,
-        setUserBufferCards,
-        setOppBufferCards,
-        setOppInPlayCards,
-        setUserInPlayCards
-      )
-    );
+  const [rewards, setRewards] = useState<IItemStack<IItem>[]>([]);
+
+  const [type, setType] = useState<string>("");
+
+  const [battleStateObserver] = useState<IBattleStateObserver>(
+    new BattleStateObserver(
+      setIsPlayerTurn,
+      setIsOpponentTurn,
+      setUserHealth,
+      setOpponentHealth,
+      setUserEnergy,
+      setOpponentEnergy,
+      setHand,
+      setDrawPileSize,
+      setUserBufferCards,
+      setOppBufferCards,
+      setOppInPlayCards,
+      setUserInPlayCards
+    )
+  );
 
   return (
     <BattleStateContext.Provider
@@ -133,14 +132,16 @@ export const BattleStateProvider = ({ children }: { children: ReactNode }) => {
         setHand,
         drawPileSize,
         setDrawPileSize,
-        battleStateObserver
+        battleStateObserver,
+        rewards,
+        setRewards,
+        type,
+        setType
       }}
     >
       {children}
     </BattleStateContext.Provider>
   );
-
-  
 };
 
 export const useBattleState = (): BattleStateType => {
@@ -156,6 +157,7 @@ export const useBattleState = (): BattleStateType => {
  */
 class BattleStateObserver implements IBattleStateObserver {
   private setPlayerTurnCallback: (isPlayerTurn: boolean) => void;
+  private setEnemyTurnCallback: (isEnemyTurn: boolean) => void;
   private setPlayerHealthCallback: (health: number) => void;
   private setEnemyHealthCallback: (health: number) => void;
   private setPlayerEnergyCallback: (energy: number) => void;
@@ -173,6 +175,7 @@ class BattleStateObserver implements IBattleStateObserver {
 
   constructor(
     setPlayerTurn: (isPlayerTurn: boolean) => void,
+    setEnemyTurn: (isEnemyTurn: boolean) => void,
     setPlayerHealth: (health: number) => void,
     setEnemyHealth: (health: number) => void,
     setPlayerEnergy: (energy: number) => void,
@@ -185,6 +188,7 @@ class BattleStateObserver implements IBattleStateObserver {
     setPlayerCards: (cardStates: (ICardState | null)[]) => void
   ) {
     this.setPlayerTurnCallback = setPlayerTurn;
+    this.setEnemyTurnCallback = setEnemyTurn;
     this.setPlayerHealthCallback = setPlayerHealth;
     this.setEnemyHealthCallback = setEnemyHealth;
     this.setPlayerEnergyCallback = setPlayerEnergy;
@@ -195,6 +199,10 @@ class BattleStateObserver implements IBattleStateObserver {
     this.setEnemyBufferCardsCallback = setEnemyBufferCards;
     this.setEnemyCardsCallback = setEnemyCards;
     this.setPlayerCardsCallback = setPlayerCards;
+  }
+
+  setEnemyTurn(isEnemyTurn: boolean): void {
+    this.setEnemyTurnCallback(isEnemyTurn);
   }
 
   setPlayerTurn(isPlayerTurn: boolean): void {

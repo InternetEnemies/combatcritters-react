@@ -6,6 +6,8 @@
 import {
   BattleClient,
   IBattleClient,
+  IItem,
+  IItemStack,
   IMatchStateObserver,
 } from "combatcritters-ts";
 import React, {
@@ -17,6 +19,7 @@ import React, {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBattleState } from "./BattleStateContext";
+import { ClientSingleton } from "ClientSingleton";
 
 interface BattleClientType {
   battleClient: IBattleClient | null;
@@ -32,7 +35,7 @@ export const BattleClientProvider = ({ children }: { children: ReactNode }) => {
     process.env.REACT_APP_SOCKET ?? "ws://api.combatcritters.ca:4000/ws";
 
   const [battleClient, setBattleClient] = useState<IBattleClient | null>(null);
-  const { battleStateObserver } = useBattleState();
+  const { battleStateObserver, setRewards, setType } = useBattleState();
 
   const navigate = useNavigate();
 
@@ -42,7 +45,10 @@ export const BattleClientProvider = ({ children }: { children: ReactNode }) => {
   const fetchBattleClient = async () => {
     const refresh = async () => {
       try {
-        const bClient = await BattleClient.getClient(BATTLE_ROOT);
+        const bClient = await BattleClient.getClient(
+          BATTLE_ROOT,
+          ClientSingleton.getInstance().rest
+        );
         setBattleClient(bClient);
       } catch (error) {
         console.error("Failed to fetch battle client:" + error);
@@ -58,9 +64,6 @@ export const BattleClientProvider = ({ children }: { children: ReactNode }) => {
     const initialize = async () => {
       try {
         battleClient?.setBattleStateObserver(battleStateObserver);
-        battleClient?.onStopped(() => {
-          navigate("/home");
-        });
         battleClient?.setMatchStateObserver(new MatchObserver());
       } catch (error) {
         console.error("Failed to initialize battle client:" + error);
@@ -78,9 +81,13 @@ export const BattleClientProvider = ({ children }: { children: ReactNode }) => {
       console.log("Game found against " + opponent);
       navigate("/battle");
     }
-    matchEnded(_: string): void {
+    matchEnded(type: string, rewards: IItemStack<IItem>[]): void {
       console.log("Match Ended");
-      navigate("/home");
+      console.log("Type: " + type);
+      console.log("rewards: " + rewards);
+      setRewards(rewards);
+      setType(type);
+      navigate("/battle-rewards");
     }
   }
 
