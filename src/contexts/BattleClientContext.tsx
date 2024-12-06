@@ -20,6 +20,7 @@ import React, {
 import { useNavigate } from "react-router-dom";
 import { useBattleState } from "./BattleStateContext";
 import { ClientSingleton } from "ClientSingleton";
+import { useCurrency } from "./CurrencyContext";
 
 interface BattleClientType {
   battleClient: IBattleClient | null;
@@ -36,6 +37,7 @@ export const BattleClientProvider = ({ children }: { children: ReactNode }) => {
 
   const [battleClient, setBattleClient] = useState<IBattleClient | null>(null);
   const { battleStateObserver, setRewards, setType } = useBattleState();
+  const {updateCurrency} = useCurrency();
 
   const navigate = useNavigate();
 
@@ -85,6 +87,7 @@ export const BattleClientProvider = ({ children }: { children: ReactNode }) => {
       console.log("Match Ended");
       setRewards(rewards);
       setType(type);
+      updateCurrency();
       navigate("/battle-rewards");
     }
   }

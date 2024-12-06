@@ -70,7 +70,7 @@ function App() {
             <Route path="/vendors" element={<Vendors />} />
             <Route path="/battle" element={<Battle />} />
             <Route path="/home" element={<BattleHome />} />
-            <Route path="/battle-rewards" element={<BattleRewards/>}/>
+            <Route path="/battle-rewards" element={<BattleRewards />} />
           </Route>
         </Routes>
       </div>
@@ -95,13 +95,13 @@ function App() {
 function AppWrapper() {
   return (
     <Router>
-      <BattleStateProvider>
-        <BattleClientProvider>
-          <CurrencyProvider>
+      <CurrencyProvider>
+        <BattleStateProvider>
+          <BattleClientProvider>
             <App />
-          </CurrencyProvider>
-        </BattleClientProvider>
-      </BattleStateProvider>
+          </BattleClientProvider>
+        </BattleStateProvider>
+      </CurrencyProvider>
     </Router>
   );
 }
