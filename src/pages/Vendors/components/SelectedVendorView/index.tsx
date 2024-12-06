@@ -7,6 +7,7 @@ import { IVendor, IVendorReputation } from "combatcritters-ts";
 import "./selectedVendorView.css";
 import LevelBar from "../LevelBar";
 import Refresh from "../Refresh";
+import { ClientSingleton } from "ClientSingleton";
 
 interface SelectedVendorViewProps {
   vendorReputation: IVendorReputation;
@@ -31,7 +32,7 @@ const SelectedVendorView: React.FC<SelectedVendorViewProps> = ({
       <div className="selectedVendorImageWrapper">
         <img
           className="selectedVendorImage"
-          src="assets/images/testVendor.webp"
+          src={`${ClientSingleton.mediaRoot}/${vendor.image}`}
           alt="Vendor"
         />
       </div>
