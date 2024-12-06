@@ -26,6 +26,7 @@ import Battle from "pages/Battle";
 import BattleHome from "pages/BattleHome";
 import { BattleClientProvider } from "contexts/BattleClientContext";
 import { BattleStateProvider } from "contexts/BattleStateContext";
+import BattleRewards from "pages/BattleRewards";
 
 function App() {
   const [numberOfRequests, setNumberOfRequests] = useState(0); // Number of friend requests
@@ -35,7 +36,8 @@ function App() {
   const isNavbarVisible =
     location.pathname !== "/login" &&
     location.pathname !== "/" &&
-    location.pathname !== "/battle";
+    location.pathname !== "/battle" &&
+    location.pathname !== "/battle-rewards";
 
   return (
     <div className="appRoot">
@@ -68,6 +70,7 @@ function App() {
             <Route path="/vendors" element={<Vendors />} />
             <Route path="/battle" element={<Battle />} />
             <Route path="/home" element={<BattleHome />} />
+            <Route path="/battle-rewards" element={<BattleRewards/>}/>
           </Route>
         </Routes>
       </div>
