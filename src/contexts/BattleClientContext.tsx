@@ -83,8 +83,6 @@ export const BattleClientProvider = ({ children }: { children: ReactNode }) => {
     }
     matchEnded(type: string, rewards: IItemStack<IItem>[]): void {
       console.log("Match Ended");
-      console.log("Type: " + type);
-      console.log("rewards: " + rewards);
       setRewards(rewards);
       setType(type);
       navigate("/battle-rewards");
