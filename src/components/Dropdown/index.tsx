@@ -10,6 +10,7 @@ interface DropdownProps<T> {
   isEmptyMessage?: string; // Message to display in list if there are no items.
   labelPrefix?: string; // Optional prefix to add before each of the dropdown options.
   noSelectionLabel?: string; //Optional label indicating what to do when there is nothing selected.
+  style?: React.CSSProperties;
 }
 
 const Dropdown = <T,>({
@@ -19,6 +20,7 @@ const Dropdown = <T,>({
   isEmpty = false, // Default to items in the list
   isEmptyMessage = "No options", // Default message
   labelPrefix,
+  style,
   noSelectionLabel = "Select an option"
 }: DropdownProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +46,7 @@ const Dropdown = <T,>({
 
   if (isEmpty) {
     return (
-      <div className="dropdown">
+      <div className="dropdown" style={{...style}}>
         <div className="select disabled">
           <span>{isEmptyMessage}</span>
         </div>
@@ -53,7 +55,7 @@ const Dropdown = <T,>({
   }
 
   return (
-    <div className="dropdown" ref={dropdownRef}>
+    <div className="dropdown" ref={dropdownRef} style={{ ...style }}>
       <div className="select" onClick={toggleDropdown}>
         <span>
           {selectedDropdownOption
