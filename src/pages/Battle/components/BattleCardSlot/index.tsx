@@ -24,11 +24,13 @@ const BattleCardSlot: React.FC<BattleCardSlotProps> = ({
   isBuffer,
   position
 }) => {
+  const ROW_LENGTH = 5;
   const WIDTH: number = DEFAULT_CARD_WIDTH * scale;
   const {battleClient} = useBattleClient();
 
   const sacrifice = () => {
-    battleClient?.battleController.sacrifice(position);
+    const calcPosition = isBuffer ? position : position + ROW_LENGTH;
+    battleClient?.battleController.sacrifice(calcPosition);
   }
 
   return (
