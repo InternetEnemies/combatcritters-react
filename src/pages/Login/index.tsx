@@ -95,7 +95,7 @@ const Login: React.FC = () => {
         )}
 
         <Button
-          text={loginSelected ? "Log In" : "Register"}
+          text={loginSelected ? "Log Innnnnn" : "Register"}
           onClick={loginSelected ? handleLogin : handleRegister}
         />
         {error && <div className="error">{error}</div>}
